@@ -2,16 +2,13 @@ require "codesake/dawn/engine"
 
 module Codesake
   module Dawn
-    class Rails
+    class Sinatra
       include Codesake::Dawn::Engine
-
 
       def initialize(dir=nil)
         super(dir)
-        @name = "rails"
+        @name = "sinatra"
       end
-      
-     
 
     end
   end

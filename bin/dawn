@@ -6,11 +6,16 @@ require 'codesake_commons'
 require 'codesake_dawn'
 
 APPNAME = File.basename($0)
+LIST_KNOWN_FRAMEWORK  = %w(rails)# sinatra padrino)
+
 logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
-  [ '--rails',    '-r',   GetoptLong::NO_ARGUMENT],
-  [ '--version',  '-v', GetoptLong::NO_ARGUMENT],
-  [ '--help',     '-h', GetoptLong::NO_ARGUMENT]
+  [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
+  [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
+  [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
+  [ '--list-known-framework',   '-f', GetoptLong::NO_ARGUMENT ],
+  [ '--version',                '-v', GetoptLong::NO_ARGUMENT],
+  [ '--help',                   '-h', GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
 
@@ -24,6 +29,15 @@ opts.each do |opt, val|
     Kernel.exit(0)
   when '--rails'
     engine = Codesake::Dawn::Rails.new
+  when '--sinatra'
+    engine = Codesake::Dawn::Sinatra.new
+
+  when '--list-known-framework'
+    puts "Ruby MVC framework supported by #{APPNAME}:"
+    LIST_KNOWN_FRAMEWORK.each do |mvc|
+      puts "* #{mvc}"
+    end
+    Kernel.exit(0)
   end
 end
 
@@ -36,7 +50,8 @@ engine.set_target(target) unless engine.nil?
 engine.load_knowledge_base
 
 logger.die "nothing to do on #{target}" unless engine.can_apply?
-logger.ok engine.get_framework_version
+puts engine.name
+logger.ok engine.get_mvc_version
 
 
 
