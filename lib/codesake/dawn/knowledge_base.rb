@@ -1,5 +1,5 @@
-require "codesake_dawn/kb/basic_check"
-require "codesake_dawn/kb/cve_2013_1855"
+require "codesake/dawn/kb/basic_check"
+require "codesake/dawn/kb/cve_2013_1855"
 
 module Codesake
   module Dawn

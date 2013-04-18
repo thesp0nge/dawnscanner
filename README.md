@@ -1,4 +1,4 @@
-# CodesakeDawn
+# Codesake::Dawn - code review engine for ruby powered code
 
 TODO: Write a gem description
 
