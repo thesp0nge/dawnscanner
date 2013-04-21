@@ -18,12 +18,13 @@ module Codesake
           @cwe          = options[:cwe]
           @owasp        = options[:owasp]
           @release_date = options[:release_date]
-          @applies      = options[:applies]
+          @applies      = []
+          @applies      = options[:applies] unless options[:applies].nil?
         end
 
 
         def applies_to?(name)
-          ! applies.find_index(name).nil?
+          ! @applies.find_index(name).nil?
         end
         def cve_link
           "http://cve.mitre.org/cgi-bin/cvename.cgi?name=#{@name}"

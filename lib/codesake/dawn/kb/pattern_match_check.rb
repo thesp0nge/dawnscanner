@@ -1,7 +1,7 @@
 module Codesake
   module Dawn
     module Kb
-      class PatternMatchCheck
+      module PatternMatchCheck
         include BasicCheck
 
         attr_reader   :target_version
@@ -11,6 +11,7 @@ module Codesake
         attr_accessor :lines
 
         def initialize(options={})
+          super(options)
 
           @target_version = options[:target_version]
           @fixes_version  = options[:fixes_version]

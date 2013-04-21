@@ -3,6 +3,7 @@ module Codesake
     module Kb
       module DependencyCheck
         include BasicCheck
+
         attr_accessor :dependencies
         attr_accessor :fixed_dependency
 

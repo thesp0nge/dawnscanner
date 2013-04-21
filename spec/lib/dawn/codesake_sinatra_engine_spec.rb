@@ -21,6 +21,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
   end
 
   it "has some check in the knowledge base"
+  it "has check for CVE-2013-1800"
 
 
 
