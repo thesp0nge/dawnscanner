@@ -6,8 +6,8 @@ require "codesake/dawn/kb/cve_2013_1800"
 
 module Codesake
   module Dawn
+    # XXX: Check if it best using a singleton here
     class KnowledgeBase
-      # attr_reader :security_checks
 
       def initialize
         @security_checks = [
@@ -16,12 +16,18 @@ module Codesake
         ]
       end
 
-      def find(name)
+      def self.find(checks, name)
         return nil if name.nil? or name.empty?
-        @security_checks.each do |sc|
+
+        checks.each do |sc|
           return sc if sc.name == name
         end
         nil
+
+      end
+
+      def find(name)
+        Codesake::Dawn::KnowledgeBase.find(@security_checks, name)
       end
 
       def all

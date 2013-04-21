@@ -8,13 +8,16 @@ module Codesake
       attr_reader :gemfile_lock
       attr_reader :mvc_version
       attr_reader :connected_gems
+      attr_reader :checks
 
       def initialize(dir=nil, name="")
         @name = name
         @mvc_version = ""
         @gemfile_lock = ""
         @connected_gems = []
+        @checks = []
         set_target(dir) unless dir.nil?
+        load_knowledge_base
       end
 
       def set_target(dir)
@@ -29,7 +32,8 @@ module Codesake
 
 
       def load_knowledge_base
-
+        @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(self.name)
+        @checks
       end
 
       def can_apply?
