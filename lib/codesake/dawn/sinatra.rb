@@ -6,8 +6,7 @@ module Codesake
       include Codesake::Dawn::Engine
 
       def initialize(dir=nil)
-        super(dir)
-        @name = "sinatra"
+        super(dir, "sinatra")
       end
 
     end

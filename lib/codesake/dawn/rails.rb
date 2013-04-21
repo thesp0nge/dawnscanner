@@ -7,8 +7,7 @@ module Codesake
 
 
       def initialize(dir=nil)
-        super(dir)
-        @name = "rails"
+        super(dir, "rails")
       end
       
      

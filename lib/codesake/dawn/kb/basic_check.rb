@@ -1,54 +1,33 @@
+require 'cvss'
+
 module Codesake
   module Dawn
     module Kb
-      class BasicCheck
+      module BasicCheck
 
-        attr_reader   :target_version
-        attr_reader   :fixes_version
-        attr_reader   :attack_pattern
-        attr_reader   :name
-        attr_accessor :lines
+        attr_reader :name
+        attr_reader :cvss
+        attr_reader :cwe
+        attr_reader :owasp
+        attr_reader :release_date
+        attr_reader :applies
 
         def initialize(options={})
-
-          @target_version = options[:target_version]
-          @fixes_version  = options[:fixes_version]
-          @attack_pattern = options[:attack_pattern]
-          @name           = options[:name]
-          @lines          = options[:lines]  
-        end
-
-        def load_file(filename)
-          return nil unless File.exists?(filename)
-
-          f = File.open(filename)
-          @lines = f.readlines
-          f.close 
-          
-
-          @lines
-        end
-
-        def load_lines(lines)
-          @lines = lines
+          @name         = options[:name]
+          @cvss         = options[:cvss]
+          @cwe          = options[:cwe]
+          @owasp        = options[:owasp]
+          @release_date = options[:release_date]
+          @applies      = options[:applies]
         end
 
 
-        def run(attack_pattern = nil)
-          attack_pattern = @attack_pattern if attack_pattern.nil?
-
-          return [] if @lines.nil? or @lines.empty?
-          hits=[]
-
-          regex=/#{attack_pattern}/
-
-            @lines.each_with_index do |line,i|
-            hits << {:match=>line, :line=>i} unless (regex =~ line).nil?
-            end
-
-          hits
+        def applies_to?(name)
+          ! applies.find_index(name).nil?
         end
-
+        def cve_link
+          "http://cve.mitre.org/cgi-bin/cvename.cgi?name=#{@name}"
+        end
 
         # @target_version = '2.3.11'
         # @fixes_version = ['2.3.18', '3.2.13', '3.1.12' ] 
@@ -70,6 +49,11 @@ module Codesake
 
           ret
         end
+
+        def cvss_score
+          Cvss::Engine.new.score(self.cvss)
+        end
+
       end
     end
   end

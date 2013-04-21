@@ -1,3 +1,5 @@
+require 'bundler'
+
 module Codesake
   module Dawn
     module Engine
@@ -5,21 +7,23 @@ module Codesake
       attr_reader :name
       attr_reader :gemfile_lock
       attr_reader :mvc_version
+      attr_reader :connected_gems
 
-      def initialize(dir=nil)
-        @name = ""
+      def initialize(dir=nil, name="")
+        @name = name
         @mvc_version = ""
         @gemfile_lock = ""
+        @connected_gems = []
         set_target(dir) unless dir.nil?
       end
 
       def set_target(dir)
         @target = dir
-        @gemfile_lock = File.join(@target, "Gemfile.lock" )
-        @mvc_version = get_mvc_version
+        @gemfile_lock = File.join(@target, "Gemfile.lock")
+        @mvc_version = set_mvc_version
       end
 
-      def is_dir?
+      def target_is_dir?
         File.directory?(@target)
       end
 
@@ -32,16 +36,17 @@ module Codesake
         false
       end
 
-      def get_mvc_version
+      def set_mvc_version
         ver = ""
-        return ver unless is_dir?
-        return ver unless File.exist? File.join(@target, "Gemfile.lock")
+        return ver unless target_is_dir?
+        return ver unless has_gemfile_lock?
 
         my_dir = Dir.pwd
         Dir.chdir(@target) 
         lockfile = Bundler::LockfileParser.new(Bundler.read_file("Gemfile.lock"))
         lockfile.specs.each do |s|
-          ver= s.version.to_s if s.name == self.name
+          ver= s.version.to_s if s.name == @name
+          @connected_gems << {:name=>s.name, :version=>s.version.to_s}
         end
         Dir.chdir(my_dir)
         return ver
@@ -56,11 +61,11 @@ module Codesake
       end
 
       def can_apply?
-        is_dir? and is_good_mvc?
+        target_is_dir? and is_good_mvc?
       end
 
       def get_mvc_version
-        "#{@rails} #{@mvc_version}" if is_good_mvc? 
+        "#{@name} #{@mvc_version}" if is_good_mvc? 
       end
 
 

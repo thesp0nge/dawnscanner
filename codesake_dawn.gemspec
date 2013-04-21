@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'codesake_commons', '> 0.50.0'
+  gem.add_dependency 'cvss'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
