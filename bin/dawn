@@ -50,8 +50,15 @@ engine.set_target(target) unless engine.nil?
 engine.load_knowledge_base
 
 logger.die "nothing to do on #{target}" unless engine.can_apply?
-puts engine.name
-logger.ok engine.get_mvc_version
+logger.log "scanning #{target}"
+logger.log "#{engine.name} v#{engine.get_mvc_version} detected"
+logger.log "applying all security checks" 
+if engine.apply_all 
+  logger.ok "all security checks applied"
+else
+  logger.err "no security checks in the knowledge base"
+end
+logger.log "#{engine.vulnerabilities.count} vulnerabilities found"
 
 
 
