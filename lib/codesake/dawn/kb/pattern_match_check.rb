@@ -8,6 +8,7 @@ module Codesake
         attr_reader   :fixes_version
         attr_reader   :attack_pattern
         attr_reader   :name
+        attr_reader   :hits
         attr_accessor :lines
 
         def initialize(options={})
@@ -18,6 +19,7 @@ module Codesake
           @attack_pattern = options[:attack_pattern]
           @name           = options[:name]
           @lines          = options[:lines]  
+          @hits           =[]
         end
 
         def load_file(filename)
@@ -40,15 +42,21 @@ module Codesake
           attack_pattern = @attack_pattern if attack_pattern.nil?
 
           return [] if @lines.nil? or @lines.empty?
-          hits=[]
 
           regex=/#{attack_pattern}/
 
             @lines.each_with_index do |line,i|
-            hits << {:match=>line, :line=>i} unless (regex =~ line).nil?
+            @hits << {:match=>line, :line=>i} unless (regex =~ line).nil?
             end
 
-          hits
+          @hits
+        end
+
+        def vuln?
+          run
+          return ! @hits.empty?
+           
+
         end
 
 

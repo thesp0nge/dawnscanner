@@ -28,6 +28,23 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     Codesake::Dawn::KnowledgeBase.find(@engine.checks, "CVE-2013-1800").should_not  be_nil
   end
 
+  it "applies all checks" do
+    @engine.apply_all.should  be_true
+  end
+  it "applies check for CVE-2013-1800" do
+    @engine.apply("CVE-2013-1800").should   be_true
+  end
+
+  describe "applied to the sinatra-template" do
+    it "is not vulnerable to CVE-2013-1800" do
+      @engine.is_vulnerable_to?("CVE-2013-1800").should be_false
+    end
+
+    it "has no vulnerabilities" do
+      @engine.vulnerabilities.should  be_empty
+    end
+  end  
+
 
 
 

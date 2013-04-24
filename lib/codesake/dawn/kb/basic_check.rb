@@ -11,6 +11,7 @@ module Codesake
         attr_reader :owasp
         attr_reader :release_date
         attr_reader :applies
+        attr_reader :kind
 
         def initialize(options={})
           @name         = options[:name]
@@ -20,6 +21,7 @@ module Codesake
           @release_date = options[:release_date]
           @applies      = []
           @applies      = options[:applies] unless options[:applies].nil?
+          @kind         = options[:kind]
         end
 
 

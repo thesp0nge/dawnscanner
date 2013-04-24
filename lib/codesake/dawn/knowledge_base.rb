@@ -9,6 +9,9 @@ module Codesake
     # XXX: Check if it best using a singleton here
     class KnowledgeBase
 
+      DEPENDENCY_CHECK    = :dependency_check
+      PATTERN_MATCH_CHECK = :pattern_match_check
+
       def initialize
         @security_checks = [
           Codesake::Dawn::Kb::CVE_2013_1855.new, 

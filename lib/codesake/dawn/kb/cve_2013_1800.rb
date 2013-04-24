@@ -10,7 +10,8 @@ module Codesake
                 :release_date => Date.new(2013, 4, 9),
                 :cwe=>"264",
                 :owasp=>"A9", 
-                :applies=>["sinatra", "padrino", "rails"]
+                :applies=>["sinatra", "padrino", "rails"],
+                :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
           })
           self.fixed_dependency = {:name=>'crack', :version=>['0.3.2']}
         end

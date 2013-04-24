@@ -6,6 +6,9 @@ describe "Security check for CVE-2013-1800" do
   it "is aware of its name" do
     check.name.should == "CVE-2013-1800"
   end
+  it "is a dependency check" do
+    check.kind.should == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
+  end
   it "has this CVSS vector \"(AV:N/AC:L/Au:N/C:P/I:P/A:P)\"" do
     check.cvss.should == "AV:N/AC:L/Au:N/C:P/I:P/A:P"
   end
