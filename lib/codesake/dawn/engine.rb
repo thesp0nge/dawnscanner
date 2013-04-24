@@ -117,7 +117,11 @@ module Codesake
           return true if a[:name] == name
         end
         return false
+      end
 
+      def vulnerabilities
+        apply_all if @applied.empty?
+        @vulnerabilities
       end
 
       def is_vulnerable_to?(name)

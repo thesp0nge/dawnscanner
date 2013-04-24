@@ -60,8 +60,14 @@ describe "The Codesake::Dawn engine for sinatra applications" do
       @engine.vulnerabilities.should_not  be_empty
     end
 
-
+    it "applies automagically all the tests if no test has been applied" do
+      e2 =  Codesake::Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')
+      e2.vulnerabilities.should_not be_empty
+    end
   end
+
+
+  
 
 
 
