@@ -12,6 +12,8 @@ module Codesake
         attr_reader :release_date
         attr_reader :applies
         attr_reader :kind
+        attr_reader :message
+        attr_reader :remediation
 
         def initialize(options={})
           @name         = options[:name]
@@ -22,6 +24,8 @@ module Codesake
           @applies      = []
           @applies      = options[:applies] unless options[:applies].nil?
           @kind         = options[:kind]
+          @message      = options[:message]
+          @remediation  = options[:mitigation]
         end
 
 
