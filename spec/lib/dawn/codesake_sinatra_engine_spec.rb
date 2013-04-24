@@ -65,11 +65,4 @@ describe "The Codesake::Dawn engine for sinatra applications" do
       e2.vulnerabilities.should_not be_empty
     end
   end
-
-
-  
-
-
-
-
 end
