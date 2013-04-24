@@ -15,6 +15,14 @@ module Codesake
         attr_reader :message
         attr_reader :remediation
 
+        # The framework target version
+        attr_reader   :target_version
+        # The versions of the framework that fixes the vulnerability
+        attr_reader   :fixes_version
+
+        # Vulnerability evidences
+        attr_reader   :evidences
+
         def initialize(options={})
           @name         = options[:name]
           @cvss         = options[:cvss]
@@ -26,6 +34,12 @@ module Codesake
           @kind         = options[:kind]
           @message      = options[:message]
           @remediation  = options[:mitigation]
+
+          @target_version = options[:target_version]
+          @fixes_version  = options[:fixes_version]
+
+          @evidences    = []
+    
         end
 
 

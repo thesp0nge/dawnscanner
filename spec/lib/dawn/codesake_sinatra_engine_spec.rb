@@ -34,10 +34,18 @@ describe "The Codesake::Dawn engine for sinatra applications" do
   it "applies check for CVE-2013-1800" do
     @engine.apply("CVE-2013-1800").should   be_true
   end
+  
+  it "applies check for \"Not revised code\"" do
+    @engine.apply("Not revised code").should  be_true
+  end 
 
   describe "applied to sinatra-safe application" do
     it "reports it's not vulnerable to CVE-2013-1800" do
       @engine.is_vulnerable_to?("CVE-2013-1800").should be_false
+    end
+
+    it "reports it's not vulnerable to \"Not revised code\"" do
+      @engine.is_vulnerable_to?("Not revised code").should  be_false
     end
 
     it "reports it has no vulnerabilities" do
@@ -54,6 +62,10 @@ describe "The Codesake::Dawn engine for sinatra applications" do
 
     it "reports it's vulnerable to CVE-2013-1800" do
       @engine.is_vulnerable_to?("CVE-2013-1800").should be_true
+    end
+
+    it "reports it's vulnerable to \"Not revised code\"" do
+      @engine.is_vulnerable_to?("Not revised code").should  be_true
     end
 
     it "reports it has vulnerabilities" do

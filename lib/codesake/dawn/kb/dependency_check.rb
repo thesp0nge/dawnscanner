@@ -8,10 +8,14 @@ module Codesake
         attr_accessor :fixed_dependency
 
         def vuln?
+          ret = false
           @dependencies.each do |dep|
-            return true if dep[:name] == @fixed_dependency[:name] and is_vulnerable_version?(dep[:version], @fixed_dependency[:version])
+            if dep[:name] == @fixed_dependency[:name] and is_vulnerable_version?(dep[:version], @fixed_dependency[:version]) 
+              ret = true
+              self.evidences << "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
+            end
           end
-          false
+          ret
         end
       end
     end

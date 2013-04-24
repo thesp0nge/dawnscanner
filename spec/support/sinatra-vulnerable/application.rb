@@ -21,3 +21,8 @@ end
 get '/' do
   haml :root
 end
+
+# FIXME: I must raise an error here
+get '/foo' do
+  haml :bar
+end

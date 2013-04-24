@@ -1,6 +1,7 @@
 require "codesake/dawn/kb/basic_check"
 require "codesake/dawn/kb/pattern_match_check"
 require "codesake/dawn/kb/dependency_check"
+require "codesake/dawn/kb/not_revised_code"
 require "codesake/dawn/kb/cve_2013_1855"
 require "codesake/dawn/kb/cve_2013_1800"
 
@@ -14,6 +15,7 @@ module Codesake
 
       def initialize
         @security_checks = [
+          Codesake::Dawn::Kb::NotRevisedCode.new,
           Codesake::Dawn::Kb::CVE_2013_1855.new, 
           Codesake::Dawn::Kb::CVE_2013_1800.new
         ]

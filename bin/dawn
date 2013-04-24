@@ -78,6 +78,10 @@ engine.vulnerabilities.each do |vuln|
   logger.err "#{vuln[:name]} failed"
   logger.log "Description: #{vuln[:message]}"
   logger.log "Solution: #{vuln[:remediation]}"
+  logger.err "Evidence:"
+  vuln[:evidences].each do |evidence|
+    logger.err evidence
+  end
 end
 
 

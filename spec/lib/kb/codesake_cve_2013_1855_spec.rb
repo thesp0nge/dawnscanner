@@ -12,9 +12,5 @@ describe "Dawn security check for CVE-2013-1855" do
     @check.attack_pattern.should == "sanitize_css"
   end
 
-  it "won't apply to lorem.txt" do
-    @check.load_file("./spec/support/lorem.txt")
-    @check.is_vulnerable_version?.should  be_false
-  end
-
+  
 end
