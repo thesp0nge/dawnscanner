@@ -27,4 +27,17 @@ describe "The Codesake Dawn knowledge base" do
   it "must have at least a test for sinatra" do
     kb.all_by_mvc("sinatra").size.should   > 0
   end
+
+  it "must have test for CVE_2013_0333"
+  it "must have test for CVE_2013_0269"
+  it "must have test for CVE_2013_1857"
+  it "must have test for CVE_2012_2660"
+  it "must have test for CVE_2012_2661"
+  it "must have test for CVE_2012_2695"
+  it "must have test for CVE_2012_5664"
+  it "must have test for CVE_2013_0155"
+  it "must have test for CVE_2011_2931"
+  it "must have test for CVE_2012_3465"
+
+
 end
