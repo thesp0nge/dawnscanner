@@ -58,7 +58,8 @@ module Codesake
         end
 
         def cvss_score
-          Cvss::Engine.new.score(self.cvss)
+          return Cvss::Engine.new.score(self.cvss) unless self.cvss.nil?
+          "    "
         end
 
       end

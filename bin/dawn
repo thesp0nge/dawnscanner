@@ -6,7 +6,7 @@ require 'codesake_commons'
 require 'codesake_dawn'
 
 APPNAME = File.basename($0)
-LIST_KNOWN_FRAMEWORK  = %w(rails)# sinatra padrino)
+LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
 
 logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
@@ -14,6 +14,7 @@ opts    = GetoptLong.new(
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
   [ '--list-known-framework',   '-f', GetoptLong::NO_ARGUMENT ],
+  [ '--list-knowledgebase',     '-k', GetoptLong::NO_ARGUMENT ],
   [ '--version',                '-v', GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h', GetoptLong::NO_ARGUMENT]
 )
@@ -31,6 +32,19 @@ opts.each do |opt, val|
     engine = Codesake::Dawn::Rails.new
   when '--sinatra'
     engine = Codesake::Dawn::Sinatra.new
+  when '--padrino'
+    puts "sorry padrino is not yet supported"
+    Kernel.exit(1)
+  when '--list-knowledgebase'
+    kb = Codesake::Dawn::KnowledgeBase.new
+    puts "Security checks currently supported:\n\n"
+
+    kb.all.each do |check|
+      puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
+      puts "Description\n#{check.message}"
+      puts "Remediation\n#{check.remediation}\n\n"
+    end
+    Kernel.exit(0)
 
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
