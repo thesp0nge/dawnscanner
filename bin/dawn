@@ -60,9 +60,15 @@ else
 end
 logger.log "#{engine.vulnerabilities.count} vulnerabilities found"
 
+engine.vulnerabilities.each do |vuln|
+  logger.err "#{vuln[:name]} failed"
+  logger.log "Description: #{vuln[:message]}"
+  logger.log "Solution: #{vuln[:remediation]}"
+end
 
 
 
-Kernel.exit(0)
+
 logger.helo "#{APPNAME} is shutting down"
+Kernel.exit(0)
 

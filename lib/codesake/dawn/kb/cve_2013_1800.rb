@@ -7,12 +7,7 @@ module Codesake
 
         def initialize
 
-          message = "The crack gem 0.3.1 and earlier for Ruby does not properly
-          restrict casts of string values, which might allow remote attackers
-          to conduct object-injection attacks and execute arbitrary code, or
-          cause a denial of service (memory and CPU consumption) by leveraging
-          Action Pack support for (1) YAML type conversion or (2) Symbol type
-          conversion, a similar vulnerability to CVE-2013-0156."
+          message = "The crack gem 0.3.1 and earlier for Ruby does not properly restrict casts of string values, which might allow remote attackers to conduct object-injection attacks and execute arbitrary code, or cause a denial of service (memory and CPU consumption) by leveraging Action Pack support for (1) YAML type conversion or (2) Symbol type conversion, a similar vulnerability to CVE-2013-0156."
 
           super({:name=>"CVE-2013-1800", 
                 :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:P", 

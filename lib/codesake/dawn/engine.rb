@@ -90,7 +90,7 @@ module Codesake
           if check.name == name
             @applied << { :name=>name }
             check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-            @vulnerabilities << {:name=> name, :message=>check.message, :remediation=>check.remediation} if check.vuln?
+            @vulnerabilities << {:name=> check.name, :message=>check.message, :remediation=>check.remediation} if check.vuln?
             return true
           end
         end
@@ -105,7 +105,7 @@ module Codesake
         @checks.each do |check|
           @applied << { :name => name }
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-          @vulnerabilities << {:name=> name, :message=>check.message, :remediation=>check.remediation } if check.vuln?
+          @vulnerabilities << {:name=> check.name, :message=>check.message, :remediation=>check.remediation } if check.vuln?
         end
 
         true
