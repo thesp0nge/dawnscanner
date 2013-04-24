@@ -18,6 +18,7 @@ module Codesake
         @connected_gems = []
         @checks = []
         @vulnerabilities= []
+        @applied = []
         set_target(dir) unless dir.nil?
         load_knowledge_base
       end
@@ -87,6 +88,7 @@ module Codesake
 
         @checks.each do |check|
           if check.name == name
+            @applied << { :name=>name }
             check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
             @vulnerabilities << {:name=> name } if check.vuln?
             return true
@@ -101,6 +103,7 @@ module Codesake
         return false if @checks.empty?
 
         @checks.each do |check|
+          @applied << { :name => name }
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
           @vulnerabilities << {:name=> name } if check.vuln?
         end
@@ -109,8 +112,17 @@ module Codesake
 
       end
       
+      def is_applied?(name)
+        @applied.each do |a|
+          return true if a[:name] == name
+        end
+        return false
+
+      end
 
       def is_vulnerable_to?(name)
+        apply(name) unless is_applied?(name)
+        
         @vulnerabilities.each do |v|
           return true if v[:name] == name
         end

@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe "The Codesake::Dawn engine for sinatra applications" do
-  before(:all) {@engine= Codesake::Dawn::Sinatra.new('./spec/support/sinatra-template')}
+  before(:all) {@engine= Codesake::Dawn::Sinatra.new('./spec/support/sinatra-safe')}
 
   it "has a proper name" do
     @engine.name.should   ==    "sinatra"
   end
 
   it "has a valid target" do
-    @engine.target.should ==   "./spec/support/sinatra-template"
+    @engine.target.should ==   "./spec/support/sinatra-safe"
     @engine.target_is_dir?.should  be_true
   end
 
@@ -35,15 +35,33 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     @engine.apply("CVE-2013-1800").should   be_true
   end
 
-  describe "applied to the sinatra-template" do
-    it "is not vulnerable to CVE-2013-1800" do
+  describe "applied to sinatra-safe application" do
+    it "reports it's not vulnerable to CVE-2013-1800" do
       @engine.is_vulnerable_to?("CVE-2013-1800").should be_false
     end
 
-    it "has no vulnerabilities" do
+    it "reports it has no vulnerabilities" do
       @engine.vulnerabilities.should  be_empty
     end
   end  
+
+  describe "applied do the sinatra-vulnerable application do" do
+    before (:all) {@engine= Codesake::Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')}
+    it "has a valid target" do
+      @engine.target.should ==   "./spec/support/sinatra-vulnerable"
+      @engine.target_is_dir?.should  be_true
+    end
+
+    it "reports it's vulnerable to CVE-2013-1800" do
+      @engine.is_vulnerable_to?("CVE-2013-1800").should be_true
+    end
+
+    it "reports it has vulnerabilities" do
+      @engine.vulnerabilities.should_not  be_empty
+    end
+
+
+  end
 
 
 

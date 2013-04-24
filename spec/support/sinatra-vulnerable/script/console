@@ -1,0 +1,16 @@
+#! /usr/bin/env ruby
+# This console script adapted from:rake
+#   http://barkingiguana.com/blog/2009/01/25/scriptconsole-for-your-application/
+
+libs = []
+libs << "irb/completion"
+libs << File.dirname(__FILE__) + '/../environment.rb'
+
+command_line = []
+command_line << "irb"
+command_line << libs.inject("") { |acc, lib| acc + %( -r "#{lib}") }
+command_line << "--simple-prompt"
+command = command_line.join(" ")
+
+puts "Welcome to the sinatra console interface."
+exec command
