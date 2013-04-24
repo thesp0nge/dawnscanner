@@ -13,7 +13,7 @@ module Codesake
                 :owasp=>"",
                 :applies=>["sinatra", "rails", "padrino"],
                 :kind=>Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
-                :message=>"Analyzing comments, it seems your code is waiting from some review from you. Please consider take action before putting it in production.",
+                :message=>"Analyzing comments, it seems your code is waiting from some review from you. Please consider take action before putting it in production.\nThis check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME",
                 :mitigation=>"Please review the file fixing the issue.",
                 :attack_pattern => ["XXX", "TO_CHECK", "CHECKME", "CHECK", "FIXME"]
           })
