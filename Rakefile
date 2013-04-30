@@ -60,4 +60,5 @@ task :new_cve, :name do |t,args|
   puts "#{spec_filename} created"
 
   puts "*** PLEASE ADD #{name} to spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
+  puts "*** PLEASE ADD #{name} to lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
 end
