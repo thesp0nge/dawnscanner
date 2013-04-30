@@ -49,7 +49,7 @@ task :new_cve, :name do |t,args|
   puts "#{rb_filename} created"
 
   open(spec_filename, "w") do |file|
-    file.puts "require spec_helper"
+    file.puts "require \"spec_helper\""
     file.puts "# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
     file.puts ""
     file.puts "describe \"Security check for #{name}\" do"
