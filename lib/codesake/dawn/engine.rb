@@ -78,7 +78,7 @@ module Codesake
       #
       # Examples
       #   
-      #   engine.applies("CVE-2013-1800") 
+      #   engine.apply("CVE-2013-1800") 
       #   # => boolean
       #
       # Returns a true value if the security check was successfully applied or false
