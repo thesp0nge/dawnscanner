@@ -4,6 +4,7 @@ require "codesake/dawn/kb/dependency_check"
 require "codesake/dawn/kb/not_revised_code"
 require "codesake/dawn/kb/cve_2013_1855"
 require "codesake/dawn/kb/cve_2013_1800"
+require "codesake/dawn/kb/cve_2013_0333"
 
 module Codesake
   module Dawn
@@ -63,7 +64,8 @@ module Codesake
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
           Codesake::Dawn::Kb::CVE_2013_1855.new, 
-          Codesake::Dawn::Kb::CVE_2013_1800.new
+          Codesake::Dawn::Kb::CVE_2013_1800.new,
+          Codesake::Dawn::Kb::CVE_2013_0333.new
         ]
       end
     end
