@@ -6,11 +6,25 @@ module Codesake
 				#
 				# Include the testing skeleton for this CVE
 				# include PatternMatchCheck
-				# include DependencyCheck
-				#
+				include DependencyCheck
 
 
 				def initialize
+          message = "lib/active_support/json/backends/yaml.rb in Ruby on Rails 2.3.x before 2.3.16 and 3.0.x before 3.0.20 does not properly convert JSON data to YAML data for processing by a YAML parser, which allows remote attackers to execute arbitrary code, conduct SQL injection attacks, or bypass authentication via crafted data that triggers unsafe decoding, a different vulnerability than CVE-2013-0156." 
+          super({
+            :name=>"CVE-2013-0333",
+            :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            :release_date => Date.new(2013, 1, 30),
+            :cwe=>"",
+            :owasp=>"A9", 
+            :applies=>["rails"],
+            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :message=>message,
+            :mitigation=>"Please upgrade rails version at least to 2.3.16 or 3.0.20. As a general rule, using the latest stable rails version is recommended."
+          })
+
+          self.fixed_dependency = {:name=>"rails", :version=>['2.3.16', '3.0.20']}
+          
 				end
 			end
 		end
