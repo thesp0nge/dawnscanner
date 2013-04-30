@@ -14,21 +14,17 @@ module Codesake
       PATTERN_MATCH_CHECK = :pattern_match_check
 
       def initialize
-        @security_checks = [
-          Codesake::Dawn::Kb::NotRevisedCode.new,
-          Codesake::Dawn::Kb::CVE_2013_1855.new, 
-          Codesake::Dawn::Kb::CVE_2013_1800.new
-        ]
+        @security_checks = Codesake::Dawn::KnowledgeBase.load_security_checks
       end
 
-      def self.find(checks, name)
+      def self.find(checks=nil, name)
         return nil if name.nil? or name.empty?
+        checks = Codesake::Dawn::KnowledgeBase.load_security_checks if checks.nil?
 
         checks.each do |sc|
           return sc if sc.name == name
         end
         nil
-
       end
 
       def find(name)
@@ -61,6 +57,14 @@ module Codesake
 
       def all_rack_checks
         self.all_by_mvc(:rack)
+      end
+
+      def self.load_security_checks
+        [  
+          Codesake::Dawn::Kb::NotRevisedCode.new,
+          Codesake::Dawn::Kb::CVE_2013_1855.new, 
+          Codesake::Dawn::Kb::CVE_2013_1800.new
+        ]
       end
     end
 
