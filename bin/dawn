@@ -84,6 +84,13 @@ engine.vulnerabilities.each do |vuln|
   end
 end
 
+logger.log "#{engine.mitigated_issues.count} mitigated vulnerabilities found"
+engine.mitigated_issues.each do |vuln|
+  logger.ok "#{vuln[:name]} mitigated"
+  vuln[:evidences].each do |evidence|
+    logger.err evidence
+  end
+end
 
 
 

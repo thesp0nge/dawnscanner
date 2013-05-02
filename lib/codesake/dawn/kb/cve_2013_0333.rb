@@ -20,11 +20,12 @@ module Codesake
             :applies=>["rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade rails version at least to 2.3.16 or 3.0.20. As a general rule, using the latest stable rails version is recommended."
+            :mitigation=>"Please upgrade rails version at least to 2.3.16 or 3.0.20. As a general rule, using the latest stable rails version is recommended.",
+            :aux_links=>["https://groups.google.com/forum/?fromgroups=#!topic/rubyonrails-security/1h2DR63ViGo"]
           })
 
           self.fixed_dependency = {:name=>"rails", :version=>['2.3.16', '3.0.20']}
-          
+          self.aux_mitigation_gem = {:name=>"yail", :versione=>['any']}
 				end
 			end
 		end

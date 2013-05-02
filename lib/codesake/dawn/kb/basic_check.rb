@@ -14,6 +14,8 @@ module Codesake
         attr_reader :kind
         attr_reader :message
         attr_reader :remediation
+        attr_reader :aux_links
+        attr_reader :mitigated
 
         # The framework target version
         attr_reader   :target_version
@@ -34,11 +36,13 @@ module Codesake
           @kind         = options[:kind]
           @message      = options[:message]
           @remediation  = options[:mitigation]
+          @aux_links    = options[:aux_links]
 
           @target_version = options[:target_version]
           @fixes_version  = options[:fixes_version]
 
           @evidences    = []
+          @mitigated    = false
     
         end
 
@@ -74,6 +78,10 @@ module Codesake
         def cvss_score
           return Cvss::Engine.new.score(self.cvss) unless self.cvss.nil?
           "    "
+        end
+
+        def mitigated?
+          self.mitigated
         end
 
       end

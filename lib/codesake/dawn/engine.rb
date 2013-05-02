@@ -10,6 +10,7 @@ module Codesake
       attr_reader :connected_gems
       attr_reader :checks
       attr_reader :vulnerabilities
+      attr_reader :mitigated_issues
 
       def initialize(dir=nil, name="")
         @name = name
@@ -17,7 +18,8 @@ module Codesake
         @gemfile_lock = ""
         @connected_gems = []
         @checks = []
-        @vulnerabilities= []
+        @vulnerabilities = []
+        @mitigated_issues = []
         @applied = []
         set_target(dir) unless dir.nil?
         load_knowledge_base
@@ -91,7 +93,8 @@ module Codesake
             @applied << { :name=>name }
             check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
             check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
-            @vulnerabilities << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.vuln?
+            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.vuln?
+            @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.mitigated?
             return true
           end
         end
@@ -107,7 +110,8 @@ module Codesake
           @applied << { :name => name }
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
           check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
-          @vulnerabilities << {:name=> check.name, :message=>check.message, :remediation=>check.remediation , :evidences=>check.evidences} if check.vuln?
+          @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation , :evidences=>check.evidences} if check.vuln?
+          @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.mitigated?
         end
 
         true
