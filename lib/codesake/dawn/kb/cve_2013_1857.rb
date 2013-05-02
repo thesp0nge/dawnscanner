@@ -11,7 +11,7 @@ module Codesake
             :attack_pattern => ["sanitize"], 
             :name=>'CVE-2013-1857', 
             :applies=>["rails"],
-            :kind => Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
+            :kind => Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
             :aux_links => [ "https://groups.google.com/d/msg/rubyonrails-security/zAAU7vGTPvI/1vZDWXqBuXgJ" ]
           })
 
