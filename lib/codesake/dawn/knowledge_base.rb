@@ -2,6 +2,11 @@ require "codesake/dawn/kb/basic_check"
 require "codesake/dawn/kb/pattern_match_check"
 require "codesake/dawn/kb/dependency_check"
 require "codesake/dawn/kb/not_revised_code"
+
+# CVE - 2012
+require "codesake/dawn/kb/cve_2012_2660"
+
+# CVE - 2013
 require "codesake/dawn/kb/cve_2013_1855"
 require "codesake/dawn/kb/cve_2013_1857"
 require "codesake/dawn/kb/cve_2013_1800"
@@ -64,6 +69,7 @@ module Codesake
       def self.load_security_checks
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
+          Codesake::Dawn::Kb::CVE_2012_2660.new, 
           Codesake::Dawn::Kb::CVE_2013_1855.new, 
           Codesake::Dawn::Kb::CVE_2013_1800.new,
           Codesake::Dawn::Kb::CVE_2013_0333.new,
