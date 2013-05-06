@@ -25,7 +25,7 @@ module Codesake
           })
 
           self.fixed_dependency = {:name=>"rails", :version=>['2.3.16', '3.0.20']}
-          self.aux_mitigation_gem = {:name=>"yail", :versione=>['any']}
+          self.aux_mitigation_gem = {:name=>"yajl", :versione=>['any']}
 				end
 			end
 		end

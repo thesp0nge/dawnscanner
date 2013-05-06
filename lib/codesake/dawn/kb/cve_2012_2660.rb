@@ -5,7 +5,6 @@ module Codesake
 			class CVE_2012_2660
 				include DependencyCheck
 
-
 				def initialize
           message = "actionpack/lib/action_dispatch/http/request.rb in Ruby on Rails before 3.0.13, 3.1.x before 3.1.5, and 3.2.x before 3.2.4 does not properly consider differences in parameter handling between the Active Record component and the Rack interface, which allows remote attackers to bypass intended database-query restrictions and perform NULL checks via a crafted request, as demonstrated by certain \"[nil]\" values, a related issue to CVE-2012-2694."
 
@@ -23,7 +22,6 @@ module Codesake
           })
 
           self.fixed_dependency = {:name=>"rails", :version=>['2.3.15', '3.0.13', '3.2.5', '3.1.5']}
-          self.aux_mitigation_gem = {:name=>"yail", :versione=>['any']}
 
 				end
 			end
