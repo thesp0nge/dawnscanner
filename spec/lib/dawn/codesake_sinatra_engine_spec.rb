@@ -16,8 +16,8 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     @engine.has_gemfile_lock?.should   be_true
   end
 
-  it "detects a sinatra 1.2.6" do
-    @engine.mvc_version.should   == "1.2.6"
+  it "detects a sinatra 1.4.2" do
+    @engine.mvc_version.should   == "1.4.2"
   end
 
   it "has some check in the knowledge base" do

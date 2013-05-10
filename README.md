@@ -1,11 +1,11 @@
 # Codesake::Dawn - code review engine for ruby powered code
 
-Dawn is an opensource code review tool designed for applications written in
-Ruby. You can use dawn to review your code for security issues either if you're
-writing a web application or you're writing a command line script.
+This is an ongoing roadmap for the dawn source code review tool.
 
-Dawn is able to detect web applications written using Sinatra, Padrino and
-Rails frameworks.
+Dawn is a static analysis security scanner for ruby written web applications.
+It supports [Sinatra](http://www.sinatrarb.com),
+[Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
+frameworks. 
 
 ## Installation
 
