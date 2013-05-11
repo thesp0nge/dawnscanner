@@ -27,20 +27,15 @@ You can start your code review with dawn very easily. Simply tell the tool
 where the project root directory is and which is the framework you used to
 write the web application. 
 
-Sorry for non autodetect this; at this point we prefere working hard over core
-features like adding new vulnerabilities and having valuable output.
+_Sorry for non autodetect this; at this point we prefere working hard over core
+features like adding new vulnerabilities and having valuable output._
 
+dawn command line is in this form with options and the target.
 ``` 
-$ dawn _framework_ target
+$ dawn [options] target
 ```
 
-Where framework can be one of the following:
 
-``` 
-  -s for Sinatra
-  -p for Padrino
-  -r for Rails
-``` 
 
 You can also dump all security checks in the knowledge base by using the -k
 flag:
