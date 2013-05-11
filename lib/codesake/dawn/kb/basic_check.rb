@@ -53,6 +53,9 @@ module Codesake
         def cve_link
           "http://cve.mitre.org/cgi-bin/cvename.cgi?name=#{@name}"
         end
+        def nvd_link
+          "http://web.nvd.nist.gov/view/vuln/detail?vulnId=#{@name}"
+        end
 
         # @target_version = '2.3.11'
         # @fixes_version = ['2.3.18', '3.2.13', '3.1.12' ] 
