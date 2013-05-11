@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'codesake/dawn/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "codesake_dawn"
+  gem.name          = "codesake-dawn"
   gem.version       = Codesake::Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["thesp0nge@gmail.com"]
-  gem.description   = %q{codesake dawn is the static analysis engine for ruby powered web applications used in codesake.com application security portal.}
-  gem.summary       = %q{codesake dawn is the static analysis engine for ruby powered web applications}
+  gem.description   = %q{dawn is a security static source code analyzer for web applications written in ruby. It supports major MVC frameworks like sinatra, padrino and ruby on rails. dawn output is a list of security vulnerabilities affecting your code with a suggestion on how to mitigate all of them.}
+  gem.summary       = %q{dawn is a security static source code analyzer for sinatra, padrino and ruby on rails web applicartions.}
   gem.homepage      = "http://codesake.com"
 
   gem.files         = `git ls-files`.split($/)
