@@ -9,9 +9,9 @@ frameworks.
 
 This is an ongoing roadmap for the project.
 
-_latest update: Fri May 10 09:43:11 CEST 2013_
+_latest update: Mon May 13 18:56:06 CEST 2013_
 
-## Version 0.50 (First public release)
+## Version 0.50 (2013-05-13) - First public release
 
 * adding test for CVE\_2013\_0269
 * adding test for CVE\_2013\_0155
@@ -20,6 +20,7 @@ _latest update: Fri May 10 09:43:11 CEST 2013_
 
 ## Version 0.60
 
+* adding capistrano dependency
 * make output less verbose. Only vulnerabilities and severity will be shown 
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * grepping views for XSS attempts (sinatra)
@@ -42,3 +43,9 @@ _latest update: Fri May 10 09:43:11 CEST 2013_
 * support rails application controllers parsing for SQLi
 * support padrino application controllers parsing for XSS
 * support padrino application controllers parsing for SQLi
+* integration with [codesake.com](http://codesake.com) with a public available
+  APIs to be consumed by codesake users.
+
+## Version 1.50
+
+* support for node.js
