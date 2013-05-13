@@ -3,7 +3,7 @@
 require 'getoptlong'
 
 require 'codesake_commons'
-require 'codesake_dawn'
+require 'codesake-dawn'
 
 APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
@@ -72,8 +72,10 @@ if engine.apply_all
 else
   logger.err "no security checks in the knowledge base"
 end
-logger.log "#{engine.vulnerabilities.count} vulnerabilities found"
 
+if engine.vulnerabilities.count != 0
+
+logger.log "#{engine.vulnerabilities.count} vulnerabilities found"
 engine.vulnerabilities.each do |vuln|
   logger.err "#{vuln[:name]} failed"
   logger.log "Description: #{vuln[:message]}"
@@ -83,12 +85,17 @@ engine.vulnerabilities.each do |vuln|
     logger.err evidence
   end
 end
+else
+  logger.ok "no vulnerabilities found."
+end
 
-logger.log "#{engine.mitigated_issues.count} mitigated vulnerabilities found"
-engine.mitigated_issues.each do |vuln|
-  logger.ok "#{vuln[:name]} mitigated"
-  vuln[:evidences].each do |evidence|
-    logger.err evidence
+if engine.mitigated_issues.count != 0
+  logger.log "#{engine.mitigated_issues.count} mitigated vulnerabilities found"
+  engine.mitigated_issues.each do |vuln|
+    logger.ok "#{vuln[:name]} mitigated"
+    vuln[:evidences].each do |evidence|
+      logger.err evidence
+    end
   end
 end
 

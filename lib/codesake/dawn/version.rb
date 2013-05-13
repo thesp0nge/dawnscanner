@@ -1,5 +1,5 @@
 module Codesake
   module Dawn
-    VERSION = "0.50rc1"
+    VERSION = "0.50"
   end
 end
