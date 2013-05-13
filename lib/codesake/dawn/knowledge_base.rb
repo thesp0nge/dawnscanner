@@ -1,13 +1,20 @@
+# Core KB 
 require "codesake/dawn/kb/basic_check"
 require "codesake/dawn/kb/pattern_match_check"
 require "codesake/dawn/kb/dependency_check"
+
+# Q&A related checks
 require "codesake/dawn/kb/not_revised_code"
+
+# CVE - 2011
+require "codesake/dawn/kb/cve_2011_2931"
 
 # CVE - 2012
 require "codesake/dawn/kb/cve_2012_2660"
 require "codesake/dawn/kb/cve_2012_2661"
 require "codesake/dawn/kb/cve_2012_2694"
 require "codesake/dawn/kb/cve_2012_2695"
+require "codesake/dawn/kb/cve_2012_3465"
 require "codesake/dawn/kb/cve_2012_6496"
 require "codesake/dawn/kb/cve_2012_6497"
 
@@ -76,10 +83,12 @@ module Codesake
       def self.load_security_checks
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
+          Codesake::Dawn::Kb::CVE_2011_2931.new, 
           Codesake::Dawn::Kb::CVE_2012_2660.new, 
           Codesake::Dawn::Kb::CVE_2012_2661.new, 
           Codesake::Dawn::Kb::CVE_2012_2694.new, 
           Codesake::Dawn::Kb::CVE_2012_2695.new, 
+          Codesake::Dawn::Kb::CVE_2012_3465.new, 
           Codesake::Dawn::Kb::CVE_2012_6496.new, 
           Codesake::Dawn::Kb::CVE_2012_6497.new,
           Codesake::Dawn::Kb::CVE_2013_1855.new, 
