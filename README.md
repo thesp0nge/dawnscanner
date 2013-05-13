@@ -11,7 +11,7 @@ frameworks.
 
 Add this line to your application's Gemfile:
 
-    gem 'codesake_dawn'
+    gem 'codesake-dawn'
 
 And then execute:
 
@@ -19,7 +19,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install codesake_dawn
+    $ gem install codesake-dawn
 
 ## Usage
 
