@@ -44,6 +44,9 @@ flag:
 $ dawn -k|--list-knowledge-base 
 ```
 
+## Thanks to
+
+[saten](https://github.com/saten): first issue posted about a typo in the README
 
 ## Contributing
 
