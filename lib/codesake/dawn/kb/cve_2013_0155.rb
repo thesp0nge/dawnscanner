@@ -9,7 +9,7 @@ module Codesake
           message = "Ruby on Rails 3.0.x before 3.0.19, 3.1.x before 3.1.10, and 3.2.x before 3.2.11 does not properly consider differences in parameter handling between the Active Record component and the JSON implementation, which allows remote attackers to bypass intended database-query restrictions and perform NULL checks or trigger missing WHERE clauses via a crafted request, as demonstrated by certain \"[nil]\" values, a related issue to CVE-2012-2660 and CVE-2012-2694."
 
           super({
-            :name=>"CVE-2013-0333",
+            :name=>"CVE-2013-0155",
             :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:N",
             :release_date => Date.new(2013, 1, 13),
             :cwe=>"",
