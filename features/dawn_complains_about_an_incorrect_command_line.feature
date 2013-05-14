@@ -10,6 +10,12 @@ Feature: dawn complains on its command line whn incomplete
     Then the stderr should contain "missing target"
 
   Scenario: dawn complains if the target doesn't exist
-    When I run `bundle exec dawn -s this_is_foo`
-    Then the stderr should contain "this_is_foo doesn't exist"
+    Given the generic project "/tmp/this_is_foo" doesn't exist
+    When I run `bundle exec dawn -s /tmp/this_is_foo`
+    Then the stderr should contain "/tmp/this_is_foo doesn't exist"
+
+  Scenario: dawn complains if the target uses a different framework than the one specified
+    Given the rails project /tmp/hello_world_3.1.0 does exist
+    When I run `bundle exec dawn -s /tmp/hello_world_3.1.0`
+    Then the stderr should contain "nothing to do on /tmp/hello_world_3.1.0"
 
