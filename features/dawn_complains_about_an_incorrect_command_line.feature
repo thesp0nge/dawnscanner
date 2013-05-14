@@ -1,4 +1,4 @@
-Feature: dawn complains on its command line whn incomplete
+Feature: dawn complains on its command line when incomplete
   When executed dawn needs a target to analyse
 
   Scenario: dawn complains if you don't specify the target framework
