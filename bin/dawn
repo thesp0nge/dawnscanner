@@ -58,7 +58,9 @@ end
 target=ARGV.shift
 
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
-logger.die "please specify the target language" if engine.nil?
+logger.die "missing target framework option" if engine.nil?
+logger.die "missing target" if target.nil?
+logger.die "#{target} doesn't exist" unless Dir.exist?(target)
 
 engine.set_target(target) unless engine.nil?
 engine.load_knowledge_base
