@@ -1,1 +1,1 @@
-require 'codesake_dawn'
+require 'codesake-dawn'

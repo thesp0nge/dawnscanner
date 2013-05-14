@@ -8,9 +8,6 @@ describe "Dawn security check for CVE-2013-1855" do
   it "knows its name" do
     @check.name.should == "CVE-2013-1855"
   end
-  it "checks for sanitize_css pattern" do
-    @check.attack_pattern.should == ["sanitize_css"]
-  end
 
   
 end
