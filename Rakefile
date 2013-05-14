@@ -1,12 +1,24 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
+# require "highline/import"
+
+require 'cucumber'
+require 'cucumber/rake/task'
 
 require 'fileutils'
 require "codesake/dawn/knowledge_base"
 
-RSpec::Core::RakeTask.new
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty -x"
+  t.fork = false
+end
 
-task :default => :spec
+RSpec::Core::RakeTask.new do |t| 
+  t.rspec_opts = ["--color"]
+end
+
+
+task :default => [ :spec, :features ]
 task :test => :spec
 
 desc "Create a new CVE test"
