@@ -20,7 +20,7 @@ _latest update: Mon May 13 18:56:06 CEST 2013_
 
 ## Version 0.60
 
-* adding capistrano dependency
+* adding cucumber dependency
 * make output less verbose. Only vulnerabilities and severity will be shown 
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * grepping views for XSS attempts (sinatra)
