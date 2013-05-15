@@ -23,6 +23,8 @@ _latest update: Mon May 13 18:56:06 CEST 2013_
 * adding cucumber dependency
 * make output less verbose. Only vulnerabilities and severity will be shown 
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
+* adding a '--output' option
+* support JSON output
 * grepping views for XSS attempts (sinatra)
 
 ## Version 0.70 
