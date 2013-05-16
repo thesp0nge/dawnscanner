@@ -82,7 +82,7 @@ applications will be supported as well.
 | CVE-2013-0333         | YES           | YES               |
 | CVE-2011-0447         | NO            | YES               |
 | CVE-2011-0446         | NO            | YES               |
-| CVE-2013-1854         | NO            | YES               |
+| CVE-2013-1854         | YES           | YES               |
 | CVE-2013-1856         | NO            | YES               |
 | CVE-2013-0276         | NO            | YES               |
 | CVE-2013-0277         | NO            | YES               |
