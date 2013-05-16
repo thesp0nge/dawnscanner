@@ -42,21 +42,76 @@ Cross site scripting attacks.
 In a future (on version 1.5 accordingly to the Roadmap), node.js written web
 applications will be supported as well.
 
-## The matrix
+## The comparison
+
+### Basic features
 
 |Feature                | Dawn          | Brakeman          |
 |-----------------------|---------------|-------------------|
 | Version               | 0.51          | 1.9.5             |
 | Production ready?     | NO            | YES               |
 | Sinatra support       | YES           | NO                |
-| Padrino support       | NO (planned)  | NO                |
+| Padrino support       | NO *planned*  | NO                |
 | Rails support         | YES           | YES               |
+| Node.js support       | NO *planned*  | NO                |
 | Plain text output     | YES           | YES               |
 | Json output           | YES           | NO                |
+| HTML output           | NO            | YES               |
+
+### CVE security checks
+
+| CVE Check             | Dawn          | Brakeman          |
+|-----------------------|---------------|-------------------|
+| CVE-2011-2931         | YES           | YES               |
+| CVE-2012-2660         | YES           | YES               |
+| CVE-2012-2661         | YES           | YES               |
+| CVE-2012-2694         | YES           | YES               |
+| CVE-2012-2695         | YES           | YES               |
+| CVE-2012-3465         | YES           | YES               |
+| CVE-2012-3464         | NO            | YES               |
+| CVE-2012-3463         | NO            | YES               |
+| CVE-2012-6496         | YES           | NO                |
+| CVE-2012-5664         | NO            | YES               |
+| CVE-2012-6497         | YES           | NO                |
+| CVE-2013-1855         | YES           | YES               |
+| CVE-2013-1800         | YES           | NO                |
+| CVE-2013-0333         | YES           | YES               |
+| CVE-2013-0269         | YES           | YES               |
+| CVE-2013-1857         | YES           | YES               |
+| CVE-2013-0155         | YES           | YES               |
+| CVE-2013-0333         | YES           | YES               |
+| CVE-2011-0447         | NO            | YES               |
+| CVE-2011-0446         | NO            | YES               |
+| CVE-2013-1854         | NO            | YES               |
+| CVE-2013-1856         | NO            | YES               |
+| CVE-2013-0276         | NO            | YES               |
+| CVE-2013-0277         | NO            | YES               |
+| CVE-2013-0156         | NO            | YES               |
+
+### Quality checks
+
+| Quality check         | Dawn          | Brakeman          |
+|-----------------------|---------------|-------------------|
+| Not revised code      | YES           | NO                |
 
 
+### Application specific security checks
+
+| Security check              | Dawn          | Brakeman          |
+|-----------------------------|---------------|-------------------|
+| Reflected XSS               | NO            | YES               |
+| Stored XSS                  | NO            | YES *unsure*      |
+| DOM Based XSS               | NO            | NO                |
+| SQL injection               | NO            | YES               |
+| Broken authentication       | NO            | NO                |
+| Insecure object reference   | NO            | NO                |
+| CSRF                        | NO            | YES *unsure*      |
 
 
 ## Third party reviews
+
+If you blogged, twitted or in any case if you compare dawn with other SAST
+available out there supporting ruby, please tell me and I'll add your review
+here.
 
 
