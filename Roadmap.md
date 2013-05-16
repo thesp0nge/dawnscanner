@@ -41,6 +41,7 @@ _latest update: Thu May 16 07:57:39 CEST 2013_
 
 ## Version 0.80
 
+* adding test for CVE-2013-2090 _if CVE will be approved_
 * adding text for CVE-2011-0447 
 * adding text for CVE-2011-0446 
 * support sinatra application controllers parsing for SQLi

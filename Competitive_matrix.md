@@ -87,6 +87,7 @@ applications will be supported as well.
 | CVE-2013-0276         | NO            | YES               |
 | CVE-2013-0277         | NO            | YES               |
 | CVE-2013-0156         | NO            | YES               |
+| CVE-2013-2090         | NO            | NO                |
 
 ### Quality checks
 
