@@ -8,7 +8,9 @@ frameworks.
 ## Useful links
 
 www:      [http://codesake.com](http://codesake.com) 
+
 twitter:  [https://twitter.com/codesake](https://twitter.com/codesake) #dawn hashtag
+
 github:   [https://github.com/codesake/codesake\_dawn](https://github.com/codesake/codesake\_dawn)
 
 ## Installation
@@ -55,13 +57,36 @@ $ dawn [options] target
 The options you can specify tell down the MVC used in your application and some
 triggers you may want to be active during the scan.
 
+### Scanning a Sinatra web application
+
+dawn will scan application stored in hello_world directory which is a Sinatra application
+
 ```
-$ dawn -s hello_world #=> dawn will scan application stored in hello_world directory which is a Sinatra application
-$ dawn -r hello_world #=> dawn will scan application stored in hello_world directory which is a Ruby on Rails application
-$ dawn -p hello_world #=> dawn will scan application stored in hello_world directory which is a Padrino application
+$ dawn -s hello_world 
 ```
 
-In output, dawn will put all security checks that are failed during the scan. In example, this is the output of a scan performed over a very simple Sinatra application:
+### Scanning a Ruby on Rails web application
+
+dawn will scan application stored in hello_world directory which is a Ruby on Rails application
+
+```
+$ dawn -r hello_world 
+```
+
+### Scanning a Padrino web application
+
+dawn will scan application stored in hello_world directory which is a Padrino application
+
+```
+$ dawn -p hello_world 
+```
+
+### As output you get
+
+As output, dawn will put all security checks that are failed during the scan.
+In example, this is the output of a scan performed over a very simple Sinatra
+application:
+
 ```
 $ bundle exec bin/dawn -s target
 
@@ -78,6 +103,8 @@ $ bundle exec bin/dawn -s target
 08:09:11 [!] Vulnerable crack gem version found: 0.3.1
 [*] dawn is shutting down at 08:09:11
 ```
+
+
 You can also dump all security checks in the knowledge base by using the -k
 flag:
 
@@ -88,6 +115,7 @@ $ dawn -k|--list-knowledge-base
 ## Thanks to
 
 [saten](https://github.com/saten): first issue posted about a typo in the README
+
 [presidentbeef](https://githbu.com/presidentbeef): for his outstanding work that inspired me creating dawn
 
 ## LICENSE
@@ -115,10 +143,3 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
