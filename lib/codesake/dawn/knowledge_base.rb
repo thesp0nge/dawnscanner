@@ -25,6 +25,7 @@ require "codesake/dawn/kb/cve_2013_0333"
 require "codesake/dawn/kb/cve_2013_1800"
 require "codesake/dawn/kb/cve_2013_1854"
 require "codesake/dawn/kb/cve_2013_1855"
+require "codesake/dawn/kb/cve_2013_1856"
 require "codesake/dawn/kb/cve_2013_1857"
 
 module Codesake
@@ -98,6 +99,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_1800.new,
           Codesake::Dawn::Kb::CVE_2013_1854.new, 
           Codesake::Dawn::Kb::CVE_2013_1855.new, 
+          Codesake::Dawn::Kb::CVE_2013_1856.new, 
           Codesake::Dawn::Kb::CVE_2013_1857.new, 
         ]
       end
