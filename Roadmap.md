@@ -18,12 +18,12 @@ _latest update: Thu May 16 07:57:39 CEST 2013_
 
 ## Version 0.60
 
+* adding cucumber dependency
 * adding test for CVE-2013-1854
 * adding test for CVE-2013-1856
 * adding test for CVE-2013-0276
 * adding test for CVE-2013-0277
 * adding test for CVE-2013-0156
-* adding cucumber dependency
 * make output less verbose. Only vulnerabilities and severity will be shown 
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * adding a '--output' option
