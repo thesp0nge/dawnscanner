@@ -30,6 +30,8 @@ require "codesake/dawn/kb/cve_2013_1854"
 require "codesake/dawn/kb/cve_2013_1855"
 require "codesake/dawn/kb/cve_2013_1856"
 require "codesake/dawn/kb/cve_2013_1857"
+require "codesake/dawn/kb/cve_2013_2615"
+
 
 module Codesake
   module Dawn
