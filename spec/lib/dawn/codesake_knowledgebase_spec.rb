@@ -126,5 +126,26 @@ describe "The Codesake Dawn knowledge base" do
     sc.class.should == Codesake::Dawn::Kb::CVE_2013_0156
   end
 
+  it "must have test for CVE-2013-2615"
+  it "must have test for CVE-2013-1875"
+  it "must have test for CVE-2013-1655"
+  it "must have test for CVE-2013-1656"
+  it "must have test for CVE-2013-0175"
+  it "must have test for CVE-2013-0233"
+  it "must have test for CVE-2013-0284"
+  it "must have test for CVE-2013-0285"
+  it "must have test for CVE-2013-1801"
+  it "must have test for CVE-2013-1802"
+  it "must have test for CVE-2013-1821"
+  it "must have test for CVE-2013-1898"
+  it "must have test for CVE-2013-1911"
+  it "must have test for CVE-2013-1933"
+  it "must have test for CVE-2013-1947"
+  it "must have test for CVE-2013-1948"
+  it "must have test for CVE-2013-2616"
+  it "must have test for CVE-2013-2617"
+  it "must have test for CVE-2013-3221"
+
+
 
 end
