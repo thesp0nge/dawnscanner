@@ -55,7 +55,7 @@ applications will be supported as well.
 | Rails support         | YES           | YES               |
 | Node.js support       | NO *planned*  | NO                |
 | Plain text output     | YES           | YES               |
-| Json output           | YES           | NO                |
+| Json output           | YES           | YES               |
 | HTML output           | NO            | YES               |
 
 ### CVE security checks
@@ -84,7 +84,7 @@ applications will be supported as well.
 | CVE-2011-0446         | NO            | YES               |
 | CVE-2013-1854         | YES           | YES               |
 | CVE-2013-1856         | YES           | YES               |
-| CVE-2013-0276         | NO            | YES               |
+| CVE-2013-0276         | YES           | YES               |
 | CVE-2013-0277         | NO            | YES               |
 | CVE-2013-0156         | NO            | YES               |
 | CVE-2013-2090         | NO            | NO                |
@@ -98,15 +98,15 @@ applications will be supported as well.
 
 ### Application specific security checks
 
-| Security check              | Dawn          | Brakeman          |
-|-----------------------------|---------------|-------------------|
-| Reflected XSS               | NO            | YES               |
-| Stored XSS                  | NO            | YES *unsure*      |
-| DOM Based XSS               | NO            | NO                |
-| SQL injection               | NO            | YES               |
-| Broken authentication       | NO            | NO                |
-| Insecure object reference   | NO            | NO                |
-| CSRF                        | NO            | YES *unsure*      |
+| Security check              | Dawn          | Brakeman                      |
+|-----------------------------|---------------|-------------------------------|
+| Reflected XSS               | NO            | YES                           |
+| Stored XSS                  | NO            | YES                           |
+| DOM Based XSS               | NO            | NO                            |
+| SQL injection               | NO            | YES                           |
+| Broken authentication       | NO            | NO                            |
+| Insecure object reference   | NO            | NO                            |
+| CSRF                        | NO            | YES *controller level check*  |
 
 
 ## Third party reviews
