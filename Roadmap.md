@@ -33,8 +33,8 @@ _latest update: Thu May 16 07:57:39 CEST 2013_
 ## Version 0.70 
 
 * adding test for CVE-2012-3464
-* adding text for CVE-2012-3463
-* adding text for CVE-2012-5664
+* adding test for CVE-2012-3463
+* adding test for CVE-2012-5664
 * add ruby\_parser dependency
 * support sinatra application controllers parsing for XSS
 * grepping views for XSS attempts (rails)
@@ -42,11 +42,16 @@ _latest update: Thu May 16 07:57:39 CEST 2013_
 ## Version 0.80
 
 * adding test for CVE-2013-2090 _if CVE will be approved_
-* adding text for CVE-2011-0447 
-* adding text for CVE-2011-0446 
+* adding test for CVE-2011-0447 
+* adding test for CVE-2011-0446 
 * support sinatra application controllers parsing for SQLi
 * support rails application controllers parsing for XSS
 * grepping views for XSS attempts (padrino)
+
+## Version 0.90
+
+* preliminary javascript support
+* adding test for CVE-2011-4969  XSS in jquery < 1.6.2 
 
 ## Version 1.00
 
