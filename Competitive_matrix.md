@@ -10,9 +10,15 @@ linked to this page (even in case you will make criticisms to my tool)
 
 ## The competitors
 
-As the time I'm writing this (05/15/2013) the only opensource source code
-security static analyzer (let's call them SAST form this point) supporting ruby
-is [brakeman scanner](http://brakemanscanner.org/).
+As [@presidentbeef](https://twitter.com/presidentbeef) pointed me out, there
+are a couple of security source code static analyzers (lets'call them SAST from
+this point) supporting ruby.
+
+* [brakeman scanner](http://brakemanscanner.org/) 
+* [Excellent](https://github.com/simplabs/excellent)
+* [ror-sec-scanner](http://gitorious.org/code-scanner/ror-sec-scanner/)
+* [Scanny](https://github.com/openSUSE/scanny)
+* [dawn](https://github.com/codesake/codesake\_dawn)
 
 ### Brakeman
 
@@ -46,69 +52,69 @@ applications will be supported as well.
 
 ### Basic features
 
-|Feature                | Dawn          | Brakeman          |
-|-----------------------|---------------|-------------------|
-| Version               | 0.51          | 1.9.5             |
-| Production ready?     | NO            | YES               |
-| Sinatra support       | YES           | NO                |
-| Padrino support       | NO *planned*  | NO                |
-| Rails support         | YES           | YES               |
-| Node.js support       | NO *planned*  | NO                |
-| Plain text output     | YES           | YES               |
-| Json output           | YES           | YES               |
-| HTML output           | NO            | YES               |
+|Feature                | Dawn          | Brakeman          | Excellent   | ror-sec-scanner   | Scanny      |
+|-----------------------|---------------|-------------------|-------------|-------------------|-------------|
+| Version               | 0.51          | 1.9.5             |             |                   |             |
+| Production ready?     | NO            | YES               |             |                   |             |
+| Sinatra support       | YES           | NO                |             |                   |             |
+| Padrino support       | NO *planned*  | NO                |             |                   |             |
+| Rails support         | YES           | YES               |             |                   |             |
+| Node.js support       | NO *planned*  | NO                |             |                   |             |
+| Plain text output     | YES           | YES               |             |                   |             |
+| Json output           | YES           | YES               |             |                   |             |
+| HTML output           | NO            | YES               |             |                   |             |
 
 ### CVE security checks
 
-| CVE Check             | Dawn          | Brakeman          |
-|-----------------------|---------------|-------------------|
-| CVE-2011-2931         | YES           | YES               |
-| CVE-2012-2660         | YES           | YES               |
-| CVE-2012-2661         | YES           | YES               |
-| CVE-2012-2694         | YES           | YES               |
-| CVE-2012-2695         | YES           | YES               |
-| CVE-2012-3465         | YES           | YES               |
-| CVE-2012-3464         | NO            | YES               |
-| CVE-2012-3463         | NO            | YES               |
-| CVE-2012-6496         | YES           | NO                |
-| CVE-2012-5664         | NO            | YES               |
-| CVE-2012-6497         | YES           | NO                |
-| CVE-2013-1855         | YES           | YES               |
-| CVE-2013-1800         | YES           | NO                |
-| CVE-2013-0333         | YES           | YES               |
-| CVE-2013-0269         | YES           | YES               |
-| CVE-2013-1857         | YES           | YES               |
-| CVE-2013-0155         | YES           | YES               |
-| CVE-2013-0333         | YES           | YES               |
-| CVE-2011-0447         | NO            | YES               |
-| CVE-2011-0446         | NO            | YES               |
-| CVE-2013-1854         | YES           | YES               |
-| CVE-2013-1856         | YES           | YES               |
-| CVE-2013-0276         | YES           | YES               |
-| CVE-2013-0277         | YES           | YES               |
-| CVE-2013-0156         | YES           | YES               |
-| CVE-2013-2090 [0]     | NO            | NO                |
+| CVE Check             | Dawn          | Brakeman          | Excellent   | ror-sec-scanner   | Scanny      |
+|-----------------------|---------------|-------------------|-------------|-------------------|-------------|
+| CVE-2011-2931         | YES           | YES               |             |                   |             |
+| CVE-2012-2660         | YES           | YES               |             |                   |             |
+| CVE-2012-2661         | YES           | YES               |             |                   |             |
+| CVE-2012-2694         | YES           | YES               |             |                   |             |
+| CVE-2012-2695         | YES           | YES               |             |                   |             |
+| CVE-2012-3465         | YES           | YES               |             |                   |             |
+| CVE-2012-3464         | NO            | YES               |             |                   |             |
+| CVE-2012-3463         | NO            | YES               |             |                   |             |
+| CVE-2012-6496         | YES           | NO                |             |                   |             |
+| CVE-2012-5664         | NO            | YES               |             |                   |             |
+| CVE-2012-6497         | YES           | NO                |             |                   |             |
+| CVE-2013-1855         | YES           | YES               |             |                   |             |
+| CVE-2013-1800         | YES           | NO                |             |                   |             |
+| CVE-2013-0333         | YES           | YES               |             |                   |             |
+| CVE-2013-0269         | YES           | YES               |             |                   |             |
+| CVE-2013-1857         | YES           | YES               |             |                   |             |
+| CVE-2013-0155         | YES           | YES               |             |                   |             |
+| CVE-2013-0333         | YES           | YES               |             |                   |             |
+| CVE-2011-0447         | NO            | YES               |             |                   |             |
+| CVE-2011-0446         | NO            | YES               |             |                   |             |
+| CVE-2013-1854         | YES           | YES               |             |                   |             |
+| CVE-2013-1856         | YES           | YES               |             |                   |             |
+| CVE-2013-0276         | YES           | YES               |             |                   |             |
+| CVE-2013-0277         | YES           | YES               |             |                   |             |
+| CVE-2013-0156         | YES           | YES               |             |                   |             |
+| CVE-2013-2090 [0]     | NO            | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 
 ### Quality checks
 
-| Quality check         | Dawn          | Brakeman          |
-|-----------------------|---------------|-------------------|
-| Not revised code      | YES           | NO                |
+| Quality check         | Dawn          | Brakeman          | Excellent   | ror-sec-scanner   | Scanny      |
+|-----------------------|---------------|-------------------|-------------|-------------------|-------------|
+| Not revised code      | YES           | NO                |             |                   |             |
 
 
 ### Application specific security checks
 
-| Security check              | Dawn          | Brakeman   |
-|-----------------------------|---------------|------------|
-| Reflected XSS               | NO            | YES        |
-| Stored XSS                  | NO            | YES        |
-| DOM Based XSS               | NO            | NO         |
-| SQL injection               | NO            | YES        |
-| Broken authentication       | NO            | NO         |
-| Insecure object reference   | NO            | NO         |
-| CSRF                        | NO            | YES [1]    |
+| Security check              | Dawn          | Brakeman   | Excellent   | ror-sec-scanner   | Scanny      |
+|-----------------------------|---------------|------------|-------------|-------------------|-------------|
+| Reflected XSS               | NO            | YES        |             |                   |             |
+| Stored XSS                  | NO            | YES        |             |                   |             |
+| DOM Based XSS               | NO            | NO         |             |                   |             |
+| SQL injection               | NO            | YES        |             |                   |             |
+| Broken authentication       | NO            | NO         |             |                   |             |
+| Insecure object reference   | NO            | NO         |             |                   |             |
+| CSRF                        | NO            | YES [1]    |             |                   |             |
 
 [1] Brakeman warns if an application does not use protect_from_forgery, but it
 doesn't warn about vulnerable forms (e.g. those not using view helpers) -
