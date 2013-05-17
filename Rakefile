@@ -60,16 +60,16 @@ task :new_cve, :name do |t,args|
   end
   puts "#{rb_filename} created"
 
-  open(spec_filename, "w") do |file|
-    file.puts "require \"spec_helper\""
-    file.puts "# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
-    file.puts ""
-    file.puts "describe \"Security check for #{name}\" do"
-    file.puts "\tlet(:check) {Codesake::Dawn::Kb::#{class_name}.new}"
-    file.puts "\tit \"should be added to rspec\""
-    file.puts "end"
-  end
-  puts "#{spec_filename} created"
+  # open(spec_filename, "w") do |file|
+  #   file.puts "require \\"spec_helper\\""
+  #   file.puts "# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
+  #   file.puts ""
+  #   file.puts "describe \\"Security check for #{name}\\" do"
+  #   file.puts "\\tlet(:check) {Codesake::Dawn::Kb::#{class_name}.new}"
+  #   file.puts "\\tit \\"should be added to rspec\\""
+  #   file.puts "end"
+  # end
+  # puts "#{spec_filename} created"
 
   puts "*** PLEASE ADD #{name} to spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
   puts "*** PLEASE ADD #{name} to lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
