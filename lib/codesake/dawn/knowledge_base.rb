@@ -22,6 +22,7 @@ require "codesake/dawn/kb/cve_2012_6497"
 require "codesake/dawn/kb/cve_2013_0155"
 require "codesake/dawn/kb/cve_2013_0269"
 require "codesake/dawn/kb/cve_2013_0276"
+require "codesake/dawn/kb/cve_2013_0277"
 require "codesake/dawn/kb/cve_2013_0333"
 require "codesake/dawn/kb/cve_2013_1800"
 require "codesake/dawn/kb/cve_2013_1854"
@@ -97,6 +98,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_0155.new,
           Codesake::Dawn::Kb::CVE_2013_0269.new,
           Codesake::Dawn::Kb::CVE_2013_0276.new,
+          Codesake::Dawn::Kb::CVE_2013_0277.new,
           Codesake::Dawn::Kb::CVE_2013_0333.new,
           Codesake::Dawn::Kb::CVE_2013_1800.new,
           Codesake::Dawn::Kb::CVE_2013_1854.new, 
