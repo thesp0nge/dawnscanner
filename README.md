@@ -116,7 +116,7 @@ $ dawn -k|--list-knowledge-base
 
 [saten](https://github.com/saten): first issue posted about a typo in the README
 
-[presidentbeef](https://githbu.com/presidentbeef): for his outstanding work that inspired me creating dawn
+[presidentbeef](https://githbu.com/presidentbeef): for his outstanding work that inspired me creating dawn and for double check comparison matrix. Issue #2 is your :)
 
 ## LICENSE
 
