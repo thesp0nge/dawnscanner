@@ -61,5 +61,13 @@ task :new_cve, :name do |t,args|
   puts "#{rb_filename} created"
 
   puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD #{name} IN lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
+  puts "*** PLEASE ADD THIS CODE IN lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
+  puts "require \"codesake/dawn/kb/#{class_name.downcase}\""
+  puts "it \"must have test for #{name}\" do"
+  puts "  sc = kb.find(\"#{name}\")"
+  puts "  sc.should_not   be_nil"
+  puts "  sc.class.should == Codesake::Dawn::Kb::#{class_name}"
+  puts "end"
+
+
 end
