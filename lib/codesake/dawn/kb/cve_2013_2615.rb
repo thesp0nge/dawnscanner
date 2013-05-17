@@ -16,7 +16,7 @@ module Codesake
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade fastreader gem to a newer version"
+            :mitigation=>"Please upgrade fastreader gem to a newer version",
             :aux_links=>["http://seclists.org/fulldisclosure/2013/Mar/122"]
           })
 

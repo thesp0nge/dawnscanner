@@ -109,6 +109,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_1855.new, 
           Codesake::Dawn::Kb::CVE_2013_1856.new, 
           Codesake::Dawn::Kb::CVE_2013_1857.new, 
+          Codesake::Dawn::Kb::CVE_2013_2615.new, 
         ]
       end
     end
