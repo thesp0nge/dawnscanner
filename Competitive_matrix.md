@@ -98,16 +98,19 @@ applications will be supported as well.
 
 ### Application specific security checks
 
-| Security check              | Dawn          | Brakeman                      |
-|-----------------------------|---------------|-------------------------------|
-| Reflected XSS               | NO            | YES                           |
-| Stored XSS                  | NO            | YES                           |
-| DOM Based XSS               | NO            | NO                            |
-| SQL injection               | NO            | YES                           |
-| Broken authentication       | NO            | NO                            |
-| Insecure object reference   | NO            | NO                            |
-| CSRF                        | NO            | YES *controller level check*  |
+| Security check              | Dawn          | Brakeman   |
+|-----------------------------|---------------|------------|
+| Reflected XSS               | NO            | YES        |
+| Stored XSS                  | NO            | YES        |
+| DOM Based XSS               | NO            | NO         |
+| SQL injection               | NO            | YES        |
+| Broken authentication       | NO            | NO         |
+| Insecure object reference   | NO            | NO         |
+| CSRF                        | NO            | YES [1]    |
 
+[1] Brakeman warns if an application does not use protect_from_forgery, but it
+doesn't warn about vulnerable forms (e.g. those not using view helpers) -
+[@presidentbeef](https://github.com/codesake/codesake_dawn/issues/2)
 
 ## Third party reviews
 
