@@ -11,6 +11,7 @@ module Codesake
       attr_reader :checks
       attr_reader :vulnerabilities
       attr_reader :mitigated_issues
+      attr_reader :ruby_version
 
       def initialize(dir=nil, name="")
         @name = name
@@ -23,6 +24,18 @@ module Codesake
         @applied = []
         set_target(dir) unless dir.nil?
         load_knowledge_base
+        @ruby_version = get_ruby_version
+      end
+
+      def get_ruby_version
+        # does target use rbenv?
+        ver = get_rbenv_ruby_ver
+        # does the target use rvm?
+        ver = get_rvm_ruby_ver if ver.empty?
+        # take the running ruby otherwise
+        ver = RUBY_VERSION if ver.empty?
+
+        ver
       end
 
       def set_target(dir)
@@ -91,6 +104,7 @@ module Codesake
         @checks.each do |check|
           if check.name == name
             @applied << { :name=>name }
+            check.ruby_version = self.ruby_version
             check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
             check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
             @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.vuln?
@@ -108,6 +122,7 @@ module Codesake
 
         @checks.each do |check|
           @applied << { :name => name }
+          check.ruby_version = self.ruby_version
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
           check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
           @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation , :evidences=>check.evidences} if check.vuln?
@@ -139,6 +154,16 @@ module Codesake
 
         false
       end
+      private
+      def get_rbenv_ruby_ver
+        return "" unless File.exist?(File.join(@target, ".rbenv-version"))
+        return File.read('.rbenv-version').split('-')[0]
+      end
+      def get_rvm_ruby_ver
+        return "" unless File.exist?(File.join(@target, ".ruby-version"))
+        return File.read('.ruby-version').split('-')[1]
+      end
+
     end
   end
 end

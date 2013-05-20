@@ -138,7 +138,11 @@ describe "The Codesake Dawn knowledge base" do
     sc.class.should == Codesake::Dawn::Kb::CVE_2013_1875
   end
 
-  it "must have test for CVE-2013-1655"
+  it "must have test for CVE-2013-1655" do
+    sc = kb.find("CVE-2013-1655")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::CVE_2013_1655
+  end
   it "must have test for CVE-2013-1656"
   it "must have test for CVE-2013-0175"
   it "must have test for CVE-2013-0233"

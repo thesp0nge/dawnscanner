@@ -60,6 +60,10 @@ describe "The Codesake::Dawn engine for sinatra applications" do
       @engine.target_is_dir?.should  be_true
     end
 
+    it "detects running ruby as the one to be checked against" do
+      @engine.ruby_version.should == RUBY_VERSION
+    end
+
     it "reports it's vulnerable to CVE-2013-1800" do
       @engine.is_vulnerable_to?("CVE-2013-1800").should be_true
     end
