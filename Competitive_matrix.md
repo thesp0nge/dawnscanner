@@ -95,6 +95,7 @@ applications will be supported as well.
 | CVE-2013-0156         | YES           | YES               |             |                   |             |
 | CVE-2013-2090 [0]     | NO            | NO                |             |                   |             |
 | CVE-2013-2615         | YES           | NO                |             |                   |             |
+| CVE-2013-1875         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 
