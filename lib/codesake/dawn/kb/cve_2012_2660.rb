@@ -21,7 +21,7 @@ module Codesake
             :aux_links=>["https://groups.google.com/d/topic/rubyonrails-security/8SA-M3as7A8/discussion"]
           })
 
-          self.fixed_dependency = {:name=>"rails", :version=>['2.3.15', '3.0.13', '3.2.5', '3.1.5']}
+          self.safe_dependencies = [{:name=>"rails", :version=>['2.3.15', '3.0.13', '3.2.5', '3.1.5']}]
 
 				end
 			end

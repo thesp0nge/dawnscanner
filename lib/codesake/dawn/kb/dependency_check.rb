@@ -5,7 +5,14 @@ module Codesake
         include BasicCheck
 
         attr_accessor :dependencies
-        attr_accessor :fixed_dependency
+
+        # This attribute replaces fixed_dependency in 20130521. 
+        # There are cve checks like
+        # http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-0175 that
+        # addresses two different gems firing up the vulnerability. You can
+        # read this like, "if you use gem A version A1 or if you use gem B
+        # version B1 you can occur in this issue".
+        attr_accessor :safe_dependencies
         attr_accessor :aux_mitigation_gem
 
 
@@ -18,15 +25,17 @@ module Codesake
             # don't care about gem version when it mitigates a vulnerability... this can be risky, maybe I would reconsider in the future.
             @mitigated = true if dep[:name] == @aux_mitigation_gem[:name] unless @aux_mitigation_gem.nil?
 
-            if @ruby_vulnerable_versions.empty?
-              if dep[:name] == @fixed_dependency[:name] and is_vulnerable_version?(dep[:version], @fixed_dependency[:version]) 
-                ret = true
-                message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
-              end
-            else
-              if dep[:name] == @fixed_dependency[:name] and is_vulnerable_version?(dep[:version], @fixed_dependency[:version]) and is_ruby_vulnerable_version?
-                ret = true
-                message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
+            @safe_dependencies.each do |safe_dep|
+              if @ruby_vulnerable_versions.empty?
+                if dep[:name] == safe_dep[:name] and is_vulnerable_version?(dep[:version], safe_dep[:version]) 
+                  ret = true
+                  message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
+                end
+              else
+                if dep[:name] == safe_dep[:name] and is_vulnerable_version?(dep[:version], safe_dep[:version]) and is_ruby_vulnerable_version?
+                  ret = true
+                  message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
+                end
               end
             end
 

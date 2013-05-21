@@ -19,7 +19,7 @@ module Codesake
                 :message=>message,
                 :mitigation=>"Please use crack gem version 0.3.2 or above. Correct your gemfile"
           })
-          self.fixed_dependency = {:name=>'crack', :version=>['0.3.2']}
+          self.safe_dependencies = [{:name=>'crack', :version=>['0.3.2']}]
         end
 
       end

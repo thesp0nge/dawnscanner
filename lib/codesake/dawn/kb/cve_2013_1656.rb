@@ -21,7 +21,7 @@ module Codesake
             :mitigation=>"Please upgrade Spree commerce rubygem",
             :aux_links => ["http://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed"]
           })
-          self.fixed_dependency = {:name=>"spree", :version=>['1.3.3']}
+          self.safe_dependencies = [{:name=>"spree", :version=>['1.3.3']}]
 
 				end
 			end

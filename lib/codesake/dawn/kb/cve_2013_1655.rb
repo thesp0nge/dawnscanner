@@ -22,7 +22,7 @@ module Codesake
             :ruby_vulnerable_versions =>['1.9.3', '2.0.0']
           })
 
-          self.fixed_dependency = {:name=>"puppet", :version=>['2.7.21', '3.1.1']}
+          self.safe_dependencies = [{:name=>"puppet", :version=>['2.7.21', '3.1.1']}]
 
 				end
 			end

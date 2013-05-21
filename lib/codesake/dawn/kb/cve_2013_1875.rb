@@ -20,7 +20,7 @@ module Codesake
             :aux_links=>["http://seclists.org/fulldisclosure/2013/Mar/175"]
           })
 
-          self.fixed_dependency = {:name=>"fastreader", :version=>['1.0.9']}
+          self.safe_dependencies = [{:name=>"fastreader", :version=>['1.0.9']}]
  
 				end
 			end

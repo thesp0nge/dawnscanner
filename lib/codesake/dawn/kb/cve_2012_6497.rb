@@ -21,7 +21,7 @@ module Codesake
             :aux_links=>["https://groups.google.com/d/topic/rubyonrails-security/DCNTNp_qjFM/discussion"]
           })
 
-          self.fixed_dependency = {:name=>"authlogic", :version=>['3.2.10']}
+          self.safe_dependencies = [{:name=>"authlogic", :version=>['3.2.10']}]
 
 				end
 			end

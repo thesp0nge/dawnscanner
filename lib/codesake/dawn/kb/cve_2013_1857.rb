@@ -20,7 +20,7 @@ module Codesake
             :mitigation=>"Please upgrade rails version at least to 2.3.18, 3.0.8, 3.1.10 and 3.2.11. As a general rule, using the latest stable rails version is recommended.",
             :aux_links => [ "https://groups.google.com/d/msg/rubyonrails-security/zAAU7vGTPvI/1vZDWXqBuXgJ" ]
           })
-          self.fixed_dependency = {:name=>"rails", :version=>['2.3.18', '3.0.8', '3.2.13', '3.1.12']}
+          self.safe_dependencies = [{:name=>"rails", :version=>['2.3.18', '3.0.8', '3.2.13', '3.1.12']}]
 
         end
       end
