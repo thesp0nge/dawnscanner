@@ -99,6 +99,7 @@ applications will be supported as well.
 | CVE-2013-1655         | YES           | NO                |             |                   |             |
 | CVE-2013-1656         | YES           | NO                |             |                   |             |
 | CVE-2013-0175         | YES           | NO                |             |                   |             |
+| CVE-2013-0233         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 
