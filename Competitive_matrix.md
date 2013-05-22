@@ -103,6 +103,7 @@ applications will be supported as well.
 | CVE-2013-0284         | YES           | NO                |             |                   |             |
 | CVE-2013-0285         | YES           | NO                |             |                   |             |
 | CVE-2013-1801         | YES           | NO                |             |                   |             |
+| CVE-2013-1802         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 
