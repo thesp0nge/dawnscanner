@@ -31,9 +31,9 @@ module Codesake
         # does target use rbenv?
         ver = get_rbenv_ruby_ver
         # does the target use rvm?
-        ver = get_rvm_ruby_ver if ver.empty?
+        ver = get_rvm_ruby_ver if ver[:version].empty? and ver[:patchlevel].empty?
         # take the running ruby otherwise
-        ver = RUBY_VERSION if ver.empty?
+        ver = {:version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? and ver[:patchlevel].empty? 
 
         ver
       end
@@ -104,7 +104,8 @@ module Codesake
         @checks.each do |check|
           if check.name == name
             @applied << { :name=>name }
-            check.ruby_version = self.ruby_version
+            check.ruby_version = self.ruby_version[:version]
+            check.detected_ruby  = self.ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
             check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
             check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
             @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.vuln?
@@ -122,7 +123,8 @@ module Codesake
 
         @checks.each do |check|
           @applied << { :name => name }
-          check.ruby_version = self.ruby_version
+          check.ruby_version = self.ruby_version[:version]
+          check.detected_ruby  = self.ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
           check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
           @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation , :evidences=>check.evidences} if check.vuln?
@@ -156,12 +158,14 @@ module Codesake
       end
       private
       def get_rbenv_ruby_ver
-        return "" unless File.exist?(File.join(@target, ".rbenv-version"))
-        return File.read('.rbenv-version').split('-')[0]
+        return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".rbenv-version"))
+        hash = File.read('.rbenv-version').split('-')
+        return {:version=>hash[0], :patchlevel=>hash[1]}
       end
       def get_rvm_ruby_ver
-        return "" unless File.exist?(File.join(@target, ".ruby-version"))
-        return File.read('.ruby-version').split('-')[1]
+        return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".ruby-version"))
+        hash = File.read('.ruby-version').split('-')
+        return {:version=>hash[1], :patchlevel=>hash[2]}
       end
 
     end

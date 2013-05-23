@@ -77,9 +77,6 @@ module Codesake
         #   can be exploited only if the ruby version is 1.9.3 or following. For
         #   such a reason this method will check for the ruby version used by the
         #   target.
-        #   First, it will be checked a .ruby-version or .rbenv-version in the
-        #   target root, then if the files were note found the running ruby
-        #   version will be taken as canary.
         #
         # Returns:
         #   true if the running ruby is vulnerable or false otherwise
