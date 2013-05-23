@@ -1,6 +1,7 @@
 # Codesake Dawn Todo 
 
 ## #1 Introduce check dependency
+### Status: Open
 CVE-2013-1655 introduces a security issue that depends on a particular gem only
 when running a particular Ruby interpreter version. For such a reason in
 BasicCheck class I introduced a ruby\_version attribute as a String and a
