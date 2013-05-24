@@ -40,7 +40,7 @@ opts.each do |opt, val|
     puts "sorry padrino is not yet supported"
     Kernel.exit(1)
   when '--verbose'
-    options[:verbose]=>true
+    options[:verbose]=true
   when '--output'
     options[:output] = val unless VALID_OUTPUT_FORMAT.find_index(val).nil?
   when '--list-knowledgebase'
