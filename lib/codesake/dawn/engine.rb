@@ -24,7 +24,6 @@ module Codesake
         @applied = []
         set_target(dir) unless dir.nil?
         load_knowledge_base
-        @ruby_version = get_ruby_version
       end
 
       def get_ruby_version
@@ -42,6 +41,7 @@ module Codesake
         @target = dir
         @gemfile_lock = File.join(@target, "Gemfile.lock")
         @mvc_version = set_mvc_version
+        @ruby_version = get_ruby_version
       end
 
       def target_is_dir?
