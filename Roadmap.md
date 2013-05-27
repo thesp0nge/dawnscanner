@@ -38,12 +38,12 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2013-1898
 * adding test for CVE-2013-1911
 * adding test for CVE-2013-1933
+* adding test for CVE-2013-1947
 * make output less verbose. Only vulnerabilities and severity will be shown 
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * adding a '--output' option
 * support JSON output
 * grepping views for XSS attempts (sinatra)
-* adding test for CVE-2013-1947
 * adding test for CVE-2013-1948
 * adding test for CVE-2013-2616
 * adding test for CVE-2013-2617
