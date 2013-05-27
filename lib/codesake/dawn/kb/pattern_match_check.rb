@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Codesake
   module Dawn
     module Kb

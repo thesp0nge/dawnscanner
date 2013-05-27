@@ -5,6 +5,17 @@ require 'getoptlong'
 require 'codesake_commons'
 require 'codesake-dawn'
 
+def output_json_run(target = "", engine = nil)
+  return -1 if target.empty? or engine.nil?
+  return {:status=>"KO", :message=>"#{target} doesn't exist"} if ! Dir.exist?(target)
+  engine.set_target(target) unless engine.nil?
+  engine.load_knowledge_base
+
+
+
+
+end 
+
 APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
@@ -65,7 +76,8 @@ end
 
 target=ARGV.shift
 
-logger.toggle_silence if options[:output]=="json"
+return output_json_rub(target, engine)
+
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
 logger.die "missing target framework option" if engine.nil?
 logger.die "missing target" if target.nil?
@@ -114,4 +126,5 @@ end
 
 logger.helo "#{APPNAME} is shutting down"
 Kernel.exit(0)
+
 
