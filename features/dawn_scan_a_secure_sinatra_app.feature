@@ -9,7 +9,7 @@ Feature: dawn reports no security issues
   Scenario: dawn tells there are no vulnerabilities
     Given a safe sinatra application exists
     When I run `bundle exec dawn -s /tmp/sinatra-safe`
-    Then the stdout should contain "0 vulnerabilities found"
+    Then the stdout should contain "no vulnerabilities found"
 
     # Test for --output json
   Scenario: dawn can give a brief json output as well

@@ -105,6 +105,7 @@ applications will be supported as well.
 | CVE-2013-1801         | YES           | NO                |             |                   |             |
 | CVE-2013-1802         | YES           | NO                |             |                   |             |
 | CVE-2013-1821         | YES           | NO                |             |                   |             |
+| CVE-2013-1898         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 

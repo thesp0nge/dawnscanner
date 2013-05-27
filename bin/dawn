@@ -7,7 +7,7 @@ require 'codesake-dawn'
 
 APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
-VALID_OUTPUT_FORMAT   = %w(:console :json :csv :html)
+VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
 logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
@@ -65,6 +65,7 @@ end
 
 target=ARGV.shift
 
+logger.toggle_silence if options[:output]=="json"
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
 logger.die "missing target framework option" if engine.nil?
 logger.die "missing target" if target.nil?
@@ -78,7 +79,7 @@ logger.log "scanning #{target}"
 logger.log "#{engine.name} v#{engine.get_mvc_version} detected"
 logger.log "applying all security checks" 
 if engine.apply_all 
-  logger.ok "all security checks applied"
+  logger.log "all security checks applied"
 else
   logger.err "no security checks in the knowledge base"
 end
@@ -88,7 +89,7 @@ if engine.vulnerabilities.count != 0
 logger.log "#{engine.vulnerabilities.count} vulnerabilities found"
 engine.vulnerabilities.each do |vuln|
   logger.err "#{vuln[:name]} failed"
-  logger.log "Description: #{vuln[:message]}"
+  logger.log "Description: #{vuln[:message]}" if options[:verbose]
   logger.log "Solution: #{vuln[:remediation]}"
   logger.err "Evidence:"
   vuln[:evidences].each do |evidence|
