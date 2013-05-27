@@ -82,7 +82,7 @@ module Codesake
       end
 
       def get_mvc_version
-        "#{@name} #{@mvc_version}" if is_good_mvc? 
+        "#{@mvc_version}" if is_good_mvc? 
       end
 
       ## Security stuff applies here
