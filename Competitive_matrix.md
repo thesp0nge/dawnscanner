@@ -111,6 +111,7 @@ applications will be supported as well.
 | CVE-2013-1947         | YES           | NO                |             |                   |             |
 | CVE-2013-1948         | YES           | NO                |             |                   |             |
 | CVE-2013-2616         | YES           | NO                |             |                   |             |
+| CVE-2013-2617         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 
