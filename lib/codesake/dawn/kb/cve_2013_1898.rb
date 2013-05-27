@@ -7,7 +7,7 @@ module Codesake
 
 				def initialize
           message = "lib/thumbshooter.rb in the Thumbshooter 0.1.5 gem for Ruby allows remote attackers to execute arbitrary commands via shell metacharacters in a URL."
-           super({
+          super({
             :name=>"CVE-2013-1898",
             :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:P",
             :release_date => Date.new(2013, 4, 9),
