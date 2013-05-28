@@ -16,7 +16,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE\_2011\_2931
 * adding test for CVE\_2012\_3465
 
-## Version 0.60
+## Version 0.60 (2013-05-28)
 
 * adding cucumber dependency
 * adding test for CVE-2013-1854
@@ -46,8 +46,8 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * make output less verbose. Only vulnerabilities and severity will be shown 
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * adding a '--output' option
+* adding a '--count-only' option
 * support JSON output
-* grepping views for XSS attempts (sinatra)
 
 ## Version 0.70 
 
@@ -68,8 +68,9 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-5664
 * adding test for CVE-2012-6134
 * add ruby\_parser dependency
+* parsing HAML for XSS
+* write '--help'
 * support sinatra application controllers parsing for XSS
-* grepping views for XSS attempts (rails)
 * Fix issue #1. You can read more about it in TODO.md
 
 ## Version 0.80
@@ -96,7 +97,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-3463
 * support sinatra application controllers parsing for SQLi
 * support rails application controllers parsing for XSS
-* grepping views for XSS attempts (padrino)
+* parsing ERB for XSS
 
 ## Version 0.90
 

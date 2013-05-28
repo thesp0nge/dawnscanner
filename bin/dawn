@@ -5,15 +5,29 @@ require 'getoptlong'
 require 'codesake_commons'
 require 'codesake-dawn'
 
-def output_json_run(target = "", engine = nil)
-  return -1 if target.empty? or engine.nil?
-  return {:status=>"KO", :message=>"#{target} doesn't exist"} if ! Dir.exist?(target)
-  engine.set_target(target) unless engine.nil?
+def dry_run(target, engine)
+  engine.set_target(target) 
   engine.load_knowledge_base
+  engine.apply_all
+end
 
+def output_json_run(target = "", engine = nil)
+  result = {}
+  return {:status=>"KO", :message=>"BUG at #{__FILE__}@#{__LINE__}: target is empty or engine is nil."} if target.empty? or engine.nil?
+  return {:status=>"KO", :message=>"#{target} doesn't exist"} if ! Dir.exist?(target)
+  check_applied = dry_run(target, engine)
+  return {:status=>"KO", :message=>"no security checks applied"} unless check_applied
 
+  result[:status]="OK"
+  result[:target]=target
+  result[:mvc]=engine.name
+  result[:mvc_version]=engine.get_mvc_version
+  result[:vulnerabilities_count]=engine.vulnerabilities.count
+  result[:vulnerabilities]=engine.vulnerabilities
+  result[:mitigated_vuln_count]=engine.mitigated_issues.count
+  result[:mitigated_vuln] = engine.mitigated_issues
 
-
+  result
 end 
 
 APPNAME = File.basename($0)
@@ -29,11 +43,12 @@ opts    = GetoptLong.new(
   [ '--list-knowledgebase',     '-k',   GetoptLong::NO_ARGUMENT ],
   [ '--output',                 '-o',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
+  [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>:console}
+options = {:verbose=>false, :output=>"console", :count_only=>false}
 
 trap("INT")   { logger.die('[INTERRUPTED]') }
 
@@ -54,6 +69,9 @@ opts.each do |opt, val|
     options[:verbose]=true
   when '--output'
     options[:output] = val unless VALID_OUTPUT_FORMAT.find_index(val).nil?
+  when '--count-only'
+    options[:count_only] = true
+
   when '--list-knowledgebase'
     kb = Codesake::Dawn::KnowledgeBase.new
     puts "Security checks currently supported:\n\n"
@@ -76,7 +94,18 @@ end
 
 target=ARGV.shift
 
-return output_json_rub(target, engine)
+if options[:count_only] 
+  ret = dry_run(target, engine)
+
+  puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
+  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.vulnerabilities.count} : {:status=>"KO", :vulnerabilities_count=>-1}
+  Kernel.exit(0)
+end
+
+if options[:output] == "json"
+  puts output_json_run(target, engine) 
+  Kernel.exit(0)
+end
 
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
 logger.die "missing target framework option" if engine.nil?

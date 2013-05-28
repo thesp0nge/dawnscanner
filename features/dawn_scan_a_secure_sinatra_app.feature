@@ -4,7 +4,7 @@ Feature: dawn reports no security issues
   Scenario: dawn detects the sinatra version
     Given a safe sinatra application exists
     When I run `bundle exec dawn -s /tmp/sinatra-safe`
-    Then the stdout should contain "sinatra 1.4.2"
+    Then the stdout should contain "1.4.2"
 
   Scenario: dawn tells there are no vulnerabilities
     Given a safe sinatra application exists
@@ -15,7 +15,7 @@ Feature: dawn reports no security issues
   Scenario: dawn can give a brief json output as well
     Given a safe sinatra application exists
     When I run `bundle exec dawn -s /tmp/sinatra-safe --output json`
-    Then the stdout should contain "{:target=>"/tmp/sinatra-safe", :version=>"1.4.2", :issues_found=>0, :issues=>[]}"
+    Then the stdout should contain "{:status=>"OK", :target=>"/tmp/sinatra-safe", :mvc=>"sinatra", :mvc_version=>"1.4.2", :vulnerabilities_count=>0, :vulnerabilities=>[], :mitigated_vuln_count=>0, :mitigated_vuln=>[]}"
 
 
     # Tests for --count-only option
@@ -27,5 +27,5 @@ Feature: dawn reports no security issues
   Scenario: dawn can give just the number of issues found as output
     Given a safe sinatra application exists
     When I run `bundle exec dawn --count-only -s /tmp/sinatra-safe --output json`
-    Then the stdout should contain "{:target=>"/tmp/sinatra-safe", :issues_found=>0}"
+    Then the stdout should contain "{:status=>"OK", :vulnerabilities_count=>0}"
 
