@@ -54,7 +54,7 @@ applications will be supported as well.
 
 |Feature                | Dawn          | Brakeman          | Excellent   | ror-sec-scanner   | Scanny      |
 |-----------------------|---------------|-------------------|-------------|-------------------|-------------|
-| Version               | 0.51          | 1.9.5             |             |                   |             |
+| Version               | 0.70          | 1.9.5             |             |                   |             |
 | Production ready?     | NO            | YES               |             |                   |             |
 | Sinatra support       | YES           | NO                |             |                   |             |
 | Padrino support       | NO *planned*  | NO                |             |                   |             |
@@ -68,6 +68,7 @@ applications will be supported as well.
 
 | CVE Check             | Dawn          | Brakeman          | Excellent   | ror-sec-scanner   | Scanny      |
 |-----------------------|---------------|-------------------|-------------|-------------------|-------------|
+| CVE-2011-0447         | YES           | NO                |             |                   |             |
 | CVE-2011-2931         | YES           | YES               |             |                   |             |
 | CVE-2012-2660         | YES           | YES               |             |                   |             |
 | CVE-2012-2661         | YES           | YES               |             |                   |             |
