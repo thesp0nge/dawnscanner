@@ -100,6 +100,7 @@ module Codesake
       # otherwise
       def apply(name)
         load_knowledge_base if @checks.nil?
+        return false if @checks.empty?
 
         @checks.each do |check|
           if check.name == name
