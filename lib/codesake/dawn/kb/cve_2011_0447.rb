@@ -12,7 +12,7 @@ module Codesake
             :name=>"CVE-2011-0447",
             :cvss=>"AV:N/AC:M/Au:N/C:P/I:P/A:P",
             :release_date => Date.new(2011, 2, 14),
-            :cwe=>"",
+            :cwe=>"352",
             :owasp=>"A9", 
             :applies=>["rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
@@ -21,7 +21,7 @@ module Codesake
             :aux_links=>["http://weblog.rubyonrails.org/2011/2/8/csrf-protection-bypass-in-ruby-on-rails"]
           })
 
-          self.safe_dependencies = [{:name=>"rails", :version=>['2.1.9999', '2.2.9999', '3.0.4']}]
+          self.safe_dependencies = [{:name=>"rails", :version=>['2.1.9999', '2.2.9999', '2.3.11', '3.0.4']}]
  
 				end
 			end
