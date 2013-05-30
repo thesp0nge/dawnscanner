@@ -32,7 +32,7 @@ module Codesake
         # does the target use rvm?
         ver = get_rvm_ruby_ver if ver[:version].empty? and ver[:patchlevel].empty?
         # take the running ruby otherwise
-        ver = {:version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? and ver[:patchlevel].empty? 
+        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? and ver[:patchlevel].empty? 
 
         ver
       end

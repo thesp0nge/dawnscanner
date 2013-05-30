@@ -20,7 +20,7 @@ module Codesake
             :aux_links=>["http://www.ruby-lang.org/en/news/2013/02/22/rexml-dos-2013-02-22/"]
           })
 
-          self.safe_rubies = [{:version=>"1.9.3", :patchlevel=>"p392"}, {:version=>"2.0.0", :patchlevel=>"p195"}]
+          self.safe_rubies = [{:engine=>"ruby", :version=>"1.9.3", :patchlevel=>"p392"}, {:engine=>"ruby", :version=>"2.0.0", :patchlevel=>"p195"}]
 
 
 				end
