@@ -84,6 +84,7 @@ applications will be supported as well.
 | CVE-2012-3464         | YES           | YES               |             |                   |             |
 | CVE-2012-3465         | YES           | YES               |             |                   |             |
 | CVE-2012-4464         | YES           | NO                |             |                   |             |
+| CVE-2012-4466         | YES           | NO                |             |                   |             |
 | CVE-2012-5370         | YES           | NO                |             |                   |             |
 | CVE-2012-5371         | YES           | NO                |             |                   |             |
 | CVE-2012-6496         | YES           | NO                |             |                   |             |

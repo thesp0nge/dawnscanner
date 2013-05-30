@@ -11,7 +11,7 @@ module Codesake
             :name=>"CVE-2012-4464",
             :cvss=>"AV:N/AC:L/Au:N/C:N/I:P/A:N",
             :release_date => Date.new(2013, 4, 25),
-            :cwe=>"20",
+            :cwe=>"264",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
