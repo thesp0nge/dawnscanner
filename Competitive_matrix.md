@@ -69,6 +69,7 @@ applications will be supported as well.
 | CVE Check             | Dawn          | Brakeman          | Excellent   | ror-sec-scanner   | Scanny      |
 |-----------------------|---------------|-------------------|-------------|-------------------|-------------|
 | CVE-2011-0447         | YES           | NO                |             |                   |             |
+| CVE-2011-2197         | YES           | NO                |             |                   |             |
 | CVE-2011-2931         | YES           | YES               |             |                   |             |
 | CVE-2011-3186         | YES           | NO                |             |                   |             |
 | CVE-2012-1099         | YES           | NO                |             |                   |             |
