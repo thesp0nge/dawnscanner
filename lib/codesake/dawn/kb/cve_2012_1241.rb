@@ -16,7 +16,7 @@ module Codesake
             :applies=>["rails", "padrino", "sinatra"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade ActiveScriptRuby to version 1.8.7. As a general rule, using the latest stable rails version is recommended.",
+            :mitigation=>"Please upgrade ActiveScriptRuby to version 1.8.7. As a general rule, using the latest stable version is recommended.",
             :aux_links=>["https://github.com/rails/rails/commit/11dafeaa7533be26441a63618be93a03869c83a9"]
           })
 

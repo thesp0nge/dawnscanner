@@ -73,6 +73,7 @@ applications will be supported as well.
 | CVE-2011-3186         | YES           | NO                |             |                   |             |
 | CVE-2012-1099         | YES           | NO                |             |                   |             |
 | CVE-2012-1241         | YES           | NO                |             |                   |             |
+| CVE-2012-2140         | YES           | NO                |             |                   |             |
 | CVE-2012-2660         | YES           | YES               |             |                   |             |
 | CVE-2012-2661         | YES           | YES               |             |                   |             |
 | CVE-2012-2694         | YES           | YES               |             |                   |             |
