@@ -17,7 +17,7 @@ module Codesake
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade rails version at least to 3.0.12, 3.1.4 and 3.2.2. As a general rule, using the latest stable rails version is recommended.",
-            :aux_links=>["https://github.com/rails/rails/commit/11dafeaa7533be26441a63618be93a03869c83a9"]
+            :aux_links=>["http://weblog.rubyonrails.org/2012/3/1/ann-rails-3-0-12-has-been-released"]
           })
 
           self.safe_dependencies = [{:name=>"rails", :version=>['3.0.12', '3.1.4', '3.2.2']}]
