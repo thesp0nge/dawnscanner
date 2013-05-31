@@ -66,6 +66,8 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-4466
 * adding test for CVE-2012-4481
 * adding test for CVE-2012-6134
+* Fix issue #4. PatternMatching complains when applied to binary files. We must
+  skip them
 * add ruby\_parser dependency
 * add haml dependency
 * parsing HAML for XSS

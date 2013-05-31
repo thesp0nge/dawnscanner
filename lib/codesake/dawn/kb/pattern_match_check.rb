@@ -1,4 +1,5 @@
-# encoding: utf-8
+require 'ptools'
+
 module Codesake
   module Dawn
     module Kb
@@ -16,7 +17,8 @@ module Codesake
 
         def vuln?
           Dir.glob(File.join("#{root_dir}", "*")).each do |filename|
-            matches = run(load_file(filename))
+            matches = []
+            matches = run(load_file(filename)) if File.exists?(filename) and File.file?(filename) and ! File.binary?(filename)
             @evidences << {:filename=>filename, :matches=>matches} unless matches.empty?
           end
           return ! @evidences.empty?
@@ -29,7 +31,7 @@ module Codesake
         end
 
         def load_file(filename)
-          return [] unless File.exists?(filename) and File.file?(filename)
+          return [] 
 
           f = File.open(filename)
           lines = f.readlines
