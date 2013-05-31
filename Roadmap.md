@@ -65,7 +65,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-4464
 * adding test for CVE-2012-4466
 * adding test for CVE-2012-4481
-* adding test for CVE-2012-5664
+* adding test for CVE-2012-6134
 * adding test for CVE-2012-6496
 * adding test for CVE-2012-6497
 * add ruby\_parser dependency
