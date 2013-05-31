@@ -85,6 +85,7 @@ applications will be supported as well.
 | CVE-2012-3465         | YES           | YES               |             |                   |             |
 | CVE-2012-4464         | YES           | NO                |             |                   |             |
 | CVE-2012-4466         | YES           | NO                |             |                   |             |
+| CVE-2012-4481         | YES           | NO                |             |                   |             |
 | CVE-2012-5370         | YES           | NO                |             |                   |             |
 | CVE-2012-5371         | YES           | NO                |             |                   |             |
 | CVE-2012-6496         | YES           | NO                |             |                   |             |
@@ -104,6 +105,7 @@ applications will be supported as well.
 | CVE-2013-0276         | YES           | YES               |             |                   |             |
 | CVE-2013-0277         | YES           | YES               |             |                   |             |
 | CVE-2013-0156         | YES           | YES               |             |                   |             |
+| CVE-2013-2065 [0]     | NO            | NO                |             |                   |             |
 | CVE-2013-2090 [0]     | NO            | NO                |             |                   |             |
 | CVE-2013-2615         | YES           | NO                |             |                   |             |
 | CVE-2013-1875         | YES           | NO                |             |                   |             |

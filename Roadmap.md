@@ -66,7 +66,8 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-4466
 * adding test for CVE-2012-4481
 * adding test for CVE-2012-5664
-* adding test for CVE-2012-6134
+* adding test for CVE-2012-6496
+* adding test for CVE-2012-6497
 * add ruby\_parser dependency
 * parsing HAML for XSS
 * write '--help'
@@ -76,6 +77,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 ## Version 0.80
 
 * adding test for CVE-2013-2090 _if CVE will be approved_
+* adding test for CVE-2013-2065 _if CVE will be approved_
 * adding test for CVE-2010-1330
 * adding test for CVE-2011-0447 
 * adding test for CVE-2011-0446 
