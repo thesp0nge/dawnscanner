@@ -301,7 +301,17 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Codesake::Dawn::Kb::CVE_2012_6134
   end
-  it "must have test for CVE-2012-6496"
-  it "must have test for CVE-2012-6497"
+  it "must have test for CVE-2012-6496" do
+    sc = kb.find("CVE-2012-6496")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::CVE_2012_6496
+  end
+
+  it "must have test for CVE-2012-6497" do
+    sc = kb.find("CVE-2012-6497")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::CVE_2012_6497
+  end
+
 
 end

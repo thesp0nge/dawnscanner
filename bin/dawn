@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'getoptlong'
+require 'json'
 
 require 'codesake_commons'
 require 'codesake-dawn'
@@ -27,7 +28,7 @@ def output_json_run(target = "", engine = nil)
   result[:mitigated_vuln_count]=engine.mitigated_issues.count
   result[:mitigated_vuln] = engine.mitigated_issues
 
-  result
+  result.to_json
 end 
 
 APPNAME = File.basename($0)
@@ -98,7 +99,7 @@ if options[:count_only]
   ret = dry_run(target, engine)
 
   puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
-  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.vulnerabilities.count} : {:status=>"KO", :vulnerabilities_count=>-1}
+  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.vulnerabilities.count}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
   Kernel.exit(0)
 end
 

@@ -22,6 +22,11 @@ get '/' do
   haml :root
 end
 
+get '/xss' do
+  @xss_param = params['name']
+  haml :xss
+end
+
 # FIXME: I must raise an error here
 get '/foo' do
   haml :bar
