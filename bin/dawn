@@ -31,6 +31,25 @@ def output_json_run(target = "", engine = nil)
   result.to_json
 end 
 
+def dump_knowledge_base(verbose = false)
+  kb = Codesake::Dawn::KnowledgeBase.new
+  puts "Security checks currently supported:\n\n"
+
+  kb.all.each do |check|
+    if verbose
+      puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
+      puts "Description\n#{check.message}"
+      puts "Remediation\n#{check.remediation}\n\n"
+    else
+      puts "#{check.name}"
+    end
+  end
+  
+  0
+
+end
+
+
 APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
@@ -49,7 +68,7 @@ opts    = GetoptLong.new(
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false}
 
 trap("INT")   { logger.die('[INTERRUPTED]') }
 
@@ -74,16 +93,8 @@ opts.each do |opt, val|
     options[:count_only] = true
 
   when '--list-knowledgebase'
-    kb = Codesake::Dawn::KnowledgeBase.new
-    puts "Security checks currently supported:\n\n"
-
-    kb.all.each do |check|
-      puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
-      puts "Description\n#{check.message}"
-      puts "Remediation\n#{check.remediation}\n\n"
-    end
-    Kernel.exit(0)
-
+    options[:dump_kb]=true
+   
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
     LIST_KNOWN_FRAMEWORK.each do |mvc|
@@ -106,6 +117,10 @@ end
 if options[:output] == "json"
   puts output_json_run(target, engine) 
   Kernel.exit(0)
+end
+
+if options[:dump_kb]
+  return dump_knowledge_base(options[:verbose])
 end
 
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
