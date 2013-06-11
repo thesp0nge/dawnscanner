@@ -14,10 +14,10 @@ end
 
 def output_json_run(target = "", engine = nil)
   result = {}
-  return {:status=>"KO", :message=>"BUG at #{__FILE__}@#{__LINE__}: target is empty or engine is nil."} if target.empty? or engine.nil?
-  return {:status=>"KO", :message=>"#{target} doesn't exist"} if ! Dir.exist?(target)
+  return {:status=>"KO", :message=>"BUG at #{__FILE__}@#{__LINE__}: target is empty or engine is nil."}.to_json if target.empty? or engine.nil?
+  return {:status=>"KO", :message=>"#{target} doesn't exist"}.to_json if ! Dir.exist?(target)
   check_applied = dry_run(target, engine)
-  return {:status=>"KO", :message=>"no security checks applied"} unless check_applied
+  return {:status=>"KO", :message=>"no security checks applied"}.to_json unless check_applied
 
   result[:status]="OK"
   result[:target]=target
