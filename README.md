@@ -8,6 +8,7 @@ frameworks.
 [![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
 [![Build Status](https://travis-ci.org/codesake/codesake_dawn.png?branch=master)](https://travis-ci.org/codesake/codesake_dawn)
 [![Dependency Status](https://gemnasium.com/codesake/codesake_dawn.png)](https://gemnasium.com/codesake/codesake_dawn)
+[![Coverage Status](https://coveralls.io/repos/codesake/codesake_dawn/badge.png)](https://coveralls.io/r/codesake/codesake_dawn)
 
 ## Useful links
 
