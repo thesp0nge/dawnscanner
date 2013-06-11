@@ -68,7 +68,7 @@ opts    = GetoptLong.new(
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>nil}
 
 trap("INT")   { logger.die('[INTERRUPTED]') }
 
@@ -79,10 +79,11 @@ opts.each do |opt, val|
     puts "#{Codesake::Dawn::VERSION}"
     Kernel.exit(0)
   when '--rails'
-    engine = Codesake::Dawn::Rails.new
+    options[:mvc]=:force_rails
   when '--sinatra'
-    engine = Codesake::Dawn::Sinatra.new
+    options[:mvc]=:force_sinatra
   when '--padrino'
+    options[:mvc]=:force_padrino
     puts "sorry padrino is not yet supported"
     Kernel.exit(1)
   when '--verbose'
@@ -105,6 +106,14 @@ opts.each do |opt, val|
 end
 
 target=ARGV.shift
+
+## MVC auto detect
+engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].nil?
+engine = Codesake::Dawn::Rails.new                if options[:mvc] == :force_rails
+engine = Codesake::Dawn::Sinatra.new              if options[:mvc] == :force_sinatra
+# engine = Codesake::Dawn::Padrino.new if options[:mvc] == :force_padrino
+
+logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 
 if options[:count_only] 
   ret = dry_run(target, engine)

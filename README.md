@@ -43,42 +43,16 @@ that.
 ## Usage
 
 You can start your code review with dawn very easily. Simply tell the tool
-where the project root directory is and which is the framework you used to
-write the web application. 
+where the project root directory. 
 
-_Sorry for non autodetect this; at this point we prefere working hard over core
-features like adding new vulnerabilities and having valuable output._
+Starting from an unofficial 0.68 release, underlying MVC framework is
+autodetected by dawn using target Gemfile.lock file. If autodetect fails for
+some reason, the tool will complain about it and you have to specify if it's a
+rails, sinatra or padrino web application by hand.
 
 dawn command line is in this form with options and the target.
 ``` 
 $ dawn [options] target
-```
-
-The options you can specify tell down the MVC used in your application and some
-triggers you may want to be active during the scan.
-
-### Scanning a Sinatra web application
-
-dawn will scan application stored in hello_world directory which is a Sinatra application
-
-```
-$ dawn -s hello_world 
-```
-
-### Scanning a Ruby on Rails web application
-
-dawn will scan application stored in hello_world directory which is a Ruby on Rails application
-
-```
-$ dawn -r hello_world 
-```
-
-### Scanning a Padrino web application
-
-dawn will scan application stored in hello_world directory which is a Padrino application
-
-```
-$ dawn -p hello_world 
 ```
 
 ### As output you get
@@ -90,18 +64,17 @@ application:
 ```
 $ bundle exec bin/dawn -s target
 
-[*] dawn v0.51 (C) 2013 - paolo@armoredcode.com is starting up at 08:09:11
-08:09:11: scanning target
-08:09:11: sinatra vsinatra 1.4.2 detected
-08:09:11: applying all security checks
-08:09:11 [*] all security checks applied
-08:09:11: 1 vulnerabilities found
-08:09:11 [!] CVE-2013-1800 failed
-08:09:11: Description: The crack gem 0.3.1 and earlier for Ruby does not properly restrict casts of string values, which might allow remote attackers to conduct object-injection attacks and execute arbitrary code, or cause a denial of service (memory and CPU consumption) by leveraging Action Pack support for (1) YAML type conversion or (2) Symbol type conversion, a similar vulnerability to CVE-2013-0156.
-08:09:11: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
-08:09:11 [!] Evidence:
-08:09:11 [!] Vulnerable crack gem version found: 0.3.1
-[*] dawn is shutting down at 08:09:11
+[*] dawn v0.67 (C) 2013 - paolo@armoredcode.com is starting up at 08:14:17
+08:14:17: scanning /Users/thesp0nge/src/hacking/railsberry2013
+08:14:17: sinatra v1.4.2 detected
+08:14:17: applying all security checks
+08:14:17: all security checks applied
+08:14:17: 1 vulnerabilities found
+08:14:17 [!] CVE-2013-1800 failed
+08:14:17: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
+08:14:17 [!] Evidence:
+08:14:17 [!] Vulnerable crack gem version found: 0.3.1
+[*] dawn is shutting down at 08:14:17
 ```
 
 
