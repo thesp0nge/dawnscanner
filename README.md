@@ -5,6 +5,8 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
+[![Build Status](https://travis-ci.org/codesake/codesake_dawn.png?branch=master)](https://travis-ci.org/codesake/codesake_dawn)
+
 ## Useful links
 
 www:      [http://codesake.com](http://codesake.com) 
