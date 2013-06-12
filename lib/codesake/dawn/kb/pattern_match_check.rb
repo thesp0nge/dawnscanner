@@ -31,7 +31,6 @@ module Codesake
         end
 
         def load_file(filename)
-          return [] 
 
           f = File.open(filename)
           lines = f.readlines
