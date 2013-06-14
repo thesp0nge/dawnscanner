@@ -33,19 +33,20 @@ end
 
 def dump_knowledge_base(verbose = false)
   kb = Codesake::Dawn::KnowledgeBase.new
-  puts "Security checks currently supported:\n\n"
+  lines = []
+  lines << "Security checks currently supported:\n\n"
 
   kb.all.each do |check|
     if verbose
-      puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
-      puts "Description\n#{check.message}"
-      puts "Remediation\n#{check.remediation}\n\n"
+      lines << "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
+      lines << "Description\n#{check.message}"
+      lines << "Remediation\n#{check.remediation}\n\n"
     else
-      puts "#{check.name}"
+      lines << "#{check.name}"
     end
   end
   
-  0
+  lines.empty? ? 0 : lines.compact.join("\n")
 
 end
 
@@ -129,7 +130,8 @@ if options[:output] == "json"
 end
 
 if options[:dump_kb]
-  return dump_knowledge_base(options[:verbose])
+  puts dump_knowledge_base(options[:verbose])
+  Kernel.exit(0)
 end
 
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
