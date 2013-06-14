@@ -2,7 +2,7 @@ module Codesake
   module Dawn
     class Core
       def self.detect_mvc(target)
-        gemfile_lock =  File.join(target, "Gemfile.lock")
+        gemfile_lock =  File.join(target, "Gemfile.lock") or fail
         lockfile = Bundler::LockfileParser.new(Bundler.read_file(gemfile_lock))
         lockfile.specs.each do |s|
           return Codesake::Dawn::Rails.new    if s.name == "rails"
