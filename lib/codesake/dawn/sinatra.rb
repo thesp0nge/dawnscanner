@@ -6,15 +6,26 @@ module Codesake
     class Sinatra
       include Codesake::Dawn::Engine
 
+      attr_reader :sinks
+      attr_reader :appname
+
       def initialize(dir=nil)
         super(dir, "sinatra")
+        @appname = detect_appname(self.target)
+        @sinks = detect_sinks(self.appname)
+      end
+
+      # TODO: appname should be hopefully autodetect from config.ru
+      def detect_appname(target)
+        return "app.rb" if File.exist?(File.join(self.target, "app.rb"))
+        return "application.rb" if File.exist?(File.join(self.target, "application.rb"))
       end
 
       def detect_sinks(appname=nil)
         ret = []
-        # TODO: appname should be an engine attribute and hopefully autodetect from config.ru
         appname = "app.rb" if appname.nil?
         app_rb = File.readlines(File.join(self.target, appname)) if File.exist?(File.join(self.target, appname))
+        return [] if app_rb.nil?
 
         parser = RubyParser.new
 

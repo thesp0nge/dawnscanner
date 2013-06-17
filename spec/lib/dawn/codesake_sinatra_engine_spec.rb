@@ -7,6 +7,9 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     @engine.name.should   ==    "sinatra"
   end
 
+  it "detects the default application name" do
+    @engine.appname.should == "application.rb"
+  end
   it "has a valid target" do
     @engine.target.should ==   "./spec/support/sinatra-safe"
     @engine.target_is_dir?.should  be_true
