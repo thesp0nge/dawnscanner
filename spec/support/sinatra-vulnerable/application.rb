@@ -24,6 +24,7 @@ end
 
 get '/xss' do
   @xss_param = params['name']
+  @my_arr[0] = params['second']
   haml :xss
 end
 

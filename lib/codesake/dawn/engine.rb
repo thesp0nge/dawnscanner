@@ -13,6 +13,22 @@ module Codesake
       attr_reader :mitigated_issues
       attr_reader :ruby_version
 
+
+      # Typical MVC elements here
+
+      # Each view will be something like {:filename=>"target/views/index.haml", :language=>:haml}
+      attr_reader :views
+
+      # Each controller will be a little bit more complex. Of course for
+      # Sinatra, the controller filename will be the sole web application ruby
+      # file.
+      # {:filename=>"target/controllers/this_controller.rb", :actions=>[{:name=>"index", :method=>:get, :map=>"/"]}
+      attr_reader :controllers
+
+      # Models I don't know right now. Let them initialized as Array... we
+      # will see later 
+      attr_reader :models
+
       def initialize(dir=nil, name="")
         @name = name
         @mvc_version = ""
@@ -22,8 +38,38 @@ module Codesake
         @vulnerabilities = []
         @mitigated_issues = []
         @applied = []
+
         set_target(dir) unless dir.nil?
+
+        @views        = detect_views 
+        @controllers  = detect_controllers
+        @models       = detect_models
+        
         load_knowledge_base
+      end
+
+      def detect_views
+        []
+      end
+
+      def build_view_array(dir)
+
+        return [] unless File.exist?(dir) and File.directory?(dir) 
+
+        ret = []
+        Dir.glob(File.join("#{dir}", "*")).each do |filename| 
+          ret << {:filename=>filename, :language=>:haml} if File.extname(filename) == ".haml"
+        end
+
+        ret
+      end
+
+      def detect_controllers
+        []
+      end
+
+      def detect_models
+        []
       end
 
       def get_ruby_version

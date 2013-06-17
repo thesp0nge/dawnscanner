@@ -70,10 +70,9 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
   skip them
 * add ruby\_parser dependency
 * add haml dependency
-* parsing HAML for XSS
+* add target MVC autodetect
 * write '--help'
-* support sinatra application controllers parsing for XSS
-* Fix issue #1. You can read more about it in TODO.md
+* detect sinks for XSS in Sinatra applications
 
 ## Version 0.80
 
@@ -101,6 +100,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * support sinatra application controllers parsing for SQLi
 * support rails application controllers parsing for XSS
 * parsing ERB for XSS
+* Fix issue #1. You can read more about it in TODO.md
 
 ## Version 0.90
 

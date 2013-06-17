@@ -20,6 +20,14 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     @engine.mvc_version.should   == "1.4.2"
   end
 
+  it "detects 2 views" do
+    @engine.views.should == [{:filename=>"./spec/support/sinatra-safe/views/layout.haml", :language=>:haml}, {:filename=>"./spec/support/sinatra-safe/views/root.haml", :language=>:haml}]
+  end
+  it "detects views are written using HAML" do
+    @engine.views[0][:language].should == :haml
+    @engine.views[1][:language].should == :haml
+  end
+
   it "has some check in the knowledge base" do
     @engine.checks.should_not be_nil 
     @engine.checks.should_not be_empty
@@ -53,7 +61,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     end
   end  
 
-  describe "applied do the sinatra-vulnerable application do" do
+  describe "applied do the sinatra-vulnerable application" do
     before (:all) {@engine= Codesake::Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')}
     it "has a valid target" do
       @engine.target.should ==   "./spec/support/sinatra-vulnerable"
@@ -79,6 +87,31 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     it "applies automagically all the tests if no test has been applied" do
       e2 =  Codesake::Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')
       e2.vulnerabilities.should_not be_empty
+    end
+
+    context "when scanning for XSS" do
+      it "detects 3 views" do
+        @engine.views.should == [
+          {:filename=>"./spec/support/sinatra-vulnerable/views/layout.haml", :language=>:haml}, 
+          {:filename=>"./spec/support/sinatra-vulnerable/views/root.haml", :language=>:haml}, 
+          {:filename=>"./spec/support/sinatra-vulnerable/views/xss.haml", :language=>:haml}
+        ]
+      end
+      it "detects views are written using HAML" do
+        @engine.views[0][:language].should == :haml
+        @engine.views[1][:language].should == :haml
+        @engine.views[2][:language].should == :haml
+      end
+
+      it "detects a sink on application.rb" do
+        sink = @engine.detect_sinks("application.rb")
+        sink.should == [ 
+          {:sink_name=>"@xss_param", :sink_kind=>:params, :sink_source=>"name", :sink_line=>26}, 
+          {:sink_name=>"@my_arr", :sink_kind=>:params, :sink_source=>"second", :sink_line=>27} 
+        ]
+      end
+
+      it "detects reflected ones in HAML views"
     end
   end
 end
