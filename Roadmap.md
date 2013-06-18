@@ -73,6 +73,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * add target MVC autodetect
 * write '--help'
 * detect sinks for XSS in Sinatra applications
+* detect reflected XSS in Sinatra applications
 
 ## Version 0.80
 

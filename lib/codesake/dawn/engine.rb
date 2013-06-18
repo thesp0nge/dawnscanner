@@ -13,6 +13,8 @@ module Codesake
       attr_reader :mitigated_issues
       attr_reader :ruby_version
 
+      attr_reader :engine_error
+
 
       # Typical MVC elements here
 
@@ -38,6 +40,7 @@ module Codesake
         @vulnerabilities = []
         @mitigated_issues = []
         @applied = []
+        @engine_error = false
 
         set_target(dir) unless dir.nil?
 
@@ -50,6 +53,12 @@ module Codesake
 
       def detect_views
         []
+      end
+      def error!
+        @error = true
+      end
+      def error?
+        @error
       end
 
       def build_view_array(dir)

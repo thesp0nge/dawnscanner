@@ -13,15 +13,17 @@ module Codesake
       def initialize(dir=nil)
         super(dir, "sinatra")
         @appname = detect_appname(self.target)
-        @sinks = detect_sinks(self.appname)
-        @reflected_xss = detect_reflected_xss
+        error! if self.appname == ""
+        @sinks = detect_sinks(self.appname) unless self.appname == ""
+        @reflected_xss = detect_reflected_xss unless self.appname == ""
       end
 
       # TODO: appname should be hopefully autodetect from config.ru
       def detect_appname(target)
+        return "" if File.directory?(target)
         return "app.rb" if File.exist?(File.join(self.target, "app.rb"))
         return "application.rb" if File.exist?(File.join(self.target, "application.rb"))
-        file_array = Dir.glob(File.join("#{dir}", "*.rb"))
+        file_array = Dir.glob(File.join("#{target}", "*.rb"))
         return file_array[0] if ! file_array.nil? and file_array.count == 1
         return "" # gracefully failure
       end

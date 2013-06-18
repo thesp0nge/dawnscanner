@@ -11,6 +11,10 @@ module Codesake
 
         return Codesake::Dawn::Sinatra.new 
       end
+
+      def self.is_good_target?(target)
+        (File.exist?(target) and File.directory?(target))
+      end
     end
   end
 end

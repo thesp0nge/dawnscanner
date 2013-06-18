@@ -3,12 +3,12 @@ Feature: dawn reports no security issues
 
   Scenario: dawn detects the sinatra version
     Given a safe sinatra application exists
-    When I run `bundle exec dawn -s /tmp/sinatra-safe`
+    When I run `bundle exec dawn /tmp/sinatra-safe`
     Then the stdout should contain "1.4.2"
 
   Scenario: dawn tells there are no vulnerabilities
     Given a safe sinatra application exists
-    When I run `bundle exec dawn -s /tmp/sinatra-safe`
+    When I run `bundle exec dawn /tmp/sinatra-safe`
     Then the stdout should contain "no vulnerabilities found"
 
     # Test for --output json
