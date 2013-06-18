@@ -114,7 +114,14 @@ describe "The Codesake::Dawn engine for sinatra applications" do
         ]
       end
 
-      it "detects reflected ones in HAML views"
+      it "detects reflected ones in HAML views" do
+        reflected_xss= @engine.detect_reflected_xss
+        @engine.reflected_xss.should_not be_nil
+        @engine.reflected_xss.should_not be_empty 
+        @engine.reflected_xss.should == [
+          {:sink_name=>"@xss_param", :sink_kind=>:params, :sink_source=>"name", :sink_line=>26}, 
+        ]
+      end
     end
   end
 end
