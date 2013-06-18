@@ -113,7 +113,12 @@ logger.die("invalid directory (#{target})") unless Codesake::Dawn::Core.is_good_
 
 
 ## MVC auto detect
-engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].nil?
+begin
+  engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].nil?
+rescue ArgumentError => e
+  logger.die(e.message)
+end
+
 engine = Codesake::Dawn::Rails.new(target)        if options[:mvc] == :force_rails
 engine = Codesake::Dawn::Sinatra.new(target)      if options[:mvc] == :force_sinatra
 # engine = Codesake::Dawn::Padrino.new if options[:mvc] == :force_padrino
@@ -141,7 +146,7 @@ end
 logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
 logger.die "missing target framework option" if engine.nil?
 
-engine.set_target(target) unless engine.nil?
+# engine.set_target(target) unless engine.nil?
 engine.load_knowledge_base
 
 logger.die "nothing to do on #{target}" unless engine.can_apply?

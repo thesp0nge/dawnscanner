@@ -20,7 +20,6 @@ module Codesake
 
       # TODO: appname should be hopefully autodetect from config.ru
       def detect_appname(target)
-        return "" if File.directory?(target)
         return "app.rb" if File.exist?(File.join(self.target, "app.rb"))
         return "application.rb" if File.exist?(File.join(self.target, "application.rb"))
         file_array = Dir.glob(File.join("#{target}", "*.rb"))
