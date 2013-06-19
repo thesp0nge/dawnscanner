@@ -49,7 +49,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding a '--count-only' option
 * support JSON output
 
-## Version 0.70 
+## Version 0.70 (2013-06-19)
 
 * adding test for CVE-2011-0447
 * adding test for CVE-2011-3186
@@ -98,10 +98,17 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-4522
 * adding test for CVE-2012-3464
 * adding test for CVE-2012-3463
-* support sinatra application controllers parsing for SQLi
-* support rails application controllers parsing for XSS
-* parsing ERB for XSS
+* detect sinks for XSS in Padrino applications
+* detect reflected XSS in Padrino applications
+* detect stored XSS in Sinatra applications
+* detect stored XSS in Padrino applications
+* detect insecure direct object reference in Sinatra applications
+* detect insecure direct object reference in Padrino applications
+* support ERB for in detect\_views (for both Sinatra and Padrino)
 * Fix issue #1. You can read more about it in TODO.md
+* integration with [codesake.com](http://codesake.com) with a public available
+  APIs to be consumed by codesake beta users.
+
 
 ## Version 0.90
 
@@ -146,6 +153,11 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2008-2725
 * preliminary javascript support
 * adding test for CVE-2011-4969  XSS in jquery < 1.6.2 
+* detect stored XSS in Rails applications
+* detect reflected XSS in Rails applications
+* detect insecure direct object reference in Rails applications
+* detect SQLi in Sinatra applications
+* detect SQLi in Padrino applications
 
 ## Version 1.00
 
@@ -193,9 +205,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2004-0755
 * adding test for CVE-2004-0983
 * dedicated web site under dawn.codesake.com
-* support rails application controllers parsing for SQLi
-* support padrino application controllers parsing for XSS
-* support padrino application controllers parsing for SQLi
+* detect SQLi in Rails applications
 * integration with [codesake.com](http://codesake.com) with a public available
   APIs to be consumed by codesake users.
 * automatic mitigation patch generation 

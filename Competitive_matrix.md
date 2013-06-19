@@ -141,7 +141,7 @@ applications will be supported as well.
 
 | Security check              | Dawn          | Brakeman   | Excellent   | ror-sec-scanner   | Scanny      |
 |-----------------------------|---------------|------------|-------------|-------------------|-------------|
-| Reflected XSS               | NO            | YES        |             |                   |             |
+| Reflected XSS               | YES (sinatra) | YES        |             |                   |             |
 | Stored XSS                  | NO            | YES        |             |                   |             |
 | DOM Based XSS               | NO            | NO         |             |                   |             |
 | SQL injection               | NO            | YES        |             |                   |             |
