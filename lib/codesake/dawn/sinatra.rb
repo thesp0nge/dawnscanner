@@ -8,7 +8,6 @@ module Codesake
 
       attr_reader :sinks
       attr_reader :appname
-      attr_reader :reflected_xss
 
       def initialize(dir=nil)
         super(dir, "sinatra")

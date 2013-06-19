@@ -23,10 +23,17 @@ def output_json_run(target = "", engine = nil)
   result[:target]=target
   result[:mvc]=engine.name
   result[:mvc_version]=engine.get_mvc_version
-  result[:vulnerabilities_count]=engine.vulnerabilities.count
-  result[:vulnerabilities]=engine.vulnerabilities
+  result[:vulnerabilities_count]=engine.count_vulnerabilities
+  result[:vulnerabilities]=[]
+  engine.vulnerabilities.each do |v|
+    result[:vulnerabilities] << v[:name]
+  end
   result[:mitigated_vuln_count]=engine.mitigated_issues.count
   result[:mitigated_vuln] = engine.mitigated_issues
+   result[:reflected_xss] = []
+  engine.reflected_xss.each do |r|
+    result[:reflected_xss] << "request parameter \"#{r[:sink_source]}\""
+  end
 
   result.to_json
 end 
@@ -48,6 +55,26 @@ def dump_knowledge_base(verbose = false)
   
   lines.empty? ? 0 : lines.compact.join("\n")
 
+end
+
+def help
+  puts "Usage: dawn [options] target_directory"
+  printf "\n\nExamples:"
+  puts "$ dawn a_sinatra_webapp_directory"
+  puts "$ dawn -C the_rails_blog_engine"
+  puts "$ dawn -C --output json a_sinatra_webapp_directory"
+  printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application" 
+  printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
+  printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
+  printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
+  printf "\n   -k, --list-knowledgebase\t\t\tlist dawn known security checks"
+  printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
+  printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
+  printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
+  printf "\n   -v, --version\t\t\t\tshow version information"
+  printf "\n   -h, --help\t\t\t\t\tshow this help\n"
+
+  0
 end
 
 
@@ -103,6 +130,8 @@ opts.each do |opt, val|
       puts "* #{mvc}"
     end
     Kernel.exit(0)
+  when '--help'
+    Kernel.exit(help)
   end
 end
 
@@ -129,7 +158,7 @@ if options[:count_only]
   ret = dry_run(target, engine)
 
   puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
-  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.vulnerabilities.count}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
+  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
   Kernel.exit(0)
 end
 
@@ -159,18 +188,24 @@ else
   logger.err "no security checks in the knowledge base"
 end
 
-if engine.vulnerabilities.count != 0
-
-logger.log "#{engine.vulnerabilities.count} vulnerabilities found"
-engine.vulnerabilities.each do |vuln|
-  logger.err "#{vuln[:name]} failed"
-  logger.log "Description: #{vuln[:message]}" if options[:verbose]
-  logger.log "Solution: #{vuln[:remediation]}"
-  logger.err "Evidence:"
-  vuln[:evidences].each do |evidence|
-    logger.err evidence
+if engine.count_vulnerabilities != 0
+  logger.log "#{engine.count_vulnerabilities} vulnerabilities found"
+  engine.vulnerabilities.each do |vuln|
+    logger.log "#{vuln[:name]} failed"
+    logger.log "Description: #{vuln[:message]}" if options[:verbose]
+    logger.log "Solution: #{vuln[:remediation]}"
+    logger.err "Evidence:"
+    vuln[:evidences].each do |evidence|
+      logger.err evidence
+    end
   end
-end
+  if engine.has_reflected_xss?
+    logger.log "#{engine.reflected_xss.count} reflected XSS found"
+    engine.reflected_xss.each do |vuln|
+      logger.log "request parameter \"#{vuln[:sink_source]}\""
+    end
+  end
+
 else
   logger.ok "no vulnerabilities found."
 end
@@ -184,6 +219,7 @@ if engine.mitigated_issues.count != 0
     end
   end
 end
+
 
 
 

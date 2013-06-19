@@ -10,6 +10,10 @@ end
 Given /^a safe sinatra application exists$/ do
   system("rm -rf /tmp/sinatra-safe")
   system("cp -a ./spec/support/sinatra-safe /tmp") 
+end
 
+Given /^a vulnerable sinatra application exists$/ do
+  system("rm -rf /tmp/sinatra-vulnerable")
+  system("cp -a ./spec/support/sinatra-vulnerable /tmp") 
 end
 

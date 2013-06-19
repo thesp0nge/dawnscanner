@@ -15,6 +15,7 @@ module Codesake
 
       attr_reader :engine_error
 
+      attr_reader :reflected_xss
 
       # Typical MVC elements here
 
@@ -212,6 +213,14 @@ module Codesake
 
         false
       end
+      def has_reflected_xss?
+        (@reflected_xss.count != 0)
+      end
+
+      def count_vulnerabilities
+        @vulnerabilities.count + @reflected_xss.count
+      end
+
       private
       def get_rbenv_ruby_ver
         return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".rbenv-version"))
