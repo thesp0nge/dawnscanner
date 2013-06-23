@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'haml'
   gem.add_dependency 'parser'
   gem.add_dependency 'ptools'
+  gem.add_dependency 'ruby_parser'
 
   gem.add_dependency ('coveralls')
 
