@@ -230,7 +230,7 @@ module Codesake
       def get_rvm_ruby_ver
         return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".ruby-version"))
         hash = File.read('.ruby-version').split('-')
-        return {:version=>hash[1], :patchlevel=>hash[2]}
+        return {:version=>hash[0], :patchlevel=>hash[1]}
       end
 
     end
