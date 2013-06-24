@@ -218,7 +218,11 @@ module Codesake
       end
 
       def count_vulnerabilities
-        @vulnerabilities.count + @reflected_xss.count
+        ret = 0 
+        ret = @vulnerabilities.count unless @vulnerabilities.nil?
+        ret +=  @reflected_xss.count unless @reflected_xss.nil?
+
+        ret
       end
 
       private
