@@ -18,7 +18,11 @@ module Codesake
         def vuln?
           Dir.glob(File.join("#{root_dir}", "*")).each do |filename|
             matches = []
-            matches = run(load_file(filename)) if File.exists?(filename) and File.file?(filename) and ! File.binary?(filename)
+            begin
+              matches = run(load_file(filename)) if File.exists?(filename) and File.file?(filename) and ! File.binary?(filename)
+            rescue ArgumentError => e
+              puts "Skipping pattern match check for #{filename}: #{e.message}"
+            end
             @evidences << {:filename=>filename, :matches=>matches} unless matches.empty?
           end
           return ! @evidences.empty?
