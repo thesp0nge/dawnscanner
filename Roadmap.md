@@ -77,8 +77,6 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 
 ## Version 0.80
 
-* adding test for CVE-2013-2090 _if CVE will be approved_
-* adding test for CVE-2013-2065 _if CVE will be approved_
 * adding test for CVE-2010-1330
 * adding test for CVE-2011-0447 
 * adding test for CVE-2011-0446 
@@ -98,6 +96,22 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-4522
 * adding test for CVE-2012-3464
 * adding test for CVE-2012-3463
+* adding test for RoRCheatSheet\_1
+* adding test for RoRCheatSheet\_2
+* adding test for RoRCheatSheet\_3
+* adding test for RoRCheatSheet\_4
+* adding test for RoRCheatSheet\_5
+* adding test for RoRCheatSheet\_6
+* adding test for RoRCheatSheet\_7
+* adding test for RoRCheatSheet\_8
+* adding test for RoRCheatSheet\_9
+* adding test for RoRCheatSheet\_10
+* adding test for RoRCheatSheet\_11
+* adding test for RoRCheatSheet\_12
+* adding test for RoRCheatSheet\_13
+* adding test for RoRCheatSheet\_14
+* adding test for RoRCheatSheet\_15
+* adding test for RoRCheatSheet\_16
 * detect sinks for XSS in Padrino applications
 * detect reflected XSS in Padrino applications
 * detect stored XSS in Sinatra applications
@@ -112,6 +126,8 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 
 ## Version 0.90
 
+* adding test for CVE-2013-2090 _if CVE will be approved_
+* adding test for CVE-2013-2065 _if CVE will be approved_
 * adding test for CVE-2011-3186
 * adding test for CVE-2011-2197
 * adding test for CVE-2011-2932
