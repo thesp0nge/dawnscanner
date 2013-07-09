@@ -7,6 +7,9 @@ require "codesake/dawn/kb/ruby_version_check"
 # Q&A related checks
 require "codesake/dawn/kb/not_revised_code"
 
+# CVE - 2010
+require "codesake/dawn/kb/cve_2010_1330"
+
 # CVE - 2011
 require "codesake/dawn/kb/cve_2011_0447"
 require "codesake/dawn/kb/cve_2011_2197"
@@ -125,6 +128,7 @@ module Codesake
       def self.load_security_checks
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
+          Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 
           Codesake::Dawn::Kb::CVE_2011_2197.new, 
           Codesake::Dawn::Kb::CVE_2011_2931.new, 
