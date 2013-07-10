@@ -11,6 +11,7 @@ require "codesake/dawn/kb/not_revised_code"
 require "codesake/dawn/kb/cve_2010_1330"
 
 # CVE - 2011
+require "codesake/dawn/kb/cve_2011_0446"
 require "codesake/dawn/kb/cve_2011_0447"
 require "codesake/dawn/kb/cve_2011_2197"
 require "codesake/dawn/kb/cve_2011_2931"
@@ -129,6 +130,7 @@ module Codesake
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
+          Codesake::Dawn::Kb::CVE_2011_0446.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 
           Codesake::Dawn::Kb::CVE_2011_2197.new, 
           Codesake::Dawn::Kb::CVE_2011_2931.new, 
