@@ -135,6 +135,11 @@ opts.each do |opt, val|
   end
 end
 
+if options[:dump_kb]
+  puts dump_knowledge_base(options[:verbose])
+  Kernel.exit(0)
+end
+
 target=ARGV.shift
 
 logger.die("missing target") if target.nil?
@@ -164,11 +169,6 @@ end
 
 if options[:output] == "json"
   puts output_json_run(target, engine) 
-  Kernel.exit(0)
-end
-
-if options[:dump_kb]
-  puts dump_knowledge_base(options[:verbose])
   Kernel.exit(0)
 end
 
