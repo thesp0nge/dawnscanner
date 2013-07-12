@@ -77,6 +77,7 @@ applications will be supported as well.
 | CVE-2011-2931         | YES           | YES               |             |                   |             |
 | CVE-2011-2932         | YES           | NO                |             |                   |             |
 | CVE-2011-3186         | YES           | NO                |             |                   |             |
+| CVE-2011-4815         | YES           | NO                |             |                   |             |
 | CVE-2012-1099         | YES           | NO                |             |                   |             |
 | CVE-2012-1241         | YES           | NO                |             |                   |             |
 | CVE-2012-2140         | YES           | NO                |             |                   |             |
