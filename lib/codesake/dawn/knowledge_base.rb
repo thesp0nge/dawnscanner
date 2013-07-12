@@ -3,6 +3,8 @@ require "codesake/dawn/kb/basic_check"
 require "codesake/dawn/kb/pattern_match_check"
 require "codesake/dawn/kb/dependency_check"
 require "codesake/dawn/kb/ruby_version_check"
+require "codesake/dawn/kb/operating_system_check"
+require "codesake/dawn/kb/combo_check"
 
 # Q&A related checks
 require "codesake/dawn/kb/not_revised_code"
@@ -13,6 +15,7 @@ require "codesake/dawn/kb/cve_2010_1330"
 # CVE - 2011
 require "codesake/dawn/kb/cve_2011_0446"
 require "codesake/dawn/kb/cve_2011_0447"
+require "codesake/dawn/kb/cve_2011_0995"
 require "codesake/dawn/kb/cve_2011_2197"
 require "codesake/dawn/kb/cve_2011_2931"
 require "codesake/dawn/kb/cve_2011_2932"
@@ -79,6 +82,8 @@ module Codesake
       DEPENDENCY_CHECK    = :dependency_check
       PATTERN_MATCH_CHECK = :pattern_match_check
       RUBY_VERSION_CHECK  = :ruby_version_check
+      OS_CHECK            = :os_check
+      COMBO_CHECK         = :combo_check
 
       def initialize
         @security_checks = Codesake::Dawn::KnowledgeBase.load_security_checks
@@ -132,6 +137,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2011_0446.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 
+          Codesake::Dawn::Kb::CVE_2011_0995.new, 
           Codesake::Dawn::Kb::CVE_2011_2197.new, 
           Codesake::Dawn::Kb::CVE_2011_2931.new, 
           Codesake::Dawn::Kb::CVE_2011_2932.new, 
