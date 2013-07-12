@@ -13,6 +13,7 @@ module Codesake
         super(dir, "sinatra")
         @appname = detect_appname(self.target)
         error! if self.appname == ""
+        @views = detect_views
         @sinks = detect_sinks(self.appname) unless self.appname == ""
         @reflected_xss = detect_reflected_xss unless self.appname == ""
       end
@@ -107,8 +108,7 @@ module Codesake
       end
 
       def detect_views
-        build_view_array(File.join(self.target, "views")) if File.exist?(File.join(self.target, "views"))
-        []
+        return build_view_array(File.join(self.target, "views")) if File.exist?(File.join(self.target, "views"))
       end
 
       # e = Haml::Engine.new(File.read(template))

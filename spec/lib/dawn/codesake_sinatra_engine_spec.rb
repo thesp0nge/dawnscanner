@@ -24,7 +24,6 @@ describe "The Codesake::Dawn engine for sinatra applications" do
   end
 
   it "detects 2 views" do
-    @engine.detect_views
     @engine.views.should == [{:filename=>"./spec/support/sinatra-safe/views/layout.haml", :language=>:haml}, {:filename=>"./spec/support/sinatra-safe/views/root.haml", :language=>:haml}]
   end
   it "detects views are written using HAML" do
