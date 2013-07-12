@@ -67,7 +67,7 @@ def help
   printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
   printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
   printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
-  printf "\n   -k, --list-knowledgebase\t\t\tlist dawn known security checks"
+  printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
   printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
   printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
   printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
@@ -88,7 +88,7 @@ opts    = GetoptLong.new(
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
   [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT ],
-  [ '--list-knowledgebase',     '-k',   GetoptLong::NO_ARGUMENT ],
+  [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT ],
   [ '--output',                 '-o',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
@@ -99,6 +99,7 @@ engine  = nil
 options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>nil}
 
 trap("INT")   { logger.die('[INTERRUPTED]') }
+check = ""
 
 
 opts.each do |opt, val|
@@ -123,6 +124,7 @@ opts.each do |opt, val|
 
   when '--list-knowledgebase'
     options[:dump_kb]=true
+    check = val unless val.nil?
    
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
@@ -136,7 +138,13 @@ opts.each do |opt, val|
 end
 
 if options[:dump_kb]
-  puts dump_knowledge_base(options[:verbose])
+  puts dump_knowledge_base(options[:verbose]) if check.empty?
+  if ! check.empty?
+    found = Codesake::Dawn::KnowledgeBase.find(nil, check)
+    puts "#{check} found in knowledgebase." if found
+    puts "#{check} not found in knowledgebase" if ! found
+  end
+
   Kernel.exit(0)
 end
 
