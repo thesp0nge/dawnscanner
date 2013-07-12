@@ -77,7 +77,6 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 
 ## Version 0.80
 
-* adding test for CVE-2011-2197
 * adding test for CVE-2011-2929
 * adding test for CVE-2011-2932
 * adding test for CVE-2011-3186

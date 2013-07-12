@@ -73,6 +73,7 @@ applications will be supported as well.
 | CVE-2011-0447         | YES           | NO                |             |                   |             |
 | CVE-2011-0995         | YES           | NO                |             |                   |             |
 | CVE-2011-2197         | YES           | NO                |             |                   |             |
+| CVE-2011-2929         | YES           | YES               |             |                   |             |
 | CVE-2011-2931         | YES           | YES               |             |                   |             |
 | CVE-2011-2932         | YES           | NO                |             |                   |             |
 | CVE-2011-3186         | YES           | NO                |             |                   |             |
