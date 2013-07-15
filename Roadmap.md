@@ -77,8 +77,6 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 
 ## Version 0.80
 
-* adding test for CVE-2012-2694
-* adding test for CVE-2012-4522
 * adding test for CVE-2012-3464
 * adding test for CVE-2012-3463
 * adding test for RoRCheatSheet\_1
@@ -115,6 +113,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2011-4815
 * adding test for CVE-2012-3424
 * adding test for CVE-2012-5380
+* adding test for CVE-2012-4522
 
 
 ## Version 0.90
