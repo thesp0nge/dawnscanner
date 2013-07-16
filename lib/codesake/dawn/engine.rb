@@ -171,7 +171,7 @@ module Codesake
 
             @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check.vuln? and check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
 
-            @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil}} if check.mitigated?
+            @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
             return true
           end
         end
