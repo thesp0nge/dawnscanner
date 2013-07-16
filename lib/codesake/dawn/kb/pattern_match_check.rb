@@ -13,10 +13,12 @@ module Codesake
         def initialize(options={})
           super(options)
           @attack_pattern = options[:attack_pattern]
+          @glob = "*"
+          @glob = options[:glob] unless options[:glob].nil?
         end
 
         def vuln?
-          Dir.glob(File.join("#{root_dir}", "*")).each do |filename|
+          Dir.glob(File.join("#{root_dir}", @glob)).each do |filename|
             matches = []
             begin
               matches = run(load_file(filename)) if File.exists?(filename) and File.file?(filename) and ! File.binary?(filename)
