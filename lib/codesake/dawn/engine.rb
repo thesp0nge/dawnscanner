@@ -217,15 +217,20 @@ module Codesake
         @vulnerabilities
       end
 
-      def is_vulnerable_to?(name)
+      def find_vulnerability_by_name(name)
         apply(name) unless is_applied?(name)
-        
         @vulnerabilities.each do |v|
-          return true if v[:name] == name
+          return v if v[:name] == name
         end
 
-        false
+        nil
       end
+
+      def is_vulnerable_to?(name)
+        return (find_vulnerability_by_name(name) != nil)
+      end
+
+
       def has_reflected_xss?
         (@reflected_xss.count != 0)
       end
