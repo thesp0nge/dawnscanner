@@ -13,8 +13,8 @@ module Codesake
         def initialize(options={})
           super(options)
           @attack_pattern = options[:attack_pattern]
-          @glob = "*"
-          @glob = options[:glob] unless options[:glob].nil?
+          @glob = "**"
+          @glob = File.join(@glob, options[:glob]) unless options[:glob].nil?
         end
 
         def vuln?

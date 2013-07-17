@@ -167,9 +167,11 @@ module Codesake
             check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
             check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
 
-            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.vuln? and check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            check_vuln = check.vuln?
 
-            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check.vuln? and check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+
+            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
 
             @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
             return true
@@ -185,13 +187,18 @@ module Codesake
 
         @checks.each do |check|
           @applied << { :name => name }
+
           check.ruby_version = @ruby_version[:version]
           check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
           check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
           check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
-          @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation , :evidences=>check.evidences} if check.vuln?
-          @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences} if check.mitigated?
+          check_vuln = check.vuln?
+
+          @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+
+          @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+          @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
         end
 
         true

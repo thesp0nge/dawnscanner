@@ -8,6 +8,7 @@ require "codesake/dawn/kb/combo_check"
 
 # Q&A related checks
 require "codesake/dawn/kb/not_revised_code"
+require "codesake/dawn/kb/owasp_ror_cheatsheet"
 
 # CVE - 2010
 require "codesake/dawn/kb/cve_2010_1330"
@@ -139,6 +140,7 @@ module Codesake
       def self.load_security_checks
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
+          Codesake::Dawn::Kb::OwaspRorCheatsheet.new,
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2011_0446.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 

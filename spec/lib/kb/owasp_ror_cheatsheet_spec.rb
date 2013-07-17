@@ -2,7 +2,24 @@ require 'spec_helper'
 
 describe "The OWASP Ruby on Rails cheatsheet" do
 
-  it "says that running operating system commands from a ruby app can be dangerous"
+  before(:all){ @engine = Codesake::Dawn::Rails.new("./spec/support/hello_world_3.2.13") }
+
+  it "can be applied to a Rails application" do
+    @engine.apply("Owasp Ror Cheatsheet").should  be_true
+  end
+  it "fires up vulnerabilities" do
+    @engine.is_vulnerable_to?("Owasp Ror Cheatsheet").should be_true
+  end
+  it "says that running operating system commands from a ruby app can be dangerous" do
+    ev = @engine.vulnerabilities[0][:vulnerable_checks][0].evidences
+    @engine.vulnerabilities[0][:vulnerable_checks][0].should be_an_instance_of(Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection)
+    ev[0][:filename].should == "./spec/support/hello_world_3.2.13/app/helpers/application_helper.rb"
+    ev[0][:matches].count.should == 4
+    ev[0][:matches].should =~ [{:match=>"    eval(command)\n", :line=>4}, {:match=>"    System(command)\n", :line=>5}, {:match=>"    `\#{command}`\n", :line=>6}, {:match=>"    Kernel.exec(command)\n", :line=>7}]
+    
+
+  end
+
   it "says that methods fetching data must validate parameters form request"
   it "says that applications must filter data to avoid XSS"
   it "says that applications must tune session cookies to have them to expire or to store them in a database"
