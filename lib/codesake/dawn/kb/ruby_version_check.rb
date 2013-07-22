@@ -36,8 +36,18 @@ module Codesake
           # puts "S:#{@safe_rubies}"
           # puts "DD:#{@detected_ruby}"
 
-          return true if ( vv && vengine )
-          return (ve && vp && vengine )
+          if ( vv && engine)
+            @status = true
+          else
+            @status = (ve && vp && vengine )
+
+
+          end
+          
+          return @status
+
+          # return true if ( vv && vengine )
+          # return (ve && vp && vengine )
         end
         
         def is_vulnerable_engine?(target, fixes = [])

@@ -48,6 +48,8 @@ module Codesake
 
           self.evidences << message unless message.empty?
 
+          @status = ret
+
           ret
         end
       end

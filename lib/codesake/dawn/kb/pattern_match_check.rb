@@ -33,8 +33,13 @@ module Codesake
             end
             @evidences << {:filename=>filename, :matches=>matches} unless matches.empty?
           end
-          return ! @evidences.empty? unless @negative_search
-          return @evidences.empty? if @negative_search
+         
+          ret_value = ! @evidences.empty? unless @negative_search
+          ret_value = @evidences.empty? if @negative_search
+
+          @status = ret_value
+
+          return ret_value
         end
 
         private 

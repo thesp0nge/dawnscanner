@@ -36,6 +36,9 @@ module Codesake
         # Vulnerability evidences
         attr_reader   :evidences
 
+        # Check status. Returns the latest vuln? call result
+        attr_reader   :status
+
         def initialize(options={})
           @applies                  = []
           @ruby_version             = ""
@@ -57,6 +60,7 @@ module Codesake
 
           @evidences    = []
           @mitigated    = false
+          @status       = false
     
         end
 
