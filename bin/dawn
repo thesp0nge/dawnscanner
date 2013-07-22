@@ -82,7 +82,7 @@ APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
-logger  = Codesake::Commons::Logging.instance
+$logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
@@ -98,7 +98,7 @@ opts    = GetoptLong.new(
 engine  = nil
 options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>nil}
 
-trap("INT")   { logger.die('[INTERRUPTED]') }
+trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
 
 
@@ -150,22 +150,22 @@ end
 
 target=ARGV.shift
 
-logger.die("missing target") if target.nil?
-logger.die("invalid directory (#{target})") unless Codesake::Dawn::Core.is_good_target?(target)
+$logger.die("missing target") if target.nil?
+$logger.die("invalid directory (#{target})") unless Codesake::Dawn::Core.is_good_target?(target)
 
 
 ## MVC auto detect
 begin
   engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].nil?
 rescue ArgumentError => e
-  logger.die(e.message)
+  $logger.die(e.message)
 end
 
 engine = Codesake::Dawn::Rails.new(target)        if options[:mvc] == :force_rails
 engine = Codesake::Dawn::Sinatra.new(target)      if options[:mvc] == :force_sinatra
 # engine = Codesake::Dawn::Padrino.new if options[:mvc] == :force_padrino
 
-logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
+$logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 
 if options[:count_only] 
   ret = dry_run(target, engine)
@@ -180,50 +180,50 @@ if options[:output] == "json"
   Kernel.exit(0)
 end
 
-logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
-logger.die "missing target framework option" if engine.nil?
+$logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
+$logger.die "missing target framework option" if engine.nil?
 
 # engine.set_target(target) unless engine.nil?
 engine.load_knowledge_base
 
-logger.die "nothing to do on #{target}" unless engine.can_apply?
-logger.log "scanning #{target}"
-logger.log "#{engine.name} v#{engine.get_mvc_version} detected"
-logger.log "applying all security checks" 
+$logger.die "nothing to do on #{target}" unless engine.can_apply?
+$logger.log "scanning #{target}"
+$logger.log "#{engine.name} v#{engine.get_mvc_version} detected"
+$logger.log "applying all security checks" 
 if engine.apply_all 
-  logger.log "all security checks applied"
+  $logger.log "all security checks applied"
 else
-  logger.err "no security checks in the knowledge base"
+  $logger.err "no security checks in the knowledge base"
 end
 
 if engine.count_vulnerabilities != 0
-  logger.log "#{engine.count_vulnerabilities} vulnerabilities found"
+  $logger.log "#{engine.count_vulnerabilities} vulnerabilities found"
   engine.vulnerabilities.each do |vuln|
-    logger.log "#{vuln[:name]} failed"
-    logger.log "Description: #{vuln[:message]}" if options[:verbose]
-    logger.log "Solution: #{vuln[:remediation]}"
-    logger.err "Evidence:"
+    $logger.log "#{vuln[:name]} failed"
+    $logger.log "Description: #{vuln[:message]}" if options[:verbose]
+    $logger.log "Solution: #{vuln[:remediation]}"
+    $logger.err "Evidence:"
     vuln[:evidences].each do |evidence|
-      logger.err evidence
+      $logger.err evidence
     end
   end
   if engine.has_reflected_xss?
-    logger.log "#{engine.reflected_xss.count} reflected XSS found"
+    $logger.log "#{engine.reflected_xss.count} reflected XSS found"
     engine.reflected_xss.each do |vuln|
-      logger.log "request parameter \"#{vuln[:sink_source]}\""
+      $logger.log "request parameter \"#{vuln[:sink_source]}\""
     end
   end
 
 else
-  logger.ok "no vulnerabilities found."
+  $logger.ok "no vulnerabilities found."
 end
 
 if engine.mitigated_issues.count != 0
-  logger.log "#{engine.mitigated_issues.count} mitigated vulnerabilities found"
+  $logger.log "#{engine.mitigated_issues.count} mitigated vulnerabilities found"
   engine.mitigated_issues.each do |vuln|
-    logger.ok "#{vuln[:name]} mitigated"
+    $logger.ok "#{vuln[:name]} mitigated"
     vuln[:evidences].each do |evidence|
-      logger.err evidence
+      $logger.err evidence
     end
   end
 end
@@ -231,7 +231,7 @@ end
 
 
 
-logger.helo "#{APPNAME} is shutting down"
+$logger.helo "#{APPNAME} is shutting down"
 Kernel.exit(0)
 
 
