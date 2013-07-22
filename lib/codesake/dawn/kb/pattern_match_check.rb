@@ -10,9 +10,15 @@ module Codesake
         attr_reader   :attack_pattern
         attr_accessor :root_dir
 
+        # This attribute is false by default. If true, the vuln? method check
+        # if pattern attack is nor present.
+        attr_reader   :negative_search
+
         def initialize(options={})
           super(options)
-          @attack_pattern = options[:attack_pattern]
+          @attack_pattern   = options[:attack_pattern]
+          @negative_search  = false
+          @negative_search  = options[:negative_search] unless options[:negative_search].nil? 
           @glob = "**"
           @glob = File.join(@glob, options[:glob]) unless options[:glob].nil?
         end
@@ -27,7 +33,8 @@ module Codesake
             end
             @evidences << {:filename=>filename, :matches=>matches} unless matches.empty?
           end
-          return ! @evidences.empty?
+          return ! @evidences.empty? unless @negative_search
+          return @evidences.empty? if @negative_search
         end
 
         private 
