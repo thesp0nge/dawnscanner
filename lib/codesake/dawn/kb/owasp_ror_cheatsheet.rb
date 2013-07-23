@@ -1,4 +1,5 @@
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/command_injection'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/csrf'
 
 module Codesake
   module Dawn
@@ -15,9 +16,13 @@ module Codesake
             :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
             :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
             :checks=>[
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new
-            ]
+              Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
+              Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new
+            ],
+            :vuln_if_all_fails => false
           })
+
+          @debug = true
 
         end
       end
