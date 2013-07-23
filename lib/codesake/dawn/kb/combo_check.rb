@@ -36,14 +36,13 @@ module Codesake
           end
 
           dump_status
-          $logger.log("V: #{@vuln_if_all_fails}, R: #{ret}, A:#{at_least_one}")
           return ret if @vuln_if_all_fails
           return at_least_one unless @vuln_if_all_fails
         end
 
         def dump_status
           @checks.each do |check|
-            $logger.log("#{check.name}: #{check.status}")
+            $logger.log("#{File.basename(__FILE__)}@#{__LINE__}:#{check.name}: #{check.status}") if @debug
           end
 
           true
