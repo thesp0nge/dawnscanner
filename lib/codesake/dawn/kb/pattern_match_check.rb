@@ -25,6 +25,7 @@ module Codesake
 
         def vuln?
           Dir.glob(File.join("#{root_dir}", @glob)).each do |filename|
+            $logger.log("#{File.basename(__FILE__)}@#{__LINE__}: analyzing #{filename}: search is #{@negative_search}") if @debug
             matches = []
             begin
               matches = run(load_file(filename)) if File.exists?(filename) and File.file?(filename) and ! File.binary?(filename)
@@ -36,6 +37,9 @@ module Codesake
          
           ret_value = ! @evidences.empty? unless @negative_search
           ret_value = @evidences.empty? if @negative_search
+
+          $logger.log("#{File.basename(__FILE__)}@#{__LINE__}: evidences #=> #{@evidences}") if @debug
+          $logger.log("#{File.basename(__FILE__)}@#{__LINE__}: ret_value #=> #{ret_value}") if @debug
 
           @status = ret_value
 
