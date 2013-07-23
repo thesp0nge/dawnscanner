@@ -40,6 +40,7 @@ describe "The OWASP Ruby on Rails cheatsheet" do
   end
   it "says that your models must take care about not declaring attr_accessor fields to avoid mass assignements" do
     mass_assignment = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel)
+    mass_assignment.should_not be_nil
   end
   it "says redirect_to calls in your code must use only_path=true param that lets your code to be safe against forceful browsing"
   it "says that pages passed to render call must not under the user control"

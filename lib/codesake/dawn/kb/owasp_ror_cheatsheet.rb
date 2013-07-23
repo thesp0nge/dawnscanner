@@ -1,6 +1,7 @@
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/command_injection'
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/csrf'
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/session_stored_in_database'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/mass_assignment_in_model'
 
 module Codesake
   module Dawn
@@ -19,7 +20,8 @@ module Codesake
             :checks=>[
               Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
               Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new,
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new
+              Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
+              Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new
 
             ],
             :vuln_if_all_fails => false
