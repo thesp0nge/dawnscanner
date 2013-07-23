@@ -45,7 +45,10 @@ describe "The OWASP Ruby on Rails cheatsheet" do
   it "says redirect_to calls in your code must use only_path=true param that lets your code to be safe against forceful browsing"
   it "says that pages passed to render call must not under the user control"
   it "says that applications must implement the same-origin control when handling data"
-  it "says that applications must use HTTP headers designed for security"
+  it "says that applications must use HTTP headers designed for security" do
+    headers = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders)
+    headers.should_not be_nil
+  end
   it "says that you have to perform code reviews to avoid business logic faults. Using codesake dawn is great :-)"
   it "says that you have to manually check your routes to avoid a widespread attack surface."
   it "says that you must not implement your own encryption code, and in case of devise usage using 10 stretches for production is good"
