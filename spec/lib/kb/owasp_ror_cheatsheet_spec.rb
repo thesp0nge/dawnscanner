@@ -29,7 +29,7 @@ describe "The OWASP Ruby on Rails cheatsheet" do
   it "says that methods fetching data must validate parameters form request"
   it "says that applications must filter data to avoid XSS"
   it "says that applications must tune session cookies to have them to expire or to store them in a database" do
-    sessions = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionsStoredInDatabase)
+    sessions = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase)
     sessions.should  be_nil
   end
   it "says that applications must tune devise parameters"

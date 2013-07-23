@@ -3,7 +3,7 @@ module Codesake
     module Kb
       module OwaspRorCheatSheet
 
-        class SessionsStoredInDatabase
+        class SessionStoredInDatabase
           include PatternMatchCheck
 
           def initialize
