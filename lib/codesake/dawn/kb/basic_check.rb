@@ -39,6 +39,9 @@ module Codesake
         # Check status. Returns the latest vuln? call result
         attr_reader   :status
 
+        # Put the check in debug mode
+        attr_accessor :debug
+
         def initialize(options={})
           @applies                  = []
           @ruby_version             = ""
@@ -61,9 +64,9 @@ module Codesake
           @evidences    = []
           @mitigated    = false
           @status       = false
+          @debug        = false
     
         end
-
 
         def applies_to?(name)
           ! @applies.find_index(name).nil?
