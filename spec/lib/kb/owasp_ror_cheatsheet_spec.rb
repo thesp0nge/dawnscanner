@@ -29,7 +29,7 @@ describe "The OWASP Ruby on Rails cheatsheet" do
   it "says that methods fetching data must validate parameters form request"
   it "says that applications must filter data to avoid XSS"
   it "says that applications must tune session cookies to have them to expire or to store them in a database" do
-    sessions = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::Sessions)
+    sessions = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionsStoredInDatabase)
     sessions.should  be_nil
   end
   it "says that applications must tune devise parameters"
@@ -38,7 +38,9 @@ describe "The OWASP Ruby on Rails cheatsheet" do
     forgery = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf)
     forgery.should  be_nil
   end
-  it "says that your models must take care about not declaring attr_accessor fields to avoid mass assignements"
+  it "says that your models must take care about not declaring attr_accessor fields to avoid mass assignements" do
+    mass_assignment = Codesake::Dawn::Kb::ComboCheck.find_vulnerable_checks_by_class(@vc, Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel)
+  end
   it "says redirect_to calls in your code must use only_path=true param that lets your code to be safe against forceful browsing"
   it "says that pages passed to render call must not under the user control"
   it "says that applications must implement the same-origin control when handling data"
