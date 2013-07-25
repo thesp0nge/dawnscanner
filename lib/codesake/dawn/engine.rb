@@ -3,6 +3,8 @@ require 'bundler'
 module Codesake
   module Dawn
     module Engine
+      include Codesake::Dawn::Utils
+
       attr_reader :target
       attr_reader :name
       attr_reader :gemfile_lock
@@ -32,7 +34,9 @@ module Codesake
       # will see later 
       attr_reader :models
 
-      def initialize(dir=nil, name="")
+      attr_accessor :debug
+
+      def initialize(dir=nil, name="", options={})
         @name = name
         @mvc_version = ""
         @gemfile_lock = ""
@@ -42,6 +46,8 @@ module Codesake
         @mitigated_issues = []
         @applied = []
         @engine_error = false
+        @debug = false
+        @debug = options[:debug] unless options[:debug].nil?
 
         set_target(dir) unless dir.nil?
 
@@ -105,7 +111,8 @@ module Codesake
       end
 
       def load_knowledge_base
-        @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(self.name)
+        @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@name)
+        debug_me("#{@checks.count} checks loaded")
         @checks
       end
 

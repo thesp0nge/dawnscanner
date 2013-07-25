@@ -85,6 +85,8 @@ module Codesake
     # XXX: Check if it best using a singleton here
     class KnowledgeBase
 
+      include Codesake::Dawn::Utils
+
       DEPENDENCY_CHECK    = :dependency_check
       PATTERN_MATCH_CHECK = :pattern_match_check
       RUBY_VERSION_CHECK  = :ruby_version_check
@@ -118,23 +120,23 @@ module Codesake
         @security_checks.each do |sc|
           ret << sc if sc.applies_to?(mvc)
         end
-
+        ret
       end
 
       def all_sinatra_checks
-        self.all_by_mvc(:sinatra)
+        self.all_by_mvc("sinatra")
       end
 
       def all_rails_checks
-        self.all_by_mvc(:rails)
+        self.all_by_mvc("rails")
       end
 
       def all_padrino_checks
-        self.all_by_mvc(:padrino)
+        self.all_by_mvc("padrino")
       end
 
       def all_rack_checks
-        self.all_by_mvc(:rack)
+        self.all_by_mvc("rack")
       end
 
       def self.load_security_checks
