@@ -232,7 +232,7 @@ module Codesake
 
 
       def has_reflected_xss?
-        (@reflected_xss.count != 0)
+        (@reflected_xss.count != 0) unless @reflected_xss.nil?
       end
 
       def count_vulnerabilities
