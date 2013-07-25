@@ -1,7 +1,12 @@
 # Codesake Dawn Todo 
 
-## #1 Introduce check dependency
+## #2 cloning target
 ### Status: Open
+Add a --github option to dawn to clone a remote repository, perform a bundle
+install and do a code review.
+
+## #1 Introduce check dependency
+### Status: Closed
 CVE-2013-1655 introduces a security issue that depends on a particular gem only
 when running a particular Ruby interpreter version. For such a reason in
 BasicCheck class I introduced a ruby\_version attribute as a String and a

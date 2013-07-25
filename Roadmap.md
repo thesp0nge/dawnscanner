@@ -77,7 +77,6 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 
 ## Version 0.80
 
-* Fix issue #1. You can read more about it in TODO.md
 * detect sinks for XSS in Padrino applications
 * detect reflected XSS in Padrino applications
 * detect stored XSS in Sinatra applications
@@ -100,6 +99,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for RoRCheatSheet\_4
 * adding test for RoRCheatSheet\_7
 * adding test for RoRCheatSheet\_8
+* Fix issue #1. You can read more about it in TODO.md
 
 
 ## Version 0.90
