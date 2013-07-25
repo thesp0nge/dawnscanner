@@ -60,6 +60,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     end
 
     it "reports it has no vulnerabilities" do
+      puts @engine.vulnerabilities
       @engine.vulnerabilities.should  be_empty
     end
   end  

@@ -1,4 +1,5 @@
 require "codesake/dawn/core"
+require "codesake/dawn/utils"
 require "codesake/dawn/version"
 require "codesake/dawn/knowledge_base"
 require "codesake/dawn/rails"

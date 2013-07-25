@@ -77,22 +77,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 
 ## Version 0.80
 
-* adding test for RoRCheatSheet\_1
-* adding test for RoRCheatSheet\_2
-* adding test for RoRCheatSheet\_3
-* adding test for RoRCheatSheet\_4
-* adding test for RoRCheatSheet\_5
-* adding test for RoRCheatSheet\_6
-* adding test for RoRCheatSheet\_7
-* adding test for RoRCheatSheet\_8
-* adding test for RoRCheatSheet\_9
-* adding test for RoRCheatSheet\_10
-* adding test for RoRCheatSheet\_11
-* adding test for RoRCheatSheet\_12
-* adding test for RoRCheatSheet\_13
-* adding test for RoRCheatSheet\_14
-* adding test for RoRCheatSheet\_15
-* adding test for RoRCheatSheet\_16
+* Fix issue #1. You can read more about it in TODO.md
 * detect sinks for XSS in Padrino applications
 * detect reflected XSS in Padrino applications
 * detect stored XSS in Sinatra applications
@@ -100,7 +85,6 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * detect insecure direct object reference in Sinatra applications
 * detect insecure direct object reference in Padrino applications
 * support ERB for in detect\_views (for both Sinatra and Padrino)
-* Fix issue #1. You can read more about it in TODO.md
 * integration with [codesake.com](http://codesake.com) with a public available
   APIs to be consumed by codesake beta users.
 
@@ -112,6 +96,10 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2012-3424
 * adding test for CVE-2012-5380
 * adding test for CVE-2012-4522
+* adding test for RoRCheatSheet\_1
+* adding test for RoRCheatSheet\_4
+* adding test for RoRCheatSheet\_7
+* adding test for RoRCheatSheet\_8
 
 
 ## Version 0.90
@@ -157,6 +145,18 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for CVE-2008-1145
 * adding test for CVE-2008-1891
 * adding test for CVE-2008-2725
+* adding test for RoRCheatSheet\_2
+* adding test for RoRCheatSheet\_3
+* adding test for RoRCheatSheet\_5
+* adding test for RoRCheatSheet\_6
+* adding test for RoRCheatSheet\_9
+* adding test for RoRCheatSheet\_10
+* adding test for RoRCheatSheet\_11
+* adding test for RoRCheatSheet\_12
+* adding test for RoRCheatSheet\_13
+* adding test for RoRCheatSheet\_14
+* adding test for RoRCheatSheet\_15
+* adding test for RoRCheatSheet\_16
 * preliminary javascript support
 * adding test for CVE-2011-4969  XSS in jquery < 1.6.2 
 * detect stored XSS in Rails applications

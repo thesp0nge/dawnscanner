@@ -26,23 +26,23 @@ module Codesake
           vv = self.is_vulnerable_version?(detected_ruby[:version], vv_a)
           ve = false
 
-          # Since we have also the patch level a fixes version can be the same
-          # as the vulnerable... we must consider this
-          ve = self.is_same_version?(detected_ruby[:version], vv_a) unless vv
-          vp = is_vulnerable_patchlevel?(detected_ruby[:patchlevel], detected_ruby[:version]) if ve
+          ve = self.is_same_version?(detected_ruby[:version], vv_a) 
+          vp = is_vulnerable_patchlevel?(detected_ruby[:patchlevel], detected_ruby[:version]) 
 
           # XXX Debug statements to be replaced with logger call
-          # puts "D:#{self.name}, #{vengine}, #{vv}, #{ve}, #{vp}->#{vv && vengine}, #{(ve && vp && vengine )}"
-          # puts "S:#{@safe_rubies}"
-          # puts "DD:#{@detected_ruby}"
+          debug_me("D:#{self.name}, VENGINE=#{vengine}, VV=#{vv}, VE=#{ve}, VP=#{vp}->#{vv && vengine}, #{(ve && vp && vengine )}")
+          debug_me("S:#{@safe_rubies}")
+          debug_me("DD:#{@detected_ruby}")
 
-          if ( vv && engine)
-            @status = true
+
+          if ( vv && vengine)
+            @status = vp if ve
+            @status = true unless ve
           else
             @status = (ve && vp && vengine )
-
-
           end
+
+          debug_me("STATUS:#{@status}")
           
           return @status
 
@@ -59,6 +59,7 @@ module Codesake
 
         def is_same_version?(target, fixes = [])
           fixes.each do |f|
+            debug_me("F=#{f}, TARGET=#{target}")
             return true if f == target
           end
           false

@@ -12,9 +12,10 @@ module Codesake
         def initialize(options={})
           super(options)
           @vuln_if_all_fails = true
-          @vuln_if_all_fails = options[:vuln_if_all_fails] unless options[:checks].nil?
+          @vuln_if_all_fails = options[:vuln_if_all_fails] unless options[:vuln_if_all_fails].nil?
           @checks = options[:checks]
           @vulnerable_checks = []
+          @options = options
         end
 
         def vuln?
@@ -36,13 +37,14 @@ module Codesake
           end
 
           dump_status
+          debug_me("AVIAF = #{@vuln_if_all_fails}, RET = #{ret}, AL1= #{at_least_one}") 
           return ret if @vuln_if_all_fails
           return at_least_one unless @vuln_if_all_fails
         end
 
         def dump_status
           @checks.each do |check|
-            $logger.log("#{File.basename(__FILE__)}@#{__LINE__}:#{check.name}: #{check.status}") if @debug
+            debug_me("#{File.basename(__FILE__)}@#{__LINE__}:#{check.name}: #{check.status}")
           end
 
           true
