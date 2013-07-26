@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe "The Codesake::Dawn engine for padrino applications" do 
   before(:all) {@engine = Codesake::Dawn::Engine::Padrino.new('./spec/support/hello_world_padrino')}
+
   it "has a proper name"
   it "detects the applications declared in config/apps.rb"
   it "has a valid target"
