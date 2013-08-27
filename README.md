@@ -6,9 +6,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 frameworks. 
 
 [![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
-[![Build Status](https://travis-ci.org/codesake/codesake_dawn.png?branch=master)](https://travis-ci.org/codesake/codesake_dawn)
-[![Dependency Status](https://gemnasium.com/codesake/codesake_dawn.png)](https://gemnasium.com/codesake/codesake_dawn)
-[![Coverage Status](https://coveralls.io/repos/codesake/codesake_dawn/badge.png)](https://coveralls.io/r/codesake/codesake_dawn)
+[![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
+[![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
+[![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
 
 ## Useful links
 
@@ -16,7 +16,7 @@ www:      [http://codesake.com](http://codesake.com)
 
 twitter:  [https://twitter.com/codesake](https://twitter.com/codesake) #dawn hashtag
 
-github:   [https://github.com/codesake/codesake\_dawn](https://github.com/codesake/codesake\_dawn)
+github:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
 
 ## Installation
 
@@ -36,8 +36,8 @@ And then upgrade your bundle
 
 You may want to build it from source, so you have to check it out from github first:
 
-    $ git clone https://github.com/codesake/codesake_dawn/codesake_dawn.git
-    $ cd codesake_dawn
+    $ git clone https://github.com/codesake/codesake-dawn/codesake-dawn.git
+    $ cd codesake-dawn
     $ rake install
 
 And the codesake-dawn gem will be built in a pkg directory and then installed
