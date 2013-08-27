@@ -30,7 +30,7 @@ module Codesake
             :vuln_if_all_fails => false
           })
 
-          @debug = true
+          # @debug = true
 
         end
       end

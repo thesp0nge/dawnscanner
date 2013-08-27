@@ -19,10 +19,10 @@ module Codesake
               :attack_pattern => ["Application.config.session_store :active_record_store"],
               :negative_search=>true
             })
-            @debug = true
+            # @debug = true
           end 
         end
-  end
-  end
+      end
+    end
   end
 end

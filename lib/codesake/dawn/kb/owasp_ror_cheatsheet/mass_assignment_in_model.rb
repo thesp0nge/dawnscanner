@@ -20,7 +20,7 @@ module Codesake
               :attack_pattern => ["attr_accessor"],
               :negative_search=>true
             })
-            @debug = true
+            # @debug = true
           end
 
         end

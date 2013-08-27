@@ -9,13 +9,18 @@ module Codesake
       attr_reader :sinks
       attr_reader :appname
 
-      def initialize(dir=nil)
+      # mount_point is the mounting point for this Sinatra application. It's
+      # filled up only in padrino engines
+      attr_reader :mount_point
+
+      def initialize(dir=nil, mp=nil)
         super(dir, "sinatra")
         @appname = detect_appname(self.target)
         error! if self.appname == ""
         @views = detect_views
         @sinks = detect_sinks(self.appname) unless self.appname == ""
         @reflected_xss = detect_reflected_xss unless self.appname == ""
+        @mount_point = (mp.nil?)? "" : mp
       end
 
       # TODO: appname should be hopefully autodetect from config.ru

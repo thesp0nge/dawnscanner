@@ -2,15 +2,37 @@ require 'spec_helper'
 
 
 describe "The Codesake::Dawn engine for padrino applications" do 
-  before(:all) {@engine = Codesake::Dawn::Engine::Padrino.new('./spec/support/hello_world_padrino')}
+  before(:all) do 
+    @engine = Codesake::Dawn::Padrino.new('./spec/support/hello_world_padrino')
+  end
+    
 
-  it "has a proper name"
-  it "detects the applications declared in config/apps.rb"
-  it "has a valid target"
-  it "creates a valid pool of Sinatra engines"
+  it "has a proper name" do
+    @engine.name.should   ==    "padrino"
+  end
 
-  it "has a good Gemfile.lock"
-  it "detects padrino v0.11.2"
+  it "has a valid target" do
+    @engine.target.should ==   "./spec/support/hello_world_padrino"
+    @engine.target_is_dir?.should  be_true
+  end
+
+  it "detects the applications declared in config/apps.rb" do
+    @engine.should  respond_to(:detect_apps)
+    @engine.apps.should_not     be_nil
+    @engine.apps.count.should   == 3
+  end
+
+  it "creates a valid pool of Sinatra engines" 
+
+
+  it "has a good Gemfile.lock" do
+    @engine.has_gemfile_lock?.should   be_true
+  end
+
+  it "detects padrino v0.11.2" do
+    @engine.mvc_version.should   == "0.11.2"
+  end
+
   
   # describe "analyzing the main application" do
   # end
