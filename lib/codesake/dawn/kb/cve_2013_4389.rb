@@ -17,7 +17,7 @@ module Codesake
             :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade rails version at least to 3.0.21, 3.1.10 or 3.2.15. As a general rule, using the latest stable rails version is recommended.",
-            :aux_links => ["https://groups.google.com/forum/?fromgroups=#%21topic/ruby-grape/fthDkMgIOa0"]
+            :aux_links => ["https://groups.google.com/forum/message/raw?msg=ruby-security-ann/yvlR1Vx44c8/elKJkpO2KVgJ"]
           })
 
           self.safe_dependencies = [{:name=>"rails", :version=>['3.0.21', '3.1.10', '3.2.15']}]
