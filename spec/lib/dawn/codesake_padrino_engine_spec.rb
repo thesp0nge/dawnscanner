@@ -22,7 +22,11 @@ describe "The Codesake::Dawn engine for padrino applications" do
     @engine.apps.count.should   == 3
   end
 
-  it "creates a valid pool of Sinatra engines" 
+  it "creates a valid pool of Sinatra engines" do
+    @engine.apps[0].mount_point.should == "/"
+    @engine.apps[1].mount_point.should == "/log"
+    @engine.apps[2].mount_point.should == "/dispatcher"
+  end
 
 
   it "has a good Gemfile.lock" do

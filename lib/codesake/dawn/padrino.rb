@@ -17,6 +17,7 @@ module Codesake
         return nil unless File.exist?(apps_rb)
         lines = File.readlines(apps_rb)
         p = RubyParser.new
+        apps = []
 
         lines.each do |line|
           if /^Padrino\.mount/ =~ line
@@ -29,6 +30,7 @@ module Codesake
                 sinatra_app_rb = body_a[0][4][2][3][1] if is_mount_call?(body_a[0])
                 debug_me("BODY_A=#{body_a[0]}")
                 debug_me("IS_MOUNT_CALL? #{is_mount_call?(body_a[0])}")
+                debug_me("MP = #{mp}")
                 target = File.dirname(sinatra_app_rb )
                 apps << Codesake::Dawn::Sinatra.new(target, mp)
               end
@@ -41,7 +43,7 @@ module Codesake
           # if line.start_with?("Padrino.mount")
 
         end
-        []
+        apps
       end
 
       def is_mount_call?(a)
