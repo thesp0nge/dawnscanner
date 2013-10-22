@@ -78,6 +78,7 @@ require "codesake/dawn/kb/cve_2013_2615"
 require "codesake/dawn/kb/cve_2013_2616"
 require "codesake/dawn/kb/cve_2013_2617"
 require "codesake/dawn/kb/cve_2013_3221"
+require "codesake/dawn/kb/cve_2013_4389"
 
 
 module Codesake
@@ -204,6 +205,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_2616.new, 
           Codesake::Dawn::Kb::CVE_2013_2617.new, 
           Codesake::Dawn::Kb::CVE_2013_3221.new, 
+          Codesake::Dawn::Kb::CVE_2013_4389.new, 
         ]
       end
     end

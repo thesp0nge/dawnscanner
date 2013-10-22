@@ -87,6 +87,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * integration with [codesake.com](http://codesake.com) with a public available
   APIs to be consumed by codesake beta users.
 
+* adding test for CVE-2013-4389
 * adding test for CVE-2010-1330
 * adding test for CVE-2011-0446 
 * adding test for CVE-2011-0995
