@@ -130,6 +130,7 @@ applications will be supported as well.
 | CVE-2013-1933         | YES           | NO                |             |                   |             |
 | CVE-2013-1947         | YES           | NO                |             |                   |             |
 | CVE-2013-1948         | YES           | NO                |             |                   |             |
+| CVE-2013-2065         | YES           | NO                |             |                   |             |
 | CVE-2013-2616         | YES           | NO                |             |                   |             |
 | CVE-2013-2617         | YES           | NO                |             |                   |             |
 | CVE-2013-3221         | YES           | NO                |             |                   |             |

@@ -17,7 +17,7 @@ module Codesake
             :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade ruby interpreter to 1.9.3-p286 or 2.0.0-p195 or latest version available",
-            :aux_links=>["ihttp://www.ruby-lang.org/en/news/2012/10/12/cve-2012-4464-cve-2012-4466/"]
+            :aux_links=>["http://www.ruby-lang.org/en/news/2012/10/12/cve-2012-4464-cve-2012-4466/"]
           })
 
           self.safe_rubies = [{:engine=>"ruby", :version=>"1.9.3", :patchlevel=>"p286"}, {:engine=>"ruby", :version=>"2.0.0", :patchlevel=>"p195"}]
