@@ -102,6 +102,7 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for RoRCheatSheet\_7
 * adding test for RoRCheatSheet\_8
 * Fix issue #1. You can read more about it in TODO.md
+* Added internal API to scan a single Gemfile.lock
 
 
 ## Version 0.90

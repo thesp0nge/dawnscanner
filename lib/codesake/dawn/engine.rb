@@ -111,7 +111,8 @@ module Codesake
       end
 
       def load_knowledge_base
-        @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@name)
+        @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@name) unless @name == "Gemfile.lock"
+        @checks = Codesake::Dawn::KnowledgeBase.new.all if @name == "Gemfile.lock"
         debug_me("#{@checks.count} checks loaded")
         @checks
       end
