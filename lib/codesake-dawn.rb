@@ -6,6 +6,6 @@ require "codesake/dawn/rails"
 require "codesake/dawn/sinatra"
 require "codesake/dawn/padrino"
 require "codesake/dawn/gemfile_lock"
-require "codesake_commons"
+require "codesake-commons"
 
 require "date"

@@ -7,6 +7,9 @@ module Codesake
 
       attr_reader :target
       attr_reader :name
+      # This attribute is used when @name == "Gemfile.lock" to force the
+      # loading of specific MVC checks
+      attr_reader :force
       attr_reader :gemfile_lock
       attr_reader :mvc_version
       attr_reader :connected_gems
@@ -40,6 +43,7 @@ module Codesake
         @name = name
         @mvc_version = ""
         @gemfile_lock = ""
+        @force = ""
         @connected_gems = []
         @checks = []
         @vulnerabilities = []
@@ -48,6 +52,11 @@ module Codesake
         @engine_error = false
         @debug = false
         @debug = options[:debug] unless options[:debug].nil?
+
+        # Only honoring force option for Gemfile.lock engine. If no force is
+        # provided the default behaviour for Gemfile.lock engine is to load all
+        # security checks.
+        @force = options[:force] if ! options[:force].nil? and @name == "Gemfile.lock"
 
         set_target(dir) unless dir.nil?
 
@@ -111,8 +120,13 @@ module Codesake
       end
 
       def load_knowledge_base
-        @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@name) unless @name == "Gemfile.lock"
-        @checks = Codesake::Dawn::KnowledgeBase.new.all if @name == "Gemfile.lock"
+        if @name == "Gemfile.lock"
+          @checks = Codesake::Dawn::KnowledgeBase.new.all if @force.empty?
+          @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@force) unless @force.empty? 
+        else
+          @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@name) 
+
+        end
         debug_me("#{@checks.count} checks loaded")
         @checks
       end
@@ -126,7 +140,10 @@ module Codesake
         Dir.chdir(@target) 
         lockfile = Bundler::LockfileParser.new(Bundler.read_file("Gemfile.lock"))
         lockfile.specs.each do |s|
-          ver= s.version.to_s if s.name == @name
+          # detecting MVC version using @name in case of sinatra, padrino or rails engine
+          ver= s.version.to_s if s.name == @name && @name != "Gemfile.lock" 
+          # detecting MVC version using @force in case of Gemfile.lock engine
+          ver= s.version.to_s if s.name == @force.to_s && @name == "Gemfile.lock" 
           @connected_gems << {:name=>s.name, :version=>s.version.to_s}
         end
         Dir.chdir(my_dir)
@@ -142,7 +159,7 @@ module Codesake
       end
 
       def can_apply?
-        target_is_dir? and is_good_mvc?
+        target_is_dir? && is_good_mvc?
       end
 
       def get_mvc_version

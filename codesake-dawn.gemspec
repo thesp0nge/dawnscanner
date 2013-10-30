@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'codesake_commons', '>= 0.67.0'
+  gem.add_dependency "codesake-commons", "~> 0.89.0"
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
   gem.add_dependency 'parser'

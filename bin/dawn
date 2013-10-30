@@ -3,7 +3,7 @@
 require 'getoptlong'
 require 'json'
 
-require 'codesake_commons'
+require 'codesake-commons'
 require 'codesake-dawn'
 
 def dry_run(target, engine)
@@ -67,6 +67,7 @@ def help
   printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application" 
   printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
   printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
+  printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
   printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
   printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
   printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
@@ -88,8 +89,9 @@ opts    = GetoptLong.new(
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
-  [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT ],
-  [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT ],
+  [ '--gem-lock',               '-G',   GetoptLong::NO_ARGUMENT],  
+  [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT],
+  [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
   [ '--output',                 '-o',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
@@ -97,7 +99,7 @@ opts    = GetoptLong.new(
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>nil}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -109,13 +111,14 @@ opts.each do |opt, val|
     puts "#{Codesake::Dawn::VERSION}"
     Kernel.exit(0)
   when '--rails'
-    options[:mvc]=:force_rails
+    options[:mvc]=:rails
   when '--sinatra'
-    options[:mvc]=:force_sinatra
+    options[:mvc]=:sinatra
   when '--padrino'
-    options[:mvc]=:force_padrino
-    puts "sorry padrino is not yet supported"
-    Kernel.exit(1)
+    options[:mvc]=:padrino
+    $logger.die "sorry padrino is not yet supported"
+  when '--gem-lock'
+    options[:gemfile_scan] = true
   when '--verbose'
     options[:verbose]=true
   when '--output'
@@ -157,14 +160,15 @@ $logger.die("invalid directory (#{target})") unless Codesake::Dawn::Core.is_good
 
 ## MVC auto detect
 begin
-  engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].nil?
+  engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].empty?
 rescue ArgumentError => e
   $logger.die(e.message)
 end
 
-engine = Codesake::Dawn::Rails.new(target)        if options[:mvc] == :force_rails
-engine = Codesake::Dawn::Sinatra.new(target)      if options[:mvc] == :force_sinatra
-# engine = Codesake::Dawn::Padrino.new if options[:mvc] == :force_padrino
+engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails
+engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra
+# engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino
+engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc]) if options[:gemfile_scan]
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 
@@ -181,15 +185,15 @@ if options[:output] == "json"
   Kernel.exit(0)
 end
 
-$logger.helo "#{APPNAME} v#{Codesake::Dawn::VERSION} (C) 2013 - paolo@armoredcode.com is starting up"
+$logger.helo APPNAME, Codesake::Dawn::VERSION
 $logger.die "missing target framework option" if engine.nil?
 
-# engine.set_target(target) unless engine.nil?
 engine.load_knowledge_base
 
 $logger.die "nothing to do on #{target}" unless engine.can_apply?
 $logger.log "scanning #{target}"
-$logger.log "#{engine.name} v#{engine.get_mvc_version} detected"
+$logger.log "#{engine.name} v#{engine.get_mvc_version} detected" unless engine.name == "Gemfile.lock"
+$logger.log "#{engine.force} v#{engine.get_mvc_version} detected" if engine.name == "Gemfile.lock"
 $logger.log "applying all security checks" 
 if engine.apply_all 
   $logger.log "all security checks applied"
@@ -229,10 +233,4 @@ if engine.mitigated_issues.count != 0
   end
 end
 
-
-
-
-$logger.helo "#{APPNAME} is shutting down"
-Kernel.exit(0)
-
-
+$logger.bye
