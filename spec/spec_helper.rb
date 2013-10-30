@@ -1,6 +1,6 @@
 require 'coveralls'
 
-require 'codesake_commons'
+require 'codesake-commons'
 $logger  = Codesake::Commons::Logging.instance
 
 require 'codesake-dawn'
