@@ -14,7 +14,7 @@ frameworks.
 
 www:      [http://codesake.com](http://codesake.com) 
 
-twitter:  [https://twitter.com/codesake](https://twitter.com/codesake) #dawn hashtag
+twitter:  [https://twitter.com/codesake](https://twitter.com/codesake) #dawnscanner hashtag
 
 github:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
 
