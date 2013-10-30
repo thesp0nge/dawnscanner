@@ -85,6 +85,7 @@ LIST_KNOWN_FRAMEWORK  = %w(rails sinatra) #padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
 $logger  = Codesake::Commons::Logging.instance
+$logger.helo APPNAME, Codesake::Dawn::VERSION
 opts    = GetoptLong.new(
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
@@ -156,6 +157,7 @@ target=ARGV.shift
 
 $logger.die("missing target") if target.nil?
 $logger.die("invalid directory (#{target})") unless Codesake::Dawn::Core.is_good_target?(target)
+$logger.die("if scanning Gemfile.lock file you must force target MVC using one from -r, -s or -p flag") if options[:mvc].empty? && options[:gemfile_scan]
 
 
 ## MVC auto detect
@@ -185,7 +187,6 @@ if options[:output] == "json"
   Kernel.exit(0)
 end
 
-$logger.helo APPNAME, Codesake::Dawn::VERSION
 $logger.die "missing target framework option" if engine.nil?
 
 engine.load_knowledge_base
