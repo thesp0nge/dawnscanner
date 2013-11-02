@@ -90,7 +90,7 @@ opts    = GetoptLong.new(
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
-  [ '--gem-lock',               '-G',   GetoptLong::NO_ARGUMENT],  
+  [ '--gem-lock',               '-G',   GetoptLong::OPTIONAL_ARGUMENT],  
   [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT],
   [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
   [ '--output',                 '-o',   GetoptLong::REQUIRED_ARGUMENT],
@@ -100,7 +100,7 @@ opts    = GetoptLong.new(
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>""}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -120,6 +120,7 @@ opts.each do |opt, val|
     $logger.die "sorry padrino is not yet supported"
   when '--gem-lock'
     options[:gemfile_scan] = true
+    options[:gemfile_name] = val unless val.nil?
   when '--verbose'
     options[:verbose]=true
   when '--output'
@@ -170,7 +171,7 @@ end
 engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails
 engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra
 # engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino
-engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc]) if options[:gemfile_scan]
+engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc], options[:gemfile_name]) if options[:gemfile_scan]
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 

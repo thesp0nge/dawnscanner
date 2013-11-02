@@ -59,6 +59,8 @@ module Codesake
         @force = options[:force] if ! options[:force].nil? and @name == "Gemfile.lock"
 
         set_target(dir) unless dir.nil?
+        @ruby_version = get_ruby_version if dir.nil?
+        @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].empty?
 
         @views        = detect_views 
         @controllers  = detect_controllers
@@ -98,12 +100,18 @@ module Codesake
       end
 
       def get_ruby_version
-        # does target use rbenv?
-        ver = get_rbenv_ruby_ver
-        # does the target use rvm?
-        ver = get_rvm_ruby_ver if ver[:version].empty? and ver[:patchlevel].empty?
-        # take the running ruby otherwise
-        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? and ver[:patchlevel].empty? 
+        unless @target.nil?
+
+          # does target use rbenv?
+          ver = get_rbenv_ruby_ver 
+          # does the target use rvm?
+          ver = get_rvm_ruby_ver if  ver[:version].empty? && ver[:patchlevel].empty?
+          # take the running ruby otherwise
+          ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? && ver[:patchlevel].empty? 
+        else
+          ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} 
+
+        end
 
         ver
       end
@@ -216,7 +224,7 @@ module Codesake
           check.ruby_version = @ruby_version[:version]
           check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
           check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-          check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
+          check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK && @name != "Gemfile.lock"
           check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
           check_vuln = check.vuln?
 
