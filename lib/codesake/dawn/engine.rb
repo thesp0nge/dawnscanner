@@ -65,6 +65,8 @@ module Codesake
         @views        = detect_views 
         @controllers  = detect_controllers
         @models       = detect_models
+
+        $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
         
         load_knowledge_base
       end
