@@ -66,6 +66,11 @@ module Codesake
         @controllers  = detect_controllers
         @models       = detect_models
 
+        if $logger.nil?
+          $logger  = Codesake::Commons::Logging.instance
+          $logger.helo "dawn-engine", Codesake::Dawn::VERSION
+
+        end
         $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
         
         load_knowledge_base
