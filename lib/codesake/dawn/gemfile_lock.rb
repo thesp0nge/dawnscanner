@@ -3,8 +3,8 @@ module Codesake
     class GemfileLock
       include Codesake::Dawn::Engine
 
-      def initialize(dir = "./", mvc = "", filename = "")
-        super(dir, "Gemfile.lock", {:force=>mvc.to_s, :gemfile_name=>filename})
+      def initialize(dir = "./", mvc = "", filename = "", debug)
+        super(dir, "Gemfile.lock", {:force=>mvc.to_s, :gemfile_name=>filename, :debug=>debug})
       end
 
     end

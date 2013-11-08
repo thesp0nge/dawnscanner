@@ -68,6 +68,7 @@ def help
   printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
   printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
   printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
+  printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
   printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
   printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
   printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
@@ -95,12 +96,13 @@ opts    = GetoptLong.new(
   [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
   [ '--output',                 '-o',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
+  [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>""}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -127,6 +129,8 @@ opts.each do |opt, val|
     options[:output] = val unless VALID_OUTPUT_FORMAT.find_index(val).nil?
   when '--count-only'
     options[:count_only] = true
+  when '--debug'
+    options[:debug] = true
 
   when '--list-knowledgebase'
     options[:dump_kb]=true
@@ -156,8 +160,10 @@ end
 
 target=ARGV.shift
 
-$logger.die("missing target") if target.nil?
-$logger.die("invalid directory (#{target})") unless Codesake::Dawn::Core.is_good_target?(target)
+$logger.log options[:gemfile_name]
+
+$logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
+$logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
 $logger.die("if scanning Gemfile.lock file you must force target MVC using one from -r, -s or -p flag") if options[:mvc].empty? && options[:gemfile_scan]
 
 
@@ -168,10 +174,10 @@ rescue ArgumentError => e
   $logger.die(e.message)
 end
 
-engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails
-engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra
-# engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino
-engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc], options[:gemfile_name]) if options[:gemfile_scan]
+engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails && options[:gemfile_scan].nil?
+engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra && options[:gemfile_scan].nil?
+# engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino && options[:gemfile_scan].nil? 
+engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc], options[:gemfile_name], options[:debug]) if options[:gemfile_scan]
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 
@@ -192,7 +198,8 @@ $logger.die "missing target framework option" if engine.nil?
 
 engine.load_knowledge_base
 
-$logger.die "nothing to do on #{target}" unless engine.can_apply?
+$logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
+
 $logger.log "scanning #{target}"
 $logger.log "#{engine.name} v#{engine.get_mvc_version} detected" unless engine.name == "Gemfile.lock"
 $logger.log "#{engine.force} v#{engine.get_mvc_version} detected" if engine.name == "Gemfile.lock"

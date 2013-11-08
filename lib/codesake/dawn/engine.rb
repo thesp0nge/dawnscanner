@@ -72,6 +72,8 @@ module Codesake
 
         end
         $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
+        $logger.warn "combo security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
+        debug_me "engine is in debug mode" 
         
         load_knowledge_base
       end
@@ -200,6 +202,7 @@ module Codesake
 
         @checks.each do |check|
           if check.name == name
+            debug_me "applying check #{check.name}" 
             @applied << { :name=>name }
             check.ruby_version = @ruby_version[:version]
             check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
@@ -226,25 +229,31 @@ module Codesake
         return false if @checks.empty?
 
         @checks.each do |check|
-          @applied << { :name => name }
+          unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @name == "Gemfile.lock")
 
-          check.ruby_version = @ruby_version[:version]
-          check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
-          check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-          check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK && @name != "Gemfile.lock"
-          check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
-          check_vuln = check.vuln?
+            @applied << { :name => name }
+            debug_me "applying check #{check.name}" 
 
-          @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            check.ruby_version = @ruby_version[:version]
+            check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
+            check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
+            check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK 
+            check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            check_vuln = check.vuln?
 
-          @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
-          @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
+            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+
+            @vulnerabilities  << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
+          else
+            debug_me "skipping check #{check.name}"
+          end
         end
 
         true
 
       end
-      
+
       def is_applied?(name)
         @applied.each do |a|
           return true if a[:name] == name
