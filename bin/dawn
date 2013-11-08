@@ -205,7 +205,7 @@ $logger.log "#{engine.name} v#{engine.get_mvc_version} detected" unless engine.n
 $logger.log "#{engine.force} v#{engine.get_mvc_version} detected" if engine.name == "Gemfile.lock"
 $logger.log "applying all security checks" 
 if engine.apply_all 
-  $logger.log "all security checks applied"
+  $logger.log "#{engine.applied_checks} security checks applied - #{engine.skipped_checks} security checks skipped"
 else
   $logger.err "no security checks in the knowledge base"
 end

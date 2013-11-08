@@ -39,6 +39,9 @@ module Codesake
 
       attr_accessor :debug
 
+      attr_reader   :applied_checks
+      attr_reader   :skipped_checks
+
       def initialize(dir=nil, name="", options={})
         @name = name
         @mvc_version = ""
@@ -52,6 +55,8 @@ module Codesake
         @engine_error = false
         @debug = false
         @debug = options[:debug] unless options[:debug].nil?
+        @applied_checks = 0
+        @skipped_checks = 0
 
         # Only honoring force option for Gemfile.lock engine. If no force is
         # provided the default behaviour for Gemfile.lock engine is to load all
@@ -204,6 +209,7 @@ module Codesake
           if check.name == name
             unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @name == "Gemfile.lock")
               debug_me "applying check #{check.name}" 
+              @applied_checks += 1
               @applied << { :name=>name }
               check.ruby_version = @ruby_version[:version]
               check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
@@ -221,6 +227,7 @@ module Codesake
               return true
             else
               debug_me "skipping check #{check.name}"
+              @skipped_checks += 1
             end
           end
         end
@@ -237,6 +244,7 @@ module Codesake
 
             @applied << { :name => name }
             debug_me "applying check #{check.name}" 
+            @applied_checks += 1
 
             check.ruby_version = @ruby_version[:version]
             check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
@@ -251,6 +259,7 @@ module Codesake
             @mitigated_issues << {:name=> check.name, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
           else
             debug_me "skipping check #{check.name}"
+            @skipped_checks += 1
           end
         end
 
