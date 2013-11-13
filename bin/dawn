@@ -106,6 +106,7 @@ options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>fa
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
+guess = {}
 
 
 opts.each do |opt, val|
@@ -123,6 +124,9 @@ opts.each do |opt, val|
   when '--gem-lock'
     options[:gemfile_scan] = true
     options[:gemfile_name] = val unless val.nil?
+    guess = Codesake::Dawn::Core.guess_mvc(val)
+    $logger.log "Guessed MVC: #{guess[:name]} v#{guess[:version]}"
+    
   when '--verbose'
     options[:verbose]=true
   when '--output'
@@ -164,20 +168,24 @@ $logger.log options[:gemfile_name]
 
 $logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
-$logger.die("if scanning Gemfile.lock file you must force target MVC using one from -r, -s or -p flag") if options[:mvc].empty? && options[:gemfile_scan]
+$logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
 
 
-## MVC auto detect
-begin
-  engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].empty?
-rescue ArgumentError => e
-  $logger.die(e.message)
+## MVC auto detect.
+# Skipping MVC autodetect if it's already been done by guess_mvc when choosing Gemfile.lock scan
+
+if guess.empty?
+  begin
+    engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].empty?
+  rescue ArgumentError => e
+    $logger.die(e.message)
+  end
 end
 
 engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails && options[:gemfile_scan].nil?
 engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra && options[:gemfile_scan].nil?
 # engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino && options[:gemfile_scan].nil? 
-engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc], options[:gemfile_name], options[:debug]) if options[:gemfile_scan]
+engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc], options[:gemfile_name], options[:debug], guess) if options[:gemfile_scan]
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 

@@ -65,7 +65,7 @@ module Codesake
 
         set_target(dir) unless dir.nil?
         @ruby_version = get_ruby_version if dir.nil?
-        @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].empty?
+        @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
 
         @views        = detect_views 
         @controllers  = detect_controllers
@@ -80,6 +80,15 @@ module Codesake
         $logger.warn "combo security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
         debug_me "engine is in debug mode" 
         
+        if @name == "Gemfile.lock" && ! options[:guessed_mvc].nil?
+          # since all checks relies on @name a Gemfile.lock engine must
+          # impersonificate the engine for the mvc it was detected
+          debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}" 
+          @name = options[:guessed_mvc][:name] 
+          @mvc_version = options[:guessed_mvc][:version]
+          @connected_gems = options[:guessed_mvc][:connected_gems]
+        end
+
         load_knowledge_base
       end
 
@@ -152,6 +161,8 @@ module Codesake
         debug_me("#{@checks.count} checks loaded")
         @checks
       end
+
+
 
       def set_mvc_version
         ver = ""
