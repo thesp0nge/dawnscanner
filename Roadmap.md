@@ -75,17 +75,10 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * detect sinks for XSS in Sinatra applications
 * detect reflected XSS in Sinatra applications
 
-## Version 0.80
+## Version 0.79.99 - codename:oddity (2013-11-14)
 
-* detect sinks for XSS in Padrino applications
-* detect reflected XSS in Padrino applications
-* detect stored XSS in Sinatra applications
-* detect stored XSS in Padrino applications
-* detect insecure direct object reference in Sinatra applications
-* detect insecure direct object reference in Padrino applications
-* support ERB for in detect\_views (for both Sinatra and Padrino)
-* integration with [codesake.com](http://codesake.com) with a public available
-  APIs to be consumed by codesake beta users.
+This is the first codesake-dawn version making codesake.com web application
+able to scan something. It deserves a special release.
 
 * adding test for CVE-2013-2065
 * adding test for CVE-2013-4389
@@ -102,8 +95,19 @@ _latest update: Fri 17 May 2013 15:29:55 CEST_
 * adding test for RoRCheatSheet\_7
 * adding test for RoRCheatSheet\_8
 * Fix issue #1. You can read more about it in TODO.md
-* Added internal API to scan a single Gemfile.lock
+* Added API to scan a single Gemfile.lock using -G flag
 
+## Version 0.80
+
+* detect sinks for XSS in Padrino applications
+* detect reflected XSS in Padrino applications
+* detect stored XSS in Sinatra applications
+* detect stored XSS in Padrino applications
+* detect insecure direct object reference in Sinatra applications
+* detect insecure direct object reference in Padrino applications
+* support ERB for in detect\_views (for both Sinatra and Padrino)
+* integration with [codesake.com](http://codesake.com) with a public available
+  APIs to be consumed by codesake beta users.
 
 ## Version 0.90
 

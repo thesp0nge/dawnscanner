@@ -67,19 +67,18 @@ In example, this is the output of a scan performed over a very simple Sinatra
 application:
 
 ```
-$ bundle exec bin/dawn -s target
-
-[*] dawn v0.67 (C) 2013 - paolo@armoredcode.com is starting up at 08:14:17
-08:14:17: scanning /Users/thesp0nge/src/hacking/railsberry2013
-08:14:17: sinatra v1.4.2 detected
-08:14:17: applying all security checks
-08:14:17: all security checks applied
-08:14:17: 1 vulnerabilities found
-08:14:17 [!] CVE-2013-1800 failed
-08:14:17: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
-08:14:17 [!] Evidence:
-08:14:17 [!] Vulnerable crack gem version found: 0.3.1
-[*] dawn is shutting down at 08:14:17
+$ dawn target
+08:34:53 [*] dawn v0.79.99 is starting up
+08:34:54 [$] dawn: scanning target
+08:34:54 [$] dawn: sinatra v1.4.2 detected
+08:34:54 [$] dawn: applying all security checks
+08:34:54 [$] dawn: 32 security checks applied - 0 security checks skipped
+08:34:54 [$] dawn: 1 vulnerabilities found
+08:34:54 [$] dawn: CVE-2013-1800 failed
+08:34:54 [$] dawn: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
+08:34:54 [!] dawn: Evidence:
+08:34:54 [!] dawn: Vulnerable crack gem version found: 0.3.1
+08:34:54 [*] dawn is leaving
 ```
 
 

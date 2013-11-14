@@ -112,7 +112,7 @@ guess = {:name=>"", :version=>"", :connected_gems=>[]}
 opts.each do |opt, val|
   case opt
   when '--version'
-    puts "#{Codesake::Dawn::VERSION}"
+    puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
   when '--rails'
     options[:mvc]=:rails
@@ -164,8 +164,6 @@ end
 
 target=ARGV.shift
 
-$logger.log options[:gemfile_name]
-
 $logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
@@ -174,7 +172,7 @@ $logger.die("if scanning Gemfile.lock file you must not force target MVC using o
 ## MVC auto detect.
 # Skipping MVC autodetect if it's already been done by guess_mvc when choosing Gemfile.lock scan
 
-if guess.empty?
+unless options[:gemfile_scan]
   begin
     engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].empty?
   rescue ArgumentError => e
