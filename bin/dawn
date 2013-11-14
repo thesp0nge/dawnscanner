@@ -106,7 +106,7 @@ options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>fa
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
-guess = {}
+guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
 
 opts.each do |opt, val|
@@ -185,7 +185,7 @@ end
 engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails && options[:gemfile_scan].nil?
 engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra && options[:gemfile_scan].nil?
 # engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino && options[:gemfile_scan].nil? 
-engine = Codesake::Dawn::GemfileLock.new(target, options[:mvc], options[:gemfile_name], options[:debug], guess) if options[:gemfile_scan]
+engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], options[:debug], guess) if options[:gemfile_scan]
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 

@@ -58,11 +58,6 @@ module Codesake
         @applied_checks = 0
         @skipped_checks = 0
 
-        # Only honoring force option for Gemfile.lock engine. If no force is
-        # provided the default behaviour for Gemfile.lock engine is to load all
-        # security checks.
-        @force = options[:force] if ! options[:force].nil? and @name == "Gemfile.lock"
-
         set_target(dir) unless dir.nil?
         @ruby_version = get_ruby_version if dir.nil?
         @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
@@ -84,6 +79,7 @@ module Codesake
           # since all checks relies on @name a Gemfile.lock engine must
           # impersonificate the engine for the mvc it was detected
           debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}" 
+          $logger.err "there are no connected gems... it seems Gemfile.lock parsing failed" if options[:guessed_mvc][:connected_gems].empty?
           @name = options[:guessed_mvc][:name] 
           @mvc_version = options[:guessed_mvc][:version]
           @connected_gems = options[:guessed_mvc][:connected_gems]
