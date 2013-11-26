@@ -99,6 +99,9 @@ able to scan something. It deserves a special release.
 
 ## Version 0.80
 
+* adding test for CVE-2013-4164
+* adding test for CVE-2013-4562
+
 * detect sinks for XSS in Padrino applications
 * detect reflected XSS in Padrino applications
 * detect stored XSS in Sinatra applications
