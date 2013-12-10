@@ -98,11 +98,12 @@ opts    = GetoptLong.new(
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
   [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
+  [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -135,6 +136,8 @@ opts.each do |opt, val|
     options[:count_only] = true
   when '--debug'
     options[:debug] = true
+  when '--exit-on-warn'
+    options[:exit_on_warn] = true
 
   when '--list-knowledgebase'
     options[:dump_kb]=true
@@ -248,4 +251,8 @@ if engine.mitigated_issues.count != 0
   end
 end
 
-$logger.bye
+if options[:exit_on_warn] && engine.count_vulnerabilities != 0
+  $logger.die "#{engine.count_vulnerabilities} vulnerabilities found." 
+else
+  $logger.bye
+end
