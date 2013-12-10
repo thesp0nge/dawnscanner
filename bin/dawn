@@ -74,6 +74,7 @@ def help
   printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
   printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
   printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
+  printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
   printf "\n   -v, --version\t\t\t\tshow version information"
   printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
@@ -98,11 +99,12 @@ opts    = GetoptLong.new(
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
   [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
+  [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -135,6 +137,8 @@ opts.each do |opt, val|
     options[:count_only] = true
   when '--debug'
     options[:debug] = true
+  when '--exit-on-warn'
+    options[:exit_on_warn] = true
 
   when '--list-knowledgebase'
     options[:dump_kb]=true
@@ -198,6 +202,14 @@ end
 if options[:output] == "json"
   puts output_json_run(target, engine) 
   Kernel.exit(0)
+end
+
+if options[:exit_on_warn]
+  Kernel.at_exit do
+    if engine.count_vulnerabilities != 0
+      Kernel.exit(engine.count_vulnerabilities)
+    end
+  end
 end
 
 $logger.die "missing target framework option" if engine.nil?
