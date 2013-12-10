@@ -203,6 +203,14 @@ if options[:output] == "json"
   Kernel.exit(0)
 end
 
+if options[:exit_on_warn]
+  Kernel.at_exit do
+    if engine.count_vulnerabilities != 0
+      Kernel.exit(engine.count_vulnerabilities)
+    end
+  end
+end
+
 $logger.die "missing target framework option" if engine.nil?
 
 engine.load_knowledge_base
@@ -251,8 +259,4 @@ if engine.mitigated_issues.count != 0
   end
 end
 
-if options[:exit_on_warn] && engine.count_vulnerabilities != 0
-  $logger.die "#{engine.count_vulnerabilities} vulnerabilities found." 
-else
-  $logger.bye
-end
+$logger.bye
