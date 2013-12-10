@@ -74,6 +74,7 @@ def help
   printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
   printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
   printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
+  printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
   printf "\n   -v, --version\t\t\t\tshow version information"
   printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
