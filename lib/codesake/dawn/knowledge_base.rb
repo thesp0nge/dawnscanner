@@ -10,6 +10,14 @@ require "codesake/dawn/kb/combo_check"
 require "codesake/dawn/kb/not_revised_code"
 require "codesake/dawn/kb/owasp_ror_cheatsheet"
 
+# Security checks with no or pending CVE
+
+# A XSS issue on Simple Form gem reported by Rafael Mendonça França on
+# November, 29 2013
+# 
+# https://groups.google.com/forum/#!topic/ruby-security-ann/flHbLMb07tE
+require "codesake/dawn/kb/simpleform_xss_20131129"
+
 # CVE - 2010
 require "codesake/dawn/kb/cve_2010_1330"
 
@@ -148,6 +156,7 @@ module Codesake
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
           Codesake::Dawn::Kb::OwaspRorCheatsheet.new,
+          Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2011_0446.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 

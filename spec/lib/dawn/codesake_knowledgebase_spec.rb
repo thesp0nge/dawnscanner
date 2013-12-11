@@ -387,4 +387,10 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Codesake::Dawn::Kb::CVE_2013_4457
   end
+
+  it "must have test for 20131129-SimpleForm-Xss" do
+    sc = kb.find("Simple Form XSS - 20131129")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::SimpleForm_Xss_20131129
+  end
 end
