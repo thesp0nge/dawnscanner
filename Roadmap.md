@@ -104,16 +104,9 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-4562
 * added a '-z' flag to exit the process with the number of issues found as exit code
 * added a Cross Site Scripting in Simple Form gem
+* adding test for CVE-2013-4492
 
-* detect sinks for XSS in Padrino applications
-* detect reflected XSS in Padrino applications
-* detect stored XSS in Sinatra applications
-* detect stored XSS in Padrino applications
-* detect insecure direct object reference in Sinatra applications
-* detect insecure direct object reference in Padrino applications
-* support ERB for in detect\_views (for both Sinatra and Padrino)
-* integration with [codesake.com](http://codesake.com) with a public available
-  APIs to be consumed by codesake beta users.
+
 
 ## Version 0.90
 
@@ -177,6 +170,16 @@ able to scan something. It deserves a special release.
 * detect insecure direct object reference in Rails applications
 * detect SQLi in Sinatra applications
 * detect SQLi in Padrino applications
+
+* detect sinks for XSS in Padrino applications
+* detect reflected XSS in Padrino applications
+* detect stored XSS in Sinatra applications
+* detect stored XSS in Padrino applications
+* detect insecure direct object reference in Sinatra applications
+* detect insecure direct object reference in Padrino applications
+* support ERB for in detect\_views (for both Sinatra and Padrino)
+* integration with [codesake.com](http://codesake.com) with a public available
+  APIs to be consumed by codesake beta users.
 
 ## Version 1.00
 

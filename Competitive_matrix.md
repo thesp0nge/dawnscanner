@@ -135,6 +135,8 @@ applications will be supported as well.
 | CVE-2013-2617         | YES           | NO                |             |                   |             |
 | CVE-2013-3221         | YES           | NO                |             |                   |             |
 | CVE-2013-4389         | YES           | NO                |             |                   |             |
+| CVE-2013-4492         | YES           | NO                |             |                   |             |
+| CVE-2013-4562         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 
