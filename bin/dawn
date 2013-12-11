@@ -191,6 +191,14 @@ engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], options
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 
+if options[:exit_on_warn]
+  Kernel.at_exit do
+    if engine.count_vulnerabilities != 0
+      Kernel.exit(engine.count_vulnerabilities)
+    end
+  end
+end
+
 if options[:count_only] 
   ret = dry_run(target, engine)
 
@@ -202,14 +210,6 @@ end
 if options[:output] == "json"
   puts output_json_run(target, engine) 
   Kernel.exit(0)
-end
-
-if options[:exit_on_warn]
-  Kernel.at_exit do
-    if engine.count_vulnerabilities != 0
-      Kernel.exit(engine.count_vulnerabilities)
-    end
-  end
 end
 
 $logger.die "missing target framework option" if engine.nil?
