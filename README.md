@@ -22,7 +22,7 @@ github:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesa
 
 You can install dawn, directly using [Rubygems](https://rubygems.org) by typing:
 
-    gem 'codesake-dawn'
+    gem install codesake-dawn
 
 If you want to add dawn to your project Gemfile, you must add the following:
     
