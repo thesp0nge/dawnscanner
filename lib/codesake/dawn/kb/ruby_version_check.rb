@@ -29,7 +29,6 @@ module Codesake
           ve = self.is_same_version?(detected_ruby[:version], vv_a) 
           vp = is_vulnerable_patchlevel?(detected_ruby[:patchlevel], detected_ruby[:version]) 
 
-          # XXX Debug statements to be replaced with logger call
           debug_me("D:#{self.name}, VENGINE=#{vengine}, VV=#{vv}, VE=#{ve}, VP=#{vp}->#{vv && vengine}, #{(ve && vp && vengine )}")
           debug_me("S:#{@safe_rubies}")
           debug_me("DD:#{@detected_ruby}")

@@ -1,9 +1,9 @@
-# Codesake::Dawn - code review engine for ruby powered code
+# Codesake::Dawn - The security code review tool for ruby powered code
 
-Dawn is a static analysis security scanner for ruby written web applications.
-It supports [Sinatra](http://www.sinatrarb.com),
-[Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
-frameworks. 
+codesake-dawn is a source code review tool crafted to detect security issues in
+ruby written code. The main usage is to apply codesake-dawn to web
+applications, it supports [Sinatra](http://www.sinatrarb.com),
+[Padrino](http://www.padrinorb.com) and of course [Ruby on Rails](http://rubyonrails.org) frameworks. 
 
 [![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
 [![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
@@ -68,17 +68,36 @@ application:
 
 ```
 $ dawn target
-08:34:53 [*] dawn v0.79.99 is starting up
-08:34:54 [$] dawn: scanning target
-08:34:54 [$] dawn: sinatra v1.4.2 detected
-08:34:54 [$] dawn: applying all security checks
-08:34:54 [$] dawn: 32 security checks applied - 0 security checks skipped
-08:34:54 [$] dawn: 1 vulnerabilities found
-08:34:54 [$] dawn: CVE-2013-1800 failed
-08:34:54 [$] dawn: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
-08:34:54 [!] dawn: Evidence:
-08:34:54 [!] dawn: Vulnerable crack gem version found: 0.3.1
-08:34:54 [*] dawn is leaving
+8:28:18 [*] dawn v0.80.0 is starting up
+08:28:18 [$] dawn: scanning spec/support/sinatra-vulnerable
+08:28:18 [$] dawn: sinatra v1.2.6 detected
+08:28:18 [$] dawn: applying all security checks
+08:28:18 [$] dawn: 37 security checks applied - 0 security checks skipped
+08:28:18 [$] dawn: 5 vulnerabilities found
+08:28:18 [$] dawn: Not revised code failed
+08:28:18 [$] dawn: Description: Analyzing comments, it seems your code is waiting from some review from you. Please consider take action before putting it in production.
+This check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME
+08:28:18 [$] dawn: Solution: Please review the file fixing the issue.
+08:28:18 [!] dawn: Evidence:
+08:28:18 [!] dawn: {:filename=>"spec/support/sinatra-vulnerable/application.rb", :matches=>[{:match=>"# FIXME: I must raise an error here\n", :line=>30}]}
+08:28:18 [$] dawn: CVE-2013-0269 failed
+08:28:18 [$] dawn: Description: The JSON gem before 1.5.5, 1.6.x before 1.6.8, and 1.7.x before 1.7.7 for Ruby allows remote attackers to cause a denial of service (resource consumption) or bypass the mass assignment protection mechanism via a crafted JSON document that triggers the creation of arbitrary Ruby symbols or certain internal objects, as demonstrated by conducting a SQL injection attack against Ruby on Rails, aka "Unsafe Object Creation Vulnerability."
+08:28:18 [$] dawn: Solution: Please upgrade JSON gem to version 1.5.5, 1.6.8 or 1.7.7 or latest version available
+08:28:18 [!] dawn: Evidence:
+08:28:18 [!] dawn: Vulnerable json gem version found: 1.4.6
+08:28:18 [$] dawn: CVE-2013-1800 failed
+08:28:18 [$] dawn: Description: The crack gem 0.3.1 and earlier for Ruby does not properly restrict casts of string values, which might allow remote attackers to conduct object-injection attacks and execute arbitrary code, or cause a denial of service (memory and CPU consumption) by leveraging Action Pack support for (1) YAML type conversion or (2) Symbol type conversion, a similar vulnerability to CVE-2013-0156.
+08:28:18 [$] dawn: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
+08:28:18 [!] dawn: Evidence:
+08:28:18 [!] dawn: Vulnerable crack gem version found: 0.3.1
+08:28:18 [$] dawn: CVE-2013-4164 failed
+08:28:18 [$] dawn: Description: Any time a string is converted to a floating point value, a specially crafted string can cause a heap overflow. This can lead to a denial of service attack via segmentation faults and possibly arbitrary code execution. Any program that converts input of unknown origin to floating point values (especially common when accepting JSON) are vulnerable.
+08:28:18 [$] dawn: Solution: All users are recommended to upgrade to Ruby 1.9.3 patchlevel 484, ruby 2.0.0 patchlevel 353 or ruby 2.1.0 preview2.
+08:28:18 [!] dawn: Evidence:
+08:28:18 [!] dawn: ruby v2.0.0-p247 detected
+08:28:18 [$] dawn: 1 reflected XSS found
+08:28:18 [$] dawn: request parameter "name"
+08:28:18 [*] dawn is leaving
 ```
 
 
@@ -88,6 +107,24 @@ flag:
 ```
 $ dawn -k|--list-knowledge-base 
 ```
+
+In the 0.80 gem version, there are 75 security checks designed for application written in ruby. 
+
+## Supporters
+
+To me as project leader it's very important to have feedbacks. I really want to
+ear your voice. 
+
+If you're a proud codesake-dawn user, if you find it useful, if you integrated
+it in your release process and if you want to openly support the project you
+can put your reference here.
+
+
+You can support the project by forking the repo, adding a success story, a
+statement saying how do you feel the tool or your company logo as well and then
+submitting a pull request.
+
+Thank you for your support.
 
 ## Thanks to
 
