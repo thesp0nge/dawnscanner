@@ -106,6 +106,7 @@ able to scan something. It deserves a special release.
 * added a Cross Site Scripting in Simple Form gem
 * adding test for CVE-2013-4492
 * adding test for CVE-2013-4491
+* adding test for CVE-2013-6414
 * adding test for CVE-2013-6415
 
 
