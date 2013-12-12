@@ -35,6 +35,7 @@ module Codesake
           debug_me("DD:#{@detected_ruby}")
 
 
+
           if ( vv && vengine)
             @status = vp if ve
             @status = true unless ve
@@ -43,6 +44,7 @@ module Codesake
           end
 
           debug_me("STATUS:#{@status}")
+          self.evidences << "#{@detected_ruby[:engine]} v#{@detected_ruby[:version]}-#{@detected_ruby[:patchlevel]} detected" if @status
           
           return @status
 
