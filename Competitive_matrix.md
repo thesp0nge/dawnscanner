@@ -140,6 +140,8 @@ applications will be supported as well.
 | CVE-2013-4562         | YES           | NO                |             |                   |             |
 | CVE-2013-6414         | YES           | NO                |             |                   |             |
 | CVE-2013-6415         | YES           | NO                |             |                   |             |
+| CVE-2013-6416         | YES           | NO                |             |                   |             |
+| CVE-2013-6417         | YES           | NO                |             |                   |             |
 
 [0] This CVE must be confirmed
 

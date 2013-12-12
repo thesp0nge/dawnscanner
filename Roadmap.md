@@ -108,6 +108,8 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-4491
 * adding test for CVE-2013-6414
 * adding test for CVE-2013-6415
+* adding test for CVE-2013-6416
+* adding test for CVE-2013-6417
 
 
 ## Version 0.90
