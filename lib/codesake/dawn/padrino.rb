@@ -11,6 +11,13 @@ module Codesake
         @apps = detect_apps
       end
 
+      def get_sinatra_version
+        self.connected_gems.each do |gem|
+          return gem[:version] if gem[:name] == "sinatra"
+        end
+
+        return ""
+      end
       def detect_apps
 
         apps_rb = File.join(@target, "config", "apps.rb")
@@ -42,6 +49,12 @@ module Codesake
           
           # if line.start_with?("Padrino.mount")
 
+        end
+
+
+        debug_me("sinatra version is: #{self.get_sinatra_version}")
+        apps.each do |a|
+          debug_me("* detected sinatra v#{a.get_mvc_version} application: #{a.mount_point} ")
         end
         apps
       end

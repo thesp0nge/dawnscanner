@@ -39,7 +39,7 @@ module Codesake
         Dir.chdir(my_dir)
         lockfile.specs.each do |s|
           return Codesake::Dawn::Rails.new(target)    if s.name == "rails"
-          # return Codesake::Dawn::Padrino.new  if s.name == "padrino"
+          return Codesake::Dawn::Padrino.new(target)  if s.name == "padrino"
         end
 
         return Codesake::Dawn::Sinatra.new(target) 
