@@ -232,7 +232,7 @@ if engine.count_vulnerabilities != 0
   $logger.log "#{engine.count_vulnerabilities} vulnerabilities found"
   engine.vulnerabilities.each do |vuln|
     $logger.log "#{vuln[:name]} failed"
-    $logger.log "Description: #{vuln[:message]}" if options[:verbose]
+    $logger.log "Description: #{vuln[:message]}" 
     $logger.log "Solution: #{vuln[:remediation]}"
     $logger.err "Evidence:"
     vuln[:evidences].each do |evidence|
