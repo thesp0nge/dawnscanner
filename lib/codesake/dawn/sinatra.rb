@@ -37,7 +37,10 @@ module Codesake
         @views.each do |v|
           view_content = File.read(v[:filename])
           @sinks.each do |sink|
-            ret << sink if view_content.match(sink[:sink_name])
+            if view_content.match(sink[:sink_name])
+              sink[:sink_view] = v[:filename]
+              ret << sink
+            end
           end
         end
         ret
@@ -72,14 +75,14 @@ module Codesake
 
                     sink_source = "#{body[3].to_a[1][2].to_s}[#{body[3].to_a[3][1].to_s}]"
 
-                    ret << {:sink_name=>sink_name, :sink_kind=>:params, :sink_line=>i+1, :sink_source=>sink_source}
+                    ret << {:sink_name=>sink_name, :sink_kind=>:params, :sink_line=>i+1, :sink_source=>sink_source, :sink_file=>appname, :sink_evidence=>line}
                   end
                   if body[0][0] == :ivar
                     sink_name=body[0][1].to_s
                     sink_pos=body[2][1].to_i
                     sink_source=body[3][3][1]
 
-                    ret << {:sink_name=>sink_name, :sink_kind=>:params, :sink_line=>i+1, :sink_source=>sink_source}
+                    ret << {:sink_name=>sink_name, :sink_kind=>:params, :sink_line=>i+1, :sink_source=>sink_source, :sink_file=>appname, :sink_evidence=>line}
                   end
 
                 end
@@ -91,7 +94,7 @@ module Codesake
                 if is_assignement_from_params?(body, :iasgn)
                   sink_name = body[0].to_s
                   sink_source = "#{body[1][3][1].to_s}"
-                  ret << {:sink_name=>sink_name, :sink_kind=>:params, :sink_line=>i+1, :sink_source=>sink_source }
+                  ret << {:sink_name=>sink_name, :sink_kind=>:params, :sink_line=>i+1, :sink_source=>sink_source, :sink_file=>appname, :sink_evidence=>line}
                 end
               end
             rescue Racc::ParseError => e

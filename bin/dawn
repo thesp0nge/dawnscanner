@@ -242,7 +242,8 @@ if engine.count_vulnerabilities != 0
   if engine.has_reflected_xss?
     $logger.log "#{engine.reflected_xss.count} reflected XSS found"
     engine.reflected_xss.each do |vuln|
-      $logger.log "request parameter \"#{vuln[:sink_source]}\""
+      $logger.log "request parameter \"#{vuln[:sink_source]}\" is used without escaping in #{vuln[:sink_view]}. It was read here: #{vuln[:sink_file]}@#{vuln[:sink_line]}"
+      $logger.err "evidence: #{vuln[:sink_evidence]}"
     end
   end
 
