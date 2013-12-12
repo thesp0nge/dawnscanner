@@ -8,7 +8,7 @@ module Codesake
 				def initialize
           message = "Cross-site scripting (XSS) vulnerability in exceptions.rb in the i18n gem before 0.6.6 for Ruby allows remote attackers to inject arbitrary web script or HTML via a crafted I18n::MissingTranslationData.new call."
 
- super({
+          super({
             :name=>"CVE-2013-4492",
             :cvss=>"AV:N/AC:M/Au:N/C:N/I:P/A:N",
             :release_date => Date.new(2013, 12, 7),
@@ -17,7 +17,7 @@ module Codesake
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade ruby-i18n to version 0.6.6 As a general rule, using the latest stable version is recommended.",
+            :mitigation=>"Please upgrade ruby-i18n to version 0.6.6. As a general rule, using the latest stable version is recommended.",
             :aux_links=>["https://groups.google.com/forum/message/raw?msg=ruby-security-ann/pLrh6DUw998/bLFEyIO4k_EJ"]
           })
 

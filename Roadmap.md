@@ -105,7 +105,7 @@ able to scan something. It deserves a special release.
 * added a '-z' flag to exit the process with the number of issues found as exit code
 * added a Cross Site Scripting in Simple Form gem
 * adding test for CVE-2013-4492
-
+* adding test for CVE-2013-4491
 
 
 ## Version 0.90
