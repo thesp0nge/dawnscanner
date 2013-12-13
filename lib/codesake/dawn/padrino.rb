@@ -33,11 +33,25 @@ module Codesake
               tree = p.parse(line)
               if ! tree.nil? && tree.sexp_type == :call
                 body_a = tree.sexp_body.to_a
-                mp = body_a[2][1]
-                sinatra_app_rb = body_a[0][4][2][3][1] if is_mount_call?(body_a[0])
-                debug_me("BODY_A=#{body_a[0]}")
+                debug_me("BODY_A=#{body_a[0]} - BODY_A_SIZE=#{body_a[0].size}")
                 debug_me("IS_MOUNT_CALL? #{is_mount_call?(body_a[0])}")
+                mp = body_a[2][1]
                 debug_me("MP = #{mp}")
+
+                # Padrino.mount('HelloWorldPadrino::App', :app_file => Padrino.root('app/app.rb')).to('/')
+                sinatra_app_rb = body_a[0][4][2][3][1] if body_a[0].size == 5 && is_mount_call?(body_a[0]) 
+
+                # Padrino.mount("HelloWorldPadrino:App").to('/')
+                if body_a[0].size == 4
+
+                  # Defaulting the application name if mount point is /
+                  sinatra_app_rb = "app/app.rb" if mp == "/"
+
+                  # Take the app name as mountpoint/app.rb
+                  sinatra_app_rb = body_a[0][3][1].downcase+"/app.rb" unless mp == "/"
+
+                end
+
                 target = File.dirname(sinatra_app_rb )
                 apps << Codesake::Dawn::Sinatra.new(target, mp)
               end
@@ -54,7 +68,7 @@ module Codesake
 
         debug_me("sinatra version is: #{self.get_sinatra_version}")
         apps.each do |a|
-          debug_me("* detected sinatra v#{a.get_mvc_version} application: #{a.mount_point} ")
+          debug_me("detected sinatra application at #{a.mount_point} ")
         end
         apps
       end

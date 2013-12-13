@@ -7,7 +7,7 @@ frameworks.
 
 This is an ongoing roadmap for the dawn source code review tool.
 
-_latest update: Fri 17 May 2013 15:29:55 CEST_
+_latest update: Fri Dec 13 07:55:54 CET 2013_
 
 ## Version 0.50 (2013-05-13) - First public release
 
@@ -97,7 +97,7 @@ able to scan something. It deserves a special release.
 * Fix issue #1. You can read more about it in TODO.md
 * Added API to scan a single Gemfile.lock using -G flag
 
-## Version 0.80
+## Version 0.80 - codename: elevator (2013-12-12)
 
 * adding test for CVE-2013-4164
 * adding test for CVE-2013-4457
@@ -111,8 +111,9 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-6416
 * adding test for CVE-2013-6417
 
-
 ## Version 0.90
+
+* refactoring bin/dawn script
 
 * adding test for CVE-2013-2090 _if CVE will be approved_
 * adding test for CVE-2013-2065 _if CVE will be approved_
