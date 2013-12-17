@@ -15,7 +15,7 @@ module Codesake
             :release_date => Date.new(2013, 3, 8),
             :cwe=>"20", 
             :owasp=>"A9",
-            :applies=>["rails"],
+            :applies=>["rails", "sinatra", "padrino"],
             :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade Spree commerce rubygem",
