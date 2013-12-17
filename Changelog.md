@@ -10,8 +10,10 @@ _latest update: Tue Dec 17 08:12:19 CET 2013_
 ## Version 0.85 - codename: elevator (2013-12-17)
 
 * refactoring bin/dawn script: some stuff were moved into Codesake::Core class
-* Added a check against Denial of Service vulnerability for Nokogiri 1.5.x and
-  1.6.0 when used with JRuby.
+* Added a check against Denial of Service vulnerability for Nokogiri 1.5.x 
+  and 1.6.0 when used with JRuby.
+* Added a check against Denial of Service vulnerability due to entity expansion
+  for Nokogiri 1.5.x and 1.6.0 when used with JRuby.
 
 
 ## Version 0.80 - codename: elevator (2013-12-12)
