@@ -107,6 +107,7 @@ require "codesake/dawn/kb/cve_2013_6414"
 require "codesake/dawn/kb/cve_2013_6415"
 require "codesake/dawn/kb/cve_2013_6416"
 require "codesake/dawn/kb/cve_2013_6417"
+require "codesake/dawn/kb/cve_2013_6421"
 
 
 module Codesake
@@ -250,6 +251,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_6415.new, 
           Codesake::Dawn::Kb::CVE_2013_6416.new, 
           Codesake::Dawn::Kb::CVE_2013_6417.new, 
+          Codesake::Dawn::Kb::CVE_2013_6421.new, 
 
         ]
       end

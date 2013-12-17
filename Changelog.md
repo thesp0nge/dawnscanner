@@ -17,6 +17,7 @@ _latest update: Tue Dec 17 08:12:19 CET 2013_
 * Added a check for CVE-2013-4478 (sup remote code execution)
 * Added a check for CVE-2013-4479 (sup remote code execution)
 * Added a check for CVE-2013-1812 (ruby-openid denial of service)
+* Added a check for CVE-2013-6421 (sprout remote code execution)
 
 
 
