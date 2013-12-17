@@ -16,6 +16,8 @@ _latest update: Tue Dec 17 08:12:19 CET 2013_
   for Nokogiri 1.5.x and 1.6.0 when used with JRuby.
 * Added a check for CVE-2013-4478 (sup remote code execution)
 * Added a check for CVE-2013-4479 (sup remote code execution)
+* Added a check for CVE-2013-1812 (ruby-openid denial of service)
+
 
 
 ## Version 0.80 - codename: elevator (2013-12-12)
