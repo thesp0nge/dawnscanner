@@ -7,6 +7,11 @@ frameworks.
 
 _latest update: Tue Dec 17 08:12:19 CET 2013_
 
+## Version 0.85 - codename: elevator (2013-12-17)
+
+* refactoring bin/dawn script: some stuff were moved into Codesake::Core class
+
+
 ## Version 0.80 - codename: elevator (2013-12-12)
 
 * adding test for CVE-2013-4164

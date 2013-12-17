@@ -426,4 +426,10 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Codesake::Dawn::Kb::CVE_2013_6417
   end
+
+  it "must have test for NokogiriDos20131217_1" do
+    sc = kb.find("Nokogiri - Denial of service - 20131217")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::NokogiriDos20131217
+  end
 end

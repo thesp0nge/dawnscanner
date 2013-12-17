@@ -18,6 +18,12 @@ require "codesake/dawn/kb/owasp_ror_cheatsheet"
 # https://groups.google.com/forum/#!topic/ruby-security-ann/flHbLMb07tE
 require "codesake/dawn/kb/simpleform_xss_20131129"
 
+# Two different denial of service issues affecting Nokogiri gem when using Jruby interpreter
+# December, 17 2013
+#
+# https://groups.google.com/forum/#!topic/ruby-security-ann/DeJpjTAg1FA
+require "codesake/dawn/kb/nokogiri_dos_20131217"
+
 # CVE - 2010
 require "codesake/dawn/kb/cve_2010_1330"
 
@@ -163,6 +169,7 @@ module Codesake
           Codesake::Dawn::Kb::NotRevisedCode.new,
           Codesake::Dawn::Kb::OwaspRorCheatsheet.new,
           Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
+          Codesake::Dawn::Kb::NokogiriDos20131217.new,
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2011_0446.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 
