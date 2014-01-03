@@ -7,9 +7,9 @@ frameworks.
 
 This is an ongoing roadmap for the dawn source code review tool.
 
-_latest update: Fri Dec 13 07:55:54 CET 2013_
+_latest update: Fri Jan  3 15:15:33 CET 2014_
 
-## Version 0.90
+## Version 1.0.0
 
 * adding test for CVE-2013-2090 _if CVE will be approved_
 * adding test for CVE-2013-2065 _if CVE will be approved_
@@ -52,38 +52,6 @@ _latest update: Fri Dec 13 07:55:54 CET 2013_
 * adding test for CVE-2008-1145
 * adding test for CVE-2008-1891
 * adding test for CVE-2008-2725
-* adding test for RoRCheatSheet\_2
-* adding test for RoRCheatSheet\_3
-* adding test for RoRCheatSheet\_5
-* adding test for RoRCheatSheet\_6
-* adding test for RoRCheatSheet\_9
-* adding test for RoRCheatSheet\_10
-* adding test for RoRCheatSheet\_11
-* adding test for RoRCheatSheet\_12
-* adding test for RoRCheatSheet\_13
-* adding test for RoRCheatSheet\_14
-* adding test for RoRCheatSheet\_15
-* adding test for RoRCheatSheet\_16
-* preliminary javascript support
-* adding test for CVE-2011-4969  XSS in jquery < 1.6.2 
-* detect stored XSS in Rails applications
-* detect reflected XSS in Rails applications
-* detect insecure direct object reference in Rails applications
-* detect SQLi in Sinatra applications
-* detect SQLi in Padrino applications
-
-* detect sinks for XSS in Padrino applications
-* detect reflected XSS in Padrino applications
-* detect stored XSS in Sinatra applications
-* detect stored XSS in Padrino applications
-* detect insecure direct object reference in Sinatra applications
-* detect insecure direct object reference in Padrino applications
-* support ERB for in detect\_views (for both Sinatra and Padrino)
-* integration with [codesake.com](http://codesake.com) with a public available
-  APIs to be consumed by codesake beta users.
-
-## Version 1.00
-
 * adding test for CVE-2008-4310
 * adding test for CVE-2008-3657
 * adding test for CVE-2008-1891
@@ -127,6 +95,37 @@ _latest update: Fri Dec 13 07:55:54 CET 2013_
 * adding test for CVE-2005-1992
 * adding test for CVE-2004-0755
 * adding test for CVE-2004-0983
+
+## Version 1.2.0
+
+* adding test for RoRCheatSheet\_2
+* adding test for RoRCheatSheet\_3
+* adding test for RoRCheatSheet\_5
+* adding test for RoRCheatSheet\_6
+* adding test for RoRCheatSheet\_9
+* adding test for RoRCheatSheet\_10
+* adding test for RoRCheatSheet\_11
+* adding test for RoRCheatSheet\_12
+* adding test for RoRCheatSheet\_13
+* adding test for RoRCheatSheet\_14
+* adding test for RoRCheatSheet\_15
+* adding test for RoRCheatSheet\_16
+* preliminary javascript support
+* adding test for CVE-2011-4969  XSS in jquery < 1.6.2 
+* detect stored XSS in Rails applications
+* detect reflected XSS in Rails applications
+* detect insecure direct object reference in Rails applications
+* detect SQLi in Sinatra applications
+* detect SQLi in Padrino applications
+* detect sinks for XSS in Padrino applications
+* detect reflected XSS in Padrino applications
+* detect stored XSS in Sinatra applications
+* detect stored XSS in Padrino applications
+* detect insecure direct object reference in Sinatra applications
+* detect insecure direct object reference in Padrino applications
+* support ERB for in detect\_views (for both Sinatra and Padrino)
+* integration with [codesake.com](http://codesake.com) with a public available
+  APIs to be consumed by codesake beta users.
 * dedicated web site under dawn.codesake.com
 * detect SQLi in Rails applications
 * integration with [codesake.com](http://codesake.com) with a public available
