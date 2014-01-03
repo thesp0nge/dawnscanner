@@ -20,7 +20,7 @@ module Codesake
             :aux_links=>["https://groups.google.com/forum/#!topic/ruby-security-ann/3XTGFbAJoTg"]
           })
 
-          self.safe_dependencies = [{:name=>"cocaine", :version=>['0.5.3', '0.4.9999']}]
+          self.safe_dependencies = [{:name=>"cocaine", :version=>['0.5.3', '0.4.9999', '0.3.0']}]
 
 
 				end

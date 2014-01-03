@@ -5,16 +5,16 @@ ruby written code. The main usage is to apply codesake-dawn to web
 applications, it supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and of course [Ruby on Rails](http://rubyonrails.org) frameworks. 
 
-[![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
+![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
 [![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
 [![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
 [![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
 
 ## Useful links
 
-www:      [http://codesake.com](http://codesake.com) 
+www:      [http://dawn.codesake.com](http://dawn.codesake.com) 
 
-twitter:  [https://twitter.com/codesake](https://twitter.com/codesake) #dawnscanner hashtag
+twitter:  [https://twitter.com/dawnscanner](https://twitter.com/dawnscanner)
 
 github:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
 
@@ -118,7 +118,6 @@ ear your voice.
 If you're a proud codesake-dawn user, if you find it useful, if you integrated
 it in your release process and if you want to openly support the project you
 can put your reference here.
-
 
 You can support the project by forking the repo, adding a success story, a
 statement saying how do you feel the tool or your company logo as well and then
