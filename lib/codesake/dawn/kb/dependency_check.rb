@@ -27,12 +27,12 @@ module Codesake
 
             @safe_dependencies.each do |safe_dep|
               if @ruby_vulnerable_versions.empty?
-                if dep[:name] == safe_dep[:name] and is_vulnerable_version?(dep[:version], safe_dep[:version]) 
+                if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version]) 
                   ret = true
                   message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
                 end
               else
-                if dep[:name] == safe_dep[:name] and is_vulnerable_version?(dep[:version], safe_dep[:version]) and is_ruby_vulnerable_version?
+                if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version]) && is_ruby_vulnerable_version?
                   ret = true
                   message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
                 end

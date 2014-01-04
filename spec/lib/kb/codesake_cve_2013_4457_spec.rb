@@ -6,33 +6,33 @@ describe "The CVE-2013-4457 vulnerability" do
     # @check.debug = true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.4.0'}]
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.4.0'}]
     @check.vuln?.should   be_true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.4.1'}]
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.4.1'}]
     @check.vuln?.should   be_true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.4.2'}]
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.4.2'}]
     @check.vuln?.should   be_true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.5.0'}]
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.5.0'}]
     @check.vuln?.should   be_true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.5.1'}]
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.5.1'}]
     @check.vuln?.should   be_true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.5.2'}]
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.5.2'}]
     @check.vuln?.should   be_true
   end
 
   it "is skipped if non vulnerable version of cocaine rubygem is detected" do
-    @check.options[:dependencies]=[{:name=>"cocaine", :version=>'0.3.2'}]
-    @check.vuln?.should   be_true
+    @check.dependencies=[{:name=>"cocaine", :version=>'0.3.2'}]
+    @check.vuln?.should   be_false
   end
 
 
