@@ -5,7 +5,13 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Tue Dec 17 08:12:19 CET 2013_
+_latest update: Sun Jan  5 09:36:53 CET 2014_
+
+* Fixing issue #19 (https://github.com/codesake/codesake-dawn/issues/19). There
+  was a problem on ```is_a_vulnerable_version?``` routine that flags a security
+  check as vulnerable even if it wasn't. During the dependency check, if the
+  vulnerable gem and the dependency has both major and minor version equal and
+  the patch number tells if the gem is vulnerable or not, this check failed.
 
 ## Version 0.85 - codename: elevator (2013-12-17)
 
