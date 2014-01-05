@@ -5,7 +5,7 @@ ruby written code. The main usage is to apply codesake-dawn to web
 applications, it supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and of course [Ruby on Rails](http://rubyonrails.org) frameworks. 
 
-![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
+[![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
 [![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
 [![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
 [![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
