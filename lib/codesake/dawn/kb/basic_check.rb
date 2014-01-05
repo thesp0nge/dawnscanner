@@ -112,20 +112,12 @@ module Codesake
           ret = false
 
           target_v_array = target.split(".").map! { |n| n.to_i }
-          debug_me("TARGET_V_ARRAY = #{target_v_array}")
           fixes.each do |fv|
             fixes_v_array = fv.split(".").map! { |n| n.to_i }
-            debug_me("FIXES_V_ARRAY = #{fixes_v_array}")
-            debug_me("SAME_MAJOR? #{target_v_array[0] == fixes_v_array[0]}")
-            debug_me("VULN_MINOR? #{target_v_array[1] < fixes_v_array[1]}")
-
-            debug_me("VULN_PATCH? #{target_v_array[2] < fixes_v_array[2]}")
-
 
             if target_v_array[0] == fixes_v_array[0]
               ret = true if target_v_array[1] < fixes_v_array[1] # same major but previous minor
               if target_v_array[1] == fixes_v_array[1] 
-                debug_me("SAME_MINOR? #{target_v_array[1] == fixes_v_array[1]}")
                 ret = true if target_v_array[2] < fixes_v_array[2] 
                 ret = false if target_v_array[2] >= fixes_v_array[2] 
 
