@@ -27,6 +27,7 @@ require "codesake/dawn/kb/nokogiri_entityexpansion_dos_20131217"
 
 # CVE - 2004
 require "codesake/dawn/kb/cve_2004_0755"
+require "codesake/dawn/kb/cve_2004_0983"
 
 # CVE - 2010
 require "codesake/dawn/kb/cve_2010_1330"
@@ -180,6 +181,7 @@ module Codesake
           Codesake::Dawn::Kb::NokogiriDos20131217.new,
           Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217.new,
           Codesake::Dawn::Kb::CVE_2004_0755.new, 
+          Codesake::Dawn::Kb::CVE_2004_0983.new, 
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2011_0446.new, 
           Codesake::Dawn::Kb::CVE_2011_0447.new, 
