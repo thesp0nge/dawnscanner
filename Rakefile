@@ -59,6 +59,19 @@ task :new_cve, :name do |t,args|
   end
   puts "#{rb_filename} created"
 
+  open(spec_filename, "w") do |file|
+    file.puts "require 'spec_helper'"
+
+    file.puts "describe \"The #{name} vulnerability do\""
+    file.puts "\tbefore(:all) do"
+    file.puts "\t\t@check = Codesake::Dawn::Kb::#{class_name}.new"
+    file.puts "\t\t# @check.debug = true"
+    file.puts "\tend"
+    file.puts "\tit \"you may want to test something here...\""
+    file.puts "end"
+  end
+  puts "#{spec_filename} created"
+
   puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
   puts "*** PLEASE ADD THIS CODE IN lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
   puts "require \"codesake/dawn/kb/#{class_name.downcase}\""
@@ -108,6 +121,20 @@ task :new_check, :name do |t,args|
     file.puts "end"
   end
   puts "#{rb_filename} created"
+
+  open(spec_filename, "w") do |file|
+    file.puts "require 'spec_helper'"
+
+    file.puts "describe \"The #{name} vulnerability do\""
+    file.puts "\tbefore(:all) do"
+    file.puts "\t\t@check = Codesake::Dawn::Kb::#{class_name}.new"
+    file.puts "\t\t# @check.debug = true"
+    file.puts "\tend"
+    file.puts "\tit \"you may want to test something here...\""
+    file.puts "end"
+  end
+  puts "#{spec_filename} created"
+
 
   puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
   puts "*** PLEASE ADD THIS CODE IN lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
