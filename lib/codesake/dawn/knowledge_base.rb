@@ -29,6 +29,9 @@ require "codesake/dawn/kb/nokogiri_entityexpansion_dos_20131217"
 require "codesake/dawn/kb/cve_2004_0755"
 require "codesake/dawn/kb/cve_2004_0983"
 
+# CVE - 2005
+require "codesake/dawn/kb/cve_2005_1992"
+
 # CVE - 2010
 require "codesake/dawn/kb/cve_2010_1330"
 
