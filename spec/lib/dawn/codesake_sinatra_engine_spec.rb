@@ -19,8 +19,8 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     @engine.has_gemfile_lock?.should   be_true
   end
 
-  it "detects a sinatra 1.4.2" do
-    @engine.mvc_version.should   == "1.4.2"
+  it "detects a sinatra 1.4.4" do
+    @engine.mvc_version.should   == "1.4.4"
   end
 
   it "detects 2 views" do
@@ -110,8 +110,8 @@ describe "The Codesake::Dawn engine for sinatra applications" do
       it "detects a sink on application.rb" do
         sink = @engine.detect_sinks("application.rb")
         sink.should == [ 
-          {:sink_name=>"@xss_param", :sink_kind=>:params, :sink_source=>"name", :sink_line=>26}, 
-          {:sink_name=>"@my_arr", :sink_kind=>:params, :sink_source=>"second", :sink_line=>27} 
+          {:sink_name=>"@xss_param", :sink_kind=>:params, :sink_line=>26, :sink_source=>"name", :sink_file=>"application.rb", :sink_evidence=>"  @xss_param = params['name']"},
+          {:sink_name=>"@my_arr", :sink_kind=>:params, :sink_line=>27, :sink_source=>"second", :sink_file=>"application.rb", :sink_evidence=>"  @my_arr[0] = params['second']"}
         ]
       end
 
@@ -120,7 +120,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
         @engine.reflected_xss.should_not be_nil
         @engine.reflected_xss.should_not be_empty 
         @engine.reflected_xss.should == [
-          {:sink_name=>"@xss_param", :sink_kind=>:params, :sink_source=>"name", :sink_line=>26}, 
+          {:sink_name=>"@xss_param", :sink_kind=>:params, :sink_line=>26, :sink_source=>"name", :sink_file=>"application.rb", :sink_evidence=>"  @xss_param = params['name']", :sink_view=>"./spec/support/sinatra-vulnerable/views/xss.haml"}
         ]
       end
     end
