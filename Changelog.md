@@ -17,6 +17,8 @@ _latest update: Sun Jan  5 09:36:53 CET 2014_
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
+* Added a check for CVE-2005-2337
+
 
 ## Version 0.85 - codename: elevator (2013-12-17)
 

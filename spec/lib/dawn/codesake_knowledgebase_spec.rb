@@ -473,4 +473,9 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Codesake::Dawn::Kb::CVE_2005_1992
   end
+  it "must have test for CVE-2005-2337" do
+    sc = kb.find("CVE-2005-2337")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::CVE_2005_2337
+  end
 end
