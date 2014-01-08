@@ -25,6 +25,7 @@ module Codesake
             :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
           })
           self.safe_rubies = [ {:engine=>"jruby", :version=>"99.99.99", :patchlevel=>"p999"}]
+          # self.debug = true
         end
       end
 

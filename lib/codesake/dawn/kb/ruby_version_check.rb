@@ -27,7 +27,7 @@ module Codesake
           ve = false
 
           ve = self.is_same_version?(detected_ruby[:version], vv_a) 
-          vp = is_vulnerable_patchlevel?(detected_ruby[:patchlevel], detected_ruby[:version]) 
+          vp = is_vulnerable_patchlevel?(detected_ruby[:version], detected_ruby[:patchlevel])
 
           debug_me("D:#{self.name}, VENGINE=#{vengine}, VV=#{vv}, VE=#{ve}, VP=#{vp}->#{vv && vengine}, #{(ve && vp && vengine )}")
           debug_me("S:#{@safe_rubies}")
