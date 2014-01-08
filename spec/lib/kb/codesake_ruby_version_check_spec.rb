@@ -10,6 +10,7 @@ class Mockup
       :applies=>['sinatra', 'padrino', 'rails'],
       :message=> message
     )
+    # self.debug = true
 
     self.safe_rubies = [{:version=>"1.9.3", :patchlevel=>"p392"}, {:version=>"2.0.0", :patchlevel=>"p0"}]
   end

@@ -14,6 +14,10 @@ _latest update: Sun Jan  5 09:36:53 CET 2014_
   check as vulnerable even if it wasn't. During the dependency check, if the
   vulnerable gem and the dependency has both major and minor version equal and
   the patch number tells if the gem is vulnerable or not, this check failed.
+* ruby_version_check.rb: fixed an issue on is_vulnerable_patchlevel? that
+  caused a nil pointer exception when ruby interpreter patchlevel was evaluated
+* ruby_version_check.rb: fixed an issue on is_vulnerable_patchlevel? that loads
+  the safe patchlevels comparing the wrong parameter.
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
@@ -27,6 +31,7 @@ _latest update: Sun Jan  5 09:36:53 CET 2014_
 * Added a check for CVE-2006-6852
 * Added a check for CVE-2006-6979
 * Added a check for CVE-2007-0469
+* Added a check for CVE-2011-2686
 * Added a check for CVE-2011-2705
 * Added a check for CVE-2011-2930
 * Added a check for CVE-2011-3009

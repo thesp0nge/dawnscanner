@@ -66,14 +66,19 @@ module Codesake
           false
         end
 
-        def is_vulnerable_patchlevel?(target, version)
+        def is_vulnerable_patchlevel?(version, patchlevel)
           fixes = []
+          debug_me "is_vulnerable_patchlevel? called with TARGET=#{version} and VERSION=#{patchlevel}"
+          debug_me "SAFE_RUBIES=#{@safe_rubies}"
           @safe_rubies.each do |ss|
             fixes << ss[:patchlevel].split("p")[1].to_i if ss[:version] == version
           end
 
-          t = target.split("p")[1].to_i
+          debug_me "FIXES IS EMPTY" if fixes.empty?
+
+          t = patchlevel.split("p")[1].to_i
           fixes.each do |f|
+            debug_me "PATCHLEVEL FIXES = #{f}, PATCHLEVEL TARGET = #{t}"
             return true if f > t
           end
           false
