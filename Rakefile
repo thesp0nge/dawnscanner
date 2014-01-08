@@ -23,7 +23,7 @@ task :default => [ :spec, :features ]
 task :test => :spec
 
 desc "Create a new CVE test"
-task :new_cve, :name do |t,args| 
+task :cve, :name do |t,args| 
   name      = args.name
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
@@ -87,7 +87,7 @@ end
 
 
 desc "Create a new Generic security check"
-task :new_check, :name do |t,args| 
+task :check, :name do |t,args| 
   name      = args.name
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
