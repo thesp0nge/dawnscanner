@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Sun Jan  5 09:36:53 CET 2014_
+_latest update: Wed Jan  8 23:50:05 CET 2014
 
 ## 
 
@@ -34,6 +34,7 @@ _latest update: Sun Jan  5 09:36:53 CET 2014_
 * Added a check for CVE-2006-6852
 * Added a check for CVE-2006-6979
 * Added a check for CVE-2007-0469
+* Added a check for CVE-2010-3933
 * Added a check for CVE-2011-0188
 * Added a check for CVE-2011-0739
 * Added a check for CVE-2011-1004

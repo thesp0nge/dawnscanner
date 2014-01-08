@@ -583,4 +583,9 @@ end
   sc.should_not   be_nil
   sc.class.should == Codesake::Dawn::Kb::CVE_2011_0188
 end
+  it "must have test for CVE-2010-3933" do
+  sc = kb.find("CVE-2010-3933")
+  sc.should_not   be_nil
+  sc.class.should == Codesake::Dawn::Kb::CVE_2010_3933
+end
 end
