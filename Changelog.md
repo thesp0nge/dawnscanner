@@ -18,6 +18,9 @@ _latest update: Sun Jan  5 09:36:53 CET 2014_
   caused a nil pointer exception when ruby interpreter patchlevel was evaluated
 * ruby_version_check.rb: fixed an issue on is_vulnerable_patchlevel? that loads
   the safe patchlevels comparing the wrong parameter.
+* Added a rake task to better integrate codesake-dawn in a continous
+  development workflow. Now when you install codesake-dawn you have a 'rake
+  dawn' task executing the tool on the current directory.
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
@@ -31,6 +34,7 @@ _latest update: Sun Jan  5 09:36:53 CET 2014_
 * Added a check for CVE-2006-6852
 * Added a check for CVE-2006-6979
 * Added a check for CVE-2007-0469
+* Added a check for CVE-2011-1005
 * Added a check for CVE-2011-2686
 * Added a check for CVE-2011-2705
 * Added a check for CVE-2011-2930
