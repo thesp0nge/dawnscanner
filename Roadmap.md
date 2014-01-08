@@ -22,7 +22,6 @@ _latest update: Fri Jan  3 15:15:33 CET 2014_
 * adding test for CVE-2011-2929
 * adding test for CVE-2011-1005
 * adding test for CVE-2010-3933
-* adding test for CVE-2011-4319
 * adding test for CVE-2011-3009
 * adding test for CVE-2011-1004
 * adding test for CVE-2010-3119
