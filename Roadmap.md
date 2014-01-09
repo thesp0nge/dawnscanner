@@ -15,10 +15,7 @@ _latest update: Fri Jan  3 15:15:33 CET 2014_
 * add a check against deprecated ruby / gems version. I will handle MVC gems right now.
 * adding test for CVE-2011-2854
 * adding test for CVE-2011-0446
-* adding test for CVE-2008-7248
-* adding test for CVE-2009-3857
 * adding test for CVE-2008-4310
-* adding test for CVE-2009-0161
 * adding test for CVE-2008-5189
 * adding test for CVE-2008-3657
 * adding test for CVE-2008-2376
