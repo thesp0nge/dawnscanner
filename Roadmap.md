@@ -22,7 +22,6 @@ _latest update: Thu Jan  9 08:58:00 CET 2014_
 * adding test for CVE-2007-2383
 * adding test for CVE-2007-2383
 * adding test for CVE-2007-2666
-* adding test for CVE-2007-5380
 * adding test for CVE-2005-1992
 * adding test for CVE-2007-5162
 * adding test for CVE-2004-0983
