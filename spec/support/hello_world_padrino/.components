@@ -1,9 +1,0 @@
----
-:orm: datamapper
-:test: cucumber
-:mock: none
-:script: jquery
-:renderer: haml
-:stylesheet: none
-:namespace: HelloWorldPadrino
-:migration_format: number

@@ -1,4 +1,0 @@
-data_mapper -v 1.0.0
-dm-postgres-adapter
-sinatra -v 1.0
-
