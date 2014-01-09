@@ -7,7 +7,7 @@ module Codesake
       attr_reader :apps
 
       def initialize(dir=nil)
-        super(dir, "padrino", {:debug=>true}) 
+        super(dir, "padrino", {:debug=>false}) 
         @apps = detect_apps
       end
 
