@@ -51,5 +51,5 @@ _latest update: Thu Jan  9 08:58:00 CET 2014_
 * automatic mitigation patch generation 
 
 ## Version 2.0.0
-
+* Add a --github option to dawn to clone a remote repository, perform a bundle install and do a code review.
 * node.js support
