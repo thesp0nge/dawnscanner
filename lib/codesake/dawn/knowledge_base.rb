@@ -46,6 +46,9 @@ require "codesake/dawn/kb/cve_2006_6979"
 # CVE - 2007
 require "codesake/dawn/kb/cve_2007_0469"
 
+# CVE - 2009
+require "codesake/dawn/kb/cve_2009_4214"
+
 # CVE - 2010
 require "codesake/dawn/kb/cve_2010_1330"
 require "codesake/dawn/kb/cve_2010_2489"
@@ -223,6 +226,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2006_6852.new, 
           Codesake::Dawn::Kb::CVE_2006_6979.new, 
           Codesake::Dawn::Kb::CVE_2007_0469.new, 
+          Codesake::Dawn::Kb::CVE_2009_4214.new, 
           Codesake::Dawn::Kb::CVE_2010_1330.new, 
           Codesake::Dawn::Kb::CVE_2010_2489.new, 
           Codesake::Dawn::Kb::CVE_2010_3933.new, 
