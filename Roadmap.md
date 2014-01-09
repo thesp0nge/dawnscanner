@@ -9,17 +9,10 @@ This is an ongoing roadmap for the dawn source code review tool.
 
 _latest update: Thu Jan  9 08:58:00 CET 2014_
 
-## Version 1.0.0
+## Version 1.1.0
 
 * add a language check. It will handle a ruby script as input and a ruby\_parser line as unsafe pattern. It will compile the ruby and look for the unsafe pattern
 * add a check against deprecated ruby / gems version. I will handle MVC gems right now.
-* adding test for CVE-2011-2854
-* adding test for CVE-2011-0446
-* adding test for CVE-2004-0983
-* adding test for CVE-2008-1447
-* adding test for CVE-2007-2383
-* adding test for CVE-2007-2666
-* adding test for CVE-2005-1992
 
 ## Version 1.2.0
 
@@ -57,6 +50,6 @@ _latest update: Thu Jan  9 08:58:00 CET 2014_
   APIs to be consumed by codesake users.
 * automatic mitigation patch generation 
 
-## Version 1.50
+## Version 2.0.0
 
-* support for node.js
+* node.js support
