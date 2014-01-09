@@ -34,6 +34,7 @@ _latest update: Wed Jan  8 23:50:05 CET 2014
 * Added a check for CVE-2006-6852
 * Added a check for CVE-2006-6979
 * Added a check for CVE-2007-0469
+* Added a check for CVE-2010-2489
 * Added a check for CVE-2010-3933
 * Added a check for CVE-2011-0188
 * Added a check for CVE-2011-0739

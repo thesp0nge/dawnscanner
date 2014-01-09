@@ -35,7 +35,7 @@ module Codesake
         def different_family?
           ret = false
           @safe_os.each do |sos|
-            ret = true if ! ret and sos[:family] == @target_os[:family]
+            ret = true if ! ret && sos[:family] == @target_os[:family]
           end
           ret
         end
@@ -43,7 +43,7 @@ module Codesake
         def different_vendor?
           ret = false
           @safe_os.each do |sos|
-            ret = true if ! ret and sos[:vendor] == @target_os[:vendor]
+            ret = true if ! ret && sos[:vendor] == @target_os[:vendor]
           end
           ret
         end
@@ -51,7 +51,8 @@ module Codesake
         def vulnerable_os?
           ret = false
           @safe_os.each do |sos|
-            ret = true if ! ret and is_vulnerable_version?(@target_os[:family], sos[:version])
+            ret = true if ! ret && sos[:version] = 'none'
+            ret = true if ! ret && is_vulnerable_version?(@target_os[:family], sos[:version])
           end
           ret
         end

@@ -13,14 +13,11 @@ _latest update: Fri Jan  3 15:15:33 CET 2014_
 
 * add a language check. It will handle a ruby script as input and a ruby\_parser line as unsafe pattern. It will compile the ruby and look for the unsafe pattern
 * add a check against deprecated ruby / gems version. I will handle MVC gems right now.
-* adding test for CVE-2010-3119
 * adding test for CVE-2011-2854
 * adding test for CVE-2011-0446
-* adding test for CVE-2010-3928
 * adding test for CVE-2008-7248
 * adding test for CVE-2009-4124
 * adding test for CVE-2010-0541
-* adding test for CVE-2010-2489
 * adding test for CVE-2009-3857
 * adding test for CVE-2009-4078
 * adding test for CVE-2009-4214
