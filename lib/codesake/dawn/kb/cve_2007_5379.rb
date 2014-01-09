@@ -2,16 +2,16 @@ module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-09
-			class CVE_2007_5380
+			class CVE_2007_5379
 				include DependencyCheck
 
 				def initialize
-          message = "Session fixation vulnerability in Rails before 1.2.4, as used for Ruby on Rails, allows remote attackers to hijack web sessions via unspecified vectors related to \"URL-based sessions.\""
-           super({
-            :name=>"CVE-2007-5380",
-            :cvss=>"AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          message = "Rails before 1.2.4, as used for Ruby on Rails, allows remote attackers and ActiveResource servers to determine the existence of arbitrary files and read arbitrary XML files via the Hash.from_xml (Hash#from_xml) method, which uses XmlSimple (XML::Simple) unsafely, as demonstrated by reading passwords from the Pidgin (Gaim) .purple/accounts.xml file."
+          super({
+            :name=>"CVE-2007-5379",
+            :cvss=>"AV:N/AC:L/Au:N/C:P/I:N/A:N",
             :release_date => Date.new(2007, 10, 19),
-            :cwe=>"",
+            :cwe=>"200",
             :owasp=>"A9", 
             :applies=>["rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
