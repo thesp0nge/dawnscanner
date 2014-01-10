@@ -16,7 +16,7 @@ module Codesake
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade rwiki to version 2.1.0 or above",
+            :mitigation=>"Please upgrade passenger to version 3.0.21, 4.0.5 or above",
             :aux_links=>["http://blog.phusion.nl/2013/05/29/phusion-passenger-4-0-5-released/", "http://blog.phusion.nl/2013/05/29/phusion-passenger-3-0-21-released/"]
           })
 
