@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Wed Jan  8 23:50:05 CET 2014_
+_latest update: Fri Jan 10 08:53:06 CET 2014_
 
-## Version 1.0.0 - codename: Lightning McQueen (2014-01-10)
+## Version 1.0.0 - codename: Lightning McQueen (2014-01-xx)
 
 * Fixing issue #19 (https://github.com/codesake/codesake-dawn/issues/19). There
   was a problem on ```is_a_vulnerable_version?``` routine that flags a security
