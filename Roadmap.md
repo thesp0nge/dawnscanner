@@ -7,7 +7,15 @@ frameworks.
 
 This is an ongoing roadmap for the dawn source code review tool.
 
-_latest update: Thu Jan  9 08:58:00 CET 2014_
+_latest update: Fri Jan 10 17:06:04 CET 2014_
+
+## Version 1.0.0
+
+* CVE-2014-1234
+* CVE-2014-1233
+* CVE-2013-2119
+* CVE-2013-6459
+* CVE-2013-7086
 
 ## Version 1.1.0
 
