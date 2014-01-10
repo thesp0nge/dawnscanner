@@ -154,6 +154,7 @@ require "codesake/dawn/kb/cve_2013_1947"
 require "codesake/dawn/kb/cve_2013_1948"
 require "codesake/dawn/kb/cve_2013_2065"
 require "codesake/dawn/kb/cve_2013_2090"
+require "codesake/dawn/kb/cve_2013_2119"
 require "codesake/dawn/kb/cve_2013_2615"
 require "codesake/dawn/kb/cve_2013_2616"
 require "codesake/dawn/kb/cve_2013_2617"
@@ -171,6 +172,9 @@ require "codesake/dawn/kb/cve_2013_6415"
 require "codesake/dawn/kb/cve_2013_6416"
 require "codesake/dawn/kb/cve_2013_6417"
 require "codesake/dawn/kb/cve_2013_6421"
+
+# CVE - 2014
+# require "codesake/dawn/kb/cve_2014_1234"
 
 
 module Codesake
@@ -348,6 +352,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_1948.new, 
           Codesake::Dawn::Kb::CVE_2013_2065.new, 
           Codesake::Dawn::Kb::CVE_2013_2090.new, 
+          Codesake::Dawn::Kb::CVE_2013_2119.new, 
           Codesake::Dawn::Kb::CVE_2013_2615.new, 
           Codesake::Dawn::Kb::CVE_2013_2616.new, 
           Codesake::Dawn::Kb::CVE_2013_2617.new, 

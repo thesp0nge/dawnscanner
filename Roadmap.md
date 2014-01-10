@@ -11,14 +11,36 @@ _latest update: Fri Jan 10 17:06:04 CET 2014_
 
 ## Version 1.0.0
 
-* CVE-2014-1234
-* CVE-2014-1233
-* CVE-2013-2119
-* CVE-2013-6459
+
 * CVE-2013-7086
+* CVE-2013-6459
+* CVE-2013-5671
+* CVE-2013-5647
+* CVE-2013-4593
+* CVE-2013-4489
+* CVE-2013-4413
+* CVE-2013-2516
+* CVE-2013-2513
+* CVE-2013-2512
+* CVE-2013-2119
+* CVE-2013-1878
+* CVE-2013-1876
+* CVE-2013-1756
+* CVE-2013-1607
+* CVE-2013-0263
+* CVE-2013-0256
+* CVE-2013-0162
+* CVE-2012-2671
+* CVE-2012-2139
+* CVE-2012-1098
+* CVE-2007-6183
 
 ## Version 1.1.0
 
+* CVE-2014-1234
+* CVE-2014-1233
+* add @rubysec vulnerability database integration using rake
+* create a task to check for new CVE in NVD website
 * add a language check. It will handle a ruby script as input and a ruby\_parser line as unsafe pattern. It will compile the ruby and look for the unsafe pattern
 * add a check against deprecated ruby / gems version. I will handle MVC gems right now.
 
