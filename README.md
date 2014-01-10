@@ -1,22 +1,54 @@
-# Codesake::Dawn - The security code review tool for ruby powered code
+# Codesake::Dawn - The security code scanner for Ruby
 
-codesake-dawn is a source code review tool crafted to detect security issues in
-ruby written code. The main usage is to apply codesake-dawn to web
-applications, it supports [Sinatra](http://www.sinatrarb.com),
-[Padrino](http://www.padrinorb.com) and of course [Ruby on Rails](http://rubyonrails.org) frameworks. 
+Codesake::Dawn is a source code scanner designed to review your code for
+security issues. 
+
+Codesake::Dawn is able to scan your ruby standalone programs but its main usage
+is to deal with web applications. It supports applications written using majors
+MVC (Model View Controller) frameworks, like: 
+
+* [Ruby on Rails](http://rubyonrails.org)
+* [Sinatra](http://www.sinatrarb.com)
+* [Padrino](http://www.padrinorb.com) 
+
+---
 
 [![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
 [![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
 [![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
 [![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
 
-## Useful links
+---
 
-www:      [http://dawn.codesake.com](http://dawn.codesake.com) 
+Codesake::Dawn version 1.0 has 131 security checks loaded in its knowledge
+base. Most of them are CVE bulletins, that applies to gems, framework or the
+ruby interpreter itself.
 
-twitter:  [https://twitter.com/dawnscanner](https://twitter.com/dawnscanner)
+You candump all security checks in the knowledge base by using the -k
+flag:
 
-github:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
+```
+$ dawn -k|--list-knowledge-base 
+```
+
+
+When you run Codesake::Dawn on your code it parses your project Gemfile.lock
+looking for the gems used and it tries to detect the ruby interpreter version
+you are using or you declared in your ruby version management tool you like
+most (RVM, rbenv, ...).
+
+Then the tool tries to detect the MVC framework your web application uses and
+it applies the security check accordingly. There checks designed to match rails
+application or checks that are appliable to any ruby code.
+
+Codesake::Dawn can also understand the code in your views and to backtrack
+sinks to spot cross site scripting and sql injections introduced by the code
+you actually wrote. In the project roadmap this is the code most of the future
+development effort will be focused on.
+
+Codesake::Dawn security scan result is a list of vulnerabilities with some
+mitigation actions you want to follow in order to build a stronger web
+application.
 
 ## Installation
 
@@ -50,36 +82,113 @@ that.
 You can start your code review with dawn very easily. Simply tell the tool
 where the project root directory. 
 
-Starting from an unofficial 0.68 release, underlying MVC framework is
-autodetected by dawn using target Gemfile.lock file. If autodetect fails for
-some reason, the tool will complain about it and you have to specify if it's a
-rails, sinatra or padrino web application by hand.
+Underlying MVC framework is autodetected by dawn using target Gemfile.lock
+file. If autodetect fails for some reason, the tool will complain about it and
+you have to specify if it's a rails, sinatra or padrino web application by
+hand.
 
-dawn command line is in this form with options and the target.
+Basic usage is to specify some optional command line option to fit best your
+needs, and to specify the target directory where your code is stored.
+
 ``` 
 $ dawn [options] target
 ```
 
-### As output you get
+In case of need, there is a quick command line option reference running ```dawn -h``` at your OS prompt.
+
+```
+$ bundle exec dawn -h
+08:05:21 [*] dawn v1.0.0.rc1 is starting up
+Usage: dawn [options] target_directory
+
+
+Examples:$ dawn a_sinatra_webapp_directory
+$ dawn -C the_rails_blog_engine
+$ dawn -C --output json a_sinatra_webapp_directory
+
+   -r, --rails					force dawn to consider the target a rails application
+   -s, --sinatra				force dawn to consider the target a sinatra application
+   -p, --padrino				force dawn to consider the target a padrino application
+   -G, --gem-lock				force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock
+   -D, --debug					enters dawn debug mode
+   -f, --list-known-framework			list ruby MVC frameworks supported by dawn
+   -k, --list-knowledgebase [check_name]	list dawn known security checks. If check_name is specified dawn says if check is present or not
+   -o, --output [console, json. csv, html]	the output will be in the specified format
+   -V, --verbose				the output will be more verbose
+   -C, --count-only				dawn will only count vulnerabilities (useful for scripts)
+   -z, --exit-on-warn				dawn will return number of found vulnerabilities as exit code
+   -v, --version				show version information
+   -h, --help					show this help
+```
+
+### Codesake::Dawn security scan in action
 
 As output, dawn will put all security checks that are failed during the scan.
-In example, this is the output of a scan performed over a very simple Sinatra
-application:
+
+This the result of Codedake::Dawn running against a 
+[Sinatra 1.4.2 web application](https://github.com/thesp0nge/railsberry2013) wrote for a talk I
+delivered in 2013 at [Railsberry conference](http://www.railsberry.com).
+
+As you may see, Codesake::Dawn first detects MVC running the application by
+looking at Gemfile.lock, than it discards all security checks not appliable to
+Sinatra (49 security checks, in version 1.0, especially designed for Ruby on
+Rails) and it applies them.
+
+``` 
+$ bundle exec dawn ~/src/hacking/railsberry2013
+08:09:47 [*] dawn v1.0.0.rc1 is starting up
+08:09:47 [$] dawn: scanning /Users/thesp0nge/src/hacking/railsberry2013
+08:09:47 [$] dawn: sinatra v1.4.2 detected
+08:09:47 [$] dawn: applying all security checks
+08:09:47 [$] dawn: 82 security checks applied - 0 security checks skipped
+08:09:47 [$] dawn: 1 vulnerabilities found
+08:09:47 [$] dawn: CVE-2013-1800 failed
+08:09:47 [$] dawn: Description: The crack gem 0.3.1 and earlier for Ruby does not properly restrict casts of string values, which might allow remote attackers to conduct object-injection attacks and execute arbitrary code, or cause a denial of service (memory and CPU consumption) by leveraging Action Pack support for (1) YAML type conversion or (2) Symbol type conversion, a similar vulnerability to CVE-2013-0156.
+08:09:47 [$] dawn: Solution: Please use crack gem version 0.3.2 or above. Correct your gemfile
+08:09:47 [!] dawn: Evidence:
+08:09:47 [!] dawn: Vulnerable crack gem version found: 0.3.1
+08:09:47 [*] dawn is leaving
+``` 
+
+---
+
+When you run Codesake::Dawn on a web application with up to date dependencies,
+it's likely to return a friendly _no vulnerabilities found_ message. Keep it up
+working that way!
+
+This is Codesake::Dawn running against a Padrino web application I wrote for [a
+scorecard quiz game about application security](http://scorecard.armoredcode.com). 
+Italian language only. Sorry.
+
+```
+08:17:09 [*] dawn v1.0.0.rc1 is starting up
+08:17:09 [$] dawn: scanning /Users/thesp0nge/src/CORE_PROJECTS/scorecard
+08:17:09 [$] dawn: padrino v0.11.2 detected
+08:17:09 [$] dawn: applying all security checks
+08:17:09 [$] dawn: 82 security checks applied - 0 security checks skipped
+08:17:09 [*] dawn: no vulnerabilities found.
+08:17:09 [*] dawn is leaving
+```
+
+---
+
+Last example shows Codesake::Dawn against a very simple Sinatra application
+designed to be buggy:
 
 ```
 $ dawn target
-8:28:18 [*] dawn v0.80.0 is starting up
-08:28:18 [$] dawn: scanning spec/support/sinatra-vulnerable
+08:28:18 [*] dawn v1.0.0.rc1 is starting up
+08:28:18 [$] dawn: scanning /Users/thesp0nge/tmp/sinatra-vulnerable
 08:28:18 [$] dawn: sinatra v1.2.6 detected
 08:28:18 [$] dawn: applying all security checks
-08:28:18 [$] dawn: 37 security checks applied - 0 security checks skipped
+08:28:18 [$] dawn: 82 security checks applied - 0 security checks skipped
 08:28:18 [$] dawn: 5 vulnerabilities found
 08:28:18 [$] dawn: Not revised code failed
 08:28:18 [$] dawn: Description: Analyzing comments, it seems your code is waiting from some review from you. Please consider take action before putting it in production.
 This check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME
 08:28:18 [$] dawn: Solution: Please review the file fixing the issue.
 08:28:18 [!] dawn: Evidence:
-08:28:18 [!] dawn: {:filename=>"spec/support/sinatra-vulnerable/application.rb", :matches=>[{:match=>"# FIXME: I must raise an error here\n", :line=>30}]}
+08:28:18 [!] dawn: {:filename=>"/Users/thesp0nge/tmp/sinatra-vulnerable/application.rb", :matches=>[{:match=>"# FIXME: I must raise an error here\n", :line=>30}]}
 08:28:18 [$] dawn: CVE-2013-0269 failed
 08:28:18 [$] dawn: Description: The JSON gem before 1.5.5, 1.6.x before 1.6.8, and 1.7.x before 1.7.7 for Ruby allows remote attackers to cause a denial of service (resource consumption) or bypass the mass assignment protection mechanism via a crafted JSON document that triggers the creation of arbitrary Ruby symbols or certain internal objects, as demonstrated by conducting a SQL injection attack against Ruby on Rails, aka "Unsafe Object Creation Vulnerability."
 08:28:18 [$] dawn: Solution: Please upgrade JSON gem to version 1.5.5, 1.6.8 or 1.7.7 or latest version available
@@ -100,15 +209,15 @@ This check will analyze the source code looking for the following patterns: XXX,
 08:28:18 [*] dawn is leaving
 ```
 
+---
 
-You can also dump all security checks in the knowledge base by using the -k
-flag:
+## Useful links
 
-```
-$ dawn -k|--list-knowledge-base 
-```
+Project homepage: [http://dawn.codesake.com](http://dawn.codesake.com) 
 
-In the 0.80 gem version, there are 75 security checks designed for application written in ruby. 
+Twitter progile:  [@dawnscanner](https://twitter.com/dawnscanner)
+
+Github repository:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
 
 ## Supporters
 
@@ -137,7 +246,7 @@ Thank you for your support.
 
 ## LICENSE
 
-Copyright (c) 2013 Paolo Perego
+Copyright (c) 2013, 2014 Paolo Perego
 
 MIT License
 
