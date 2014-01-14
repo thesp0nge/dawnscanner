@@ -130,6 +130,7 @@ module Codesake
                   ret = true if target_v_array[3] < fixes_v_array[3]
                   ret = false if target_v_array[3] >= fixes_v_array[3]
                 end
+                ret = false if (target_v_array[2] == fixes_v_array[2]) && target_v_array.count != 4 && fixes_v_array.count != 4
                 ret = false if target_v_array[2] > fixes_v_array[2] 
 
               end

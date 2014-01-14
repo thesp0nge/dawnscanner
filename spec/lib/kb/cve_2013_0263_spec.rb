@@ -4,5 +4,8 @@ describe "The CVE-2013-0263 vulnerability" do
 		@check = Codesake::Dawn::Kb::CVE_2013_0263.new
 		# @check.debug = true
 	end
-	it "needs some test..."
+  it "is not reported when rack version 1.4.5 is used" do
+    @check.dependencies = [{:name=>"rack", :version=>'1.4.5'}]
+    @check.vuln?.should be_false
+  end
 end

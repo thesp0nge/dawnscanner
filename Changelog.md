@@ -23,6 +23,9 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
   dawn' task executing the tool on the current directory.
 * In BasicCheck::is_vulnerable_version? Added support for the fourth version
   number. We needed this to implement check for CVE-2013-7086
+* Fixing issue #20. is_vulnerable_version? has a problem when the patchlevel is
+  the same but there are only three different version numbers (x.y.z format).
+  The last change introduces this vuln. Thank you Florin for opening the issue.
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
@@ -72,6 +75,7 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
 * Added a check for CVE-2011-3009
 * Added a check for CVE-2011-3187
 * Added a check for CVE-2011-4319
+* Added a check for CVE-2013-0162
 * Added a check for CVE-2013-0256
 * Added a check for CVE-2013-0263
 * Added a check for CVE-2013-2090
