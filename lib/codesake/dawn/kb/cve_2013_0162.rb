@@ -12,7 +12,7 @@ module Codesake
             :name=>"CVE-2013-0162",
             :cvss=>"AV:L/AC:L/Au:N/C:N/I:P/A:N",
             :release_date => Date.new(2013, 3, 1),
-            :cwe=>"",
+            :cwe=>"264",
             :owasp=>"A9", 
             :applies=>["sinatra", "padrino", "rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
