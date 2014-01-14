@@ -67,7 +67,7 @@ module Codesake
           @mitigated    = false
           @status       = false
           @debug        = false
-    
+
         end
 
         def applies_to?(name)
@@ -94,7 +94,7 @@ module Codesake
 
           found = false
 
-          
+
           @ruby_vulnerable_versions.each do |v|
             found = true if v == @ruby_version
           end
@@ -103,13 +103,14 @@ module Codesake
         end
 
         # @target_version = '2.3.11'
-        # @fixes_version = ['2.3.18', '3.2.13', '3.1.12' ] 
+        # @fixes_version = ['2.3.18', '3.2.13', '3.1.12' ]
         def is_vulnerable_version?(target = nil, fixes = nil)
           target  = @target_version if target.nil?
           fixes   = @fixes_version  if fixes.nil?
-          return false if target.nil? or fixes.empty?
 
-          ret = false
+          vulnerable = false
+
+          return vulnerable if target.nil? || fixes.empty?
 
           target_v_array = target.split(".").map! { |n| n.to_i }
           fixes.each do |fv|
@@ -118,26 +119,31 @@ module Codesake
             debug_me "target_array = #{target_v_array}"
             debug_me "fixes_array = #{fixes_v_array}"
             if target_v_array[0] == fixes_v_array[0]
-              ret = true if target_v_array[1] < fixes_v_array[1] # same major but previous minor
-              if target_v_array[1] == fixes_v_array[1] 
-                ret = true if target_v_array[2] < fixes_v_array[2] 
-                # In order to support CVE-2013-7086 security check we must be able to 
-                # hande the 'fourth' version number -> 1.5.0.4 
+              vulnerable = true if target_v_array[1] < fixes_v_array[1] # same major but previous minor
+              if target_v_array[1] == fixes_v_array[1]
+                vulnerable = true if target_v_array[2] < fixes_v_array[2]
                 debug_me "target array count = #{target_v_array.count}"
                 debug_me "fixes array count = #{fixes_v_array.count}"
                 debug_me "same patchlevel?: #{(target_v_array[2] == fixes_v_array[2])}"
-                if (target_v_array[2] == fixes_v_array[2]) && target_v_array.count == 4 && fixes_v_array.count == 4
-                  ret = true if target_v_array[3] < fixes_v_array[3]
-                  ret = false if target_v_array[3] >= fixes_v_array[3]
+                case
+                when target_v_array.count == 4 && fixes_v_array.count == 4 &&
+                  target_v_array[2] == fixes_v_array[2]
+                then
+                  # In order to support CVE-2013-7086 security check we must be
+                  # able to handle the 'fourth' version number -> 1.5.0.4
+                  vulnerable = true if target_v_array[3] < fixes_v_array[3]
+                  vulnerable = false if target_v_array[3] >= fixes_v_array[3]
+                when target_v_array[2] >= fixes_v_array[2]
+                  vulnerable = false
+                else
+                  vulnerable = true
                 end
-                ret = false if target_v_array[2] > fixes_v_array[2] 
-
               end
             end
-            debug_me("RET IS #{ret}")
+            debug_me("RET IS #{vulnerable}")
           end
 
-          ret
+          vulnerable
         end
 
         def cvss_score
