@@ -115,11 +115,22 @@ module Codesake
           fixes.each do |fv|
             fixes_v_array = fv.split(".").map! { |n| n.to_i }
 
+            debug_me "target_array = #{target_v_array}"
+            debug_me "fixes_array = #{fixes_v_array}"
             if target_v_array[0] == fixes_v_array[0]
               ret = true if target_v_array[1] < fixes_v_array[1] # same major but previous minor
               if target_v_array[1] == fixes_v_array[1] 
                 ret = true if target_v_array[2] < fixes_v_array[2] 
-                ret = false if target_v_array[2] >= fixes_v_array[2] 
+                # In order to support CVE-2013-7086 security check we must be able to 
+                # hande the 'fourth' version number -> 1.5.0.4 
+                debug_me "target array count = #{target_v_array.count}"
+                debug_me "fixes array count = #{fixes_v_array.count}"
+                debug_me "same patchlevel?: #{(target_v_array[2] == fixes_v_array[2])}"
+                if (target_v_array[2] == fixes_v_array[2]) && target_v_array.count == 4 && fixes_v_array.count == 4
+                  ret = true if target_v_array[3] < fixes_v_array[3]
+                  ret = false if target_v_array[3] >= fixes_v_array[3]
+                end
+                ret = false if target_v_array[2] > fixes_v_array[2] 
 
               end
             end

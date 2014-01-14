@@ -21,6 +21,8 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
 * Added a rake task to better integrate codesake-dawn in a continous
   development workflow. Now when you install codesake-dawn you have a 'rake
   dawn' task executing the tool on the current directory.
+* In BasicCheck::is_vulnerable_version? Added support for the fourth version
+  number. We needed this to implement check for CVE-2013-7086
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
@@ -72,6 +74,7 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
 * Added a check for CVE-2011-4319
 * Added a check for CVE-2013-2090
 * Added a check for CVE-2013-2119
+* Added a check for CVE-2013-7086
 
 
 ## Version 0.85 - codename: elevator (2013-12-17)
