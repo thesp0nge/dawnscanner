@@ -10,9 +10,9 @@ module Codesake
     # "Finn McMissile"  - v 1.3.0
     # "Fillmore"        - v 1.4.0
 
-    VERSION   = "1.0.0.rc1"
+    VERSION   = "1.0.0.rc2"
     CODENAME  = "Lightning McQueen"
-    RELEASE   = "20140110"
+    RELEASE   = "20140114"
 
   end
 end
