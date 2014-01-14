@@ -17,7 +17,7 @@ module Codesake
             :applies=>["sinatra", "padrino", "rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade will_paginage version to 3.0.5. As a general rule, using the latest stable rails version is recommended.",
+            :mitigation=>"Please upgrade will_paginage version to 3.0.5. As a general rule, using the latest stable version is recommended.",
             :aux_links=>["https://github.com/mislav/will_paginate/releases/tag/v3.0.5"]
           })
 

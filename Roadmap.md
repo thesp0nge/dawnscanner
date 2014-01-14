@@ -11,8 +11,6 @@ _latest update: Fri Jan 10 17:06:04 CET 2014_
 
 ## Version 1.0.0
 
-* CVE-2013-6459
-* CVE-2013-5671
 * CVE-2013-5647
 * CVE-2013-4593
 * CVE-2013-4489
@@ -37,6 +35,7 @@ _latest update: Fri Jan 10 17:06:04 CET 2014_
 
 * CVE-2014-1234
 * CVE-2014-1233
+* CVE-2013-5671
 * move is\_vulnerable\_version? and is\_vulnerable\_patchlevel? to an adhoc class handling version comparison
 * add @rubysec vulnerability database integration using rake
 * create a task to check for new CVE in NVD website
