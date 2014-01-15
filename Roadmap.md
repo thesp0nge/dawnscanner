@@ -11,8 +11,6 @@ _latest update: Wed Jan 15 07:55:47 CET 2014_
 
 ## Version 1.0.0
 
-* CVE-2013-2119
-* CVE-2013-1756
 * CVE-2012-2139
 
 ## Version 1.1.0

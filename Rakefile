@@ -67,7 +67,7 @@ task :cve, :name do |t,args|
     file.puts "\t\t@check = Codesake::Dawn::Kb::#{class_name}.new"
     file.puts "\t\t# @check.debug = true"
     file.puts "\tend"
-    file.puts "\tit \"needs some test...\""
+    file.puts "\tit \"is reported when...\""
     file.puts "end"
   end
   puts "#{spec_filename} created"
@@ -130,7 +130,7 @@ task :check, :name do |t,args|
     file.puts "\t\t@check = Codesake::Dawn::Kb::#{class_name}.new"
     file.puts "\t\t# @check.debug = true"
     file.puts "\tend"
-    file.puts "\tit \"needs some test...\""
+    file.puts "\tit \"is reported when...\""
     file.puts "end"
   end
   puts "#{spec_filename} created"
