@@ -102,6 +102,7 @@ require "codesake/dawn/kb/cve_2011_4319"
 require "codesake/dawn/kb/cve_2011_4815"
 
 # CVE - 2012
+require "codesake/dawn/kb/cve_2012_1098"
 require "codesake/dawn/kb/cve_2012_1099"
 require "codesake/dawn/kb/cve_2012_1241"
 require "codesake/dawn/kb/cve_2012_2139"
@@ -310,6 +311,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2011_3187.new, 
           Codesake::Dawn::Kb::CVE_2011_4319.new, 
           Codesake::Dawn::Kb::CVE_2011_4815.new, 
+          Codesake::Dawn::Kb::CVE_2012_1098.new, 
           Codesake::Dawn::Kb::CVE_2012_1099.new, 
           Codesake::Dawn::Kb::CVE_2012_1241.new, 
           Codesake::Dawn::Kb::CVE_2012_2139.new, 
