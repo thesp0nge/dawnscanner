@@ -32,6 +32,7 @@ _latest update: Wed 15 Jan 2014 11:01:53 CET_
 * add a check against deprecated ruby / gems version. I will handle MVC gems
   right now.
 * Improving HTML output as described in issue #7
+* Ignoring CTAGS generated file and vendor/bundle directory ad descrived in issue #17
 
 ## Version 1.2.0
 
