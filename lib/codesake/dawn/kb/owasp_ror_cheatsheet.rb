@@ -18,6 +18,8 @@ module Codesake
             :applies=>["rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
             :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
+            :message=>message,
+            :mitigation=>"Please refere to the Ruby on Rails cheatsheet available from owasp.org to mitigate this vulnerability",
             :checks=>[
               Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
               Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new,

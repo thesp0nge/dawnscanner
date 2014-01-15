@@ -31,6 +31,8 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
   (CVE-2012-6134). The patch is already merged in the git repository but there
   are no further gem releases. The suggested mitigation is to tell your Gemfile
   to fetch the code directly from github rather then using rubygems.org
+* Fixing issue #18. Owasp RoR Cheatsheet check was missing of message and
+  mitigation step.
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
