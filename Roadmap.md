@@ -7,11 +7,7 @@ frameworks.
 
 This is an ongoing roadmap for the Codesake::Dawn source code review tool.
 
-_latest update: Wed Jan 15 07:55:47 CET 2014_
-
-## Version 1.0.0
-
-* CVE-2012-2139
+_latest update: Wed 15 Jan 2014 11:01:53 CET_
 
 ## Version 1.1.0
 

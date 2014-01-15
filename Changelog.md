@@ -27,6 +27,10 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
   the same but there are only three different version numbers (x.y.z format).
   The last change introduces this vuln. Thank you Florin for opening the issue.
 * Created a dedicated web site: [dawn.codesake.com](http://dawn.codesake.com)
+* Fixing issue #8. The omniauth-oauth2 version 1.1.1 has a CSRF vulnerability
+  (CVE-2012-6134). The patch is already merged in the git repository but there
+  are no further gem releases. The suggested mitigation is to tell your Gemfile
+  to fetch the code directly from github rather then using rubygems.org
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992

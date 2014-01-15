@@ -16,7 +16,7 @@ module Codesake
             :applies=>["rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade omniauth-oauth2 version to the latest one",
+            :mitigation=>"At January 2014 there are no further releases of omniauth-oauth2 gem, however the vulnerability it has been fixed in the git repository. As remediation we suggest to ask your Gemfile to fetch the code directly from git@github.com:intridea/omniauth-oauth2.git",
             :aux_links=>["https://github.com/intridea/omniauth-oauth2/pull/25"]
           })
 
