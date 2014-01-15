@@ -20,17 +20,29 @@ MVC (Model View Controller) frameworks, like:
 
 ---
 
-Codesake::Dawn version 1.0 has 131 security checks loaded in its knowledge
+Codesake::Dawn version 1.0 has 141 security checks loaded in its knowledge
 base. Most of them are CVE bulletins, that applies to gems, framework or the
 ruby interpreter itself.
 
-You candump all security checks in the knowledge base by using the -k
+You can dump all security checks in the knowledge base by using the -k
 flag:
 
 ```
 $ dawn -k|--list-knowledge-base 
 ```
 
+Useful in scripts, you can even supply a parameter to ```-k``` flag to check if
+a security control has been implemented or not.
+
+```
+$ dawn -k CVE-2013-6421
+07:59:30 [*] dawn v1.0.0.rc2 is starting up
+CVE-2013-6421 found in knowledgebase.
+
+$ dawn -k this_test_does_not_exist
+08:02:17 [*] dawn v1.0.0.rc2 is starting up
+this_test_does_not_exist not found in knowledgebase
+```
 
 When you run Codesake::Dawn on your code it parses your project Gemfile.lock
 looking for the gems used and it tries to detect the ruby interpreter version
@@ -52,9 +64,15 @@ application.
 
 ## Installation
 
-You can install dawn, directly using [Rubygems](https://rubygems.org) by typing:
+You can install latest Codesake::Dawn version, using [Rubygems](https://rubygems.org) by typing:
 
     gem install codesake-dawn
+
+In order to install a release candidate version, the gem install command line is the following:
+
+```
+$ gem install codesake-dawn --pre
+```
 
 If you want to add dawn to your project Gemfile, you must add the following:
     
@@ -79,10 +97,10 @@ that.
 
 ## Usage
 
-You can start your code review with dawn very easily. Simply tell the tool
+You can start your code review with Codesake::Dawn very easily. Simply tell the tool
 where the project root directory. 
 
-Underlying MVC framework is autodetected by dawn using target Gemfile.lock
+Underlying MVC framework is autodetected by Codesake::Dawn using target Gemfile.lock
 file. If autodetect fails for some reason, the tool will complain about it and
 you have to specify if it's a rails, sinatra or padrino web application by
 hand.
@@ -123,7 +141,7 @@ $ dawn -C --output json a_sinatra_webapp_directory
 
 ### Codesake::Dawn security scan in action
 
-As output, dawn will put all security checks that are failed during the scan.
+As output, Codesake::Dawn will put all security checks that are failed during the scan.
 
 This the result of Codedake::Dawn running against a 
 [Sinatra 1.4.2 web application](https://github.com/thesp0nge/railsberry2013) wrote for a talk I
@@ -221,8 +239,7 @@ Github repository:   [https://github.com/codesake/codesake\-dawn](https://github
 
 ## Supporters
 
-To me as project leader it's very important to have feedbacks. I really want to
-ear your voice. 
+To me as project leader it's very important to have feedbacks. 
 
 If you're a proud codesake-dawn user, if you find it useful, if you integrated
 it in your release process and if you want to openly support the project you
@@ -232,7 +249,11 @@ You can support the project by forking the repo, adding a success story, a
 statement saying how do you feel the tool or your company logo as well and then
 submitting a pull request.
 
-Thank you for your support.
+More easily you can drop an email to [me](mailto:thesp0nge@gmail.com) sending a
+statement about your success story and I'll put on the
+[website](http://dawn.codesake.com/success-stories).
+
+Thank you.
 
 ## Thanks to
 

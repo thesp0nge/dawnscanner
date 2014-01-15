@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Codesake::Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["thesp0nge@gmail.com"]
-  gem.description   = %q{dawn is a security static source code analyzer for web applications written in ruby. It supports major MVC frameworks like sinatra, padrino and ruby on rails. dawn output is a list of security vulnerabilities affecting your code with a suggestion on how to mitigate all of them.}
-  gem.summary       = %q{dawn is a security static source code analyzer for sinatra, padrino and ruby on rails web applicartions.}
+  gem.description   = %q{dawn is a security static source code analyzer for web applications written in ruby. It supports major MVC frameworks like sinatra, padrino and ruby on rails. dawn output is a list of security vulnerabilities affecting your code. It provides more than 140 security checks with their own mitigation suggestion.}
+  gem.summary       = %q{dawn is a security static source code analyzer for sinatra, padrino and ruby on rails web applications.}
   gem.homepage      = "http://dawn.codesake.com"
 
   gem.files         = `git ls-files`.split($/)
@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "codesake-commons", "~> 0.89.0"
+  gem.add_dependency "codesake-commons", "~> 0.90.0"
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
   gem.add_dependency 'parser'

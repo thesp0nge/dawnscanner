@@ -1,6 +1,6 @@
 # Codesake Dawn - changelog
 
-Dawn is a static analysis security scanner for ruby written web applications.
+Codesake::Dawn is a static analysis security scanner for ruby written web applications.
 It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
@@ -21,11 +21,12 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
 * Added a rake task to better integrate codesake-dawn in a continous
   development workflow. Now when you install codesake-dawn you have a 'rake
   dawn' task executing the tool on the current directory.
-* In BasicCheck::is_vulnerable_version? Added support for the fourth version
+* In BasicCheck::is_vulnerable_version? added support for the fourth version
   number. We needed this to implement check for CVE-2013-7086
 * Fixing issue #20. is_vulnerable_version? has a problem when the patchlevel is
   the same but there are only three different version numbers (x.y.z format).
   The last change introduces this vuln. Thank you Florin for opening the issue.
+* Created a dedicated web site: [dawn.codesake.com](http://dawn.codesake.com)
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
