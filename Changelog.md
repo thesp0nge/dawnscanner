@@ -33,6 +33,8 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
   to fetch the code directly from github rather then using rubygems.org
 * Fixing issue #18. Owasp RoR Cheatsheet check was missing of message and
   mitigation step.
+* Fixing issue #17 with some more directories to be in whitelist in pattern
+  matching check. More exclusions will be added in further releases
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
