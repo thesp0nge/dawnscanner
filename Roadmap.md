@@ -31,6 +31,7 @@ _latest update: Wed 15 Jan 2014 11:01:53 CET_
   the unsafe pattern
 * add a check against deprecated ruby / gems version. I will handle MVC gems
   right now.
+* Improving HTML output as described in issue #7
 
 ## Version 1.2.0
 
