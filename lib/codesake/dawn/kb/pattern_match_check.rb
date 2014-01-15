@@ -16,7 +16,10 @@ module Codesake
 
         EXCLUSION_LIST = [
           "tags",
-          "vendor/bundle"
+          "vendor/bundle", 
+          "features",
+          "specs",
+          "test"
         ]
 
         def initialize(options={})
