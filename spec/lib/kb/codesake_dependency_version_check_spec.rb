@@ -1,40 +1,44 @@
 require 'spec_helper'
 
-class Mockup
-  include Codesake::Dawn::Kb::RubyVersionCheck
+class DependencyMockup
+  include Codesake::Dawn::Kb::DependencyCheck
 
   def initialize
     message = "This is a mock"
     super(
-      :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK, 
+      :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK, 
       :applies=>['sinatra', 'padrino', 'rails'],
       :message=> message
     )
     # self.debug = true
 
-    self.safe_rubies = [{:version=>"1.9.3", :patchlevel=>"p392"}, {:version=>"2.0.0", :patchlevel=>"p0"}]
+    self.safe_dependencies = [{:name=>'this_gem', :version=>['0.3.0', '1.3.3', '2.3.3', '9.4.31.2']}]
   end
 end
 
-describe "The security check for Ruby interpreter version" do
-  let (:check) {Mockup.new}
 
-  it "fires if ruby version is vulnerable" do
-    check.detected_ruby = {:version=>"1.9.2", :patchlevel=>"p10000"}
-    check.vuln?.should    be_true
+describe "The security check for gem dependency should" do
+  before(:all) do
+    @check = DependencyMockup.new
   end
-  it "doesn't fire if ruby version is not vulnerable and patchlevel is not vulnerable" do
-    check.detected_ruby = {:version=>"1.9.4", :patchlevel=>"p10000"}
-    check.vuln?.should    be_false
+  # let (:check) {Mockup.new}
+
+  it "fires if vulnerable 0.2.9 version is detected" do
+    @check.dependencies = [{:name=>"this_gem", :version=>'0.2.9'}]
+    @check.vuln?.should    be_true
+  end
+  it "doesn't fire if not vulnerable 0.4.0 version is found" do
+    @check.dependencies = [{:name=>"this_gem", :version=>'0.4.0'}]
+    @check.vuln?.should    be_false
   end
 
-  it "doesn't fire if ruby version is vulnerable and patchlevel is not vulnerable" do
-    check.detected_ruby = {:version=>"1.9.3", :patchlevel=>"p10000"}
-    check.vuln?.should    be_false
+  it "fires if vulnerable 1.3.2 version is found" do
+    @check.dependencies = [{:name=>"this_gem", :version=>'1.3.2'}]
+    @check.vuln?.should    be_true
   end
 
-  it "fires if ruby version is vulnerable and patchlevel is vulnerable" do
-    check.detected_ruby = {:version=>"1.9.3", :patchlevel=>"p391"}
-    check.vuln?.should    be_true
+  it "doesn't fire if not vulnerable 1.4.2 version is found" do
+    @check.dependencies = [{:name=>"this_gem", :version=>'1.4.2'}]
+    @check.vuln?.should    be_false
   end
 end

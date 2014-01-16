@@ -19,7 +19,7 @@ RSpec::Core::RakeTask.new do |t|
 end
 
 
-task :default => [ :spec, :features ]
+task :default => [ :spec, :features, :kb ]
 task :test => :spec
 
 desc "Create a new CVE test"
@@ -145,5 +145,23 @@ task :check, :name do |t,args|
   puts "  sc.class.should == Codesake::Dawn::Kb::#{class_name}"
   puts "end"
 
+
+end
+
+desc 'Creates a KnowledgeBase.md file'
+task :kb do
+  checks = Codesake::Dawn::KnowledgeBase.new.all
+  open("KnowledgeBase.md", "w") do |file|
+    file.puts "# Codesake::Dawn Knowledge base"
+    file.puts "\nThe knowledge base library for Codesake::Dawn version #{Codesake::Dawn::VERSION} contains #{checks.count} security checks."
+    file.puts "---"
+    checks.each do |c|
+      file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
+      file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE')
+    end
+
+    file.puts "\n\n_Last updated: #{Time.now.strftime("%a %d %b %T %Z %Y")}_"
+  end
+  puts "KnowledgeBase.md file successfully generated"
 
 end

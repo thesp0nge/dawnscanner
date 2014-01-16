@@ -111,7 +111,6 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
 * Added a check for CVE-2013-6421 (sprout remote code execution)
 
 
-
 ## Version 0.80 - codename: elevator (2013-12-12)
 
 * adding test for CVE-2013-4164
@@ -125,6 +124,7 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
 * adding test for CVE-2013-6415
 * adding test for CVE-2013-6416
 * adding test for CVE-2013-6417
+
 
 ## Version 0.79.99 - codename:oddity (2013-11-14)
 
@@ -147,6 +147,7 @@ able to scan something. It deserves a special release.
 * adding test for RoRCheatSheet\_8
 * Fix issue #1. You can read more about it in TODO.md
 * Added API to scan a single Gemfile.lock using -G flag
+
 
 ## Version 0.70 (2013-06-19)
 
@@ -173,6 +174,7 @@ able to scan something. It deserves a special release.
 * write '--help'
 * detect sinks for XSS in Sinatra applications
 * detect reflected XSS in Sinatra applications
+
 
 ## Version 0.60 (2013-05-28)
 
@@ -206,6 +208,7 @@ able to scan something. It deserves a special release.
 * adding a '--output' option
 * adding a '--count-only' option
 * support JSON output
+
 
 ## Version 0.50 (2013-05-13) - First public release
 

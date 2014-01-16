@@ -32,7 +32,8 @@ _latest update: Wed 15 Jan 2014 11:01:53 CET_
 * add a check against deprecated ruby / gems version. I will handle MVC gems
   right now.
 * Improving HTML output as described in issue #7
-* Ignoring CTAGS generated file and vendor/bundle directory ad descrived in issue #17
+* Add a --github option to Codesake::Dawn to clone a remote repository, perform
+  a bundle install and do a code review.
 
 ## Version 1.2.0
 
@@ -65,14 +66,11 @@ _latest update: Wed 15 Jan 2014 11:01:53 CET_
 * detect insecure direct object reference in Sinatra applications
 * detect insecure direct object reference in Padrino applications
 * support ERB for in detect\_views (for both Sinatra and Padrino)
-* integration with [codesake.com](http://codesake.com) with a public available
-  APIs to be consumed by codesake beta users.
 * detect SQLi in Rails applications
 * automatic mitigation patch generation 
 
 
 ## Version 2.0.0
-* Add a --github option to Codesake::Dawn to clone a remote repository, perform a bundle install and do a code review.
 * node.js support
 * SQLite3 integration for saving data. Each project will have its own SQLite
   database containing reviews, findings and all. A table with Codesake::Dawn version it
