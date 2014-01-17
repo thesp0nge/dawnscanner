@@ -118,8 +118,15 @@ module Codesake
             debug_me "target_array = #{target_v_array}"
             debug_me "fixes_array = #{fixes_v_array}"
             if target_v_array[0] == fixes_v_array[0]
+              # SAME MAJOR RELEASE
               ret = true if target_v_array[1] < fixes_v_array[1] # same major but previous minor
               if target_v_array[1] == fixes_v_array[1] 
+                # SAME MINOR RELEASE
+                # This is the case of version number made by 2 digits (e.g.
+                # 3.12). If both major and minor are the same then there is no
+                # vuln
+                return false if target_v_array.count == 2 
+
                 ret = true if target_v_array[2] < fixes_v_array[2] 
                 # In order to support CVE-2013-7086 security check we must be able to 
                 # hande the 'fourth' version number -> 1.5.0.4 
