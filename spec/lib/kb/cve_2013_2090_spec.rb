@@ -12,7 +12,7 @@ describe "The CVE-2013-2090 vulnerability" do
     @check.dependencies = [{:name=>"cremefraiche", :version=>'0.6.2'}]
     @check.vuln?.should   be_false
   end
-  it "we must check that cremefraiche version 0.5.2 version is vulnerable"
+  it "fires when 0.5 and previous versions are found. We must check that cremefraiche version 0.5.2 version is vulnerable"
   # it "doesn't fire when an older not vulnerable cremefraiche version is used" do
   #   @check.dependencies = [{:name=>"cremefraiche", :version=>'0.5.2'}]
   #   @check.vuln?.should   be_false
