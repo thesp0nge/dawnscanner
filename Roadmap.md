@@ -7,7 +7,7 @@ frameworks.
 
 This is an ongoing roadmap for the Codesake::Dawn source code review tool.
 
-_latest update: Wed 15 Jan 2014 11:01:53 CET_
+_latest update: Fri Jan 17 08:09:29 CET 2014_
 
 ## Version 1.1.0
 
@@ -34,6 +34,13 @@ _latest update: Wed 15 Jan 2014 11:01:53 CET_
 * Improving HTML output as described in issue #7
 * Add a --github option to Codesake::Dawn to clone a remote repository, perform
   a bundle install and do a code review.
+* DependencyCheck assumes that if x.y.z version fixes an issue, every minor
+  version in the same major are affected as well. This assumption is risky, we
+  must introduce a flag, or an attribute saying that the previous minor
+  versions are affected or not. We must also recheck CVE already in the
+  knowledge base as well. This assumption is not done for previous major
+  versions. Let's say a gem version 1.2.3 has a problem, DependencyCheck
+  doesn't say nothing about 0.9.3, but it thinks 1.1.9 is vulnerable.
 
 ## Version 1.2.0
 

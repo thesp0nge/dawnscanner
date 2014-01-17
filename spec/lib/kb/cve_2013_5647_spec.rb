@@ -4,5 +4,16 @@ describe "The CVE-2013-5647 vulnerability" do
 		@check = Codesake::Dawn::Kb::CVE_2013_5647.new
 		# @check.debug = true
 	end
-	it "needs some test..."
+  it "fires when vulnerable sounder 1.0.1 version is userd" do
+    @check.dependencies = [{:name=>"sounder", :version=>'1.0.1'}]
+    @check.vuln?.should   be_true
+  end
+  it "doesn't fire when sounder not vulnerable version is used" do
+    @check.dependencies = [{:name=>"sounder", :version=>'1.0.2'}]
+    @check.vuln?.should   be_false
+  end
+  it "doesn't fire when a very old sounder version is used" do
+    @check.dependencies = [{:name=>"sounder", :version=>'0.9.2'}]
+    @check.vuln?.should   be_false
+  end
 end
