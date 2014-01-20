@@ -26,6 +26,10 @@ module Codesake
             @mitigated = true if dep[:name] == @aux_mitigation_gem[:name] unless @aux_mitigation_gem.nil?
 
             @safe_dependencies.each do |safe_dep|
+              if safe_dep[:name] == "rails"
+                debug_me "Forcing save_minor_fixes flag for rails gem dependency check"
+                self.save_minor_fixes = true
+              end
               if @ruby_vulnerable_versions.empty?
                 if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version]) 
                   ret = true

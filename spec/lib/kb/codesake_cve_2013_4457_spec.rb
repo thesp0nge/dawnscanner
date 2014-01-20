@@ -32,6 +32,7 @@ describe "The CVE-2013-4457 vulnerability" do
 
   it "is skipped if non vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.3.2'}]
+    # @check.debug = true
     @check.vuln?.should   be_false
   end
 
