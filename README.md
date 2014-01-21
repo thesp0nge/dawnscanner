@@ -20,7 +20,7 @@ MVC (Model View Controller) frameworks, like:
 
 ---
 
-Codesake::Dawn version 1.0 has 141 security checks loaded in its knowledge
+Codesake::Dawn version 1.0 has 142 security checks loaded in its knowledge
 base. Most of them are CVE bulletins, that applies to gems, framework or the
 ruby interpreter itself.
 
@@ -36,11 +36,11 @@ a security control has been implemented or not.
 
 ```
 $ dawn -k CVE-2013-6421
-07:59:30 [*] dawn v1.0.0.rc2 is starting up
+07:59:30 [*] dawn v1.0.0 is starting up
 CVE-2013-6421 found in knowledgebase.
 
 $ dawn -k this_test_does_not_exist
-08:02:17 [*] dawn v1.0.0.rc2 is starting up
+08:02:17 [*] dawn v1.0.0 is starting up
 this_test_does_not_exist not found in knowledgebase
 ```
 
@@ -116,7 +116,7 @@ In case of need, there is a quick command line option reference running ```dawn 
 
 ```
 $ bundle exec dawn -h
-08:05:21 [*] dawn v1.0.0.rc1 is starting up
+08:05:21 [*] dawn v1.0.0 is starting up
 Usage: dawn [options] target_directory
 
 
@@ -154,7 +154,7 @@ Rails) and it applies them.
 
 ``` 
 $ bundle exec dawn ~/src/hacking/railsberry2013
-08:09:47 [*] dawn v1.0.0.rc1 is starting up
+08:09:47 [*] dawn v1.0.0 is starting up
 08:09:47 [$] dawn: scanning /Users/thesp0nge/src/hacking/railsberry2013
 08:09:47 [$] dawn: sinatra v1.4.2 detected
 08:09:47 [$] dawn: applying all security checks
@@ -179,7 +179,7 @@ scorecard quiz game about application security](http://scorecard.armoredcode.com
 Italian language only. Sorry.
 
 ```
-08:17:09 [*] dawn v1.0.0.rc1 is starting up
+08:17:09 [*] dawn v1.0.0 is starting up
 08:17:09 [$] dawn: scanning /Users/thesp0nge/src/CORE_PROJECTS/scorecard
 08:17:09 [$] dawn: padrino v0.11.2 detected
 08:17:09 [$] dawn: applying all security checks
@@ -195,7 +195,7 @@ designed to be buggy:
 
 ```
 $ dawn target
-08:28:18 [*] dawn v1.0.0.rc1 is starting up
+08:28:18 [*] dawn v1.0.0 is starting up
 08:28:18 [$] dawn: scanning /Users/thesp0nge/tmp/sinatra-vulnerable
 08:28:18 [$] dawn: sinatra v1.2.6 detected
 08:28:18 [$] dawn: applying all security checks
@@ -236,6 +236,8 @@ Project homepage: [http://dawn.codesake.com](http://dawn.codesake.com)
 Twitter progile:  [@dawnscanner](https://twitter.com/dawnscanner)
 
 Github repository:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
+
+The list of knowledge base content: [http://dawn.codesake.com/knowledge-base](http://dawn.codesake.com/knowledge-base)
 
 ## Supporters
 

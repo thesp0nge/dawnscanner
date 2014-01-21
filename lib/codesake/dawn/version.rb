@@ -6,13 +6,16 @@ module Codesake
     #
     # Future releases
     #
-    # "Tow Mater"       - v 1.2.0
-    # "Finn McMissile"  - v 1.3.0
-    # "Fillmore"        - v 1.4.0
+    # "Tow Mater"       
+    # "Finn McMissile"  
+    # "Fillmore"        
+    # "Holly Shiftwell" 
+    # "Guido"           
+    # "Luigi"           
 
-    VERSION   = "1.0.0.rc2"
+    VERSION   = "1.0.0"
     CODENAME  = "Lightning McQueen"
-    RELEASE   = "20140114"
+    RELEASE   = "20140121"
 
   end
 end

@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Fri Jan 10 08:53:06 CET 2014_
+_latest update: Tue Jan 21 08:13:32 CET 2014_
 
-## Version 1.0.0 - codename: Lightning McQueen (2014-01-xx)
+## Version 1.0.0 - codename: Lightning McQueen (2014-01-21)
 
 * Fixing issue #19 (https://github.com/codesake/codesake-dawn/issues/19). There
   was a problem on ```is_a_vulnerable_version?``` routine that flags a security
@@ -35,6 +35,17 @@ _latest update: Fri Jan 10 08:53:06 CET 2014_
   mitigation step.
 * Fixing issue #17 with some more directories to be in whitelist in pattern
   matching check. More exclusions will be added in further releases
+* Added spec files for almost all security checks after 2008. Almost all kind
+  of checks (dependency, pattern matching, combo, ruby version) are covered by
+  a test.
+* DependencyCheck assumes that if x.y.z version fixes an issue, every minor
+  version in the same major are affected as well. This assumption is risky, so
+  we introduced an attribute saying that the previous minor versions are
+  affected or not. This attribute is automagically set to true in dependencies
+  check when dealing with the rails gem.  This assumption is not done for
+  previous major versions. Let's say a gem version 1.2.3 has a problem,
+  DependencyCheck doesn't say nothing about 0.9.3, but it thinks 1.1.9 is
+  vulnerable.
 * Added a check for CVE-2004-0755
 * Added a check for CVE-2004-0983
 * Added a check for CVE-2005-1992
