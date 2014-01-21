@@ -1,3 +1,5 @@
+## Press announcement
+
 After 9 months of development, it's now time for Codesake::Dawn security source
 code scanner first major release.
 
@@ -38,3 +40,19 @@ $ gem install codesake-dawn
 You can find the announcement on the web here: [http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-0-released/](http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-0-released/)
 Enjoy it!
 Paolo - paolo@codesake.com
+
+## Twitter announcement
+@dawnscanner version 1.0.0 is out. Read the announcement: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-0-released/ #ruby #rails #sinatra #padrina #security #scanner
+
+## Linkedin announcement 
+@dawnscanner version 1.0.0 is out. Read the announcement online. Codesake::Dawn makes security code review fun for ruby developers, it scans 142 CVE bulletins and future release will be able to scan custom ruby code for XSS, SQL Injections and business logic flaws. It supports Sinatra, Padrino and Ruby on Rails MVC framework out of the box. 
+
+$ gem install codesake-dawn 
+$ have fun
+
+## HN Link
+https://news.ycombinator.com/item?id=7094470
+## Reddit
+http://www.reddit.com/r/security/comments/1vr4ur/ann_codesakedawn_v100_released/
+http://www.reddit.com/r/ruby/comments/1vr4u0/ann_codesakedawn_v100_released/
+
