@@ -139,6 +139,7 @@ end
 $logger.die "missing target framework option" if engine.nil?
 
 engine.load_knowledge_base
+$logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::RELEASE == "(development)"
 
 $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
 
@@ -158,9 +159,9 @@ if engine.count_vulnerabilities != 0
     $logger.log "#{vuln[:name]} failed"
     $logger.log "Description: #{vuln[:message]}" 
     $logger.log "Solution: #{vuln[:remediation]}"
-    $logger.err "Evidence:"
+    $logger.log "Evidence:"
     vuln[:evidences].each do |evidence|
-      $logger.err evidence
+      $logger.log evidence
     end
   end
   if engine.has_reflected_xss?
