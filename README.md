@@ -233,7 +233,7 @@ This check will analyze the source code looking for the following patterns: XXX,
 
 Project homepage: [http://dawn.codesake.com](http://dawn.codesake.com) 
 
-Twitter progile:  [@dawnscanner](https://twitter.com/dawnscanner)
+Twitter profile:  [@dawnscanner](https://twitter.com/dawnscanner)
 
 Github repository:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
 
