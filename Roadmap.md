@@ -21,6 +21,11 @@ _latest update: Fri Jan 17 08:09:29 CET 2014_
 * CVE-2013-2513
 * CVE-2013-2512
 * CVE-2013-1607
+* CVE-2013-0262
+* CVE-2013-0184
+* CVE-2013-0183
+* CVE-2012-6109
+* CVE-2011-5036
 * CVE-2007-6183
 * move is\_vulnerable\_version? and is\_vulnerable\_patchlevel? to an adhoc
   class handling version comparison
@@ -56,6 +61,7 @@ _latest update: Fri Jan 17 08:09:29 CET 2014_
 
 ## Version 1.5.0
 
+* add support for pure Rack applications
 * detect stored XSS in Rails applications
 * detect reflected XSS in Rails applications
 * detect insecure direct object reference in Rails applications
