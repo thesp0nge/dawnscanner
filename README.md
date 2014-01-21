@@ -239,6 +239,8 @@ Github repository:   [https://github.com/codesake/codesake\-dawn](https://github
 
 The list of knowledge base content: [http://dawn.codesake.com/knowledge-base](http://dawn.codesake.com/knowledge-base)
 
+Mailing list: [https://groups.google.com/forum/#!forum/codesake-dawn](https://groups.google.com/forum/#!forum/codesake-dawn)
+
 ## Supporters
 
 To me as project leader it's very important to have feedbacks. 
