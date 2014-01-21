@@ -35,6 +35,7 @@ _latest update: Fri Jan 17 08:09:29 CET 2014_
 * Add a --github option to Codesake::Dawn to clone a remote repository, perform
   a bundle install and do a code review.
 * Add support for github hooks
+* Add a ruby deprecation check, accordingly to https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
 
 ## Version 1.2.0
 
