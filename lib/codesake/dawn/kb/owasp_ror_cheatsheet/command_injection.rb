@@ -15,10 +15,11 @@ module Codesake
               :glob=>"*.rb",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
-              :attack_pattern => ["eval", "System", "\`", "Kernel.exec"]
+              :attack_pattern => ["eval", "System", "\`", "Kernel.exec"],
+              :avoid_comments => true
             })
+            # @debug = true
           end
-
         end
       end
     end

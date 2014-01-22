@@ -14,6 +14,11 @@ module Codesake
         # if pattern attack is nor present.
         attr_reader   :negative_search
 
+        # This attribute is false by default. If true, it tells pattern
+        # matching check to ignore strings starting with the ruby single line
+        # comment separator, '#'.
+        attr_reader   :avoid_comments
+
         EXCLUSION_LIST = [
           "tags",
           "vendor/bundle", 
@@ -24,9 +29,11 @@ module Codesake
 
         def initialize(options={})
           super(options)
-          @attack_pattern   = options[:attack_pattern]
           @negative_search  = false
+          @avoid_comments = false
+          @attack_pattern   = options[:attack_pattern] unless options[:attack_pattern].nil?
           @negative_search  = options[:negative_search] unless options[:negative_search].nil? 
+          @avoid_comments  = options[:avoid_comments] unless options[:avoid_comments].nil? 
           @glob = "**"
           @glob = File.join(@glob, options[:glob]) unless options[:glob].nil?
         end
@@ -86,7 +93,12 @@ module Codesake
 
             regex=/#{pat}/
 
+            debug_me "@avoid_comments is #{@avoid_comments}"
+
             lines.each_with_index do |line,i|
+              debug_me "Line is a comment (#{line})" if line.strip.start_with?('#')
+              line = "" if line.strip.start_with?('#') && @avoid_comments
+              debug_me "Line is empty" if line.empty?
               hits << {:match=>line, :line=>i} unless (regex =~ line).nil?
             end
           end
