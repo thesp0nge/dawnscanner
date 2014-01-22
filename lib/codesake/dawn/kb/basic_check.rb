@@ -74,6 +74,7 @@ module Codesake
           @ruby_version   = options[:ruby_version]
 
           @evidences    = []
+          @evidences    = options[:evidences] unless options[:evidences].nil?
           @mitigated    = false
           @status       = false
           @debug        = false
