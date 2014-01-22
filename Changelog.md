@@ -7,6 +7,19 @@ frameworks.
 
 _latest update: Tue Jan 21 08:13:32 CET 2014_
 
+## Version 1.0.1 - codename: Lightning McQueen (2014-xx-xx)
+
+* Fixing issue #22. PatternMatchingCheck evaluates lines starting with the '#'
+  when applying regular expresion to get the job done. Of course this can be an
+  issue when it finds offending patterns inside comments (and this is why using
+  pattern matching in a security code review is EVIL!). Now there is an
+  attribute, avoid\_comments that tells the class to eventually strip leading
+  whitespaces from string and not to apply regex if the line is starting with
+  '#'.
+  Again, applying pattern matching approach to security leads to a lot of false
+  positives and should be avoided when possible, even with low severity checks
+  like this.
+
 ## Version 1.0.0 - codename: Lightning McQueen (2014-01-21)
 
 * Fixing issue #19 (https://github.com/codesake/codesake-dawn/issues/19). There
