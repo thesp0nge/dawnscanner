@@ -18,7 +18,8 @@ module Codesake
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
               :attack_pattern => ["attr_accessor"],
-              :negative_search=>true
+              :negative_search=>false,
+              :evidences=>["In one or more of your models, you use attr_accessor attribute modifier. This is risky since it exposes you to a massive assignment vulnerability. You have to carefully handle how your model receive data by setting all attribute to attr_reader and using a setter method validating input before saving to database."]
             })
             # @debug = true
           end
