@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Tue Jan 21 08:13:32 CET 2014_
+_latest update: Fri Jan 24 07:57:58 CET 2014_
 
 ## Version 1.0.1 - codename: Lightning McQueen (2014-xx-xx)
 
@@ -19,6 +19,8 @@ _latest update: Tue Jan 21 08:13:32 CET 2014_
   Again, applying pattern matching approach to security leads to a lot of false
   positives and should be avoided when possible, even with low severity checks
   like this.
+* Fixing issue #21. RoR cheatsheet security checks now have a detailed message
+  telling what's wen wrong with the code and why the check fired.
 
 ## Version 1.0.0 - codename: Lightning McQueen (2014-01-21)
 
