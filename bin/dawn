@@ -156,12 +156,12 @@ end
 if engine.count_vulnerabilities != 0
   $logger.log "#{engine.count_vulnerabilities} vulnerabilities found"
   engine.vulnerabilities.each do |vuln|
-    $logger.log "#{vuln[:name]} failed"
+    $logger.err "#{vuln[:name]} check failed"
     $logger.log "Description: #{vuln[:message]}" 
     $logger.log "Solution: #{vuln[:remediation]}"
     $logger.log "Evidence:"
     vuln[:evidences].each do |evidence|
-      $logger.log evidence
+      $logger.log "\t#{evidence}"
     end
   end
   if engine.has_reflected_xss?
