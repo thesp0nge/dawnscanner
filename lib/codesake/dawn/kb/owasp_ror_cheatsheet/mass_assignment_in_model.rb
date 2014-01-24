@@ -19,7 +19,9 @@ module Codesake
               :message=>message,
               :attack_pattern => ["attr_accessor"],
               :negative_search=>false,
-              :evidences=>["In one or more of your models, you use attr_accessor attribute modifier. This is risky since it exposes you to a massive assignment vulnerability. You have to carefully handle how your model receive data by setting all attribute to attr_reader and using a setter method validating input before saving to database."]
+              :avoid_comments=>true,
+              :evidences=>["In one or more of your models, you use attr_accessor attribute modifier. This is risky since it exposes you to a massive assignment vulnerability. You have to carefully handle how your model receive data by setting all attribute to attr_reader and using a setter method validating input before saving to database."],
+              :mitigation=>"Avoid attr_accessor attribute modifier in your models. You must use attr_reader as modifier and carefully filter your inputs before passing to the database layer."
             })
             # @debug = true
           end
