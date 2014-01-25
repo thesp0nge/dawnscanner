@@ -7,7 +7,7 @@ frameworks.
 
 _latest update: Fri Jan 24 07:57:58 CET 2014_
 
-## Version 1.0.1 - codename: Lightning McQueen (2014-xx-xx)
+## Version 1.0.1 - codename: Lightning McQueen (2014-01-25)
 
 * Fixing issue #22. PatternMatchingCheck evaluates lines starting with the '#'
   when applying regular expresion to get the job done. Of course this can be an
