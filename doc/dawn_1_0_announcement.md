@@ -42,9 +42,26 @@ Enjoy it!
 Paolo - paolo@codesake.com
 
 ## Twitter announcement
+
+### version 1.0.1
+
+@dawnscanner version 1.0.1 is out. It fixes two minor issues about #owasp #rubyonrails #cheatsheet #sinatra #padrino #security #scanner 
+
+### version 1.0.0
 @dawnscanner version 1.0.0 is out. Read the announcement: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-0-released/ #ruby #rails #sinatra #padrina #security #scanner
 
+
 ## Linkedin announcement 
+
+### version 1.0.1
+@dawnscanner version 1.0.1 is out. Read the announcement online. Codesake::Dawn makes security code review fun for ruby developers, it scans 142 CVE bulletins and future release will be able to scan custom ruby code for XSS, SQL Injections and business logic flaws. It supports Sinatra, Padrino and Ruby on Rails MVC framework out of the box. 
+
+https://twitter.com/rubygems/status/427066100367777792
+
+$ gem install codesake-dawn 
+$ have fun
+
+### version 1.0.0
 @dawnscanner version 1.0.0 is out. Read the announcement online. Codesake::Dawn makes security code review fun for ruby developers, it scans 142 CVE bulletins and future release will be able to scan custom ruby code for XSS, SQL Injections and business logic flaws. It supports Sinatra, Padrino and Ruby on Rails MVC framework out of the box. 
 
 $ gem install codesake-dawn 
