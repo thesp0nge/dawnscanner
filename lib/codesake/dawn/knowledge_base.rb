@@ -7,8 +7,17 @@ require "codesake/dawn/kb/operating_system_check"
 require "codesake/dawn/kb/combo_check"
 
 # Q&A related checks
+## Not revised code
 require "codesake/dawn/kb/not_revised_code"
-require "codesake/dawn/kb/owasp_ror_cheatsheet"
+# require "codesake/dawn/kb/owasp_ror_cheatsheet"
+
+## Owasp ROR Cheatsheet
+
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/command_injection'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/csrf'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/session_stored_in_database'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/mass_assignment_in_model'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/security_related_headers'
 
 # Security checks with no or pending CVE
 
@@ -249,7 +258,12 @@ module Codesake
       def self.load_security_checks
         [  
           Codesake::Dawn::Kb::NotRevisedCode.new,
-          Codesake::Dawn::Kb::OwaspRorCheatsheet.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new, 
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders.new, 
+          # Codesake::Dawn::Kb::OwaspRorCheatsheet.new,
           Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
           Codesake::Dawn::Kb::NokogiriDos20131217.new,
           Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217.new,

@@ -15,10 +15,12 @@ module Codesake
               :glob=>"*.rb",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
-              :attack_pattern => ["eval", "System", "\`", "Kernel.exec"]
+              :attack_pattern => ["eval", "System", "\`", "Kernel.exec"],
+              :avoid_comments => true,
+              :mitigation=>"Please validate the code you pass as argument to eval, System, Kernel.exec and friends. If you generate your command line with user controlled values, can lead to an arbitrary code execution."
             })
+            # @debug = true
           end
-
         end
       end
     end

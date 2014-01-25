@@ -24,10 +24,9 @@ module Codesake
                     'X-Content-Type-Options' => 'nosniff',	  	
                     'X-XSS-Protection' => '1;'
                   }"],
-              :negative_search=>true
+              :negative_search=>true,
+              :mitigation=>"Use response headers like X-Frame-Options, X-Content-Type-Options, X-XSS-Protection in your project."
             })
-
-            
           end
         end
       end
