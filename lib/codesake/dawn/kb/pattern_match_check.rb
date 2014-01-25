@@ -14,6 +14,11 @@ module Codesake
         # if pattern attack is nor present.
         attr_reader   :negative_search
 
+        # This attribute is false by default. If true, it tells pattern
+        # matching check to ignore strings starting with the ruby single line
+        # comment separator, '#'.
+        attr_reader   :avoid_comments
+
         EXCLUSION_LIST = [
           "tags",
           "vendor/bundle", 
@@ -24,11 +29,15 @@ module Codesake
 
         def initialize(options={})
           super(options)
-          @attack_pattern   = options[:attack_pattern]
           @negative_search  = false
+          @avoid_comments = false
+          @attack_pattern   = options[:attack_pattern] unless options[:attack_pattern].nil?
           @negative_search  = options[:negative_search] unless options[:negative_search].nil? 
+          @avoid_comments  = options[:avoid_comments] unless options[:avoid_comments].nil? 
+          @evidences  = options[:evidences] unless options[:evidences].nil? 
           @glob = "**"
           @glob = File.join(@glob, options[:glob]) unless options[:glob].nil?
+          debug_me("EVIDENCES ARE #{@evidences.inspect}")
         end
 
         def must_exclude?(filename)
@@ -40,19 +49,26 @@ module Codesake
         end
 
         def vuln?
+          found = false
+          matches = nil
           Dir.glob(File.join("#{root_dir}", @glob)).each do |filename|
             debug_me("#{File.basename(__FILE__)}@#{__LINE__}: analyzing #{filename}: search is #{@negative_search}")
             matches = []
             begin
               matches = run(load_file(filename)) if File.exists?(filename) && File.file?(filename) && ! File.binary?(filename) && ! must_exclude?(filename)
+              found = ! matches.empty?
             rescue ArgumentError => e
               puts "Skipping pattern match check for #{filename}: #{e.message}"
             end
-            @evidences << {:filename=>filename, :matches=>matches} unless matches.empty?
+            @evidences << {:filename=>filename, :matches=>matches} unless found
           end
          
-          ret_value = ! @evidences.empty? unless @negative_search
-          ret_value = @evidences.empty? if @negative_search
+          debug_me("FOUND IS: #{found}")
+          debug_me("EVIDENCES ARE: #{@evidences.inspect}")
+          debug_me("MATCHES: #{matches}")
+
+          ret_value = found unless @negative_search
+          ret_value = ! found if @negative_search
 
           debug_me("#{File.basename(__FILE__)}@#{__LINE__}: evidences #=> #{@evidences}")
           debug_me("#{File.basename(__FILE__)}@#{__LINE__}: ret_value #=> #{ret_value}")
@@ -86,11 +102,16 @@ module Codesake
 
             regex=/#{pat}/
 
+            debug_me "@avoid_comments is #{@avoid_comments}"
+
             lines.each_with_index do |line,i|
+              debug_me("LINE IS: #{line}")
+              line = "" if line.strip.start_with?('#') && @avoid_comments
               hits << {:match=>line, :line=>i} unless (regex =~ line).nil?
             end
           end
 
+          debug_me("HITS IS: #{hits}")
           hits
         end
 

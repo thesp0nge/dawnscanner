@@ -16,7 +16,8 @@ module Codesake
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
               :attack_pattern => ["protect_from_forgery"],
-              :negative_search=>true
+              :negative_search=>true,
+              :mitigation=>"Make sure you are using Rails protect_from_forgery facilities in application_controller.rMake sure you are using Rails protect_from_forgery facilities in application_controller.rb"
             })
             # @debug = true
           end

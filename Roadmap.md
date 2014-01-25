@@ -41,6 +41,10 @@ _latest update: Fri Jan 17 08:09:29 CET 2014_
   a bundle install and do a code review.
 * Add support for github hooks
 * Add a ruby deprecation check, accordingly to https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
+* Add a severity attribute to basic check. It must be calculated automatically
+  on the cvss_score or it may be overriden upon check creation.
+* Better bin/dawn script output formatting using some library like PrettyPrint
+  (this can involve a change in codesake-commons package).
 
 ## Version 1.2.0
 
