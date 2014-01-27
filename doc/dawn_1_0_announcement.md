@@ -58,7 +58,7 @@ Paolo - paolo@codesake.com
 ## Linkedin announcement 
 
 ### version 1.0.2
-@dawnscanner version 1.0.1 is out. Read the announcement online. Codesake::Dawn makes security code review fun for ruby developers, it scans 142 CVE bulletins and future release will be able to scan custom ruby code for XSS, SQL Injections and business logic flaws. It supports Sinatra, Padrino and Ruby on Rails MVC framework out of the box. 
+@dawnscanner version 1.0.2 is out. Read the announcement online. Codesake::Dawn makes security code review fun for ruby developers, it scans 142 CVE bulletins and future release will be able to scan custom ruby code for XSS, SQL Injections and business logic flaws. It supports Sinatra, Padrino and Ruby on Rails MVC framework out of the box. 
 
 
 https://twitter.com/rubygems/status/427768158284677120
