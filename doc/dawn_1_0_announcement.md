@@ -45,7 +45,7 @@ Paolo - paolo@codesake.com
 
 ### version 1.0.2
 
-@dawnscanner version 1.0.2 is out. It fixes an annoying bug when rainbow gem version 2.0.0 is installed. #sinatra #padrino #rubyonrails #security #scanner
+@dawnscanner version 1.0.2 is out. It fixes an annoying bug whit rainbow gem 2.0.0 #sinatra #padrino #rubyonrails #security #scanner 
 
 ### version 1.0.1
 
