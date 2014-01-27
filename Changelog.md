@@ -7,6 +7,13 @@ frameworks.
 
 _latest update: Fri Jan 24 07:57:58 CET 2014_
 
+## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
+
+* Fixing issue #27. With rainbow gem version 2.0.0 there is an exception while
+  codesake-commons logging facilities tries to print something with the .color
+  method. Now Codesake::Dawn uses a new codesake-commons gem version that fixes
+  how rainbow gem deals with colorized output.
+
 ## Version 1.0.1 - codename: Lightning McQueen (2014-01-25)
 
 * Fixing issue #22. PatternMatchingCheck evaluates lines starting with the '#'
