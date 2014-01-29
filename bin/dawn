@@ -2,6 +2,9 @@
 
 require 'getoptlong'
 require 'json'
+require 'terminal-table'
+
+require 'justify'
 
 require 'codesake-commons'
 require 'codesake-dawn'
@@ -13,6 +16,7 @@ VALID_OUTPUT_FORMAT   = %w(console json csv html)
 $logger  = Codesake::Commons::Logging.instance
 $logger.helo APPNAME, Codesake::Dawn::VERSION
 opts    = GetoptLong.new(
+  [ '--ascii-report',           '-a',   GetoptLong::NO_ARGUMENT],
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
@@ -28,7 +32,7 @@ opts    = GetoptLong.new(
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false, :ascii_report=>false}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -40,6 +44,8 @@ opts.each do |opt, val|
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
+  when '--ascii-report'
+    options[:ascii_report] = true
   when '--rails'
     options[:mvc]=:rails
   when '--sinatra'
@@ -143,6 +149,8 @@ $logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::R
 
 $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
 
+unless options[:ascii_report]
+
 $logger.log "scanning #{target}"
 $logger.log "#{engine.name} v#{engine.get_mvc_version} detected" unless engine.name == "Gemfile.lock"
 $logger.log "#{engine.force} v#{engine.get_mvc_version} detected" if engine.name == "Gemfile.lock"
@@ -186,4 +194,49 @@ if engine.mitigated_issues.count != 0
   end
 end
 
+else
+  ret = engine.apply_all
+  # 0_First table: executive summary
+  rows = []
+  rows << ['Dawn version', Codesake::Dawn::VERSION]
+  rows << ['Scan started', engine.scan_start]
+  rows << ['Scan duration', "#{engine.scan_time.round(3)} sec"]
+  rows << ['Target', target]
+  rows << ['MVC detected framework', "#{engine.name} v#{engine.get_mvc_version}" ] unless engine.name == "Gemfile.lock"
+  rows << ['MVC detected framework', "#{engine.force} v#{engine.get_mvc_version}" ] if engine.name == "Gemfile.lock"
+  if ret
+    rows << ['Applied checks', "#{engine.applied_checks} security checks"]
+    rows << ['Skipped checks', "#{engine.skipped_checks} security checks"]
+  else
+    rows << ['Applied checks', "No security checks in the knowledge base"]
+  end
+  rows << ['Vulnerabilities found', engine.count_vulnerabilities]
+  rows << ['Mitigated issues found', engine.mitigated_issues.count]
+  table = Terminal::Table.new :title=>'Scan summary', :rows => rows
+  puts table
+
+
+  if engine.count_vulnerabilities > 0
+
+    # 1_Vulnerabilities
+    rows = []
+    engine.vulnerabilities.each do |vuln|
+      rows << [vuln[:name].justify(10), vuln[:message].justify(50), vuln[:remediation].justify(15), vuln[:evidences].join.justify(15)]
+      rows << :separator
+    end
+    table = Terminal::Table.new :title=>"Vulnerabilities", :headings=>['Issue', 'Description', 'Solution', 'Evidences'], :rows=>rows
+    puts table
+  end
+  if engine.mitigated_issues.count > 0
+    # 2_Mitigated issues
+    rows = []
+    engine.mitigated_issues.each do |vuln|
+      rows << [vuln[:name].justify(10), vuln[:message].justify(50), vuln[:evidences].join.justify(15)]
+      rows << :separator
+    end
+    table = Terminal::Table.new :title=>"Mitigated issues", :headings=>['Issue', 'Description', 'Evidences'], :rows=>rows
+    puts table
+  end
+
+end
 $logger.bye

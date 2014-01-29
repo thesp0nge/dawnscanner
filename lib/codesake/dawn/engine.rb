@@ -7,6 +7,8 @@ module Codesake
 
       attr_reader :target
       attr_reader :name
+      attr_reader :scan_start
+      attr_reader :scan_stop
       # This attribute is used when @name == "Gemfile.lock" to force the
       # loading of specific MVC checks
       attr_reader :force
@@ -44,6 +46,8 @@ module Codesake
 
       def initialize(dir=nil, name="", options={})
         @name = name
+        @scan_start = Time.now
+        @scan_stop = @scan_start
         @mvc_version = ""
         @gemfile_lock = ""
         @force = ""
@@ -243,8 +247,14 @@ module Codesake
       end
 
       def apply_all
+        @scan_start = Time.now
+        debug_me("SCAN STARTED: #{@scan_start}")
         load_knowledge_base if @checks.nil?
-        return false if @checks.empty?
+        if @checks.empty?
+          @scan_stop = Time.now
+          debug_me("SCAN STOPPED: #{@scan_stop}")
+          return false
+        end
 
         @checks.each do |check|
           unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @name == "Gemfile.lock")
@@ -269,9 +279,15 @@ module Codesake
             @skipped_checks += 1
           end
         end
+        @scan_stop = Time.now
+        debug_me("SCAN STOPPED: #{@scan_stop}")
 
         true
 
+      end
+
+      def scan_time
+        @scan_stop - @scan_start
       end
 
       def is_applied?(name)
