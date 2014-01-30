@@ -7,7 +7,7 @@ frameworks.
 
 This is an ongoing roadmap for the Codesake::Dawn source code review tool.
 
-_latest update: Fri Jan 17 08:09:29 CET 2014_
+_latest update: Thu Jan 30 08:39:13 CET 2014_
 
 ## Version 1.1.0
 
@@ -43,8 +43,7 @@ _latest update: Fri Jan 17 08:09:29 CET 2014_
 * Add a ruby deprecation check, accordingly to https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
 * Add a severity attribute to basic check. It must be calculated automatically
   on the cvss_score or it may be overriden upon check creation.
-* Better bin/dawn script output formatting using some library like PrettyPrint
-  (this can involve a change in codesake-commons package).
+* bin/dawn refactoring using the new Reporting class to produce json, csv, html output
 
 ## Version 1.2.0
 

@@ -18,8 +18,8 @@ module Codesake
 
     VERSION   = "1.1.0"
     CODENAME  = "Lightning McQueen"
-    # RELEASE   = "(development)"
-    RELEASE   = "20140125"
+    RELEASE   = "(development)"
+    # RELEASE   = "20140125"
 
   end
 end

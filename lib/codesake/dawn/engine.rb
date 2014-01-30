@@ -56,6 +56,7 @@ module Codesake
         @vulnerabilities = []
         @mitigated_issues = []
         @applied = []
+        @reflected_xss = []
         @engine_error = false
         @debug = false
         @debug = options[:debug] unless options[:debug].nil?
