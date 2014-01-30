@@ -7,7 +7,7 @@ frameworks.
 
 This is an ongoing roadmap for the Codesake::Dawn source code review tool.
 
-_latest update: Mon Jan 27 08:13:14 CET 2014_
+_latest update: Thu Jan 30 08:39:13 CET 2014_
 
 ## Version 1.1.0
 
@@ -48,6 +48,12 @@ _latest update: Mon Jan 27 08:13:14 CET 2014_
   the unsafe pattern
 * add a check against deprecated ruby / gems version. I will handle MVC gems
   right now.
+* Better bin/dawn script output formatting using some library like PrettyPrint
+  (this can involve a change in codesake-commons package). We will use tables
+  to create ascii organized reports.
+* Create a digital signature as described [here](http://rubygems.rubyforge.org/rubygems-update/Gem/Security.html)
+* Add preliminary Cross Site Scripting detection for Ruby on Rails.
+* bin/dawn refactoring using the new Reporting class to produce json, csv, html output
 
 ## Version 1.2.0
 
@@ -60,11 +66,6 @@ _latest update: Mon Jan 27 08:13:14 CET 2014_
   https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
 * Add a severity attribute to basic check. It must be calculated automatically
   on the cvss_score or it may be overriden upon check creation.
-* Better bin/dawn script output formatting using some library like PrettyPrint
-  (this can involve a change in codesake-commons package). We will use tables
-  to create ascii organized reports.
-* Create a digital signature as described [here](http://rubygems.rubyforge.org/rubygems-update/Gem/Security.html)
-* Add preliminary Cross Site Scripting detection for Ruby on Rails.
 
 ## Version 1.3.0
 

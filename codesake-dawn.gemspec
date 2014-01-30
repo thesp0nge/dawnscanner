@@ -25,6 +25,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'ruby_parser'
   gem.add_dependency 'sys-uname'
   gem.add_dependency 'grit'
+  gem.add_dependency 'terminal-table'
+  gem.add_dependency 'justify'
 
   gem.add_dependency ('coveralls')
 

@@ -2,6 +2,9 @@
 
 require 'getoptlong'
 require 'json'
+require 'terminal-table'
+
+require 'justify'
 
 require 'codesake-commons'
 require 'codesake-dawn'
@@ -13,6 +16,7 @@ VALID_OUTPUT_FORMAT   = %w(console json csv html)
 $logger  = Codesake::Commons::Logging.instance
 $logger.helo APPNAME, Codesake::Dawn::VERSION
 opts    = GetoptLong.new(
+  [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
@@ -28,7 +32,7 @@ opts    = GetoptLong.new(
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false}
+options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false, :ascii_tabular_report=>false}
 
 trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
@@ -40,6 +44,8 @@ opts.each do |opt, val|
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
+  when '--ascii-tabular-report'
+    options[:ascii_tabular_report] = true
   when '--rails'
     options[:mvc]=:rails
   when '--sinatra'
@@ -123,6 +129,13 @@ if options[:exit_on_warn]
   end
 end
 
+$logger.die "missing target framework option" if engine.nil?
+$logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::RELEASE == "(development)"
+$logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
+
+engine.load_knowledge_base
+ret = engine.apply_all
+
 if options[:count_only] 
   ret = Codesake::Dawn::Core.dry_run(target, engine)
 
@@ -136,12 +149,8 @@ if options[:output] == "json"
   Kernel.exit(0)
 end
 
-$logger.die "missing target framework option" if engine.nil?
 
-engine.load_knowledge_base
-$logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::RELEASE == "(development)"
-
-$logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
+unless options[:ascii_tabular_report]
 
 $logger.log "scanning #{target}"
 $logger.log "#{engine.name} v#{engine.get_mvc_version} detected" unless engine.name == "Gemfile.lock"
@@ -186,4 +195,7 @@ if engine.mitigated_issues.count != 0
   end
 end
 
+else
+  Codesake::Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>:tabular}).report
+end
 $logger.bye

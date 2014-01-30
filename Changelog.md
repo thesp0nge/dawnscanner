@@ -7,6 +7,11 @@ frameworks.
 
 _latest update: Fri Jan 24 07:57:58 CET 2014_
 
+## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
+
+* Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
+  tables. A bit of bin/dawn refactoring was necessary.
+
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 
 * Fixing issue #27. With rainbow gem version 2.0.0 there is an exception while
