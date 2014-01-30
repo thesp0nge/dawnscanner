@@ -17,6 +17,7 @@ $logger  = Codesake::Commons::Logging.instance
 $logger.helo APPNAME, Codesake::Dawn::VERSION
 opts    = GetoptLong.new(
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
+  [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
@@ -44,6 +45,8 @@ opts.each do |opt, val|
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
+  when '--json'
+    options[:output] = "json"
   when '--ascii-tabular-report'
     options[:ascii_tabular_report] = true
   when '--rails'
@@ -145,7 +148,7 @@ if options[:count_only]
 end
 
 if options[:output] == "json"
-  puts Codesake::Dawn::Core.output_json_run(target, engine) 
+  Codesake::Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>:json}).report
   Kernel.exit(0)
 end
 

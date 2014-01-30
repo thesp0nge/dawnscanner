@@ -26,31 +26,6 @@ module Codesake
       end
 
 
-      def self.output_json_run(target = "", engine = nil)
-        result = {}
-        return {:status=>"KO", :message=>"BUG at #{__FILE__}@#{__LINE__}: target is empty or engine is nil."}.to_json if target.empty? or engine.nil?
-        return {:status=>"KO", :message=>"#{target} doesn't exist"}.to_json if ! Dir.exist?(target)
-        check_applied = Codesake::Dawn::Core.dry_run(target, engine)
-        return {:status=>"KO", :message=>"no security checks applied"}.to_json unless check_applied
-
-        result[:status]="OK"
-        result[:target]=target
-        result[:mvc]=engine.name
-        result[:mvc_version]=engine.get_mvc_version
-        result[:vulnerabilities_count]=engine.count_vulnerabilities
-        result[:vulnerabilities]=[]
-        engine.vulnerabilities.each do |v|
-          result[:vulnerabilities] << v[:name]
-        end
-        result[:mitigated_vuln_count]=engine.mitigated_issues.count
-        result[:mitigated_vuln] = engine.mitigated_issues
-        result[:reflected_xss] = []
-        engine.reflected_xss.each do |r|
-          result[:reflected_xss] << "request parameter \"#{r[:sink_source]}\""
-        end
-
-        result.to_json
-      end 
 
 
       def self.dump_knowledge_base(verbose = false)

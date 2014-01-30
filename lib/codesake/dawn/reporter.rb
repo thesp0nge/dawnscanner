@@ -14,7 +14,8 @@ module Codesake
       end
 
       def report
-        ascii_tabular_report if @format == :tabular
+        ascii_tabular_report  if @format == :tabular
+        json_report           if @format == :json
       end
       private
       def ascii_tabular_report
@@ -76,6 +77,42 @@ module Codesake
           puts table
         end
       end
+
+
+      def json_report
+        result = {}
+        return {:status=>"KO", :message=>"BUG at #{__FILE__}@#{__LINE__}: target is empty or engine is nil."}.to_json if @engine.target.empty? or @engine.nil?
+        return {:status=>"KO", :message=>"#{target} doesn't exist"}.to_json if ! Dir.exist?(@engine.target)
+        return {:status=>"KO", :message=>"no security checks applied"}.to_json unless @ret
+
+        result[:status]="OK"
+        result[:dawn_version] = Codesake::Dawn::VERSION
+        result[:dawn_status] = "Develoment version" if Codesake::Dawn::RELEASE == "(development)"
+        result[:scan_started] = @engine.scan_start
+        result[:scan_duration] = "#{@engine.scan_time.round(3)} sec"
+        result[:target]=@engine.target
+        result[:mvc]=@engine.name unless @engine.name == "Gemfile.lock"
+        result[:mvc]=@engine.force if @engine.name == "Gemfile.lock"
+        result[:mvc_version]=@engine.get_mvc_version
+
+        result[:applied_checks_count] = @engine.applied_checks
+        result[:skipped_checks_count] = @engine.skipped_checks
+        result[:vulnerabilities_count]=@engine.count_vulnerabilities
+
+        result[:mitigated_issues_count] = @engine.mitigated_issues.count
+        result[:reflected_xss_count] = @engine.reflected_xss.count
+        result[:vulnerabilities]=[]
+        @engine.vulnerabilities.each do |v|
+          result[:vulnerabilities] << v[:name]
+        end
+        result[:mitigated_vuln] = @engine.mitigated_issues
+        result[:reflected_xss] = []
+        @engine.reflected_xss.each do |r|
+          result[:reflected_xss] << "request parameter \"#{r[:sink_source]}\""
+        end
+
+        puts result.to_json
+      end 
     end
   end
 end
