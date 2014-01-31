@@ -62,6 +62,7 @@ module Codesake
         @debug = options[:debug] unless options[:debug].nil?
         @applied_checks = 0
         @skipped_checks = 0
+        @gemfile_lock_sudo = false
 
         set_target(dir) unless dir.nil?
         @ruby_version = get_ruby_version if dir.nil?
@@ -88,6 +89,7 @@ module Codesake
           @name = options[:guessed_mvc][:name] 
           @mvc_version = options[:guessed_mvc][:version]
           @connected_gems = options[:guessed_mvc][:connected_gems]
+          @gemfile_lock_sudo = true
         end
 
         load_knowledge_base
@@ -258,7 +260,7 @@ module Codesake
         end
 
         @checks.each do |check|
-          unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @name == "Gemfile.lock")
+          unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
 
             @applied << { :name => name }
             debug_me "applying check #{check.name}" 
