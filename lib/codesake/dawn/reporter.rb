@@ -3,7 +3,6 @@ module Codesake
     class Reporter
 
       def initialize(options={})
-        @format = :txt
         @engine = nil
         @ret = false
 
@@ -11,13 +10,22 @@ module Codesake
         @format = options[:format] unless options[:format].nil?
         @engine = options[:engine] unless options[:engine].nil?
 
+        @format = :console unless is_valid_format?(@format)
       end
 
       def report
         ascii_tabular_report  if @format == :tabular
         json_report           if @format == :json
+        ascii_plain_report    if @format == :console
       end
       private
+
+      def is_valid_format?(format)
+        return false if format.nil?
+        return true if (format == :console) || (format == :tabular) || (format == :json) || (format == :html) || (format == :csv)
+        return false # otherwise
+      end
+
       def ascii_tabular_report
 
         # 0_First table: executive summary
@@ -113,6 +121,52 @@ module Codesake
 
         puts result.to_json
       end 
+
+      def ascii_plain_report
+
+        $logger.log "scanning #{@engine.target}"
+        $logger.log "#{@engine.name} v#{@engine.get_mvc_version} detected" unless @engine.name == "Gemfile.lock"
+        $logger.log "#{@engine.force} v#{@engine.get_mvc_version} detected" if @engine.name == "Gemfile.lock"
+        $logger.log "applying all security checks" 
+        if @ret
+          $logger.log "#{@engine.applied_checks} security checks applied - #{@engine.skipped_checks} security checks skipped"
+        else
+          $logger.err "no security checks in the knowledge base"
+        end
+
+        if @engine.count_vulnerabilities != 0
+          $logger.log "#{@engine.count_vulnerabilities} vulnerabilities found"
+          @engine.vulnerabilities.each do |vuln|
+            $logger.err "#{vuln[:name]} check failed"
+            $logger.log "Description: #{vuln[:message]}" 
+            $logger.log "Solution: #{vuln[:remediation]}"
+            $logger.log "Evidence:"
+            vuln[:evidences].each do |evidence|
+              $logger.log "\t#{evidence}"
+            end
+          end
+          if @engine.has_reflected_xss?
+            $logger.log "#{@engine.reflected_xss.count} reflected XSS found"
+            @engine.reflected_xss.each do |vuln|
+              $logger.log "request parameter \"#{vuln[:sink_source]}\" is used without escaping in #{vuln[:sink_view]}. It was read here: #{vuln[:sink_file]}@#{vuln[:sink_line]}"
+              $logger.err "evidence: #{vuln[:sink_evidence]}"
+            end
+          end
+
+        else
+          $logger.ok "no vulnerabilities found."
+        end
+
+        if @engine.mitigated_issues.count != 0
+          $logger.log "#{@engine.mitigated_issues.count} mitigated vulnerabilities found"
+          @engine.mitigated_issues.each do |vuln|
+            $logger.ok "#{vuln[:name]} mitigated"
+            vuln[:evidences].each do |evidence|
+              $logger.err evidence
+            end
+          end
+        end
+      end
     end
   end
 end

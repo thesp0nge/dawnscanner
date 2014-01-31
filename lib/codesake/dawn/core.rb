@@ -4,10 +4,11 @@ module Codesake
 
       def self.help
         puts "Usage: dawn [options] target_directory"
-        printf "\n\nExamples:"
-        puts "$ dawn a_sinatra_webapp_directory"
-        puts "$ dawn -C the_rails_blog_engine"
-        puts "$ dawn -C --output json a_sinatra_webapp_directory"
+        printf "\nExamples:\n"
+        puts "\t$ dawn a_sinatra_webapp_directory"
+        puts "\t$ dawn -C the_rails_blog_engine"
+        puts "\t$ dawn -C --json a_sinatra_webapp_directory"
+        puts "\t$ dawn --ascii-tabular-report my_rails_blog_ecommerce"
         printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application" 
         printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
         printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
@@ -15,7 +16,7 @@ module Codesake
         printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
         printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
         printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
-        printf "\n   -a, --ascii-table-report\t\t\tcause dawn to format findings using table in ascii art"
+        printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using table in ascii art"
         printf "\n   -j, --json\t\t\t\t\tcause dawn to format findings using json"
         printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
         printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
@@ -23,11 +24,8 @@ module Codesake
         printf "\n   -v, --version\t\t\t\tshow version information"
         printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
-        0
+        true 
       end
-
-
-
 
       def self.dump_knowledge_base(verbose = false)
         kb = Codesake::Dawn::KnowledgeBase.new
@@ -49,12 +47,6 @@ module Codesake
 
       end
 
-
-      def self.dry_run(target, engine)
-        engine.set_target(target) 
-        engine.load_knowledge_base
-        engine.apply_all
-      end
       
       # guess_mvc is very close to detect_mvc despite it accepts a
       # filename as input and it tries to guess the mvc framework used from the
