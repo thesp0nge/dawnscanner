@@ -4,10 +4,12 @@ module Codesake
 
       def self.help
         puts "Usage: dawn [options] target_directory"
-        printf "\n\nExamples:"
-        puts "$ dawn a_sinatra_webapp_directory"
-        puts "$ dawn -C the_rails_blog_engine"
-        puts "$ dawn -C --output json a_sinatra_webapp_directory"
+        printf "\nExamples:\n"
+        puts "\t$ dawn a_sinatra_webapp_directory"
+        puts "\t$ dawn -C the_rails_blog_engine"
+        puts "\t$ dawn -C --json a_sinatra_webapp_directory"
+        puts "\t$ dawn --ascii-tabular-report my_rails_blog_ecommerce"
+        puts "\t$ dawn --html -F my_report.html my_rails_blog_ecommerce"
         printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application" 
         printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
         printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
@@ -15,43 +17,17 @@ module Codesake
         printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
         printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
         printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
-        printf "\n   -o, --output [console, json. csv, html]\tthe output will be in the specified format"
+        printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using table in ascii art"
+        printf "\n   -j, --json\t\t\t\t\tcause dawn to format findings using json"
         printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
         printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
         printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
+        printf "\n   -F, --file\t\t\t\t\ttells dawn to write output to filename"
         printf "\n   -v, --version\t\t\t\tshow version information"
         printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
-        0
+        true 
       end
-
-
-      def self.output_json_run(target = "", engine = nil)
-        result = {}
-        return {:status=>"KO", :message=>"BUG at #{__FILE__}@#{__LINE__}: target is empty or engine is nil."}.to_json if target.empty? or engine.nil?
-        return {:status=>"KO", :message=>"#{target} doesn't exist"}.to_json if ! Dir.exist?(target)
-        check_applied = Codesake::Dawn::Core.dry_run(target, engine)
-        return {:status=>"KO", :message=>"no security checks applied"}.to_json unless check_applied
-
-        result[:status]="OK"
-        result[:target]=target
-        result[:mvc]=engine.name
-        result[:mvc_version]=engine.get_mvc_version
-        result[:vulnerabilities_count]=engine.count_vulnerabilities
-        result[:vulnerabilities]=[]
-        engine.vulnerabilities.each do |v|
-          result[:vulnerabilities] << v[:name]
-        end
-        result[:mitigated_vuln_count]=engine.mitigated_issues.count
-        result[:mitigated_vuln] = engine.mitigated_issues
-        result[:reflected_xss] = []
-        engine.reflected_xss.each do |r|
-          result[:reflected_xss] << "request parameter \"#{r[:sink_source]}\""
-        end
-
-        result.to_json
-      end 
-
 
       def self.dump_knowledge_base(verbose = false)
         kb = Codesake::Dawn::KnowledgeBase.new
@@ -73,12 +49,6 @@ module Codesake
 
       end
 
-
-      def self.dry_run(target, engine)
-        engine.set_target(target) 
-        engine.load_knowledge_base
-        engine.apply_all
-      end
       
       # guess_mvc is very close to detect_mvc despite it accepts a
       # filename as input and it tries to guess the mvc framework used from the

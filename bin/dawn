@@ -14,27 +14,27 @@ LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
 $logger  = Codesake::Commons::Logging.instance
-$logger.helo APPNAME, Codesake::Dawn::VERSION
 opts    = GetoptLong.new(
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
+  [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
+  [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
-  [ '--gem-lock',               '-G',   GetoptLong::OPTIONAL_ARGUMENT],  
+  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],  
   [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT],
   [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
-  [ '--output',                 '-o',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
   [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
+  [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :count_only=>false, :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false, :ascii_tabular_report=>false}
+options = {:verbose=>false, :output=>"console", :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false}
 
-trap("INT")   { $logger.die('[INTERRUPTED]') }
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
@@ -44,26 +44,31 @@ opts.each do |opt, val|
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
+  when '--json'
+    options[:output] = "json"
   when '--ascii-tabular-report'
-    options[:ascii_tabular_report] = true
+    options[:output] = "tabular"
+  when '--html'
+    options[:output] = "html"
   when '--rails'
     options[:mvc]=:rails
   when '--sinatra'
     options[:mvc]=:sinatra
   when '--padrino'
     options[:mvc]=:padrino
+  when '--file'
+    options[:filename] = val
   when '--gem-lock'
     options[:gemfile_scan] = true
-    options[:gemfile_name] = val unless val.nil?
-    guess = Codesake::Dawn::Core.guess_mvc(val)
-    $logger.log "Guessed MVC: #{guess[:name]} v#{guess[:version]}"
+    unless val.empty?
+      options[:gemfile_name] = val 
+      guess = Codesake::Dawn::Core.guess_mvc(val)
+    end
     
   when '--verbose'
     options[:verbose]=true
-  when '--output'
-    options[:output] = val unless VALID_OUTPUT_FORMAT.find_index(val).nil?
   when '--count-only'
-    options[:count_only] = true
+    options[:output] = "count"
   when '--debug'
     options[:debug] = true
   when '--exit-on-warn'
@@ -97,6 +102,8 @@ end
 
 target=ARGV.shift
 
+$logger.helo APPNAME, Codesake::Dawn::VERSION
+trap("INT")   { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
@@ -111,13 +118,13 @@ unless options[:gemfile_scan]
   rescue ArgumentError => e
     $logger.die(e.message)
   end
+else
+  engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], guess) # if options[:gemfile_scan]
 end
-
 
 engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails && options[:gemfile_scan].nil?
 engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra && options[:gemfile_scan].nil?
 engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino && options[:gemfile_scan].nil? 
-engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], options[:debug], guess) if options[:gemfile_scan]
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 
@@ -129,6 +136,11 @@ if options[:exit_on_warn]
   end
 end
 
+if options[:debug]
+  $logger.warn "putting engine in debug mode"
+  engine.debug = true
+end
+
 $logger.die "missing target framework option" if engine.nil?
 $logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::RELEASE == "(development)"
 $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
@@ -136,66 +148,11 @@ $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine
 engine.load_knowledge_base
 ret = engine.apply_all
 
-if options[:count_only] 
-  ret = Codesake::Dawn::Core.dry_run(target, engine)
-
+if options[:output] == "count" 
   puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
   puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
   Kernel.exit(0)
 end
 
-if options[:output] == "json"
-  puts Codesake::Dawn::Core.output_json_run(target, engine) 
-  Kernel.exit(0)
-end
-
-
-unless options[:ascii_tabular_report]
-
-$logger.log "scanning #{target}"
-$logger.log "#{engine.name} v#{engine.get_mvc_version} detected" unless engine.name == "Gemfile.lock"
-$logger.log "#{engine.force} v#{engine.get_mvc_version} detected" if engine.name == "Gemfile.lock"
-$logger.log "applying all security checks" 
-if engine.apply_all 
-  $logger.log "#{engine.applied_checks} security checks applied - #{engine.skipped_checks} security checks skipped"
-else
-  $logger.err "no security checks in the knowledge base"
-end
-
-if engine.count_vulnerabilities != 0
-  $logger.log "#{engine.count_vulnerabilities} vulnerabilities found"
-  engine.vulnerabilities.each do |vuln|
-    $logger.err "#{vuln[:name]} check failed"
-    $logger.log "Description: #{vuln[:message]}" 
-    $logger.log "Solution: #{vuln[:remediation]}"
-    $logger.log "Evidence:"
-    vuln[:evidences].each do |evidence|
-      $logger.log "\t#{evidence}"
-    end
-  end
-  if engine.has_reflected_xss?
-    $logger.log "#{engine.reflected_xss.count} reflected XSS found"
-    engine.reflected_xss.each do |vuln|
-      $logger.log "request parameter \"#{vuln[:sink_source]}\" is used without escaping in #{vuln[:sink_view]}. It was read here: #{vuln[:sink_file]}@#{vuln[:sink_line]}"
-      $logger.err "evidence: #{vuln[:sink_evidence]}"
-    end
-  end
-
-else
-  $logger.ok "no vulnerabilities found."
-end
-
-if engine.mitigated_issues.count != 0
-  $logger.log "#{engine.mitigated_issues.count} mitigated vulnerabilities found"
-  engine.mitigated_issues.each do |vuln|
-    $logger.ok "#{vuln[:name]} mitigated"
-    vuln[:evidences].each do |evidence|
-      $logger.err evidence
-    end
-  end
-end
-
-else
-  Codesake::Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>:tabular}).report
-end
+Codesake::Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym, :filename=>options[:filename]}).report
 $logger.bye
