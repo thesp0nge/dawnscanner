@@ -115,28 +115,32 @@ $ dawn [options] target
 In case of need, there is a quick command line option reference running ```dawn -h``` at your OS prompt.
 
 ```
-$ bundle exec dawn -h
-08:05:21 [*] dawn v1.0.0 is starting up
+$ dawn -h
+
 Usage: dawn [options] target_directory
 
+Examples:
+    $ dawn a_sinatra_webapp_directory
+    $ dawn -C the_rails_blog_engine
+    $ dawn -C --json a_sinatra_webapp_directory        
+    $ dawn --ascii-tabular-report my_rails_blog_ecommerce        
+    $ dawn --html -F my_report.html my_rails_blog_ecommerce
 
-Examples:$ dawn a_sinatra_webapp_directory
-$ dawn -C the_rails_blog_engine
-$ dawn -C --output json a_sinatra_webapp_directory
-
-   -r, --rails					force dawn to consider the target a rails application
-   -s, --sinatra				force dawn to consider the target a sinatra application
-   -p, --padrino				force dawn to consider the target a padrino application
-   -G, --gem-lock				force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock
-   -D, --debug					enters dawn debug mode
-   -f, --list-known-framework			list ruby MVC frameworks supported by dawn
-   -k, --list-knowledgebase [check_name]	list dawn known security checks. If check_name is specified dawn says if check is present or not
-   -o, --output [console, json. csv, html]	the output will be in the specified format
-   -V, --verbose				the output will be more verbose
-   -C, --count-only				dawn will only count vulnerabilities (useful for scripts)
-   -z, --exit-on-warn				dawn will return number of found vulnerabilities as exit code
-   -v, --version				show version information
-   -h, --help					show this help
+  -r, --rails                                  force dawn to consider the target a rails application   
+  -s, --sinatra                                force dawn to consider the target a sinatra application   
+  -p, --padrino                                force dawn to consider the target a padrino application
+  -G, --gem-lock                               force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock
+  -D, --debug                                  enters dawn debug mode
+  -f, --list-known-framework                   list ruby MVC frameworks supported by dawn
+  -k, --list-knowledgebase [check_name]        list dawn known security checks. If check_name is specified dawn says if check is present or not
+  -a, --ascii-tabular-report                   cause dawn to format findings using table in ascii art   
+  -j, --json                                   cause dawn to format findings using json   
+  -V, --verbose                                the output will be more verbose   
+  -C, --count-only                             dawn will only count vulnerabilities (useful for scripts)   
+  -z, --exit-on-warn                           dawn will return number of found vulnerabilities as exit code
+  -F, --file                                   tells dawn to write output to filename   
+  -v, --version                                show version information
+  -h, --help                                   show this help
 ```
 
 ### Codesake::Dawn security scan in action
@@ -227,6 +231,17 @@ This check will analyze the source code looking for the following patterns: XXX,
 08:28:18 [*] dawn is leaving
 ```
 
+If you need a fancy HTML report about your scan, just ask to Codesake::Dawn
+
+```
+$ dawn /Users/thesp0nge/src/hacking/rt_first_app --html --file report.html          (ruby-2.0.0-p353@codesake)
+
+09:00:54 [*] dawn v1.1.0 is starting up
+09:00:54 [!] dawn: this is a development Codesake::Dawn version
+09:00:54 [*] dawn: report.html created (2952 bytes)
+09:00:54 [*] dawn is leaving
+```
+
 ---
 
 ## Useful links
@@ -263,7 +278,7 @@ Thank you.
 
 [saten](https://github.com/saten): first issue posted about a typo in the README
 
-[presidentbeef](https://github.com/presidentbeef): for his outstanding work that inspired me creating dawn and for double check comparison matrix. Issue #2 is your :)
+[presidentbeef](https://github.com/presidentbeef): for his outstanding work that inspired me creating dawn and for double check comparison matrix. Issue #2 is yours :)
 
 [marinerJB](https://github.com/marinerJB): for misc bug reports and further ideas
 

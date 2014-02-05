@@ -17,6 +17,7 @@ $logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
   [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
+  [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
@@ -27,11 +28,12 @@ opts    = GetoptLong.new(
   [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
+  [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
 engine  = nil
-options = {:verbose=>false, :output=>"console", :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :debug=>false, :exit_on_warn => false}
+options = {:verbose=>false, :output=>"console", :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false}
 
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
@@ -46,18 +48,21 @@ opts.each do |opt, val|
     options[:output] = "json"
   when '--ascii-tabular-report'
     options[:output] = "tabular"
+  when '--html'
+    options[:output] = "html"
   when '--rails'
     options[:mvc]=:rails
   when '--sinatra'
     options[:mvc]=:sinatra
   when '--padrino'
     options[:mvc]=:padrino
+  when '--file'
+    options[:filename] = val
   when '--gem-lock'
     options[:gemfile_scan] = true
     unless val.empty?
       options[:gemfile_name] = val 
       guess = Codesake::Dawn::Core.guess_mvc(val)
-      puts "Guessed MVC: #{guess[:name]} v#{guess[:version]}"
     end
     
   when '--verbose'
@@ -114,7 +119,7 @@ unless options[:gemfile_scan]
     $logger.die(e.message)
   end
 else
-  engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], options[:debug], guess) # if options[:gemfile_scan]
+  engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], guess) # if options[:gemfile_scan]
 end
 
 engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails && options[:gemfile_scan].nil?
@@ -149,5 +154,5 @@ if options[:output] == "count"
   Kernel.exit(0)
 end
 
-Codesake::Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym}).report
+Codesake::Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym, :filename=>options[:filename]}).report
 $logger.bye

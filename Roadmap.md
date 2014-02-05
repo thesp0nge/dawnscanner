@@ -54,6 +54,7 @@ _latest update: Thu Jan 30 08:39:13 CET 2014_
 * Create a digital signature as described [here](http://rubygems.rubyforge.org/rubygems-update/Gem/Security.html)
 * Add preliminary Cross Site Scripting detection for Ruby on Rails.
 * bin/dawn refactoring using the new Reporting class to produce json, csv, html output
+* add config file with setting (css directory, report options, ...)
 
 ## Version 1.2.0
 

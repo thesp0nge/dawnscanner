@@ -9,6 +9,7 @@ module Codesake
         puts "\t$ dawn -C the_rails_blog_engine"
         puts "\t$ dawn -C --json a_sinatra_webapp_directory"
         puts "\t$ dawn --ascii-tabular-report my_rails_blog_ecommerce"
+        puts "\t$ dawn --html -F my_report.html my_rails_blog_ecommerce"
         printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application" 
         printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
         printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
@@ -21,6 +22,7 @@ module Codesake
         printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
         printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
         printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
+        printf "\n   -F, --file\t\t\t\t\ttells dawn to write output to filename"
         printf "\n   -v, --version\t\t\t\tshow version information"
         printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
