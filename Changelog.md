@@ -11,6 +11,7 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 
 * Added a check for CVE-2013-4413
 * Added a check for CVE-2013-4489
+* Added a check for CVE-2013-5671
 * Added a check for CVE-2014-1233
 * Added a check for CVE-2014-1234
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
