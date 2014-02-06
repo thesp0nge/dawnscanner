@@ -9,6 +9,7 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 
 ## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
 
+* Added a check for CVE-2011-5036
 * Added a check for CVE-2012-6109
 * Added a check for CVE-2013-0183
 * Added a check for CVE-2013-0184
