@@ -10,10 +10,13 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 ## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
 
 * Added a check for CVE-2013-4413
+* Added a check for CVE-2013-4489
 * Added a check for CVE-2014-1233
 * Added a check for CVE-2014-1234
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
   tables. A bit of bin/dawn refactoring was necessary.
+* Added a not_affected attribute to dependency check to flag as not vulnerable
+  previous versions
 
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 

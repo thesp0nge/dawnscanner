@@ -15,6 +15,7 @@ module Codesake
         attr_accessor :safe_dependencies
         attr_accessor :aux_mitigation_gem
 
+        attr_accessor :not_affected
 
         def vuln?
           ret         = false
