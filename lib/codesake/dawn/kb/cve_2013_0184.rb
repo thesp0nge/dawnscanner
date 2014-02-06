@@ -16,7 +16,7 @@ module Codesake
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade rack version up to version 1.5.2 or 1.4.5 or higher.",
+            :mitigation=>"Please upgrade rack version up to version 1.4.4, 1.3.9, 1.2.7, 1.1.5 or higher.",
             :aux_links=>["https://bugzilla.redhat.com/show_bug.cgi?id=895384"]
           })
           self.safe_dependencies = [{:name=>"rack", :version=>['1.4.4', '1.3.9', '1.2.7', '1.1.5']}]
