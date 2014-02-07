@@ -28,6 +28,14 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
   tables. A bit of bin/dawn refactoring was necessary.
 * Added a not_affected attribute to dependency check to flag as not vulnerable
   previous versions
+* CVE-2013-2090: we were uncertain about previous cremefraiche version if they
+  were vulnerable or not. Gem author, yanked all previous version but the
+  latest released 29 January 2014. We removed the rspec check for version <
+  0.6.x
+* basic_check.rb: due to the great @rubysec guys work, the link to their site
+  is provided as well. True to be told, there are some CVE valid but not found
+  on NVID website, so having @rubysec link is even more accurate in those
+  situations.
 
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 

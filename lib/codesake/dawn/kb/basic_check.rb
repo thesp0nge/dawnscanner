@@ -90,6 +90,9 @@ module Codesake
         def nvd_link
           "http://web.nvd.nist.gov/view/vuln/detail?vulnId=#{@name}"
         end
+        def rubysec_advisories_link
+          "http://www.rubysec.com/advisories/#{@name}/"
+        end
 
         # Public: checks if the ruby version used for target application works a pre-requisite to exploit a particular vulnerability.
         #
