@@ -17,6 +17,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
+  gem.cert_chain  = ['certs/paolo_at_codesake_dot_com.pem']
+  gem.signing_key = File.expand_path("~/.gem/gem-private_key.pem") if $0 =~ /gem\z/
+
   gem.add_dependency "codesake-commons", "~> 0.95.0"
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
