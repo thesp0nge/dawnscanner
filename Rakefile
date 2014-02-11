@@ -21,6 +21,7 @@ end
 
 task :default => [ :spec, :features, :kb ]
 task :test => :spec
+task :release => [:build, :'checksum:calculate', :'checksum:commit']
 
 desc "Create a new CVE test"
 task :cve, :name do |t,args| 
@@ -164,4 +165,25 @@ task :kb do
   end
   puts "KnowledgeBase.md file successfully generated"
 
+end
+
+require 'digest/sha2'
+namespace :checksum do
+
+desc 'Calculate gem checksum'
+task :calculate do
+  system 'mkdir -p checksum > /dev/null'
+  built_gem_path = "pkg/codesake-dawn-#{Codesake::Dawn::VERSION}.gem"
+  checksum = Digest::SHA512.new.hexdigest(File.read(built_gem_path))
+  checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
+  File.open(checksum_path, 'w' ) {|f| f.write(checksum) }
+
+  puts "#{checksum_path}: #{checksum}"
+end
+
+desc 'Add and commit latest checksum'
+task :commit do
+  checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
+  system "git --add #{checksum_path} -m \"Adding #{Codesake::Dawn::VERSION} checksum to repo\""
+end
 end
