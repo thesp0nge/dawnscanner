@@ -77,7 +77,7 @@ _latest update: Thu Jan 30 08:39:13 CET 2014_
 * Cross Site Scripting detection: it must be done for all MVC frameworks
   (including Rack) and it must cover either reflected than stored attack
   patterns
-* Add premilinari SQL injection detection for Ruby on Rails
+* Add premilinary SQL injection detection for Ruby on Rails
 
 ## Version 1.5.0
 

@@ -64,14 +64,30 @@ application.
 
 ## Installation
 
-You can install latest Codesake::Dawn version, using [Rubygems](https://rubygems.org) by typing:
-
-    gem install codesake-dawn
-
-In order to install a release candidate version, the gem install command line is the following:
+codesake-dawn rubygem is cryptographically signed. To be sure the gem you
+install hasn’t been tampered, you must first add ```paolo@codesake.com```
+public signing certificate as trusted to your gem specific keyring.
 
 ```
-$ gem install codesake-dawn --pre
+$ gem cert --add <(curl -Ls https://raw.github.com/codesake/codesake-dawn/certs/paolo_at_codesake_dot_com.pem)
+```
+
+You can install latest Codesake::Dawn version, fetching it from
+[Rubygems](https://rubygems.org) by typing:
+
+```
+$ gem install codesake-dawn -P MediumSecurity
+```
+
+The MediumSecurity trust profile will verify signed gems, but allow the
+installation of unsigned dependencies. This is necessary because not all of
+Codesake::Dawn’s dependencies are signed, so we cannot use HighSecurity.
+
+In order to install a release candidate version, the gem install command line
+is the following:
+
+```
+$ gem install codesake-dawn --pre -P MediumSecurity
 ```
 
 If you want to add dawn to your project Gemfile, you must add the following:

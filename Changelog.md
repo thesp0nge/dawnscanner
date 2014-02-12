@@ -14,6 +14,9 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 * Added a --json (-j) to produce JSON reports
 * Added a --html (-h) to produce HTML reports
 * Added a --file (-F) flag to save report to supplied filename
+* Added Codesake::Dawn gem signature as described in
+  http://guides.rubygems.org/security/. README is modified accordingly with new
+  installation suggestions. Added also gem SHA512 checksum in repository.
 
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 
