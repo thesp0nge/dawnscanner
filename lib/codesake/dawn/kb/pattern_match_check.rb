@@ -18,6 +18,11 @@ module Codesake
         # matching check to ignore strings starting with the ruby single line
         # comment separator, '#'.
         attr_reader   :avoid_comments
+        
+        # This attribute is false by default. If true, it tells pattern
+        # matching check that the attack pattern is already a regular
+        # expression.
+        attr_reader   :attack_pattern_is_regex
 
         EXCLUSION_LIST = [
           "tags",
@@ -29,14 +34,16 @@ module Codesake
 
         def initialize(options={})
           super(options)
-          @negative_search  = false
-          @avoid_comments = false
-          @attack_pattern   = options[:attack_pattern] unless options[:attack_pattern].nil?
-          @negative_search  = options[:negative_search] unless options[:negative_search].nil? 
-          @avoid_comments  = options[:avoid_comments] unless options[:avoid_comments].nil? 
-          @evidences  = options[:evidences] unless options[:evidences].nil? 
-          @glob = "**"
-          @glob = File.join(@glob, options[:glob]) unless options[:glob].nil?
+          @negative_search          = false
+          @avoid_comments           = false
+          @attack_pattern_is_regex  = false
+          @glob                     = "**"
+          @attack_pattern           = options[:attack_pattern] unless options[:attack_pattern].nil?
+          @negative_search          = options[:negative_search] unless options[:negative_search].nil? 
+          @avoid_comments           = options[:avoid_comments] unless options[:avoid_comments].nil? 
+          @evidences                = options[:evidences] unless options[:evidences].nil? 
+          @attack_pattern_is_regex  = options[:attack_pattern_is_regex] unless options[:attack_pattern_is_regex].nil? 
+          @glob                     = File.join(@glob, options[:glob]) unless options[:glob].nil?
           debug_me("EVIDENCES ARE #{@evidences.inspect}")
         end
 
@@ -102,6 +109,7 @@ module Codesake
 
             regex=/#{pat}/
 
+            debug_me "regex is #{regex}"
             debug_me "@avoid_comments is #{@avoid_comments}"
 
             lines.each_with_index do |line,i|
