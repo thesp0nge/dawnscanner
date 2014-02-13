@@ -46,6 +46,11 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
   on NVID website, so having @rubysec link is even more accurate in those
   situations.
 
+## Version 1.0.3 - codename: Lightning McQueen (2014-02-13)
+
+* Fixing issue #37. Now the rake task is successfully loaded when you require
+  the 'codesake/dawn/tasks' path. The task is dawn:run.
+
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 
 * Fixing issue #27. With rainbow gem version 2.0.0 there is an exception while

@@ -159,6 +159,22 @@ Examples:
   -h, --help                                   show this help
 ```
 
+### Rake task
+
+To include Codesake::Dawn in your rake task list, you simply have to put this line in your ```Rakefile```
+
+```
+require 'codesake/dawn/tasks'
+```
+
+Then executing ```$ rake -T``` you will have a ```dawn:run``` task you want to execute.
+
+```
+$ rake -T                                                                                                                                                                                                                                                                 (ruby-2.0.0-p353@engage)
+rake dawn:run                  # Execute codesake-dawn on the current directory
+...
+```
+
 ### Codesake::Dawn security scan in action
 
 As output, Codesake::Dawn will put all security checks that are failed during the scan.
