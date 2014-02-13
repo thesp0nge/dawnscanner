@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Fri Jan 24 07:57:58 CET 2014_
+_latest update: Thu Feb 13 08:31:37 CET 2014_
 
 ## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
 
