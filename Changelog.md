@@ -24,6 +24,9 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 * Added a check for CVE-2013-5671
 * Added a check for CVE-2014-1233
 * Added a check for CVE-2014-1234
+* Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
+  Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
+  test, so all the cheatsheet content is covered since now.
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
   tables. A bit of bin/dawn refactoring was necessary.
 * Added a not_affected attribute to dependency check to flag as not vulnerable
