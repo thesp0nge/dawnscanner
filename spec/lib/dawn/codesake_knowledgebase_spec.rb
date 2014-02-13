@@ -768,4 +768,80 @@ end
   sc.should_not   be_nil
   sc.class.should == Codesake::Dawn::Kb::CVE_2013_1756
 end
+  it "must have test for CVE-2014-1233" do
+    sc = kb.find("CVE-2014-1233")
+    sc.should_not   be_nil
+    sc.class.should == Codesake::Dawn::Kb::CVE_2014_1233
+  end
+it "must have test for CVE-2014-1234" do
+    sc = kb.find("CVE-2014-1234")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2014_1234
+end
+it "must have test for CVE-2013-4413" do
+    sc = kb.find("CVE-2013-4413")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_4413
+end
+
+it "must have test for CVE-2013-4489" do
+    sc = kb.find("CVE-2013-4489")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_4489
+end
+it "must have test for CVE-2013-5671" do
+    sc = kb.find("CVE-2013-5671")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_5671
+end
+it "must have test for CVE-2013-4593" do
+    sc = kb.find("CVE-2013-4593")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_4593
+end
+it "must have test for CVE-2013-0262" do
+    sc = kb.find("CVE-2013-0262")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_0262
+end
+it "must have test for CVE-2013-0184" do
+    sc = kb.find("CVE-2013-0184")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_0184
+end
+it "must have test for CVE-2013-0183" do
+    sc = kb.find("CVE-2013-0183")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_0183
+end
+it "must have test for CVE-2012-6109" do
+    sc = kb.find("CVE-2012-6109")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2012_6109
+end
+it "must have test for CVE-2011-5036" do
+    sc = kb.find("CVE-2011-5036")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2011_5036
+end
+it "must have test for CVE-2013-2516" do
+    sc = kb.find("CVE-2013-2516")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_2516
+end
+it "must have test for CVE-2013-2513" do
+    sc = kb.find("CVE-2013-2513")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_2513
+end
+it "must have test for CVE-2013-2512" do
+    sc = kb.find("CVE-2013-2512")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_2512
+end
+it "must have test for CVE-2013-1607" do
+    sc = kb.find("CVE-2013-1607")
+      sc.should_not   be_nil
+        sc.class.should == Codesake::Dawn::Kb::CVE_2013_1607
+end
 end

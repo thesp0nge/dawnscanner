@@ -5,10 +5,28 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks. 
 
-_latest update: Fri Jan 24 07:57:58 CET 2014_
+_latest update: Thu Feb 13 08:31:37 CET 2014_
 
 ## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
 
+* Added a check for CVE-2011-5036
+* Added a check for CVE-2012-6109
+* Added a check for CVE-2013-0183
+* Added a check for CVE-2013-0184
+* Added a check for CVE-2013-0262
+* Added a check for CVE-2013-1607
+* Added a check for CVE-2013-2512
+* Added a check for CVE-2013-2513
+* Added a check for CVE-2013-2516
+* Added a check for CVE-2013-4413
+* Added a check for CVE-2013-4489
+* Added a check for CVE-2013-4593
+* Added a check for CVE-2013-5671
+* Added a check for CVE-2014-1233
+* Added a check for CVE-2014-1234
+* Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
+  Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
+  test, so all the cheatsheet content is covered since now.
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
   tables. A bit of bin/dawn refactoring was necessary.
 * Added a --json (-j) to produce JSON reports
@@ -17,6 +35,16 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 * Added Codesake::Dawn gem signature as described in
   http://guides.rubygems.org/security/. README is modified accordingly with new
   installation suggestions. Added also gem SHA512 checksum in repository.
+* Added a not_affected attribute to dependency check to flag as not vulnerable
+  previous versions
+* CVE-2013-2090: we were uncertain about previous cremefraiche version if they
+  were vulnerable or not. Gem author, yanked all previous version but the
+  latest released 29 January 2014. We removed the rspec check for version <
+  0.6.x
+* basic_check.rb: due to the great @rubysec guys work, the link to their site
+  is provided as well. True to be told, there are some CVE valid but not found
+  on NVID website, so having @rubysec link is even more accurate in those
+  situations.
 
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 

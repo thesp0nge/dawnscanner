@@ -90,6 +90,9 @@ module Codesake
         def nvd_link
           "http://web.nvd.nist.gov/view/vuln/detail?vulnId=#{@name}"
         end
+        def rubysec_advisories_link
+          "http://www.rubysec.com/advisories/#{@name}/"
+        end
 
         # Public: checks if the ruby version used for target application works a pre-requisite to exploit a particular vulnerability.
         #
@@ -136,7 +139,12 @@ module Codesake
                 # This is the case of version number made by 2 digits (e.g.
                 # 3.12). If both major and minor are the same then there is no
                 # vuln
-                return false if target_v_array.count == 2 
+                return false if target_v_array.count == 2 && fixes_v_array.count == 2
+
+                # This it the case of the vulneable version that is made by 2
+                # digit and fixed one made by 3. (eg. all the 6.2.x is
+                # vulnerable and 6.2 without patchlevel is found.
+                return true if target_v_array.count == 2 && fixes_v_array.count == 3
 
                 ret = true if target_v_array[2] < fixes_v_array[2] 
                 # In order to support CVE-2013-7086 security check we must be able to 
@@ -163,11 +171,34 @@ module Codesake
               debug_me "Honoring save_minor_fixes flag. Found a version #{target} that matches #{fixes} but there is another fixed version with higher minor version"
               return false
             end
+
             debug_me("RET IS #{ret}")
+            ret = false if is_not_affected?(target_v_array)
+            debug_me("RET AFTER NOT AFFECTED CHECK IS #{ret}")
 
           end
 
           ret
+        end
+
+        def is_not_affected?(detected_gem_version)
+          return false if self.kind != Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
+          return false if self.not_affected.nil?
+          self.not_affected[:version].each do |na|
+            na_array = na.split(".").map! { |n| n.to_i }
+            debug_me("na_array: #{na_array}")
+            debug_me("detected_gem_version: #{detected_gem_version}")
+
+            return false if detected_gem_version[0] > na_array[0]
+            return true if detected_gem_version[0] < na_array[0] && self.not_affected[:earlier]
+
+            # here the two versions have the same major number
+            return true if detected_gem_version[1] == na_array[1]
+            return true if detected_gem_version[1] < na_array[1] && self.not_affected[:earlier]
+            
+          end
+          debug_me("IS_NOT_AFFECTED? IS FALSE")
+          return false
         end
 
         def cvss_score
