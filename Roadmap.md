@@ -39,6 +39,17 @@ _latest update: Thu Jan 30 08:39:13 CET 2014_
 * adding test for RoRCheatSheet\_14
 * adding test for RoRCheatSheet\_15
 * adding test for RoRCheatSheet\_16
+* add a check against deprecated ruby / gems version. I will handle MVC gems
+  right now.
+* Better bin/dawn script output formatting using some library like PrettyPrint
+  (this can involve a change in codesake-commons package). We will use tables
+  to create ascii organized reports.
+* Create a digital signature as described [here](http://rubygems.rubyforge.org/rubygems-update/Gem/Security.html)
+* bin/dawn refactoring using the new Reporting class to produce json, csv, html output
+* add config file with setting (css directory, report options, ...)
+
+## Version 1.2.0
+
 * move is\_vulnerable\_version? and is\_vulnerable\_patchlevel? to an adhoc
   class handling version comparison
 * add @rubysec vulnerability database integration using rake
@@ -46,18 +57,7 @@ _latest update: Thu Jan 30 08:39:13 CET 2014_
 * add a language check. It will handle a ruby script as input and a
   ruby\_parser line as unsafe pattern. It will compile the ruby and look for
   the unsafe pattern
-* add a check against deprecated ruby / gems version. I will handle MVC gems
-  right now.
-* Better bin/dawn script output formatting using some library like PrettyPrint
-  (this can involve a change in codesake-commons package). We will use tables
-  to create ascii organized reports.
-* Create a digital signature as described [here](http://rubygems.rubyforge.org/rubygems-update/Gem/Security.html)
 * Add preliminary Cross Site Scripting detection for Ruby on Rails.
-* bin/dawn refactoring using the new Reporting class to produce json, csv, html output
-* add config file with setting (css directory, report options, ...)
-
-## Version 1.2.0
-
 * Issue #7: Improving HTML output and let the user the capability to provide a
   basic layout to customize report
 * Add a --github option to Codesake::Dawn to clone a remote repository, perform
