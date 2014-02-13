@@ -2,7 +2,6 @@ require 'rake'
 
 namespace :dawn do
 
-  desc 'Execute codesake-dawn on the current directory'
   task :require do
     begin
       require 'codesake-dawn'
@@ -21,6 +20,7 @@ namespace :dawn do
     require 'codesake-dawn'
   end
 
+  desc 'Execute codesake-dawn on the current directory'
   task :run do
     system "dawn ."
   end
