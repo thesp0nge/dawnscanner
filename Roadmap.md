@@ -58,6 +58,7 @@ _latest update: Thu Jan 30 08:39:13 CET 2014_
 
 ## Version 1.2.0
 
+* Issue #40: Support for string version modifiers
 * Issue #7: Improving HTML output and let the user the capability to provide a
   basic layout to customize report
 * Add a --github option to Codesake::Dawn to clone a remote repository, perform
