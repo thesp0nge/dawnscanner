@@ -24,6 +24,9 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
 * Added a check for CVE-2013-5671
 * Added a check for CVE-2014-1233
 * Added a check for CVE-2014-1234
+* Added a check for CVE-2014-0080
+* Added a check for CVE-2014-0081
+* Added a check for CVE-2014-0082
 * Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
   Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
   test, so all the cheatsheet content is covered since now.
