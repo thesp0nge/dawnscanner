@@ -9,6 +9,8 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 
 ## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
 
+* Added a check for CVE-2014-0080
+* Added a check for CVE-2014-0081
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
   tables. A bit of bin/dawn refactoring was necessary.
 * Added a --json (-j) to produce JSON reports
@@ -17,7 +19,6 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 * Added Codesake::Dawn gem signature as described in
   http://guides.rubygems.org/security/. README is modified accordingly with new
   installation suggestions. Added also gem SHA512 checksum in repository.
-* Added a check for CVE-2014-0080
 
 ## Version 1.0.2 - codename: Lightning McQueen (2014-01-27)
 

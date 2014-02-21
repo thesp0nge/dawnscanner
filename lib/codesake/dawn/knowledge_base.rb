@@ -197,6 +197,7 @@ require "codesake/dawn/kb/cve_2013_7086"
 # require "codesake/dawn/kb/cve_2014_1234"
 
 require "codesake/dawn/kb/cve_2014_0080"
+require "codesake/dawn/kb/cve_2014_0081"
 
 module Codesake
   module Dawn
@@ -407,6 +408,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_6459.new, 
           Codesake::Dawn::Kb::CVE_2013_7086.new, 
           Codesake::Dawn::Kb::CVE_2014_0080.new, 
+          Codesake::Dawn::Kb::CVE_2014_0081.new, 
 
         ]
       end
