@@ -11,6 +11,7 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
 
 * Added a check for CVE-2014-0080
 * Added a check for CVE-2014-0081
+* Added a check for CVE-2014-0082
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
   tables. A bit of bin/dawn refactoring was necessary.
 * Added a --json (-j) to produce JSON reports
