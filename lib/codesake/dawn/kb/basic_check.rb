@@ -79,6 +79,10 @@ module Codesake
           @status       = false
           @debug        = false
     
+          if $logger.nil?
+            $logger  = Codesake::Commons::Logging.instance
+            $logger.helo "dawn-basic-check", Codesake::Dawn::VERSION
+          end
         end
 
         def applies_to?(name)
