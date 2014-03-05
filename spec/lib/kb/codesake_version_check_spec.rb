@@ -6,7 +6,7 @@ describe "The version check should" do
     @check.safe=['0.4.5', '0.5.4', '0.7.8']
     @check.deprecated=['0.1.x', '0.2.x', '0.3.x', '1.x']
     @check.excluded=['0.6.4']
-    @check.debug = true
+    # @check.debug = true
   end
 
   context "without some beta versions to handle" do
