@@ -41,28 +41,23 @@ module Codesake
                     :save_minor => self.save_minor_fixes
                   }
                 )
-                v.debug = true
+                v.debug = self.debug
 
                 vuln = v.vuln?
                 debug_me "Vulnerable version found for gem #{dep[:name]} (#{dep[:version]})" if vuln
-              end
-              return false
-              if @ruby_vulnerable_versions.empty?
-                if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version])
-                  ret = true
+                if vuln && @ruby_vulnerable_versions.empty?
                   message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
+                  ret = vuln
                 end
-              else
-                if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version]) && is_ruby_vulnerable_version?
-                  ret = true
-                  message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
+                if vuln && ! @ruby_vulnerable_versions.empty?
+                  ret =  is_ruby_vulnerable_version?
+                  message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}" if ret
                 end
               end
             end
-
           end
 
-          if ret and @mitigated
+          if ret && @mitigated
             ret = false
             message += "Vulnerability has been mitigated by gem #{@aux_mitigation_gem[:name]}. Don't remove it from your Gemfile"
           end

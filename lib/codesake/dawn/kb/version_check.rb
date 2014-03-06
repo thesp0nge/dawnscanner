@@ -77,7 +77,7 @@ module Codesake
           @safe.sort.each do |s| 
             sva = version_string_to_array(s)[:version]
             if is_same_major?(sva, dva) && is_same_minor?(sva, dva) && dva[2] >= sva[2] && hm
-              debug_me "Honoring save_minor_fixes flag. Found a version #{target} that matches #{fixes} but there is another fixed version with higher minor version"
+              debug_me "Honoring save_minor_fixes flag. Found a version #{@detected} that matches #{s} but there is another fixed version with higher minor version"
               return true
             end
           end
@@ -214,14 +214,15 @@ module Codesake
           major = is_vulnerable_major?(safe_version_array, detected_version_array)
           minor = is_vulnerable_minor?(safe_version_array, detected_version_array)
 
-          debug_me "is_vulnerable_version? MAJOR=#{major} MINOR=#{minor} PATCH=#{safe_version[2] >= detected_version[2]}"
+          debug_me "is_vulnerable_version? MAJOR=#{major} MINOR=#{minor} PATCH=#{safe_version_array[2] > detected_version_array[2]}"
 
           return is_vulnerable_beta?(sva[:beta], dva[:beta]) if is_same_version?(safe_version_array, detected_version_array) && is_beta_check?(sva[:beta], dva[:beta])
           return is_vulnerable_rc?(sva[:rc], dva[:rc]) if is_same_version?(safe_version_array, detected_version_array) && is_rc_check?(sva[:rc], dva[:rc])
           return is_vulnerable_pre?(sva[:pre], dva[:pre]) if is_same_version?(safe_version_array, detected_version_array) && is_pre_check?(sva[:pre], dva[:pre])
 
-          return true if major && minor && (safe_version[2] > detected_version[2])
-          return false if (!major) && (!minor) && (safe_version[2] <= detected_version[2])
+          return true if major && minor && (safe_version_array[2] > detected_version_array[2])
+          return false if major && minor && (safe_version_array[2] <= detected_version_array[2])
+          return false if (!major) && (!minor) && (safe_version_array[2] <= detected_version_array[2])
         end
 
         def is_excluded?(detected_version)
