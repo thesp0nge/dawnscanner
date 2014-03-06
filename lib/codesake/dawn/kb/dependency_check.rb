@@ -6,7 +6,7 @@ module Codesake
 
         attr_accessor :dependencies
 
-        # This attribute replaces fixed_dependency in 20130521. 
+        # This attribute replaces fixed_dependency in 20130521.
         # There are cve checks like
         # http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-0175 that
         # addresses two different gems firing up the vulnerability. You can
@@ -22,6 +22,7 @@ module Codesake
           @mitigated  = false
           message     = ""
 
+
           @dependencies.each do |dep|
             # don't care about gem version when it mitigates a vulnerability... this can be risky, maybe I would reconsider in the future.
             @mitigated = true if dep[:name] == @aux_mitigation_gem[:name] unless @aux_mitigation_gem.nil?
@@ -31,8 +32,23 @@ module Codesake
                 debug_me "Forcing save_minor_fixes flag for rails gem dependency check"
                 self.save_minor_fixes = true
               end
+
+              if dep[:name] == safe_dep[:name]
+                v = Codesake::Dawn::Kb::VersionCheck.new(
+                  {
+                    :safe=>safe_dep[:version],
+                    :detected=>dep[:version],
+                    :save_minor => self.save_minor_fixes
+                  }
+                )
+                v.debug = true
+
+                vuln = v.vuln?
+                debug_me "Vulnerable version found for gem #{dep[:name]} (#{dep[:version]})" if vuln
+              end
+              return false
               if @ruby_vulnerable_versions.empty?
-                if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version]) 
+                if dep[:name] == safe_dep[:name] && is_vulnerable_version?(dep[:version], safe_dep[:version])
                   ret = true
                   message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
                 end
@@ -46,7 +62,7 @@ module Codesake
 
           end
 
-          if ret and @mitigated 
+          if ret and @mitigated
             ret = false
             message += "Vulnerability has been mitigated by gem #{@aux_mitigation_gem[:name]}. Don't remove it from your Gemfile"
           end

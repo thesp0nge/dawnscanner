@@ -8,10 +8,16 @@ module Codesake
         attr_accessor :deprecated
         attr_accessor :excluded
         attr_accessor :detected
+        attr_accessor :save_minor
 
 
         def initialize(options={})
           super(options)
+          @safe       ||= options[:safe]
+          @deprecated ||= options[:deprecated]
+          @excluded   ||= options[:excluded]
+          @detected   ||= options[:detected]
+          @save_minor ||= options[:save_minor]
           debug_me "VersionCheck initialized"
         end
 
@@ -21,18 +27,69 @@ module Codesake
           debug_me "Deprecated versions array is #{@deprecated}. I'll mark them as vulnerable"
           debug_me "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable"
 
-          ret = false
-          ret
+          return is_deprecated? unless @deprecated.nil?
+          return is_excluded? unless @excluded.nil?
+
+          @safe.each do |s|
+            vuln  = is_vulnerable_version?(s, @detected)
+            smf   = save_minor_fix 
+
+            debug_me "VULN=#{vuln} SAVE_MINOR=#{smf}"
+
+            return false if vuln && smf
+            return true if vuln && ! smf
+          end
+
+          return false
         end
 
-        # private I'll mark this section as private after all tests...
+        # checks in the array if there is another string with higher minor version but the same major as the parameter element)
+        def is_there_an_higher_minor_version?
+          dva = version_string_to_array(@detected)[:version]
+          @safe.sort.each do |s|
+            sva = version_string_to_array(s)[:version]
+            debug_me "DVA=#{dva} - SVA=#{sva} - S=#{s}"
+            return true if dva[0] == sva[0] && dva[1] < sva[1]
+          end
+          return false
+        end
 
+        ##
+        # This functions handles an hack to save a detected version even if a
+        # safe version with an higher minor version number has been found. 
+        #
+        # This is mostly used in rails where there are different versions and
+        # if a 3.2.12 is safe it should not marked as vulnerable just because
+        # you can either use 3.3.x that is a different branch.
+        #
+        # It returns true when the detected version must be saved, false otherwise.
+        def save_minor_fix
+          return false unless @save_minor
+          hm = is_there_an_higher_minor_version?
+
+          # This is the save minor version workaround.
+          # fixes is something like ['2.2.2', '3.1.1', '3.2.2']
+          # target is '3.1.1' and save_minor_fixes is true
+          # I don't want that check for 3.2.2 marks this as vulnerable, so I will save it
+          debug_me "save minor fixes flag is #{@save_minor}"
+          debug_me "is_there_an_higher_minor_version? is #{hm}"
+          dva = version_string_to_array(@detected)[:version]
+          @safe.sort.each do |s| 
+            sva = version_string_to_array(s)[:version]
+            if is_same_major?(sva, dva) && is_same_minor?(sva, dva) && dva[2] >= sva[2] && hm
+              debug_me "Honoring save_minor_fixes flag. Found a version #{target} that matches #{fixes} but there is another fixed version with higher minor version"
+              return true
+            end
+          end
+          return false
+        end
 
         def is_good_parameter?(array)
           return false if array.nil?
           return false if array.empty?
           return true
         end
+        
         ##
         # It checks if the first digit of a version array is the same
         #
@@ -42,6 +99,10 @@ module Codesake
         def is_same_major?(array_a, array_b)
           return false if ! is_good_parameter?(array_a) || ! is_good_parameter?(array_b)
           return (array_a[0] == array_b[0])
+        end
+        def is_same_minor?(array_a, array_b)
+          return false if ! is_good_parameter?(array_a) || ! is_good_parameter?(array_b)
+          return (array_a[1] == array_b[1])
         end
 
         def is_vulnerable_major?(safe_version, detected_version)
@@ -59,7 +120,7 @@ module Codesake
           end
           if safe_version.length > detected_version.length
             # detected version is just the major number e.g. 2
-            # safe version is kinda more complex e.g. 2.3.2 
+            # safe version is kinda more complex e.g. 2.3.2
             # in this case we return the version is vulnerable if the
             # detected_version major is less or equal the safe one.
             return (safe_version[0] <= detected_version[0])
@@ -75,7 +136,6 @@ module Codesake
           return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) if (safe_version_array.count == 2) && (detected_version_array.count == 2)
           return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2]) if (safe_version_array.count == 3) && (detected_version_array.count == 3)
         end
-        
         #########################
         # Beta version handling
         #
@@ -86,7 +146,6 @@ module Codesake
         end
 
         def is_vulnerable_beta?(safe_version_beta, detected_version_beta)
-          
           debug_me "SVB=#{safe_version_beta} - DVB=#{detected_version_beta}"
           # if the safe_version_beta is 0 then the detected_version_beta is
           # vulnerable by design, since the safe version is a stable and we
@@ -96,7 +155,7 @@ module Codesake
           return true if safe_version_beta > detected_version_beta
 
           # fallback
-          return false 
+          return false
         end
 
         #########################
@@ -109,7 +168,6 @@ module Codesake
         end
 
         def is_vulnerable_rc?(safe_version_rc, detected_version_rc)
-          
           debug_me "SVB=#{safe_version_rc} - DVB=#{detected_version_rc}"
           # if the safe_version_rc is 0 then the detected_version_rc is
           # vulnerable by design, since the safe version is a stable and we
@@ -119,7 +177,7 @@ module Codesake
           return true if safe_version_rc > detected_version_rc
 
           # fallback
-          return false 
+          return false
         end
 
         #########################
@@ -132,7 +190,6 @@ module Codesake
         end
 
         def is_vulnerable_pre?(safe_version_pre, detected_version_pre)
-          
           debug_me "SVB=#{safe_version_pre} - DVB=#{detected_version_pre}"
           # if the safe_version_pre is 0 then the detected_version_pre is
           # vulnerable by design, since the safe version is a stable and we
@@ -142,7 +199,7 @@ module Codesake
           return true if safe_version_pre > detected_version_pre
 
           # fallback
-          return false 
+          return false
         end
 
         def is_vulnerable_version?(safe_version, detected_version)
@@ -167,6 +224,14 @@ module Codesake
           return false if (!major) && (!minor) && (safe_version[2] <= detected_version[2])
         end
 
+        def is_excluded?(detected_version)
+          @excluded.each do |exc|
+            exc_v = version_string_to_array(exc)[:version]
+            det_v = version_string_to_array(detected_version)[:version]
+            return true if is_same_version?(dep_v, det_v)
+          end
+          return false
+        end
         def is_deprecated?(detected_version)
           @deprecated.each do |dep|
             debug_me "DEPRECATED_VERSION: #{dep}"
@@ -192,7 +257,7 @@ module Codesake
 
             if dep_v[2] == 'x'
               # deprecation version is something like 1.2.x
-              # detected version is deprecated if major == 1 and minor == 2. 
+              # detected version is deprecated if major == 1 and minor == 2.
               return true if det_v[0] == dep_v[0] && det_v[1] == dep_v[1]
 
             end
@@ -201,7 +266,7 @@ module Codesake
         end
 
 
-        ## 
+        ##
         # It takes a string representing a version and it splits it in an Hash.
         #
         # e.g.
@@ -209,7 +274,7 @@ module Codesake
         # version_string_to_array("3.2.2.beta1") #=> {:version=>[3,2,2], :beta=>1, :rc=>0}
         def version_string_to_array(string)
           # I can't use this nice onliner... stays here until I finish writing new code.
-          # return string.split(".").map! { |n| (n=='x')? n : n.to_i } 
+          # return string.split(".").map! { |n| (n=='x')? n : n.to_i }
           ver   = []
           beta  = 0
           rc    = 0
@@ -219,7 +284,7 @@ module Codesake
             ver << x.to_i unless x == 'x' || x.start_with?('beta') || x.start_with?('rc') || x.start_with?('pre')
             ver << x if x == 'x'
 
-            beta = x.split("beta")[1].to_i if x.class == String && x.start_with?('beta') && beta == 0 
+            beta = x.split("beta")[1].to_i if x.class == String && x.start_with?('beta') && beta == 0
             rc = x.split("rc")[1].to_i if x.class == String && x.start_with?('rc') && rc == 0
             pre = x.split("pre")[1].to_i if x.class == String && x.start_with?('pre') && pre == 0
 
