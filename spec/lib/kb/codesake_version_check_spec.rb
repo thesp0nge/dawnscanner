@@ -158,6 +158,7 @@ describe "The version check should" do
   context "applied as it should be" do
     it "says a version 0.4.6 is safe" do
       @check.detected = '0.4.6'
+      @check.save_minor = true
       @check.vuln?.should   be_false
     end
   end

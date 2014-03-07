@@ -10,6 +10,7 @@ module Codesake
         attr_accessor :detected
         attr_accessor :save_minor
         attr_accessor :save_major
+        attr_reader   :status
 
 
         def initialize(options={})
@@ -29,8 +30,13 @@ module Codesake
           debug_me "Deprecated versions array is #{@deprecated}. I'll mark them as vulnerable"
           debug_me "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable"
 
-          return is_deprecated? unless @deprecated.nil?
-          return is_excluded? unless @excluded.nil?
+          unless @deprecated.nil?
+           @status = :deprecated if is_detected_deprecated?
+          end
+
+          unless @excluded.nil?
+           @status = :excluded if is_detected_excluded?
+          end
 
           @safe.each do |s|
 
@@ -46,6 +52,14 @@ module Codesake
 
           return false
         end
+
+        def is_detected_deprecated?
+          return is_deprecated?(@detected)
+        end
+        def is_detected_excluded?
+          return is_excluded?(@detected)
+        end
+
         def is_higher_major?(s,d)
           sa = version_string_to_array(s)[:version]
           da = version_string_to_array(d)[:version]
@@ -267,7 +281,7 @@ module Codesake
           @excluded.each do |exc|
             exc_v = version_string_to_array(exc)[:version]
             det_v = version_string_to_array(detected_version)[:version]
-            return true if is_same_version?(dep_v, det_v)
+            return true if is_same_version?(exc_v, det_v)
           end
           return false
         end

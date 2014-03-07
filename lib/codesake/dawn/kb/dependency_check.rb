@@ -17,6 +17,21 @@ module Codesake
 
         attr_accessor :not_affected
 
+        # Tells a version is not vulnerable even if in the fixes array that has
+        # a minor version number higher than the current.
+        # This is useful especially for rails version where 3.0.x, 3.1.y, 3.2.z
+        # are separated branches and the patch is provided for all of those. So
+        # if version 3.1.10 is safe and you have it, you don't be prompted
+        # about 3.2.x.
+        attr_accessor :save_minor_fixes
+        attr_accessor :save_major_fixes
+
+        def initialize(options)
+          super(options)
+          @save_minor_fixes ||= options[:save_minor_fixes]
+          @save_major_fixes ||= options[:save_major_fixes]
+        end
+
         def vuln?
           ret         = false
           @mitigated  = false
@@ -39,7 +54,7 @@ module Codesake
                     :safe=>safe_dep[:version],
                     :detected=>dep[:version],
                     :save_minor => self.save_minor_fixes,
-                    :save_major => true # self.save_major_fixes
+                    :save_major => self.save_major_fixes
                   }
                 )
                 v.debug = self.debug
