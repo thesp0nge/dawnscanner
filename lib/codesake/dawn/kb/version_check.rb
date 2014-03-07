@@ -9,6 +9,7 @@ module Codesake
         attr_accessor :excluded
         attr_accessor :detected
         attr_accessor :save_minor
+        attr_accessor :save_major
 
 
         def initialize(options={})
@@ -18,6 +19,7 @@ module Codesake
           @excluded   ||= options[:excluded]
           @detected   ||= options[:detected]
           @save_minor ||= options[:save_minor]
+          @save_major ||= options[:save_major]
           debug_me "VersionCheck initialized"
         end
 
@@ -31,15 +33,33 @@ module Codesake
           return is_excluded? unless @excluded.nil?
 
           @safe.each do |s|
-            vuln  = is_vulnerable_version?(s, @detected)
-            smf   = save_minor_fix 
 
-            debug_me "VULN=#{vuln} SAVE_MINOR=#{smf}"
+              vuln  = is_vulnerable_version?(s, @detected)
+              smf   = save_minor_fix
+              smjf  = save_major_fix
 
-            return false if vuln && smf
-            return true if vuln && ! smf
+              debug_me "VULN=#{vuln} SAVE_MINOR=#{smf} SAVE_MAJOR=#{smjf}"
+              return false if vuln && smjf
+              return false if vuln && smf
+              return true if vuln && ! smf
           end
 
+          return false
+        end
+        def is_higher_major?(s,d)
+          sa = version_string_to_array(s)[:version]
+          da = version_string_to_array(d)[:version]
+          return (sa[0] > da[0])
+        end
+
+        # checks in the array if there is another string with higher major version
+        def is_there_an_higher_major_version?
+          dva = version_string_to_array(@detected)[:version]
+          @safe.sort.each do |s|
+            sva = version_string_to_array(s)[:version]
+            debug_me "DVA[0] = #{dva[0]} SVA[0] = #{sva[0]}"
+            return true if dva[0] < sva[0]
+          end
           return false
         end
 
@@ -48,15 +68,26 @@ module Codesake
           dva = version_string_to_array(@detected)[:version]
           @safe.sort.each do |s|
             sva = version_string_to_array(s)[:version]
-            debug_me "DVA=#{dva} - SVA=#{sva} - S=#{s}"
             return true if dva[0] == sva[0] && dva[1] < sva[1]
           end
           return false
         end
 
+        def save_major_fix
+          return false unless @save_major
+          hm = is_there_an_higher_major_version?
+
+          debug_me "save major fixes flag is #{@save_major}"
+          debug_me "is_there_an_higher_major_version? is #{hm}"
+          if  hm
+            debug_me "Honoring save_minor_fixes flag. Found a version #{@detected} that matches #{s} but there is another fixed version with higher major version"
+            return true
+          end
+          return false
+        end
         ##
         # This functions handles an hack to save a detected version even if a
-        # safe version with an higher minor version number has been found. 
+        # safe version with an higher minor version number has been found.
         #
         # This is mostly used in rails where there are different versions and
         # if a 3.2.12 is safe it should not marked as vulnerable just because
@@ -74,7 +105,7 @@ module Codesake
           debug_me "save minor fixes flag is #{@save_minor}"
           debug_me "is_there_an_higher_minor_version? is #{hm}"
           dva = version_string_to_array(@detected)[:version]
-          @safe.sort.each do |s| 
+          @safe.sort.each do |s|
             sva = version_string_to_array(s)[:version]
             if is_same_major?(sva, dva) && is_same_minor?(sva, dva) && dva[2] >= sva[2] && hm
               debug_me "Honoring save_minor_fixes flag. Found a version #{@detected} that matches #{s} but there is another fixed version with higher minor version"
@@ -89,7 +120,6 @@ module Codesake
           return false if array.empty?
           return true
         end
-        
         ##
         # It checks if the first digit of a version array is the same
         #
@@ -106,10 +136,14 @@ module Codesake
         end
 
         def is_vulnerable_major?(safe_version, detected_version)
-          ret = false
-          ret = true if safe_version[0] >= detected_version[0]
-          ret
+          return (safe_version[0] > detected_version[0])
         end
+
+        def is_vulnerable_patch?(safe_version, detected_version)
+          return false if safe_version[2].nil? || detected_version[2].nil?
+          return (safe_version[2] > detected_version[2])
+        end
+
 
         def is_vulnerable_minor?(safe_version, detected_version)
           if safe_version.length < detected_version.length
@@ -126,6 +160,7 @@ module Codesake
             return (safe_version[0] <= detected_version[0])
           end
 
+          debug_me "SV=#{safe_version[1]} DV=#{detected_version[1]}"
           # support for x as safe minor version
           return false if is_same_major?(safe_version, detected_version) && safe_version[1] == 'x'
           return true if safe_version[1] >= detected_version[1]
@@ -213,16 +248,19 @@ module Codesake
 
           major = is_vulnerable_major?(safe_version_array, detected_version_array)
           minor = is_vulnerable_minor?(safe_version_array, detected_version_array)
+          patch = is_vulnerable_patch?(safe_version_array, detected_version_array)
 
-          debug_me "is_vulnerable_version? MAJOR=#{major} MINOR=#{minor} PATCH=#{safe_version_array[2] > detected_version_array[2]}"
+          debug_me "is_vulnerable_version? MAJOR=#{major} MINOR=#{minor} PATCH=#{patch}"
 
           return is_vulnerable_beta?(sva[:beta], dva[:beta]) if is_same_version?(safe_version_array, detected_version_array) && is_beta_check?(sva[:beta], dva[:beta])
           return is_vulnerable_rc?(sva[:rc], dva[:rc]) if is_same_version?(safe_version_array, detected_version_array) && is_rc_check?(sva[:rc], dva[:rc])
           return is_vulnerable_pre?(sva[:pre], dva[:pre]) if is_same_version?(safe_version_array, detected_version_array) && is_pre_check?(sva[:pre], dva[:pre])
 
-          return true if major && minor && (safe_version_array[2] > detected_version_array[2])
-          return false if major && minor && (safe_version_array[2] <= detected_version_array[2])
-          return false if (!major) && (!minor) && (safe_version_array[2] <= detected_version_array[2])
+          return true if major && minor
+          return is_vulnerable_patch?(safe_version_array, detected_version_array) if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array)
+          return true if is_same_major?(safe_version_array, detected_version_array) && minor
+
+          return false
         end
 
         def is_excluded?(detected_version)

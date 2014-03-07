@@ -6,35 +6,10 @@ describe "The version check should" do
     @check.safe=['0.4.5', '0.5.4', '0.7.8']
     @check.deprecated=['0.1.x', '0.2.x', '0.3.x', '1.x']
     @check.excluded=['0.6.4']
-    # @check.debug = true
+    @check.debug = true
   end
 
   context "without some beta versions to handle" do
-
-    # check for is_vulnerable_xxx?
-    it "reports when a version has a vulnerable major" do
-      @check.is_vulnerable_major?('2.3.0', '1.2.0').should be_true
-    end
-
-    it "reports when a version has a non vulnerable major (equal)" do
-      @check.is_vulnerable_major?('2.3.0', '2.2.0').should be_true
-    end
-
-    it "reports when a version has a non vulnerable major" do
-      @check.is_vulnerable_major?('2.3.0', '3.2.0').should be_false
-    end
-
-    it "reports when a version has a vulnerable minor version" do
-      @check.is_vulnerable_minor?('2.3.0', '2.2.0').should be_true
-    end
-
-    it "reports when a version has a vulnerable minor version (equal)" do
-      @check.is_vulnerable_minor?('2.3.0', '2.3.0').should be_true
-    end
-
-    it "reports when a version has a non vulnerable minor version" do
-      @check.is_vulnerable_minor?('2.3.0', '2.4.0').should be_true
-    end
 
     it "reports when a version is vulnerable" do
       @check.is_vulnerable_version?('2.3.0', '2.2.9').should be_true
@@ -179,5 +154,11 @@ describe "The version check should" do
   end
   it "tells 0.4.12 is not deprecated" do
     @check.is_deprecated?('0.4.12').should be_false
+  end
+  context "applied as it should be" do
+    it "says a version 0.4.6 is safe" do
+      @check.detected = '0.4.6'
+      @check.vuln?.should   be_false
+    end
   end
 end

@@ -38,13 +38,13 @@ module Codesake
                   {
                     :safe=>safe_dep[:version],
                     :detected=>dep[:version],
-                    :save_minor => self.save_minor_fixes
+                    :save_minor => self.save_minor_fixes,
+                    :save_major => true # self.save_major_fixes
                   }
                 )
                 v.debug = self.debug
 
                 vuln = v.vuln?
-                debug_me "Vulnerable version found for gem #{dep[:name]} (#{dep[:version]})" if vuln
                 if vuln && @ruby_vulnerable_versions.empty?
                   message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
                   ret = vuln
