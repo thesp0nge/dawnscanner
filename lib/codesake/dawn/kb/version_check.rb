@@ -55,10 +55,8 @@ module Codesake
         end
 
         def is_detected_in_safe?
-          dva = version_string_to_array(@detected)[:version]
           @safe.each do |s|
-            sva = version_string_to_array(s)[:version]
-            return true if is_same_version?(sva, dva)
+            return true if @detected == s
           end
           return false
         end
@@ -254,12 +252,9 @@ module Codesake
           major = is_vulnerable_major?(safe_version_array, detected_version_array)
           minor = is_vulnerable_minor?(safe_version_array, detected_version_array)
           patch = is_vulnerable_patch?(safe_version_array, detected_version_array)
-          same  = is_same_version?(safe_version_array, detected_version_array)
 
-          debug_me "is_vulnerable_version? S=#{safe_version},D=#{detected_version} -> MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix} SAME=#{same}"
+          debug_me "is_vulnerable_version? S=#{safe_version},D=#{detected_version} -> MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
 
-          # detected version is equal than safe version. It's safe by default
-          return debug_me_and_return_false("detected version is equal to safe") if same
           return is_vulnerable_beta?(sva[:beta], dva[:beta]) if is_same_version?(safe_version_array, detected_version_array) && is_beta_check?(sva[:beta], dva[:beta])
           return is_vulnerable_rc?(sva[:rc], dva[:rc]) if is_same_version?(safe_version_array, detected_version_array) && is_rc_check?(sva[:rc], dva[:rc])
           return is_vulnerable_pre?(sva[:pre], dva[:pre]) if is_same_version?(safe_version_array, detected_version_array) && is_pre_check?(sva[:pre], dva[:pre])
