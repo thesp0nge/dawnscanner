@@ -251,6 +251,7 @@ module Codesake
           return debug_me_and_return_false("#{detected_version} has a major version vulnerable but honoring save_major_fix") if major && @save_major_fix
           return debug_me_and_return_false("#{detected_version} has a minor version vulnerable but honoring save_minor_fix") if minor && @save_minor_fix
           return true if major && minor
+          return true if major && !@save_major_fix
           return true if !major && minor && @save_major_fix
           return is_vulnerable_patch?(safe_version_array, detected_version_array) if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array)
           return true if is_same_major?(safe_version_array, detected_version_array) && minor
