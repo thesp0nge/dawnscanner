@@ -79,10 +79,10 @@ module Codesake
           dva = version_string_to_array(@detected)[:version]
           @safe.sort.each do |s|
             sva = version_string_to_array(s)[:version]
-            debug_me "DVA=#{dva} - SVA=#{sva}"
-            return true if dva[0] < sva[0]
+            debug_me "is_there_an_higher_major_version? DVA=#{dva} - SVA=#{sva}"
+            return debug_me_and_return_true("is_there_an_higher_major_version? is returning true for #{@detected}") if dva[0] < sva[0]
           end
-          return false
+          return debug_me_and_return_false("is_there_an_higher_major_version? is returning false")
         end
 
         # checks in the array if there is another string with higher minor version but the same major as the parameter element)

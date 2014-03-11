@@ -38,6 +38,7 @@ describe "The CVE-2011-4319 vulnerability" do
   end
   it "doesn't fire when safe rails version it has been found (3.2.0)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.2.0'}]
+    @check.debug=true
     @check.vuln?.should   be_false
   end
           # self.safe_dependencies = [{:name=>"rails", :version=>['2.3.13', '3.0.11', '3.1.2']}]
