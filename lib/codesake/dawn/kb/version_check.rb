@@ -35,6 +35,7 @@ module Codesake
 
           # is the detected version in the safe array?
           return debug_me_and_return_false("detected version #{@detected} found as is in safe array")      if is_detected_in_safe?
+          return debug_me_and_return_false("detected version #{@detected} is higher than all version marked safe")  if is_detected_highest?
 
           @safe.each do |s|
 
@@ -61,6 +62,13 @@ module Codesake
           return false
         end
 
+        def is_detected_highest?
+         higher= @detected 
+          @safe.sort.each do |s|
+            higher=s if is_higher?(s, higher)
+          end
+          return (higher == @detected)
+        end
         def is_detected_deprecated?
           return is_deprecated?(@detected)
         end
@@ -72,6 +80,28 @@ module Codesake
           sa = version_string_to_array(s)[:version]
           da = version_string_to_array(d)[:version]
           return (sa[0] > da[0])
+        end
+
+        # Public: tells if a version is higher than another
+        #
+        # e.g.
+        #   is_higher?('2.3.2', '2.4.2') => true
+        #   is_higher?('2.3.2', '2.3.2') => true
+        def is_higher?(a, b)
+          aa = version_string_to_array(a)
+          ba = version_string_to_array(b)
+
+          ver = false
+          beta = false
+          rc = false
+          ver = true if aa[:version][0] > ba[:version][0]
+          ver = true if aa[:version][0] == ba[:version][0] && aa[:version][1] > ba[:version][1]
+          ver = true if aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
+          beta = true if aa[:beta] >= ba[:beta]
+          rc = true if aa[:rc] >= ba[:rc]
+
+          debug_me("is_higher? aa=#{aa[:version][0]}, ab=#{ba[:version][0]}, VER=#{ver} - BETA=#{beta} - RC=#{rc}")
+          return ver && beta && rc
         end
 
         # checks in the array if there is another string with higher major version
