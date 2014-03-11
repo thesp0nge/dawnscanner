@@ -33,10 +33,14 @@ module Codesake
           @status = :deprecated if is_detected_deprecated?
           @status = :excluded   if is_detected_excluded?
 
+          # is the detected version in the safe array?
+          return debug_me_and_return_false("detected version #{@detected} found as is in safe array")      if is_detected_in_safe?
+
           @safe.each do |s|
 
               @save_minor_fix   = save_minor_fix
               @save_major_fix   = save_major_fix
+
 
               vuln  = is_vulnerable_version?(s, @detected)
 
@@ -47,6 +51,15 @@ module Codesake
               # return true if vuln && ! smf
           end
 
+          return false
+        end
+
+        def is_detected_in_safe?
+          dva = version_string_to_array(@detected)[:version]
+          @safe.each do |s|
+            sva = version_string_to_array(s)[:version]
+            return true if is_same_version?(sva, dva)
+          end
           return false
         end
 
@@ -165,6 +178,7 @@ module Codesake
         end
 
         def is_same_version?(safe_version_array, detected_version_array)
+          debug_me "is_same_version? SVA=#{safe_version_array} DVA=#{detected_version_array}"
           return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) if (safe_version_array.count == 2) && (detected_version_array.count == 2)
           return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2]) if (safe_version_array.count == 3) && (detected_version_array.count == 3)
         end
