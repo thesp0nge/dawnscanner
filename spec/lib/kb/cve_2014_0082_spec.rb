@@ -17,7 +17,6 @@ describe "The CVE-2014-0082 vulnerability" do
     rand_min = SecureRandom.random_number(9999)
     rand_patch = SecureRandom.random_number(9999)
     version = "2.#{rand_min}.#{rand_patch}"
-
     @check.dependencies = [{:name=>"rails", :version=>version}]
     @check.vuln?.should be_true
   end
