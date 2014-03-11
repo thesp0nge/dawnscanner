@@ -68,6 +68,7 @@ module Codesake
           dva = version_string_to_array(@detected)[:version]
           @safe.sort.each do |s|
             sva = version_string_to_array(s)[:version]
+            debug_me "DVA=#{dva} - SVA=#{sva}"
             return true if dva[0] < sva[0]
           end
           return false
@@ -239,9 +240,12 @@ module Codesake
           major = is_vulnerable_major?(safe_version_array, detected_version_array)
           minor = is_vulnerable_minor?(safe_version_array, detected_version_array)
           patch = is_vulnerable_patch?(safe_version_array, detected_version_array)
+          same  = is_same_version?(safe_version_array, detected_version_array)
 
-          debug_me "is_vulnerable_version? MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
+          debug_me "is_vulnerable_version? S=#{safe_version},D=#{detected_version} -> MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix} SAME=#{same}"
 
+          # detected version is equal than safe version. It's safe by default
+          return debug_me_and_return_false("detected version is equal to safe") if same
           return is_vulnerable_beta?(sva[:beta], dva[:beta]) if is_same_version?(safe_version_array, detected_version_array) && is_beta_check?(sva[:beta], dva[:beta])
           return is_vulnerable_rc?(sva[:rc], dva[:rc]) if is_same_version?(safe_version_array, detected_version_array) && is_rc_check?(sva[:rc], dva[:rc])
           return is_vulnerable_pre?(sva[:pre], dva[:pre]) if is_same_version?(safe_version_array, detected_version_array) && is_pre_check?(sva[:pre], dva[:pre])
@@ -251,6 +255,7 @@ module Codesake
           return debug_me_and_return_false("#{detected_version} has a major version vulnerable but honoring save_major_fix") if major && @save_major_fix
           return debug_me_and_return_false("#{detected_version} has a minor version vulnerable but honoring save_minor_fix") if minor && @save_minor_fix
           return true if major && minor
+          return true if ! major && minor && patch && ! @save_major_fix && ! @save_minor_fix
           return true if !major && minor && @save_major_fix
           return is_vulnerable_patch?(safe_version_array, detected_version_array) if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array)
           return true if is_same_major?(safe_version_array, detected_version_array) && minor
