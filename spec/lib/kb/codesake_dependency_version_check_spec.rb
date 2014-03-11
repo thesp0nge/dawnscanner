@@ -43,10 +43,6 @@ describe "The security check for gem dependency should" do
     @check.vuln?.should    be_false
   end
 
-  it "fires when a non vulnerable version is found but there is a fixed version with higher minor release" do
-    @check.dependencies = [{:name=>"this_gem", :version=>'2.3.3'}]
-    @check.vuln?.should    be_true
-  end
   it "doesn't fires when a non vulnerable version is found and there is a fixed version with higher minor release but I asked to honor the minor version (useful with rails gem)" do
     @check.dependencies = [{:name=>"this_gem", :version=>'2.3.3'}]
     @check.save_minor_fixes = true
