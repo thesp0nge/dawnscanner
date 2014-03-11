@@ -3,7 +3,6 @@ module Codesake
     module Kb
       module RubyVersionCheck
         include BasicCheck
-        
         # Array of hashes in the {:engine=>"ruby", :version=>"1.9.3", :patchlevel=>"p342"} form
         attr_accessor   :safe_rubies
         # Hash in the {:engine=>"ruby", :version=>"1.9.3", :patchlevel=>"p342"} form
@@ -22,11 +21,14 @@ module Codesake
             vv_p << ss[:patchlevel].split("p")[1].to_i
           end
 
+          version_check = Codesake::Dawn::Kb::VersionCheck.new(:safe=>vv_a,:detected=>detected_ruby[:version])
+
           vengine = self.is_vulnerable_engine?(detected_ruby[:engine], vv_e)
-          vv = self.is_vulnerable_version?(detected_ruby[:version], vv_a)
+          # vv = version_check.is_vulnerable_version?(detected_ruby[:version], vv_a)
+          vv = version_check.vuln?
           ve = false
 
-          ve = self.is_same_version?(detected_ruby[:version], vv_a) 
+          ve = self.is_same_version?(detected_ruby[:version], vv_a)
           vp = is_vulnerable_patchlevel?(detected_ruby[:version], detected_ruby[:patchlevel])
 
           debug_me("D:#{self.name}, VENGINE=#{vengine}, VV=#{vv}, VE=#{ve}, VP=#{vp}->#{vv && vengine}, #{(ve && vp && vengine )}")
@@ -44,13 +46,11 @@ module Codesake
 
           debug_me("STATUS:#{@status}")
           self.evidences << "#{@detected_ruby[:engine]} v#{@detected_ruby[:version]}-#{@detected_ruby[:patchlevel]} detected" if @status
-          
           return @status
 
           # return true if ( vv && vengine )
           # return (ve && vp && vengine )
         end
-        
         def is_vulnerable_engine?(target, fixes = [])
           fixes.each do |f|
             return true if f == target
