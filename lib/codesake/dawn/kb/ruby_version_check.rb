@@ -13,6 +13,7 @@ module Codesake
           vv_p = []
           vv_e = []
           vp = false
+          ve = false
 
 
           @safe_rubies.each do |ss|
@@ -21,12 +22,10 @@ module Codesake
             vv_p << ss[:patchlevel].split("p")[1].to_i
           end
 
-          version_check = Codesake::Dawn::Kb::VersionCheck.new(:safe=>vv_a,:detected=>detected_ruby[:version])
+          version_check = Codesake::Dawn::Kb::VersionCheck.new(:safe=>vv_a,:detected=>detected_ruby[:version], :debug=>@debug, :save_major=>true)
 
           vengine = self.is_vulnerable_engine?(detected_ruby[:engine], vv_e)
-          # vv = version_check.is_vulnerable_version?(detected_ruby[:version], vv_a)
           vv = version_check.vuln?
-          ve = false
 
           ve = self.is_same_version?(detected_ruby[:version], vv_a)
           vp = is_vulnerable_patchlevel?(detected_ruby[:version], detected_ruby[:patchlevel])

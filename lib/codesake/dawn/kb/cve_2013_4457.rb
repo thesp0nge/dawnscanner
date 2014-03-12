@@ -20,7 +20,7 @@ module Codesake
             :aux_links=>["https://groups.google.com/forum/#!topic/ruby-security-ann/3XTGFbAJoTg"]
           })
 
-          self.save_minor_fix = true
+          self.save_minor = true
           self.safe_dependencies = [{:name=>"cocaine", :version=>['0.5.3', '0.4.3', '0.3.0']}]
 
 

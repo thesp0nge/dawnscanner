@@ -21,6 +21,7 @@ module Codesake
           @detected   ||= options[:detected]
           @save_minor ||= options[:save_minor]
           @save_major ||= options[:save_major]
+          @debug      ||= options[:debug]
           debug_me "VersionCheck initialized"
         end
 
@@ -198,8 +199,8 @@ module Codesake
 
           # support for x as safe minor version
           return false if is_same_major?(safe_version, detected_version) && safe_version[1] == 'x'
-          return true if safe_version[1] >= detected_version[1]
-          return false if safe_version[1] < detected_version[1]
+          return true if safe_version[1] > detected_version[1]
+          return false if safe_version[1] <= detected_version[1]
         end
 
         def is_same_version?(safe_version_array, detected_version_array)
