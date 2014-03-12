@@ -54,7 +54,8 @@ module Codesake
                     :safe=>safe_dep[:version],
                     :detected=>dep[:version],
                     :save_minor => self.save_minor,
-                    :save_major => self.save_major
+                    :save_major => self.save_major,
+                    :excluded   => self.not_affected[:version]
                   }
                 )
                 v.debug = self.debug

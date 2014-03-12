@@ -32,7 +32,7 @@ module Codesake
           debug_me "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable" unless @excluded.nil?
 
           @status = :deprecated if is_detected_deprecated?
-          @status = :excluded   if is_detected_excluded?
+          return debug_me_and_return_false("detected version #{detected} is marked to be excluded for vulnerable ones")   if is_detected_excluded?
 
           # is the detected version in the safe array?
           return debug_me_and_return_false("detected version #{@detected} found as is in safe array")      if is_detected_in_safe?
@@ -92,6 +92,11 @@ module Codesake
           ver = false
           beta = false
           rc = false
+
+          # Version arrays are just major.minor version. Let's assume
+          # patchlevel is 0 for sake of comparison.
+          aa[:version] << 0 if aa[:version].count == 2
+          ba[:version] << 0 if ba[:version].count == 2
           ver = true if aa[:version][0] > ba[:version][0]
           ver = true if aa[:version][0] == ba[:version][0] && aa[:version][1] > ba[:version][1]
           ver = true if aa[:version].count == 3 && ba[:version].count == 3 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
@@ -205,6 +210,8 @@ module Codesake
 
         def is_same_version?(safe_version_array, detected_version_array)
           debug_me "is_same_version? SVA=#{safe_version_array} DVA=#{detected_version_array}"
+
+          return (safe_version_array[0] == detected_version_array[0]) if (safe_version_array[1] == 'x')
           return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) if (safe_version_array.count == 2) && (detected_version_array.count == 2)
           return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2]) if (safe_version_array.count == 3) && (detected_version_array.count == 3)
         end
@@ -276,6 +283,9 @@ module Codesake
           dva = version_string_to_array(detected_version)
           safe_version_array = sva[:version]
           detected_version_array = dva[:version]
+
+          safe_version_array << 0 if safe_version_array.count == 2
+          detected_version_array << 0 if detected_version_array.count == 2
 
           major = is_vulnerable_major?(safe_version_array, detected_version_array)
           minor = is_vulnerable_minor?(safe_version_array, detected_version_array)
