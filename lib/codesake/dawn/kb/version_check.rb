@@ -37,7 +37,7 @@ module Codesake
           return debug_me_and_return_false("detected version #{@detected} found as is in safe array")      if is_detected_in_safe?
           return debug_me_and_return_false("detected version #{@detected} is higher than all version marked safe")  if is_detected_highest?
 
-          @safe.each do |s|
+          @safe.sort.each do |s|
 
               @save_minor_fix   = save_minor_fix
               @save_major_fix   = save_major_fix
@@ -46,10 +46,7 @@ module Codesake
               vuln  = is_vulnerable_version?(s, @detected)
 
               debug_me "VULN=#{vuln} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
-              return vuln
-              # return false if vuln && smjf
-              # return false if vuln && smf
-              # return true if vuln && ! smf
+              return true if vuln
           end
 
           return false
@@ -63,7 +60,7 @@ module Codesake
         end
 
         def is_detected_highest?
-         higher= @detected 
+         higher= @detected
           @safe.sort.each do |s|
             higher=s if is_higher?(s, higher)
           end
@@ -297,7 +294,7 @@ module Codesake
           return true if ! major && minor && patch && ! @save_major_fix && ! @save_minor_fix
           return true if major && !@save_major_fix
           return true if !major && minor && @save_major_fix
-          return is_vulnerable_patch?(safe_version_array, detected_version_array) if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array)
+          return patch if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array)
           return true if is_same_major?(safe_version_array, detected_version_array) && minor
 
           return false

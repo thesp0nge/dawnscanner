@@ -23,13 +23,13 @@ module Codesake
         # are separated branches and the patch is provided for all of those. So
         # if version 3.1.10 is safe and you have it, you don't be prompted
         # about 3.2.x.
-        attr_accessor :save_minor_fixes
-        attr_accessor :save_major_fixes
+        attr_accessor :save_minor_fix
+        attr_accessor :save_major_fix
 
         def initialize(options)
           super(options)
-          @save_minor_fixes ||= options[:save_minor_fixes]
-          @save_major_fixes ||= options[:save_major_fixes]
+          @save_minor_fix ||= options[:save_minor_fix]
+          @save_major_fix ||= options[:save_major_fix]
         end
 
         def vuln?
@@ -44,8 +44,8 @@ module Codesake
 
             @safe_dependencies.each do |safe_dep|
               if safe_dep[:name] == "rails"
-                debug_me "Forcing save_minor_fixes flag for rails gem dependency check"
-                self.save_minor_fixes = true
+                debug_me "Forcing save_minor_fix flag for rails gem dependency check"
+                self.save_minor_fix = true
               end
 
               if dep[:name] == safe_dep[:name]
@@ -53,8 +53,8 @@ module Codesake
                   {
                     :safe=>safe_dep[:version],
                     :detected=>dep[:version],
-                    :save_minor => self.save_minor_fixes,
-                    :save_major => self.save_major_fixes
+                    :save_minor => self.save_minor_fix,
+                    :save_major => self.save_major_fix
                   }
                 )
                 v.debug = self.debug
