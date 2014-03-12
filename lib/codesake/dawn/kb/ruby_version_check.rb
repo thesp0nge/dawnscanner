@@ -30,9 +30,9 @@ module Codesake
           ve = self.is_same_version?(detected_ruby[:version], vv_a)
           vp = is_vulnerable_patchlevel?(detected_ruby[:version], detected_ruby[:patchlevel])
 
-          debug_me("D:#{self.name}, VENGINE=#{vengine}, VV=#{vv}, VE=#{ve}, VP=#{vp}->#{vv && vengine}, #{(ve && vp && vengine )}")
-          debug_me("S:#{@safe_rubies}")
-          debug_me("DD:#{@detected_ruby}")
+          debug_me("#{__FILE__}@#{__LINE__}: check: #{self.name}, engine is vulnerable?=#{vengine}, version is vulnerable?=#{vv}, is same version?=#{ve}, is_vulnerable_patchlevel?=#{vp}->#{vv && vengine}, #{(ve && vp && vengine )}")
+          debug_me("#{__FILE__}@#{__LINE__}: safe ruby is: #{@safe_rubies}")
+          debug_me("#{__FILE__}@#{__LINE__}: detected ruby is: #{@detected_ruby}")
 
 
 
@@ -68,15 +68,16 @@ module Codesake
         def is_vulnerable_patchlevel?(version, patchlevel)
           fixes = []
           debug_me "is_vulnerable_patchlevel? called with VERSION=#{version} and PLEVEL=#{patchlevel}"
-          debug_me "SAFE_RUBIES=#{@safe_rubies}"
           @safe_rubies.each do |ss|
             fixes << ss[:patchlevel].split("p")[1].to_i if ss[:version] == version
           end
 
           debug_me "FIXES IS EMPTY" if fixes.empty?
+          debug_me "FIXES LIST IS #{fixes}" unless fixes.empty?
           return true if fixes.empty?
 
-          t = patchlevel.split("p")[1].to_i
+          t = patchlevel.split("p")[1].to_i if patchlevel.include? 'p'
+          t = patchlevel.to_i unless patchlevel.include? 'p'
           fixes.each do |f|
             debug_me "PATCHLEVEL FIXES = #{f}, PATCHLEVEL TARGET = #{t}"
             return true if f > t
