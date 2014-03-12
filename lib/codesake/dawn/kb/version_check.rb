@@ -204,6 +204,8 @@ module Codesake
 
           # support for x as safe minor version
           return false if is_same_major?(safe_version, detected_version) && safe_version[1] == 'x'
+          return false if safe_version[0] <= detected_version[0] && safe_version[1] == 'x'
+          return true if safe_version[0] > detected_version[0] && safe_version[1] == 'x'
           return true if safe_version[1] > detected_version[1]
           return false if safe_version[1] <= detected_version[1]
         end
