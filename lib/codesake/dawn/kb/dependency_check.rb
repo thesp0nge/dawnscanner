@@ -55,10 +55,10 @@ module Codesake
                     :detected=>dep[:version],
                     :save_minor => self.save_minor,
                     :save_major => self.save_major,
-                    :excluded   => self.not_affected[:version]
                   }
                 )
                 v.debug = self.debug
+                v.excluded = self.not_affected[:version] unless self.not_affected.nil?
 
                 vuln = v.vuln?
                 if vuln && @ruby_vulnerable_versions.empty?
