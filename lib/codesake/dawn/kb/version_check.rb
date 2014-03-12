@@ -96,7 +96,7 @@ module Codesake
           rc = false
           ver = true if aa[:version][0] > ba[:version][0]
           ver = true if aa[:version][0] == ba[:version][0] && aa[:version][1] > ba[:version][1]
-          ver = true if aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
+          ver = true if aa[:version].count == 3 && ba[:version].count == 3 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
           beta = true if aa[:beta] >= ba[:beta]
           rc = true if aa[:rc] >= ba[:rc]
 
