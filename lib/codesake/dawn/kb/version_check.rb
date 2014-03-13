@@ -11,6 +11,7 @@ module Codesake
         attr_accessor :save_minor
         attr_accessor :save_major
         attr_reader   :status
+        attr_accessor :enable_warning
 
 
         def initialize(options={})
@@ -22,6 +23,7 @@ module Codesake
           @save_minor ||= options[:save_minor]
           @save_major ||= options[:save_major]
           @debug      ||= options[:debug]
+          @enable_warning ||= options[:enable_warning]
           debug_me "VersionCheck initialized"
         end
 
@@ -360,7 +362,7 @@ module Codesake
               # nonsense since it means all versions are deprecated. However
               # I'll support also nonsense checks.
 
-              $logger.warn "Setting the predicate #{dep} will mark all versions as deprecated"
+              $logger.warn "Setting the predicate #{dep} will mark all versions as deprecated" unless self.enable_warning.nil?
               debug_me "You kindly mark #{detected_version} as deprecated with this predicate #{dep}"
               return true
             end
