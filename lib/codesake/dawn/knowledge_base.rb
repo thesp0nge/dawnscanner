@@ -6,6 +6,7 @@ require "codesake/dawn/kb/ruby_version_check"
 require "codesake/dawn/kb/operating_system_check"
 require "codesake/dawn/kb/combo_check"
 require "codesake/dawn/kb/version_check"
+require "codesake/dawn/kb/deprecation_check"
 
 # Q&A related checks
 ## Not revised code
