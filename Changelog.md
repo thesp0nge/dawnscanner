@@ -3,7 +3,7 @@
 Codesake::Dawn is a static analysis security scanner for ruby written web applications.
 It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
-frameworks. 
+frameworks.
 
 _latest update: Thu Feb 13 08:31:37 CET 2014_
 
@@ -48,6 +48,9 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
   is provided as well. True to be told, there are some CVE valid but not found
   on NVID website, so having @rubysec link is even more accurate in those
   situations.
+* New Codesake::Dawn::Kb::VersionCheck class to provide version specific
+  checks, supporting beta version number, release candidate and pre. Fully
+  integrated with DepedencyCheck and RubyVersionCheck
 
 ## Version 1.0.3 - codename: Lightning McQueen (2014-02-13)
 
@@ -181,7 +184,7 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
 ## Version 0.85 - codename: elevator (2013-12-17)
 
 * refactoring bin/dawn script: some stuff were moved into Codesake::Core class
-* Added a check against Denial of Service vulnerability for Nokogiri 1.5.x 
+* Added a check against Denial of Service vulnerability for Nokogiri 1.5.x
   and 1.6.0 when used with JRuby.
 * Added a check against Denial of Service vulnerability due to entity expansion
   for Nokogiri 1.5.x and 1.6.0 when used with JRuby.
@@ -214,7 +217,7 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-2065
 * adding test for CVE-2013-4389
 * adding test for CVE-2010-1330
-* adding test for CVE-2011-0446 
+* adding test for CVE-2011-0446
 * adding test for CVE-2011-0995
 * adding test for CVE-2011-2929
 * adding test for CVE-2011-4815
@@ -283,7 +286,7 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-2616
 * adding test for CVE-2013-2617
 * adding test for CVE-2013-3221
-* make output less verbose. Only vulnerabilities and severity will be shown 
+* make output less verbose. Only vulnerabilities and severity will be shown
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * adding a '--output' option
 * adding a '--count-only' option
