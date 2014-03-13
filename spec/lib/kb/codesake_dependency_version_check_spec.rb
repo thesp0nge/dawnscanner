@@ -10,7 +10,7 @@ class DependencyMockup
       :applies=>['sinatra', 'padrino', 'rails'],
       :message=> message
     )
-    self.debug = true
+    # self.debug = true
 
     self.safe_dependencies = [{:name=>'this_gem', :version=>['0.3.0', '1.3.3', '2.3.3', '2.4.2', '9.4.31.2']}]
     self.save_major = true
