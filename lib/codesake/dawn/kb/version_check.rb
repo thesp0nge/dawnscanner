@@ -93,6 +93,7 @@ module Codesake
           ver = false
           beta = false
           rc = false
+          same = false
 
           # Version arrays are just major.minor version. Let's assume
           # patchlevel is 0 for sake of comparison.
@@ -103,11 +104,16 @@ module Codesake
           ver = true if aa[:version].count == 3 && ba[:version].count == 3 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
           ver = true if aa[:version].count == 4 && ba[:version].count == 4 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] == ba[:version][2] && aa[:version][3] > ba[:version][3]
           ver = true if aa[:version].count == 4 && ba[:version].count == 4 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
+          same = is_same_version?(aa[:version], ba[:version])
           beta = true if aa[:beta] >= ba[:beta]
           rc = true if aa[:rc] >= ba[:rc]
 
-          debug_me("is_higher? VER=#{ver} - BETA=#{beta} - RC=#{rc} return value is (#{ver && beta && rc})")
-          return ver && beta && rc
+          ret = false
+          ret = ver && beta && rc unless same
+          ret = beta && rc if same
+
+          debug_me("is_higher? a=#{a}, b=#{b} VER=#{ver} - BETA=#{beta} - RC=#{rc} - SAME=#{same} - a>b? = (#{ret})")
+          return ret
         end
 
         # checks in the array if there is another string with higher major version
@@ -222,11 +228,16 @@ module Codesake
         end
 
         def is_same_version?(safe_version_array, detected_version_array)
-          debug_me "is_same_version? SVA=#{safe_version_array} DVA=#{detected_version_array}"
+          ret = false
 
-          return (safe_version_array[0] == detected_version_array[0]) if (safe_version_array[1] == 'x')
-          return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) if (safe_version_array.count == 2) && (detected_version_array.count == 2)
-          return (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2]) if (safe_version_array.count == 3) && (detected_version_array.count == 3)
+          ret = true if (safe_version_array[0] == detected_version_array[0]) if (safe_version_array[1] == 'x')
+          ret = true if (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array.count == 2) && (detected_version_array.count == 2)
+          ret = true if (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2]) && (safe_version_array.count == 3) && (detected_version_array.count == 3)
+          ret = true if (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2]) && (safe_version_array[3] == detected_version_array[3]) && (safe_version_array.count == 4) && (detected_version_array.count == 4)
+
+          debug_me "is_same_version? SVA=#{safe_version_array} DVA=#{detected_version_array} RET=#{ret}"
+
+          return ret
         end
         #########################
         # Beta version handling
