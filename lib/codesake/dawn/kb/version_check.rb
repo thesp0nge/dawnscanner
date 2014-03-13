@@ -61,8 +61,9 @@ module Codesake
         end
 
         def is_detected_highest?
-         higher= @detected
+          higher= @detected
           @safe.sort.each do |s|
+            debug_me("higher is #{higher}")
             higher=s if is_higher?(s, higher)
           end
           return (higher == @detected)
@@ -100,10 +101,12 @@ module Codesake
           ver = true if aa[:version][0] > ba[:version][0]
           ver = true if aa[:version][0] == ba[:version][0] && aa[:version][1] > ba[:version][1]
           ver = true if aa[:version].count == 3 && ba[:version].count == 3 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
+          ver = true if aa[:version].count == 4 && ba[:version].count == 4 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] == ba[:version][2] && aa[:version][3] > ba[:version][3]
+          ver = true if aa[:version].count == 4 && ba[:version].count == 4 && aa[:version][0] == ba[:version][0] && aa[:version][1] == ba[:version][1] && aa[:version][2] > ba[:version][2]
           beta = true if aa[:beta] >= ba[:beta]
           rc = true if aa[:rc] >= ba[:rc]
 
-          debug_me("is_higher? aa=#{aa[:version][0]}, ab=#{ba[:version][0]}, VER=#{ver} - BETA=#{beta} - RC=#{rc}")
+          debug_me("is_higher? VER=#{ver} - BETA=#{beta} - RC=#{rc} return value is (#{ver && beta && rc})")
           return ver && beta && rc
         end
 
@@ -176,6 +179,10 @@ module Codesake
           return false if ! is_good_parameter?(array_a) || ! is_good_parameter?(array_b)
           return (array_a[1] == array_b[1])
         end
+        def is_same_patch?(array_a, array_b)
+          return false if ! is_good_parameter?(array_a) || ! is_good_parameter?(array_b)
+          return (array_a[2] == array_b[2])
+        end
 
         def is_vulnerable_major?(safe_version, detected_version)
           return (safe_version[0] > detected_version[0])
@@ -184,6 +191,10 @@ module Codesake
         def is_vulnerable_patch?(safe_version, detected_version)
           return false if safe_version[2].nil? || detected_version[2].nil?
           return (safe_version[2] > detected_version[2])
+        end
+        def is_vulnerable_aux_patch?(safe_version, detected_version)
+          return false if safe_version[3].nil? || detected_version[3].nil?
+          return (safe_version[3] > detected_version[3])
         end
 
 
@@ -292,8 +303,9 @@ module Codesake
           major = is_vulnerable_major?(safe_version_array, detected_version_array)
           minor = is_vulnerable_minor?(safe_version_array, detected_version_array)
           patch = is_vulnerable_patch?(safe_version_array, detected_version_array)
+          aux_patch = is_vulnerable_aux_patch?(safe_version_array, detected_version_array)
 
-          debug_me "is_vulnerable_version? S=#{safe_version},D=#{detected_version} -> MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
+          debug_me "is_vulnerable_version? S=#{safe_version},D=#{detected_version} -> MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} AUX_PATCH=#{aux_patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
 
           return is_vulnerable_beta?(sva[:beta], dva[:beta]) if is_same_version?(safe_version_array, detected_version_array) && is_beta_check?(sva[:beta], dva[:beta])
           return is_vulnerable_rc?(sva[:rc], dva[:rc]) if is_same_version?(safe_version_array, detected_version_array) && is_rc_check?(sva[:rc], dva[:rc])
@@ -307,7 +319,9 @@ module Codesake
           return true if ! major && minor && patch && ! @save_major_fix && ! @save_minor_fix
           return true if major && !@save_major_fix
           return true if !major && minor && @save_major_fix
-          return patch if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array)
+          return patch if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array) && !aux_patch
+          return aux_patch if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array) && is_same_patch?(safe_version_array, detected_version_array)
+          return true if is_same_major?(safe_version_array, detected_version_array) && is_same_minor?(safe_version_array, detected_version_array) && patch && aux_patch
           return true if is_same_major?(safe_version_array, detected_version_array) && minor
 
           return false
