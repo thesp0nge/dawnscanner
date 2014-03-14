@@ -216,6 +216,7 @@ require "codesake/dawn/kb/cve_2014_0081"
 require "codesake/dawn/kb/cve_2014_0082"
 require "codesake/dawn/kb/cve_2014_1233"
 require "codesake/dawn/kb/cve_2014_1234"
+require "codesake/dawn/kb/cve_2014_2322"
 
 module Codesake
   module Dawn
@@ -441,12 +442,12 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_7086.new, 
           Codesake::Dawn::Kb::CVE_2014_1233.new,
           Codesake::Dawn::Kb::CVE_2014_1234.new,
-<<<<<<< HEAD
           Codesake::Dawn::Kb::CVE_2014_0080.new, 
-=======
->>>>>>> fix_travis_build
           Codesake::Dawn::Kb::CVE_2014_0081.new, 
           Codesake::Dawn::Kb::CVE_2014_0082.new, 
+          Codesake::Dawn::Kb::CVE_2014_1233.new,
+          Codesake::Dawn::Kb::CVE_2014_1234.new,
+          Codesake::Dawn::Kb::CVE_2014_2322.new,
 
         ]
       end

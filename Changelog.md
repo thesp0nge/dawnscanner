@@ -22,11 +22,7 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
 * Added a check for CVE-2013-4489
 * Added a check for CVE-2013-4593
 * Added a check for CVE-2013-5671
-* Added a check for CVE-2014-1233
-* Added a check for CVE-2014-1234
 * Added a check for CVE-2014-0080
-* Added a check for CVE-2014-0081
-* Added a check for CVE-2014-0082
 * Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
   Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
   test, so all the cheatsheet content is covered since now.
@@ -54,6 +50,8 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
 * Issue #34. I added a deprecation check. However I haven't found an official
   link saying which are MVC gem version to be considered officially deprecated
   or just old. I enabled only check against ruby
+
+* Added a check for CVE-2014-2322
 
 ## Version 1.0.4 - codename: Lightning McQueen (2014-03-14)
 
