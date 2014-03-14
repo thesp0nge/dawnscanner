@@ -22,7 +22,7 @@ module Codesake
           })
 
           self.safe_dependencies = [{:name=>"grit", :version=>[ '5.4.1', '6.2.3' ]}]
-          self.not_affected = {:name=>"grit", :version=>['5.1'], :earlier=>true}
+          self.not_affected = {:name=>"grit", :version=>['5.1', '5.0', '4.x', '3.x', '2.x', '1.x', '0.x'], :earlier=>true}
 				end
 			end
 		end

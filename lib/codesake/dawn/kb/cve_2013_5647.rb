@@ -22,6 +22,7 @@ module Codesake
           })
 
           self.safe_dependencies = [{:name=>"sounder", :version=>['1.0.2']}]
+          self.save_major = true
  
 				end
 			end

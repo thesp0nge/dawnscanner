@@ -19,7 +19,7 @@ module Codesake
             :mitigation=>"Please upgrade rack version up to version 1.5.2 or 1.4.5 or higher.",
             :aux_links=>["https://groups.google.com/forum/#%21msg/rack-devel/mZsuRonD7G8/DpZIOmMLbOgJ"]
           })
-          self.save_minor_fixes = true
+          self.save_minor = true
           self.safe_dependencies = [{:name=>"rack", :version=>['1.5.2', '1.4.5']}]
 				end
 			end

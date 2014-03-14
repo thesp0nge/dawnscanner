@@ -1,9 +1,9 @@
 require 'spec_helper'
 describe "The CVE-2011-5036 vulnerability" do
-	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2011_5036.new
-		# @check.debug = true
-	end
+  before(:all) do
+    @check = Codesake::Dawn::Kb::CVE_2011_5036.new
+    # @check.debug = true
+  end
   it "is reported when the vulnerable gem is detected - 1.0.1" do
     @check.dependencies = [{:name=>"rack", :version=>"1.0.1"}]
     @check.vuln?.should   be_true
@@ -39,10 +39,6 @@ describe "The CVE-2011-5036 vulnerability" do
   end
   it "is reported when the vulnerable gem is detected - 1.1.0" do
     @check.dependencies = [{:name=>"rack", :version=>"1.1.0"}]
-    @check.vuln?.should   be_true
-  end
-  it "is reported when the vulnerable gem is detected - 1.1.3" do
-    @check.dependencies = [{:name=>"rack", :version=>"1.1.3"}]
     @check.vuln?.should   be_true
   end
   it "is reported when the vulnerable gem is detected - 1.1.2" do

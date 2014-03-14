@@ -21,6 +21,7 @@ module Codesake
           })
 
           self.safe_dependencies = [{:name=>"rails", :version=>['2.3.13', '3.0.10', '3.1.1']}]
+          self.save_major = true
 
 				end
 			end
