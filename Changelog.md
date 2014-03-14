@@ -21,7 +21,9 @@ _latest update: Fri Jan 24 07:57:58 CET 2014_
     + CVE-2014-0081: Multiple cross-site scripting (XSS) vulnerabilities in rails
     + CVE-2014-0082: Denial of service in Rails before 3.2.17
 
-  New security checks are for Owasp ROR Cheatsheet.
+  New security checks are for Owasp ROR Cheatsheet:
+    + Check for safe redirect and forward
+    + Check for sensitive file
 
 ## Version 1.0.3 - codename: Lightning McQueen (2014-02-13)
 
