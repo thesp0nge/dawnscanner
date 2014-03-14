@@ -64,7 +64,6 @@ opts.each do |opt, val|
       options[:gemfile_name] = val 
       guess = Codesake::Dawn::Core.guess_mvc(val)
     end
-    
   when '--verbose'
     options[:verbose]=true
   when '--count-only'
@@ -77,7 +76,6 @@ opts.each do |opt, val|
   when '--list-knowledgebase'
     options[:dump_kb]=true
     check = val unless val.nil?
-   
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
     LIST_KNOWN_FRAMEWORK.each do |mvc|

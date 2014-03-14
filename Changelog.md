@@ -51,6 +51,9 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
 * New Codesake::Dawn::Kb::VersionCheck class to provide version specific
   checks, supporting beta version number, release candidate and pre. Fully
   integrated with DepedencyCheck and RubyVersionCheck
+* Issue #34. I added a deprecation check. However I haven't found an official
+  link saying which are MVC gem version to be considered officially deprecated
+  or just old. I enabled only check against ruby
 
 ## Version 1.0.3 - codename: Lightning McQueen (2014-02-13)
 
