@@ -1,6 +1,6 @@
 # Codesake::Dawn Knowledge base
 
-The knowledge base library for Codesake::Dawn version 1.0.3 contains 152 security checks.
+The knowledge base library for Codesake::Dawn version 1.0.4 contains 152 security checks.
 ---
 * Not revised code: Analyzing comments, it seems your code is waiting from some review from you. Please consider take action before putting it in production.
 This check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME
@@ -165,4 +165,4 @@ XML documents with carefully crafted entity expansion strings which can cause th
 * [CVE-2014-0082](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0082): actionpack/lib/action_view/template/text.rb in Action View in Ruby on Rails 3.x before 3.2.17 converts MIME type strings to symbols during use of the :text option to the render method, which allows remote attackers to cause a denial of service (memory consumption) by including these strings in headers.
 
 
-_Last updated: Fri 14 Mar 08:19:09 CET 2014_
+_Last updated: Fri 14 Mar 08:36:40 CET 2014_

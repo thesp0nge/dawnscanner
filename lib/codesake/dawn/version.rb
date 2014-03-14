@@ -9,17 +9,17 @@ module Codesake
     #
     # Future releases
     #
-    # "Tow Mater"       
-    # "Finn McMissile"  
-    # "Fillmore"        
-    # "Holly Shiftwell" 
-    # "Guido"           
-    # "Luigi"           
+    # "Tow Mater"
+    # "Finn McMissile"
+    # "Fillmore"
+    # "Holly Shiftwell"
+    # "Guido"
+    # "Luigi"
 
-    VERSION   = "1.0.3"
+    VERSION   = "1.0.4"
     CODENAME  = "Lightning McQueen"
     # RELEASE   = "(development)"
-    RELEASE   = "20140213"
+    RELEASE   = "20140314"
 
   end
 end
