@@ -9,12 +9,12 @@ module Codesake
     #
     # Future releases
     #
-    # "Tow Mater"       
-    # "Finn McMissile"  
-    # "Fillmore"        
-    # "Holly Shiftwell" 
-    # "Guido"           
-    # "Luigi"           
+    # "Tow Mater"
+    # "Finn McMissile"
+    # "Fillmore"
+    # "Holly Shiftwell"
+    # "Guido"
+    # "Luigi"
 
     VERSION   = "1.1.0"
     CODENAME  = "Lightning McQueen"
