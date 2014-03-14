@@ -7,6 +7,24 @@ frameworks.
 
 _latest update: Fri Jan 24 07:57:58 CET 2014_
 
+## Version 1.0.4 - codename: Lightning McQueen (2014-03-14)
+
+* Backporting of some CVEs introduced in 2014 from the development branch.
+  Since it will take some time to improve dawn 1.1 and since I forgot to merge
+  some useful CVE released since January also in master, I do it know. Please
+  note that, due to a big change in DependencyCheck class the check against
+  CVE-2014-0080 will be only available with dawn 1.1.
+
+  Backported checks are:
+    + CVE-2014-1233: The paratrooper-pingdom gem 1.0.0 for Ruby allows local users to obtain the App-Key, username, and password values by listing the curl process.
+    + CVE-2014-1234: The paratrooper-newrelic gem 1.0.1 for Ruby allows local users to obtain the X-Api-Key value by listing the curl process.
+    + CVE-2014-0081: Multiple cross-site scripting (XSS) vulnerabilities in rails
+    + CVE-2014-0082: Denial of service in Rails before 3.2.17
+
+  New security checks are for Owasp ROR Cheatsheet:
+    + Check for safe redirect and forward
+    + Check for sensitive file
+
 ## Version 1.0.3 - codename: Lightning McQueen (2014-02-13)
 
 * Fixing issue #37. Now the rake task is successfully loaded when you require

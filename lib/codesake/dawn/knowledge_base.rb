@@ -18,6 +18,8 @@ require 'codesake/dawn/kb/owasp_ror_cheatsheet/csrf'
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/session_stored_in_database'
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/mass_assignment_in_model'
 require 'codesake/dawn/kb/owasp_ror_cheatsheet/security_related_headers'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/check_for_safe_redirect_and_forward'
+require 'codesake/dawn/kb/owasp_ror_cheatsheet/sensitive_files'
 
 # Security checks with no or pending CVE
 
@@ -193,8 +195,11 @@ require "codesake/dawn/kb/cve_2013_6459"
 require "codesake/dawn/kb/cve_2013_7086"
 
 # CVE - 2014
-# require "codesake/dawn/kb/cve_2014_1234"
 
+require "codesake/dawn/kb/cve_2014_0081"
+require "codesake/dawn/kb/cve_2014_0082"
+require "codesake/dawn/kb/cve_2014_1233"
+require "codesake/dawn/kb/cve_2014_1234"
 
 module Codesake
   module Dawn
@@ -263,7 +268,8 @@ module Codesake
           Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
           Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new, 
           Codesake::Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders.new, 
-          # Codesake::Dawn::Kb::OwaspRorCheatsheet.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::CheckForSafeRedirectAndForward.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::SensitiveFiles.new,
           Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
           Codesake::Dawn::Kb::NokogiriDos20131217.new,
           Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217.new,
@@ -404,6 +410,10 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_6421.new, 
           Codesake::Dawn::Kb::CVE_2013_6459.new, 
           Codesake::Dawn::Kb::CVE_2013_7086.new, 
+          Codesake::Dawn::Kb::CVE_2014_1233.new,
+          Codesake::Dawn::Kb::CVE_2014_1234.new,
+          Codesake::Dawn::Kb::CVE_2014_0081.new, 
+          Codesake::Dawn::Kb::CVE_2014_0082.new, 
 
         ]
       end
