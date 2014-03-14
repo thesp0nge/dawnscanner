@@ -52,6 +52,7 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
   or just old. I enabled only check against ruby
 
 * Added a check for CVE-2014-2322
+* Added a check for CVE-2014-0036
 
 ## Version 1.0.4 - codename: Lightning McQueen (2014-03-14)
 
