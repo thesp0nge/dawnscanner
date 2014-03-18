@@ -16,10 +16,10 @@ module Codesake
     # "Guido"
     # "Luigi"
 
-    VERSION   = "1.0.4"
+    VERSION   = "1.0.5"
     CODENAME  = "Lightning McQueen"
     # RELEASE   = "(development)"
-    RELEASE   = "20140314"
+    RELEASE   = "20140318"
 
   end
 end

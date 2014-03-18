@@ -3,15 +3,14 @@
 Codesake::Dawn is a static analysis security scanner for ruby written web applications.
 It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
-frameworks. 
+frameworks.
 
-_latest update: Fri Jan 24 07:57:58 CET 2014_
+_latest update: Tue Mar 18 15:57:42 CET 2014_
 
-<<<<<<< HEAD
+## Version 1.0.5 - codename: Lightning McQueen (2014-03-18)
+
 * Added a check for CVE-2014-2322
-=======
 * Added a check for CVE-2014-0036
->>>>>>> issue_43_cve_2014_0036
 
 ## Version 1.0.4 - codename: Lightning McQueen (2014-03-14)
 
