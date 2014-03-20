@@ -1,3 +1,4 @@
+
 ## Press announcement
 
 After 9 months of development, it's now time for Codesake::Dawn security source
@@ -43,6 +44,10 @@ Paolo - paolo@codesake.com
 
 ## Twitter announcement
 
+### version 1.0.5
+
+@dawnscanner version 1.0.5 is out. 2 new security checks: CVE-2014-2322 and CVE-2014-0036 #ruby #security #rails #sinatra #padrino
+
 ### version 1.0.4
 
 @dawnscanner version 1.0.4 is out. 10 security checks actually in development were backported to master release. https://twitter.com/rubygems/status/444389931851718656 #ruby #security #rails
@@ -65,10 +70,18 @@ Paolo - paolo@codesake.com
 
 ## Linkedin announcement 
 
+### version 1.0.5
+
+@dawnscanner version 1.0.5 is out. You can read the announcement here: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-5-released/
+Codesake::Dawn v1.0.5 introduces 2 newly released CVE bullettins: CVE-2014-006 and CVE-2014-2322 about a MitM Spoofing Weakness in rbovirt gem and command injection in arabic prawn gem. Codesake::Dawk supports Sinatra, Padrino and Ruby on Rails MVC frameworks out of the box.
+
+$ gem install codesake-dawn 
+$ have fun
+
 ### version 1.0.4
 
 @dawnscanner version 1.0.4 is out. You can read the announcement here: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-4-released/
-Codesake::Dawn v1.0.4 introduces 10 security checks backported from upcoming version 1.1.x and released in the latest months. Now the knowledge base has 152 security checks. Codesake::Dawk supports Sinatra, Padrin and Ruby on Rails MVC frameworks out of the box.
+Codesake::Dawn v1.0.4 introduces 10 security checks backported from upcoming version 1.1.x and released in the latest months. Now the knowledge base has 152 security checks. Codesake::Dawk supports Sinatra, Padrino and Ruby on Rails MVC frameworks out of the box.
 
 $ gem install codesake-dawn 
 $ have fun
