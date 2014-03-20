@@ -1,3 +1,4 @@
+
 ## Press announcement
 
 After 9 months of development, it's now time for Codesake::Dawn security source
@@ -71,7 +72,7 @@ Paolo - paolo@codesake.com
 
 ### version 1.0.5
 
-@dawnscanner version 1.0.r54 is out. You can read the announcement here: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-5-released/
+@dawnscanner version 1.0.5 is out. You can read the announcement here: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-5-released/
 Codesake::Dawn v1.0.5 introduces 2 newly released CVE bullettins: CVE-2014-006 and CVE-2014-2322 about a MitM Spoofing Weakness in rbovirt gem and command injection in arabic prawn gem. Codesake::Dawk supports Sinatra, Padrino and Ruby on Rails MVC frameworks out of the box.
 
 $ gem install codesake-dawn 
