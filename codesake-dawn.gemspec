@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Codesake::Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["thesp0nge@gmail.com"]
-  gem.description   = %q{dawn is a security static source code analyzer for web applications written in ruby. It supports major MVC frameworks like sinatra, padrino and ruby on rails. dawn output is a list of security vulnerabilities affecting your code. It provides more than 140 security checks with their own mitigation suggestion.}
-  gem.summary       = %q{dawn is a security static source code analyzer for sinatra, padrino and ruby on rails web applications.}
+  gem.description   = %q{dawn is a security static source code scanner for web applications written in ruby. It supports major MVC frameworks like sinatra, padrino and ruby on rails. dawn output is a list of security vulnerabilities affecting your code. Latest stable version contains more than 150 secutiy checks with their own mitigation suggestion.}
+  gem.summary       = %q{dawn is a security static source code scanner for sinatra, padrino and ruby on rails web applications.}
   gem.homepage      = "http://dawn.codesake.com"
 
   gem.files         = `git ls-files`.split($/)
