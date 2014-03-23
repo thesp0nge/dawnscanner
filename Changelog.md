@@ -5,7 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Mar 18 15:57:42 CET 2014_
+_latest update: Sun Mar 23 22:36:42 CET 2014_
+
+* Added a check for CVE-2014-2538
 
 ## Version 1.0.5 - codename: Lightning McQueen (2014-03-18)
 
