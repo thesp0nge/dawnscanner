@@ -44,6 +44,10 @@ Paolo - paolo@codesake.com
 
 ## Twitter announcement
 
+### version 1.0.6
+
+@dawnscanner version 1.0.6 is out. A new security check: CVE-2014-2538 #ruby #security #rails #sinatra #padrino
+
 ### version 1.0.5
 
 @dawnscanner version 1.0.5 is out. 2 new security checks: CVE-2014-2322 and CVE-2014-0036 #ruby #security #rails #sinatra #padrino
@@ -69,6 +73,14 @@ Paolo - paolo@codesake.com
 
 
 ## Linkedin announcement 
+
+### version 1.0.6
+
+@dawnscanner version 1.0.6 is out. You can read the announcement here: http://dawn.codesake.com/blog/announce-codesake-dawn-v1-0-6-released/
+Codesake::Dawn v1.0.6 introduces a newly released CVE bullettin: CVE-2014-2538 about a reflected xss in rack-ssl rubygem. Codesake::Dawk supports Sinatra, Padrino and Ruby on Rails MVC frameworks out of the box.
+
+$ gem install codesake-dawn 
+$ have fun
 
 ### version 1.0.5
 

@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Thu Feb 13 08:31:37 CET 2014_
+_latest update: Sun Mar 23 23:06:38 CET 2014_
 
 ## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
 
@@ -51,6 +51,15 @@ _latest update: Thu Feb 13 08:31:37 CET 2014_
   link saying which are MVC gem version to be considered officially deprecated
   or just old. I enabled only check against ruby
 
+=======
+
+## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
+
+* Added a check for CVE-2014-2538
+
+## Version 1.0.5 - codename: Lightning McQueen (2014-03-18)
+
+>>>>>>> issue_46_add_cve_2014_2538
 * Added a check for CVE-2014-2322
 * Added a check for CVE-2014-0036
 
