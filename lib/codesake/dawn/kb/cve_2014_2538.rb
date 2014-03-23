@@ -16,11 +16,11 @@ module Codesake
             :applies=>["rails"],
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Currently, there are no known workarounds or upgrades to correct this issue. However, a patch has been committed to the source code repository (e.g. GIT, CVS, SVN) that addresses this vulnerability. Until it is incorporated into the next release of the software, manually patching an existing installation is the only known available solution. Check the vendor links in the references section for more information.",
+            :mitigation=>"A new version for rack-ssl version it has been released. Pleas upgrade at least to version 1.4.1 or higher.",
             :aux_links=>["http://seclists.org/oss-sec/2014/q1/594"]
            })
 
-           self.safe_dependencies = [{:name=>"rack-ssl", :version=>['1.5.0']}]
+           self.safe_dependencies = [{:name=>"rack-ssl", :version=>['1.4.1']}]
 				end
 			end
 		end
