@@ -24,6 +24,15 @@ describe "The security check for gem dependency should" do
   end
   # let (:check) {Mockup.new}
 
+  it "gives an unknown severity since no CVSS is provided and no severity is given" do
+    @check.severity.should  == "unknown"
+  end
+
+  it "gives the severity level provided. No CVSS is here" do
+    @check.severity = :critical
+    @check.severity.should  == "critical"
+  end
+
   it "fires if vulnerable 0.2.9 version is detected" do
     @check.dependencies = [{:name=>"this_gem", :version=>'0.2.9'}]
     @check.vuln?.should    be_true

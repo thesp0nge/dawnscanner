@@ -110,6 +110,35 @@ module Codesake
           end
         end
 
+        def severity
+          return @severity.to_s unless @severity == :none
+
+          # if not set and if cvss is available, than use CVSS
+          unless self.cvss.nil?
+
+            score = Cvss::Engine.new.score(self.cvss)
+            case score
+            when 10
+              return "critical"
+            when 7..9
+              return "high"
+            when 4..6
+              return "medium"
+            when 2..3
+              return "low"
+            when 0..1
+              return "info"
+            else 
+              return "unknown"
+            end
+          else
+            return "unknown"
+          end
+
+          # if not set, no cvss available just return unknown
+          return "unknown"
+        end
+
         def applies_to?(name)
           ! @applies.find_index(name).nil?
         end
