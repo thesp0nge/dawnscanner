@@ -22,7 +22,7 @@ module Codesake
         end
 
         def vuln?
-          debug_me "vuln? @detected is #{@detected}"
+          debug_me "vuln? @detected is #{@detected}"
           v = Codesake::Dawn::Kb::VersionCheck.new
           v.debug = self.debug
           v.detected = @detected[:version]
