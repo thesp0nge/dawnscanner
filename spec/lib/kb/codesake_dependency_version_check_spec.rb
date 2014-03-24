@@ -24,6 +24,14 @@ describe "The security check for gem dependency should" do
   end
   # let (:check) {Mockup.new}
 
+  it "gives an unkown priority value" do
+    @check.priority.should == "unknown"
+  end
+
+  it "gives the assigned priority value" do
+    @check.priority = :critical
+    @check.priority.should == "critical"
+  end
   it "gives an unknown severity since no CVSS is provided and no severity is given" do
     @check.severity.should  == "unknown"
   end

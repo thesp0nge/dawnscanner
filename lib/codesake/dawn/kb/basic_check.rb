@@ -110,6 +110,9 @@ module Codesake
           end
         end
 
+        def priority
+          return (@priority == :none)? "unknown" : @priority.to_s
+        end
         def severity
           return @severity.to_s unless @severity == :none
 
