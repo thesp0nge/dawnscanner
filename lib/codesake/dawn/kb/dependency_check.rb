@@ -65,10 +65,6 @@ module Codesake
                   message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}"
                   ret = vuln
                 end
-                if vuln && ! @ruby_vulnerable_versions.empty?
-                  ret =  is_ruby_vulnerable_version?
-                  message = "Vulnerable #{dep[:name]} gem version found: #{dep[:version]}" if ret
-                end
               end
             end
           end

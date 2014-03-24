@@ -123,27 +123,6 @@ module Codesake
           "http://www.rubysec.com/advisories/#{@name}/"
         end
 
-        # Public: checks if the ruby version used for target application works a pre-requisite to exploit a particular vulnerability.
-        #
-        #   Take the CVE-2013-1655 as example. The Puppet rubygem vulnerability
-        #   can be exploited only if the ruby version is 1.9.3 or following. For
-        #   such a reason this method will check for the ruby version used by the
-        #   target.
-        #
-        # Returns:
-        #   true if the running ruby is vulnerable or false otherwise
-        def is_ruby_vulnerable_version?
-          return false if @ruby_vulnerable_versions.nil?
-
-          found = false
-
-          @ruby_vulnerable_versions.each do |v|
-            found = true if v == @ruby_version
-          end
-
-          found
-        end
-
         def cvss_score
           return Cvss::Engine.new.score(self.cvss) unless self.cvss.nil?
           "    "
