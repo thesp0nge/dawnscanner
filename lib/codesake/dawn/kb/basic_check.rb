@@ -44,6 +44,36 @@ module Codesake
         # Put the check in debug mode
         attr_accessor :debug
 
+        # This is a flag for the security check family. Valid values are:
+        #   + generic_check
+        #   + cve_bulletin
+        #   + coding_style
+        #   + owasp_top_10_n (where n is a number between 1 and 10)
+        attr_accessor :check_family
+
+        # This is the check severity level. It tells how dangerous is the
+        # vulnerability for you application.
+        #
+        # Valid values are:
+        #   + :critical
+        #   + :high
+        #   + :medium
+        #   + :low
+        #   + :info
+        #   + :none
+        attr_accessor :severity
+
+        # This is the check priority level. It tells how fast you should
+        # mitigate the vulnerability.
+        #
+        # Valid values are:
+        #   + :critical
+        #   + :high
+        #   + :medium
+        #   + :low
+        #   + :info
+        #   + :none
+        attr_accessor :priority
 
         def initialize(options={})
           @applies                  = []
@@ -70,6 +100,9 @@ module Codesake
           @mitigated    = false
           @status       = false
           @debug        = false
+          @severity     = :none
+          @priority     = :none
+          @check_family = :generic_check
 
           if $logger.nil?
             $logger  = Codesake::Commons::Logging.instance
