@@ -16,6 +16,8 @@ module Codesake
               :glob=>".gitignore",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
+              :check_family=>:owasp_ror_cheatsheet,
+              :severity=>:info,
               :attack_pattern => ["/config/database.yml", "/config/initializers/secret_token.rb", "/db/seeds.rb", "/db/*.sqlite3"],
               :mitigation=>"Put sensitive files in your repository gitignore file"
             })

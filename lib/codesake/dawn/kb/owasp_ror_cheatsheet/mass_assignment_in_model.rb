@@ -20,6 +20,8 @@ module Codesake
               :attack_pattern => ["attr_accessor"],
               :negative_search=>false,
               :avoid_comments=>true,
+              :check_family=>:owasp_ror_cheatsheet,
+              :severity=>:info,
               :evidences=>["In one or more of your models, you use attr_accessor attribute modifier. This is risky since it exposes you to a massive assignment vulnerability. You have to carefully handle how your model receive data by setting all attribute to attr_reader and using a setter method validating input before saving to database."],
               :mitigation=>"Avoid attr_accessor attribute modifier in your models. You must use attr_reader as modifier and carefully filter your inputs before passing to the database layer."
             })

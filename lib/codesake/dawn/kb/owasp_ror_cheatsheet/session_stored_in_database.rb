@@ -19,6 +19,8 @@ module Codesake
               :attack_pattern => ["Application.config.session_store :active_record_store"],
               :negative_search=>true,
               :avoid_comments=>true,
+              :check_family=>:owasp_ror_cheatsheet,
+              :severity=>:info,
               :evidences=>["In your session_store.rb file you are not using ActiveRercord to store session data. This will let rails to use a cookie based session and it can expose your web application to a session replay attack."],
               :mitigation=>"Use ActiveRecord or the ORM you love most to handle your code session_store. Add \"Application.config.session_store :active_record_store\" to your session_store.rb file."
             })
