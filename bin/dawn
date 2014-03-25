@@ -49,18 +49,41 @@ opts    = GetoptLong.new(
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
+opts.quiet=true
+
 engine  = nil
+
+enabled_checks = Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES
 options = {:verbose=>false, :output=>"console", :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false}
 
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
-
+begin
 opts.each do |opt, val|
   case opt
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
+  when '--disable-cve-bulletins'
+    enabled_checks.delete(:cve_bulletin)
+  when '--disable-code-quality'
+    enabled_checks.delete(:code_quality)
+  when '--disable-code-style'
+    enabled_checks.delete(:code_style)
+  when '--disable-owasp-ror-cheatsheet'
+    enabled_checks.delete(:owasp_ror_cheatsheet)
+  when '--disable-owasp-top-10'
+    enabled_checks.delete(:owasp_top_10_1)
+    enabled_checks.delete(:owasp_top_10_2)
+    enabled_checks.delete(:owasp_top_10_3)
+    enabled_checks.delete(:owasp_top_10_4)
+    enabled_checks.delete(:owasp_top_10_5)
+    enabled_checks.delete(:owasp_top_10_6)
+    enabled_checks.delete(:owasp_top_10_7)
+    enabled_checks.delete(:owasp_top_10_8)
+    enabled_checks.delete(:owasp_top_10_9)
+    enabled_checks.delete(:owasp_top_10_10)
   when '--list-known-families'
     printf "Codesake::Dawn supports following check families:\n\n"
     puts Codesake::Dawn::Kb::BasicCheck.families
@@ -107,6 +130,12 @@ opts.each do |opt, val|
     Kernel.exit(Codesake::Dawn::Core.help)
   end
 end
+rescue GetoptLong::InvalidOption => e
+
+  $logger.helo APPNAME, Codesake::Dawn::VERSION
+  $logger.err e.message
+  Kernel.exit(Codesake::Dawn::Core.help)
+end
 
 if options[:dump_kb]
   puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose]) if check.empty?
@@ -126,6 +155,7 @@ trap("INT")   { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
+$logger.log("security check enabled: #{enabled_checks}")
 
 
 ## MVC auto detect.
