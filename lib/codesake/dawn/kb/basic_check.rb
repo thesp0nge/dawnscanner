@@ -112,7 +112,7 @@ module Codesake
           #
           # I don't want to manually fix 150+ ruby files to add something I can
           # deal here
-          @check_family = :cve if @name.start_with?('CVE-')
+          @check_family = :cve if !options[:name].nil? && options[:name].start_with?('CVE-')
 
           if $logger.nil?
             $logger  = Codesake::Commons::Logging.instance
