@@ -26,10 +26,18 @@ opts    = GetoptLong.new(
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
 
   [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],
-  [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
 
+  # Disable checks by family type
+  [ '--disable-cve-bulletins',          GetoptLong::NO_ARGUMENT],
+  [ '--disable-code-quality',           GetoptLong::NO_ARGUMENT],
+  [ '--disable-code-style',             GetoptLong::NO_ARGUMENT],
+  [ '--disable-owasp-ror-cheatsheet',   GetoptLong::NO_ARGUMENT],
+  [ '--disable-owasp-top-10',           GetoptLong::NO_ARGUMENT],
+
+  # List stuff
+  [ '--list-knowledgebase',             GetoptLong::OPTIONAL_ARGUMENT],
   [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
   [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
   # please save output to file

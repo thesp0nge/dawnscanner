@@ -14,16 +14,24 @@ module Codesake
         printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application" 
         printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
         printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
-        printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
-        printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
         printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using table in ascii art"
         printf "\n   -j, --json\t\t\t\t\tcause dawn to format findings using json"
-        printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
         printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
         printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
         printf "\n   -F, --file\t\t\t\t\ttells dawn to write output to filename"
+        printf "\n\nDisable security check family\n"
+        printf "\n       --disable-cve-bulletins\t\t\tdisable all CVE security checks"
+        printf "\n       --disable-code-quality\t\t\tdisable all code quality checks"
+        printf "\n       --disable-code-style\t\t\tdisable all code style checks"
+        printf "\n       --disable-owasp-ror-cheatsheet\t\tdisable all Owasp Ruby on Rails cheatsheet checks"
+        printf "\n       --disable-owasp-top-10\t\t\tdisable all Owasp Top 10 checks"
+        printf "\n\nFlags useful to query Codesake::Dawn\n"
+        printf "\n       --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
         printf "\n       --list-known-families\t\t\tlist security check families contained in dawn's knowledge base"
         printf "\n       --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
+        printf "\n\nService flags\n"
+        printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
+        printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
         printf "\n   -v, --version\t\t\t\tshow version information"
         printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
@@ -50,7 +58,6 @@ module Codesake
 
       end
 
-      
       # guess_mvc is very close to detect_mvc despite it accepts a
       # filename as input and it tries to guess the mvc framework used from the
       # gems it founds in Gemfile.lock without creating an engine.
