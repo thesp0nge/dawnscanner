@@ -37,7 +37,7 @@ opts    = GetoptLong.new(
   [ '--disable-owasp-top-10',           GetoptLong::NO_ARGUMENT],
 
   # List stuff
-  [ '--list-knowledgebase',             GetoptLong::OPTIONAL_ARGUMENT],
+  [ '--list-knowledge-base',             GetoptLong::OPTIONAL_ARGUMENT],
   [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
   [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
   # please save output to file
@@ -94,7 +94,7 @@ opts.each do |opt, val|
   when '--exit-on-warn'
     options[:exit_on_warn] = true
 
-  when '--list-knowledgebase'
+  when '--list-knowledge-base'
     options[:dump_kb]=true
     check = val unless val.nil?
   when '--list-known-framework'
