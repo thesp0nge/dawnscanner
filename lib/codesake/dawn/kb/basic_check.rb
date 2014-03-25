@@ -46,10 +46,13 @@ module Codesake
 
         # This is a flag for the security check family. Valid values are:
         #   + generic_check
+        #   + code_quality
         #   + cve_bulletin
-        #   + coding_style
+        #   + code_style
+        #   + owasp_ror_cheatsheet
         #   + owasp_top_10_n (where n is a number between 1 and 10)
         attr_accessor :check_family
+        ALLOWED_FAMILIES = [:generic_check, :code_quality, :cve_bulletin, :code_style, :owasp_ror_cheatsheet, :owasp_top_10_1, :owasp_top_10_2, :owasp_top_10_3, :owasp_top_10_4, :owasp_top_10_5, :owasp_top_10_6, :owasp_top_10_7, :owasp_top_10_8, :owasp_top_10_9, :owasp_top_10_10]
 
         # This is the check severity level. It tells how dangerous is the
         # vulnerability for you application.
@@ -120,11 +123,27 @@ module Codesake
           end
         end
 
+        def families
+          return ALLOWED_FAMILIES.map { |x| x.to_s }
+        end
+
+        def family=(item)
+          if ! ALLOWED_FAMILIES.find_index(item.to_sym).nil?
+            instance_variable_set(:@check_family, item.to_sym)
+            return item
+          else
+            $logger.err("invalid check family: #{item}")
+            instance_variable_set(:@check_family, :generic_check)
+            return @family
+          end
+        end
+
         def family
-          return "CVE bulletin" if @check_family == :cve
-          return "Ruby coding style" if @check_family == :coding_style
+          return "CVE bulletin"                   if @check_family == :cve
+          return "Ruby coding style"              if @check_family == :code_style
+          return "Ruby code quality check"        if @check_family == :code_quality
           return "Owasp Ruby on Rails cheatsheet" if @check_family == :owasp_ror_cheatsheet
-          return "Owasp Top 10" if @check_family.to_s.start_with?('owasp_top_10')
+          return "Owasp Top 10"                   if @check_family.to_s.start_with?('owasp_top_10')
           return "Unknown"
         end
 
