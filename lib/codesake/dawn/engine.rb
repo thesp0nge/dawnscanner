@@ -92,7 +92,13 @@ module Codesake
           @gemfile_lock_sudo = true
         end
 
-        load_knowledge_base
+        # FIXME.20140325
+        #
+        # I comment out this call. knowledge base must be called explicitly
+        # since it's now possible to pass an array saying check families to be
+        # loaded.
+        #
+        # load_knowledge_base
       end
 
       def detect_views
@@ -153,7 +159,8 @@ module Codesake
         File.directory?(@target)
       end
 
-      def load_knowledge_base
+      def load_knowledge_base(enabled_check=[])
+        debug_me("load_knowledge_base called. Enabled checks are: #{enabled_check}")
         if @name == "Gemfile.lock"
           @checks = Codesake::Dawn::KnowledgeBase.new.all if @force.empty?
           @checks = Codesake::Dawn::KnowledgeBase.new.all_by_mvc(@force) unless @force.empty? 
@@ -216,7 +223,19 @@ module Codesake
       # Returns a true value if the security check was successfully applied or false
       # otherwise
       def apply(name)
-        load_knowledge_base if @checks.nil?
+
+        # FIXME.20140325
+        # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
+        # Reason is simple, load_knowledge_base now needs enabled check array
+        # and I don't want to pollute engine API to propagate this value. It's
+        # a param to load_knowledge_base and then bin/dawn calls it
+        # accordingly.
+        # load_knowledge_base if @checks.nil?
+        if @checks.nil?
+          $logger.err "you must load knowledge base before trying to apply security checks"
+          return false
+        end
+
         return false if @checks.empty?
 
         @checks.each do |check|
@@ -252,7 +271,19 @@ module Codesake
       def apply_all
         @scan_start = Time.now
         debug_me("SCAN STARTED: #{@scan_start}")
-        load_knowledge_base if @checks.nil?
+        # FIXME.20140325
+        # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
+        # Reason is simple, load_knowledge_base now needs enabled check array
+        # and I don't want to pollute engine API to propagate this value. It's
+        # a param to load_knowledge_base and then bin/dawn calls it
+        # accordingly.
+        # load_knowledge_base if @checks.nil?
+        if @checks.nil?
+          $logger.err "you must load knowledge base before trying to apply security checks"
+          @scan_stop = Time.now
+          debug_me("SCAN STOPPED: #{@scan_stop}")
+          return false
+        end
         if @checks.empty?
           @scan_stop = Time.now
           debug_me("SCAN STOPPED: #{@scan_stop}")

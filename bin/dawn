@@ -194,7 +194,7 @@ $logger.die "missing target framework option" if engine.nil?
 $logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::RELEASE == "(development)"
 $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
 
-engine.load_knowledge_base
+engine.load_knowledge_base(enabled_checks)
 ret = engine.apply_all
 
 if options[:output] == "count" 
