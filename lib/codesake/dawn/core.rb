@@ -15,7 +15,6 @@ module Codesake
         printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application" 
         printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
         printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
-        printf "\n   -f, --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
         printf "\n   -k, --list-knowledgebase [check_name]\tlist dawn known security checks. If check_name is specified dawn says if check is present or not"
         printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using table in ascii art"
         printf "\n   -j, --json\t\t\t\t\tcause dawn to format findings using json"
@@ -23,6 +22,7 @@ module Codesake
         printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
         printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
         printf "\n   -F, --file\t\t\t\t\ttells dawn to write output to filename"
+        printf "\n       --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
         printf "\n   -v, --version\t\t\t\tshow version information"
         printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 

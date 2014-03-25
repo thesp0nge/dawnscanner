@@ -15,20 +15,29 @@ VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
 $logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
+  # report formatting options
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
   [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
   [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
+
+  # MVC forcing
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
-  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],  
-  [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT],
+
+  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
-  [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
-  [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
+
+  [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
+  [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
+  # please save output to file
   [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
+
+  # service options
+  [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
+  [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
@@ -43,6 +52,9 @@ opts.each do |opt, val|
   case opt
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
+    Kernel.exit(0)
+  when '--list-known-families'
+    puts 'here'
     Kernel.exit(0)
   when '--json'
     options[:output] = "json"
