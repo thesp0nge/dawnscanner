@@ -242,7 +242,7 @@ module Codesake
 
       def self.find(checks=nil, name)
         return nil if name.nil? or name.empty?
-        checks = Codesake::Dawn::KnowledgeBase.load_security_checks if checks.nil?
+        checks = Codesake::Dawn::KnowledgeBase.new.load_security_checks if checks.nil?
 
         checks.each do |sc|
           return sc if sc.name == name

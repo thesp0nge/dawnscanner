@@ -36,8 +36,10 @@ opts    = GetoptLong.new(
   [ '--disable-owasp-ror-cheatsheet',   GetoptLong::NO_ARGUMENT],
   [ '--disable-owasp-top-10',           GetoptLong::NO_ARGUMENT],
 
+  # Search knowledge base
+  [ '--search-knowledge-base',  '-S',   GetoptLong::REQUIRED_ARGUMENT],
   # List stuff
-  [ '--list-knowledge-base',             GetoptLong::OPTIONAL_ARGUMENT],
+  [ '--list-knowledge-base',            GetoptLong::NO_ARGUMENT],
   [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
   [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
   # please save output to file
@@ -54,7 +56,7 @@ opts.quiet=true
 engine  = nil
 
 enabled_checks = Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES
-options = {:verbose=>false, :output=>"console", :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false}
+options = {:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false}
 
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
@@ -117,9 +119,15 @@ opts.each do |opt, val|
   when '--exit-on-warn'
     options[:exit_on_warn] = true
 
+  when '--search-knowledge-base'
+    found = Codesake::Dawn::KnowledgeBase.find(nil, val)
+    puts "#{val} found in knowledgebase." if found
+    puts "#{val} not found in knowledgebase" if ! found
+    Kernel.exit(0)
+
   when '--list-knowledge-base'
-    options[:dump_kb]=true
-    check = val unless val.nil?
+    puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose]) 
+    Kernel.exit(0)
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
     LIST_KNOWN_FRAMEWORK.each do |mvc|
@@ -135,17 +143,6 @@ rescue GetoptLong::InvalidOption => e
   $logger.helo APPNAME, Codesake::Dawn::VERSION
   $logger.err e.message
   Kernel.exit(Codesake::Dawn::Core.help)
-end
-
-if options[:dump_kb]
-  puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose]) if check.empty?
-  if ! check.empty?
-    found = Codesake::Dawn::KnowledgeBase.find(nil, check)
-    puts "#{check} found in knowledgebase." if found
-    puts "#{check} not found in knowledgebase" if ! found
-  end
-
-  Kernel.exit(0)
 end
 
 target=ARGV.shift
