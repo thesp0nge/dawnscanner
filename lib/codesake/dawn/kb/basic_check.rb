@@ -123,7 +123,7 @@ module Codesake
           end
         end
 
-        def families
+        def self.families
           return ALLOWED_FAMILIES.map { |x| x.to_s }
         end
 

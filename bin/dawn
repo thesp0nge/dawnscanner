@@ -54,7 +54,8 @@ opts.each do |opt, val|
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
     Kernel.exit(0)
   when '--list-known-families'
-    puts 'here'
+    printf "Codesake::Dawn supports following check families:\n\n"
+    puts Codesake::Dawn::Kb::BasicCheck.families
     Kernel.exit(0)
   when '--json'
     options[:output] = "json"

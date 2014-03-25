@@ -22,6 +22,7 @@ module Codesake
         printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
         printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
         printf "\n   -F, --file\t\t\t\t\ttells dawn to write output to filename"
+        printf "\n       --list-known-families\t\t\tlist security check families contained in dawn's knowledge base"
         printf "\n       --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
         printf "\n   -v, --version\t\t\t\tshow version information"
         printf "\n   -h, --help\t\t\t\t\tshow this help\n"
