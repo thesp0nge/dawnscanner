@@ -104,10 +104,28 @@ module Codesake
           @priority     = :none
           @check_family = :generic_check
 
+          @severity         = options[:severity] unless options[:severity].nil?
+          @priority         = options[:priority] unless options[:priority].nil?
+          @check_family     = options[:check_family] unless options[:check_family].nil?
+
+          # FIXME.20140325
+          #
+          # I don't want to manually fix 150+ ruby files to add something I can
+          # deal here
+          @check_family = :cve if @name.start_with?('CVE-')
+
           if $logger.nil?
             $logger  = Codesake::Commons::Logging.instance
             $logger.helo "dawn-basic-check", Codesake::Dawn::VERSION
           end
+        end
+
+        def family
+          return "CVE bulletin" if @check_family == :cve
+          return "Ruby coding style" if @check_family == :coding_style
+          return "Owasp Ruby on Rails cheatsheet" if @check_family == :owasp_ror_cheatsheet
+          return "Owasp Top 10" if @check_family.to_s.start_with?('owasp_top_10')
+          return "Unknown"
         end
 
         def priority
