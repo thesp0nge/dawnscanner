@@ -2,6 +2,9 @@ module Codesake
   module Dawn
     class Core
 
+      # TODO.20140326
+      # All those methods must moved from here to Util class and a
+      # Codesake::Dawn::Core namespace must be created.
       def self.help
         puts "Usage: dawn [options] target_directory"
         printf "\nExamples:\n"
