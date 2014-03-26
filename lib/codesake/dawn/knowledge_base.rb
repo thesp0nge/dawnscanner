@@ -233,13 +233,16 @@ module Codesake
       OS_CHECK            = :os_check
       COMBO_CHECK         = :combo_check
 
-      def initialize
-        @security_checks = Codesake::Dawn::KnowledgeBase.load_security_checks
+      def initialize(options={})
+        @enabled_checks = Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES
+        @enabled_checks = options[:enabled_checks] unless options[:enabled_check].nil?
+
+        @security_checks = load_security_checks
       end
 
       def self.find(checks=nil, name)
         return nil if name.nil? or name.empty?
-        checks = Codesake::Dawn::KnowledgeBase.load_security_checks if checks.nil?
+        checks = Codesake::Dawn::KnowledgeBase.new.load_security_checks if checks.nil?
 
         checks.each do |sc|
           return sc if sc.name == name
@@ -255,6 +258,13 @@ module Codesake
         @security_checks
       end
 
+      # TODO - next big refactoring will include also a change in this API.
+      #
+      # So to match Semantic Version, it must bring to a major version bump.
+      # MVC name should be passed as constructor option, so the all_by_mvc can
+      #
+      # be called without parameter, having a nice-to-read code.
+      # @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>@enabled_checks}).all_by_mvc(@name) 
       def all_by_mvc(mvc)
         ret = []
         @security_checks.each do |sc|
@@ -279,61 +289,53 @@ module Codesake
         self.all_by_mvc("rack")
       end
 
-      def self.load_security_checks
-        [  
-          Codesake::Dawn::Kb::NotRevisedCode.new,
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new,
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new, 
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders.new, 
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::CheckForSafeRedirectAndForward.new,
-          Codesake::Dawn::Kb::OwaspRorCheatSheet::SensitiveFiles.new,
-          Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
-          Codesake::Dawn::Kb::NokogiriDos20131217.new,
-          Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217.new,
-          Codesake::Dawn::Kb::CVE_2004_0755.new, 
-          Codesake::Dawn::Kb::CVE_2004_0983.new, 
-          Codesake::Dawn::Kb::CVE_2005_1992.new, 
-          Codesake::Dawn::Kb::CVE_2005_2337.new, 
-          Codesake::Dawn::Kb::CVE_2006_1931.new, 
-          Codesake::Dawn::Kb::CVE_2006_2582.new, 
-          Codesake::Dawn::Kb::CVE_2006_3694.new, 
-          Codesake::Dawn::Kb::CVE_2006_4112.new, 
-          Codesake::Dawn::Kb::CVE_2006_5467.new, 
-          Codesake::Dawn::Kb::CVE_2006_6303.new, 
-          Codesake::Dawn::Kb::CVE_2006_6852.new, 
-          Codesake::Dawn::Kb::CVE_2006_6979.new, 
-          Codesake::Dawn::Kb::CVE_2007_0469.new, 
-          Codesake::Dawn::Kb::CVE_2007_5162.new, 
-          Codesake::Dawn::Kb::CVE_2007_5379.new, 
-          Codesake::Dawn::Kb::CVE_2007_5380.new, 
-          Codesake::Dawn::Kb::CVE_2007_5770.new, 
-          Codesake::Dawn::Kb::CVE_2007_6077.new, 
-          Codesake::Dawn::Kb::CVE_2007_6612.new, 
-          Codesake::Dawn::Kb::CVE_2008_1145.new, 
-          Codesake::Dawn::Kb::CVE_2008_1891.new, 
-          Codesake::Dawn::Kb::CVE_2008_2376.new, 
-          Codesake::Dawn::Kb::CVE_2008_2662.new, 
-          Codesake::Dawn::Kb::CVE_2008_2663.new, 
-          Codesake::Dawn::Kb::CVE_2008_2664.new, 
-          Codesake::Dawn::Kb::CVE_2008_2725.new, 
-          Codesake::Dawn::Kb::CVE_2008_3655.new, 
-          Codesake::Dawn::Kb::CVE_2008_3657.new, 
-          Codesake::Dawn::Kb::CVE_2008_3790.new, 
-          Codesake::Dawn::Kb::CVE_2008_3905.new, 
-          Codesake::Dawn::Kb::CVE_2008_4094.new, 
-          Codesake::Dawn::Kb::CVE_2008_4310.new, 
-          Codesake::Dawn::Kb::CVE_2008_5189.new, 
-          Codesake::Dawn::Kb::CVE_2008_7248.new, 
-          Codesake::Dawn::Kb::CVE_2009_4078.new, 
-          Codesake::Dawn::Kb::CVE_2009_4124.new, 
-          Codesake::Dawn::Kb::CVE_2009_4214.new, 
-          Codesake::Dawn::Kb::CVE_2010_1330.new, 
-          Codesake::Dawn::Kb::CVE_2010_2489.new, 
-          Codesake::Dawn::Kb::CVE_2010_3933.new, 
-          Codesake::Dawn::Kb::CVE_2011_0188.new, 
-          Codesake::Dawn::Kb::CVE_2011_0446.new, 
+      def load_security_checks
+
+        # START @cve_security_checks array
+        @cve_security_checks =
+        [
+          Codesake::Dawn::Kb::CVE_2004_0755.new,
+          Codesake::Dawn::Kb::CVE_2004_0983.new,
+          Codesake::Dawn::Kb::CVE_2005_1992.new,
+          Codesake::Dawn::Kb::CVE_2005_2337.new,
+          Codesake::Dawn::Kb::CVE_2006_1931.new,
+          Codesake::Dawn::Kb::CVE_2006_2582.new,
+          Codesake::Dawn::Kb::CVE_2006_3694.new,
+          Codesake::Dawn::Kb::CVE_2006_4112.new,
+          Codesake::Dawn::Kb::CVE_2006_5467.new,
+          Codesake::Dawn::Kb::CVE_2006_6303.new,
+          Codesake::Dawn::Kb::CVE_2006_6852.new,
+          Codesake::Dawn::Kb::CVE_2006_6979.new,
+          Codesake::Dawn::Kb::CVE_2007_0469.new,
+          Codesake::Dawn::Kb::CVE_2007_5162.new,
+          Codesake::Dawn::Kb::CVE_2007_5379.new,
+          Codesake::Dawn::Kb::CVE_2007_5380.new,
+          Codesake::Dawn::Kb::CVE_2007_5770.new,
+          Codesake::Dawn::Kb::CVE_2007_6077.new,
+          Codesake::Dawn::Kb::CVE_2007_6612.new,
+          Codesake::Dawn::Kb::CVE_2008_1145.new,
+          Codesake::Dawn::Kb::CVE_2008_1891.new,
+          Codesake::Dawn::Kb::CVE_2008_2376.new,
+          Codesake::Dawn::Kb::CVE_2008_2662.new,
+          Codesake::Dawn::Kb::CVE_2008_2663.new,
+          Codesake::Dawn::Kb::CVE_2008_2664.new,
+          Codesake::Dawn::Kb::CVE_2008_2725.new,
+          Codesake::Dawn::Kb::CVE_2008_3655.new,
+          Codesake::Dawn::Kb::CVE_2008_3657.new,
+          Codesake::Dawn::Kb::CVE_2008_3790.new,
+          Codesake::Dawn::Kb::CVE_2008_3905.new,
+          Codesake::Dawn::Kb::CVE_2008_4094.new,
+          Codesake::Dawn::Kb::CVE_2008_4310.new,
+          Codesake::Dawn::Kb::CVE_2008_5189.new,
+          Codesake::Dawn::Kb::CVE_2008_7248.new,
+          Codesake::Dawn::Kb::CVE_2009_4078.new,
+          Codesake::Dawn::Kb::CVE_2009_4124.new,
+          Codesake::Dawn::Kb::CVE_2009_4214.new,
+          Codesake::Dawn::Kb::CVE_2010_1330.new,
+          Codesake::Dawn::Kb::CVE_2010_2489.new,
+          Codesake::Dawn::Kb::CVE_2010_3933.new,
+          Codesake::Dawn::Kb::CVE_2011_0188.new,
+          Codesake::Dawn::Kb::CVE_2011_0446.new,
           Codesake::Dawn::Kb::CVE_2011_0447.new, 
           Codesake::Dawn::Kb::CVE_2011_0739.new, 
           Codesake::Dawn::Kb::CVE_2011_0995.new, 
@@ -450,8 +452,36 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2014_1234.new,
           Codesake::Dawn::Kb::CVE_2014_2322.new,
           Codesake::Dawn::Kb::CVE_2014_2538.new,
-
         ]
+        # END @cve_security_checks array
+        # START @owasp_ror_cheatsheet_checks array
+        @owasp_ror_cheatsheet_checks = [
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new, 
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders.new, 
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::CheckForSafeRedirectAndForward.new,
+          Codesake::Dawn::Kb::OwaspRorCheatSheet::SensitiveFiles.new,
+        ]
+        # END @owasp_ror_cheatsheet_checks array
+        @code_quality_checks = [
+          Codesake::Dawn::Kb::NotRevisedCode.new,
+        ]
+        @aux_checks =
+        [
+          Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
+          Codesake::Dawn::Kb::NokogiriDos20131217.new,
+          Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217.new,
+        ]
+
+        ret = []
+        ret += @aux_checks
+        ret += @cve_security_checks         if @enabled_checks.include?(:cve_bulletin)
+        ret += @owasp_ror_cheatsheet_checks if @enabled_checks.include?(:owasp_ror_cheatsheet)
+        ret += @code_quality_checks         if @enabled_checks.include?(:code_quality)
+
+        ret
       end
     end
 

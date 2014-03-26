@@ -15,34 +15,83 @@ VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
 $logger  = Codesake::Commons::Logging.instance
 opts    = GetoptLong.new(
+  # report formatting options
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
   [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
   [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
+
+  # MVC forcing
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
-  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],  
-  [ '--list-known-framework',   '-f',   GetoptLong::NO_ARGUMENT],
-  [ '--list-knowledgebase',     '-k',   GetoptLong::OPTIONAL_ARGUMENT],
-  [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
-  [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
+
+  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
+
+  # Disable checks by family type
+  [ '--disable-cve-bulletins',          GetoptLong::NO_ARGUMENT],
+  [ '--disable-code-quality',           GetoptLong::NO_ARGUMENT],
+  [ '--disable-code-style',             GetoptLong::NO_ARGUMENT],
+  [ '--disable-owasp-ror-cheatsheet',   GetoptLong::NO_ARGUMENT],
+  [ '--disable-owasp-top-10',           GetoptLong::NO_ARGUMENT],
+
+  # Search knowledge base
+  [ '--search-knowledge-base',  '-S',   GetoptLong::REQUIRED_ARGUMENT],
+  # List stuff
+  [ '--list-knowledge-base',            GetoptLong::NO_ARGUMENT],
+  [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
+  [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
+  # please save output to file
   [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
+  # specify an alternate config file
+  [ '--config-file',            '-c',   GetoptLong::REQUIRED_ARGUMENT],
+
+  # service options
+  [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
+  [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
   [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
   [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
 )
-engine  = nil
-options = {:verbose=>false, :output=>"console", :dump_kb=>false, :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false}
+opts.quiet=true
 
+engine  = nil
+
+
+options = Codesake::Dawn::Core.read_conf(Codesake::Dawn::Core.find_conf(true))
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
-
+begin
 opts.each do |opt, val|
   case opt
   when '--version'
     puts "#{Codesake::Dawn::VERSION} [#{Codesake::Dawn::CODENAME}]"
+    Kernel.exit(0)
+  when '--config-file'
+    options = Codesake::Dawn::Core.read_conf(val)
+  when '--disable-cve-bulletins'
+    options[:enabled_checks].delete(:cve_bulletin)
+  when '--disable-code-quality'
+    options[:enabled_checks].delete(:code_quality)
+  when '--disable-code-style'
+    options[:enabled_checks].delete(:code_style)
+  when '--disable-owasp-ror-cheatsheet'
+    options[:enabled_checks].delete(:owasp_ror_cheatsheet)
+  when '--disable-owasp-top-10'
+    options[:enabled_checks].delete(:owasp_top_10_1)
+    options[:enabled_checks].delete(:owasp_top_10_2)
+    options[:enabled_checks].delete(:owasp_top_10_3)
+    options[:enabled_checks].delete(:owasp_top_10_4)
+    options[:enabled_checks].delete(:owasp_top_10_5)
+    options[:enabled_checks].delete(:owasp_top_10_6)
+    options[:enabled_checks].delete(:owasp_top_10_7)
+    options[:enabled_checks].delete(:owasp_top_10_8)
+    options[:enabled_checks].delete(:owasp_top_10_9)
+    options[:enabled_checks].delete(:owasp_top_10_10)
+  when '--list-known-families'
+    printf "Codesake::Dawn supports following check families:\n\n"
+    puts Codesake::Dawn::Kb::BasicCheck.families
     Kernel.exit(0)
   when '--json'
     options[:output] = "json"
@@ -73,9 +122,15 @@ opts.each do |opt, val|
   when '--exit-on-warn'
     options[:exit_on_warn] = true
 
-  when '--list-knowledgebase'
-    options[:dump_kb]=true
-    check = val unless val.nil?
+  when '--search-knowledge-base'
+    found = Codesake::Dawn::KnowledgeBase.find(nil, val)
+    puts "#{val} found in knowledgebase." if found
+    puts "#{val} not found in knowledgebase" if ! found
+    Kernel.exit(0)
+
+  when '--list-knowledge-base'
+    puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose]) 
+    Kernel.exit(0)
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
     LIST_KNOWN_FRAMEWORK.each do |mvc|
@@ -86,16 +141,11 @@ opts.each do |opt, val|
     Kernel.exit(Codesake::Dawn::Core.help)
   end
 end
+rescue GetoptLong::InvalidOption => e
 
-if options[:dump_kb]
-  puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose]) if check.empty?
-  if ! check.empty?
-    found = Codesake::Dawn::KnowledgeBase.find(nil, check)
-    puts "#{check} found in knowledgebase." if found
-    puts "#{check} not found in knowledgebase" if ! found
-  end
-
-  Kernel.exit(0)
+  $logger.helo APPNAME, Codesake::Dawn::VERSION
+  $logger.err e.message
+  Kernel.exit(Codesake::Dawn::Core.help)
 end
 
 target=ARGV.shift
@@ -105,6 +155,7 @@ trap("INT")   { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
+$logger.log("security check enabled: #{options[:enabled_checks]}")
 
 
 ## MVC auto detect.
@@ -143,7 +194,7 @@ $logger.die "missing target framework option" if engine.nil?
 $logger.warn "this is a development Codesake::Dawn version" if Codesake::Dawn::RELEASE == "(development)"
 $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
 
-engine.load_knowledge_base
+engine.load_knowledge_base(options[:enabled_checks])
 ret = engine.apply_all
 
 if options[:output] == "count" 

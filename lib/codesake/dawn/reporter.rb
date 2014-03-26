@@ -72,8 +72,8 @@ module Codesake
         html_body += "<tbody>"
         html_body += "<tr><td>Dawn version</td><td>#{Codesake::Dawn::VERSION}</td></tr>" unless Codesake::Dawn::RELEASE == "(development)"
         html_body += "<tr><td>Dawn development version</td><td>#{Codesake::Dawn::VERSION}</td></tr>" if Codesake::Dawn::RELEASE == "(development)"
-        html_body += "<tr><td>Scan duration</td><td>#{@engine.scan_time.round(3)} sec</td></tr>" 
-        html_body += "<tr><td>Target</td><td>#{@engine.target}</td></tr>" 
+        html_body += "<tr><td>Scan duration</td><td>#{@engine.scan_time.round(3)} sec</td></tr>"
+        html_body += "<tr><td>Target</td><td>#{@engine.target}</td></tr>"
         html_body += "<tr><td>MVC detected framework</td><td>#{@engine.name} v#{@engine.get_mvc_version}</td></tr>" unless @engine.name == "Gemfile.lock"
         html_body += "<tr><td>MVC detected framework</td><td>#{@engine.force} v#{@engine.get_mvc_version}</td></tr>" if @engine.name == "Gemfile.lock"
         if @ret
@@ -89,16 +89,15 @@ module Codesake
         html_body += "</tbody>"
         html_body += "</table>"
 
-        
 
         if @engine.count_vulnerabilities > 0
           html_body += "<hr />"
           html_body += "<h2>Vulnerabilities found</h2> "
           html_body += "<table class=\"table-striped table-bordered table\">"
-          html_body += "<thead><tr><td>Name</td><td>CVSS score</td><td>Description</td><td>Remediation</td></tr></thead>"
+          html_body += "<thead><tr><td>Name</td><td>Severity</td><td>Priority</td><td>CVSS score</td><td>Description</td><td>Remediation</td></tr></thead>"
 
           @engine.vulnerabilities.each do |vuln|
-            html_body += "<tr><td><a href=\"#{vuln[:cve_link]}\">#{vuln[:name]}</a></td><td>#{vuln[:cvss_score]}</td><td>#{vuln[:message]}</td><td>#{vuln[:remediation]}</td></tr>"
+            html_body += "<tr><td><a href=\"#{vuln[:cve_link]}\">#{vuln[:name]}</a></td><td>#{vuln[:priority]}</td><td>#{vuln[:severity]}</td><td>#{vuln[:cvss_score]}</td><td>#{vuln[:message]}</td><td>#{vuln[:remediation]}</td></tr>"
           end
           html_body += "</tbody>"
           html_body += "</table>"
@@ -141,7 +140,7 @@ module Codesake
         end
         rows << ['Vulnerabilities found', @engine.count_vulnerabilities]
         rows << ['Mitigated issues found', @engine.mitigated_issues.count]
-        rows << ['Reflected XSS', @engine.reflected_xss.count] 
+        rows << ['Reflected XSS', @engine.reflected_xss.count]
         table = Terminal::Table.new :title=>'Scan summary', :rows => rows
         puts table
 
@@ -151,10 +150,10 @@ module Codesake
           # 1_Vulnerabilities
           rows = []
           @engine.vulnerabilities.each do |vuln|
-            rows << [vuln[:name].justify(10), vuln[:message].justify(50), vuln[:remediation].justify(15), vuln[:evidences].join.justify(15)]
+            rows << [vuln[:name].justify(10), vuln[:severity], vuln[:priority], vuln[:message].justify(50), vuln[:remediation].justify(15), vuln[:evidences].join.justify(15)]
             rows << :separator
           end
-          table = Terminal::Table.new :title=>"Vulnerabilities", :headings=>['Issue', 'Description', 'Solution', 'Evidences'], :rows=>rows
+          table = Terminal::Table.new :title=>"Vulnerabilities", :headings=>['Issue', 'Severity', 'Priority', 'Description', 'Solution', 'Evidences'], :rows=>rows
           puts table
 
           rows = []
@@ -226,7 +225,7 @@ module Codesake
         $logger.log "scanning #{@engine.target}"
         $logger.log "#{@engine.name} v#{@engine.get_mvc_version} detected" unless @engine.name == "Gemfile.lock"
         $logger.log "#{@engine.force} v#{@engine.get_mvc_version} detected" if @engine.name == "Gemfile.lock"
-        $logger.log "applying all security checks" 
+        $logger.log "applying all security checks"
         if @ret
           $logger.log "#{@engine.applied_checks} security checks applied - #{@engine.skipped_checks} security checks skipped"
         else
@@ -237,7 +236,9 @@ module Codesake
           $logger.log "#{@engine.count_vulnerabilities} vulnerabilities found"
           @engine.vulnerabilities.each do |vuln|
             $logger.err "#{vuln[:name]} check failed"
-            $logger.log "Description: #{vuln[:message]}" 
+            $logger.log "Severity: #{vuln[:severity]}"
+            $logger.log "Priority: #{vuln[:priority]}"
+            $logger.log "Description: #{vuln[:message]}"
             $logger.log "Solution: #{vuln[:remediation]}"
             $logger.log "Evidence:"
             vuln[:evidences].each do |evidence|

@@ -36,7 +36,9 @@ Setting this to true will essentially strip out any host information.
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
               :attack_pattern => ["redirect_to"],
-              :mitigation=>"The most basic, but restrictive protection is to use the :only_path option. Setting this to true will essentially strip out any host information."
+              :mitigation=>"The most basic, but restrictive protection is to use the :only_path option. Setting this to true will essentially strip out any host information.",
+              :severity=>:info,
+              :check_family=>:owasp_ror_cheatsheet
             })
             # @debug = true
 
