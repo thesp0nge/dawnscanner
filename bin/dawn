@@ -155,7 +155,7 @@ trap("INT")   { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
-$logger.log("security check enabled: #{options[:enabled_checks]}")
+$logger.log("security check enabled: #{options[:enabled_checks]}") if options[:debug]
 
 
 ## MVC auto detect.

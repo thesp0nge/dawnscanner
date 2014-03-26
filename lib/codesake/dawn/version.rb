@@ -3,18 +3,20 @@ module Codesake
     # codesake-dawn when in development has RELASE equal to '(development)' and
     # the version number is set for the next release.
     #
-    # codesake-dawn v 1.x.y release codename will be Disney Pixar Cars / Cars2
-    # characters. My son Daniele loves those films and since I love him too,
-    # this is a kinda sort of tribute of my son's passion.
+    # Each codesake-dawn major release will have a Disney Pixar Cars / Cars2
+    # character as codename. My son Daniele loves those films and since I love
+    # him too, # this is a kinda sort of tribute of my son's passion.
     #
     # Future releases
     #
-    # "Tow Mater"
-    # "Finn McMissile"
-    # "Fillmore"
-    # "Holly Shiftwell"
-    # "Guido"
-    # "Luigi"
+    # | Character       | Release |
+    # |-----------------|---------|
+    # |  "Tow Mater"    |  2.0.0  |
+    # | "Finn McMissile"|  3.0.0  |
+    # |  "Fillmore"     |  4.0.0  |
+    # |"Holly Shiftwell"|  5.0.0  |
+    # |   "Guido"       |  6.0.0  |
+    # |   "Luigi"       |  7.0.0  |
 
     VERSION   = "1.1.0"
     CODENAME  = "Lightning McQueen"
