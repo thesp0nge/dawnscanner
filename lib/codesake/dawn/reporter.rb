@@ -97,7 +97,7 @@ module Codesake
           html_body += "<thead><tr><td>Name</td><td>Severity</td><td>Priority</td><td>CVSS score</td><td>Description</td><td>Remediation</td></tr></thead>"
 
           @engine.vulnerabilities.each do |vuln|
-            html_body += "<tr><td><a href=\"#{vuln[:cve_link]}\">#{vuln[:name]}</a></td><td>#{vuln[:priority]}</td><td>#{vuln[:severity]}</td><td>#{vuln[:cvss_score]}</td><td>#{vuln[:message]}</td><td>#{vuln[:remediation]}</td></tr>"
+            html_body += "<tr><td><a href=\"#{vuln[:cve_link]}\">#{vuln[:name]}</a></td><td>#{vuln[:severity]}</td><td>#{vuln[:priority]}</td><td>#{vuln[:cvss_score]}</td><td>#{vuln[:message]}</td><td>#{vuln[:remediation]}</td></tr>"
           end
           html_body += "</tbody>"
           html_body += "</table>"

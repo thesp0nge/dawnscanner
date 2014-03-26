@@ -7,7 +7,7 @@ frameworks.
 
 _latest update: Sun Mar 23 23:06:38 CET 2014_
 
-## Version 1.1.0 - codename: Tom Mater (2014-xx-xx)
+## Version 1.1.0 - codename: Lightning McQueen (2014-xx-xx)
 
 * Added a check for CVE-2011-5036
 * Added a check for CVE-2012-6109
@@ -61,7 +61,7 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
   no CVSS are available the return value is "unknown".
 * Removed old ruby version check from BasicCheck. It's outdated and no longer
   needed
-* Added --disable-cve-bulletinsi flag to disable all CVE security checks
+* Added --disable-cve-bulletins flag to disable all CVE security checks
 * Added --disable-code-quality flag to disable all code quality checks
 * Added --disable-code-style flag to disable all code style checks
 * Added --disable-owasp-ror-cheatsheet flag to disable all Owasp Ruby on Rails
