@@ -50,8 +50,24 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
 * Issue #34. I added a deprecation check. However I haven't found an official
   link saying which are MVC gem version to be considered officially deprecated
   or just old. I enabled only check against ruby
-
-=======
+* Added a --seach-knowledge-base removing the optional parameter to
+  --list-knowledge-base that is just for listing.
+* Renamed '--list-knowledgebase' to '--list-knowledge-base' and '-k' short option was removed
+* Added a --list-known-families option printing out Codesake::Dawn supported check family name
+* Removed '-f' short option for list-known-framework
+* Added family and severity to Owasp RoR Cheatsheet files
+* Add a method to return severity level. If it's provided by check constructor
+  then that value is used, otherwise is calculated using CVSS.  If no value and
+  no CVSS are available the return value is "unknown".
+* Removed old ruby version check from BasicCheck. It's outdated and no longer
+  needed
+* Added --disable-cve-bulletinsi flag to disable all CVE security checks
+* Added --disable-code-quality flag to disable all code quality checks
+* Added --disable-code-style flag to disable all code style checks
+* Added --disable-owasp-ror-cheatsheet flag to disable all Owasp Ruby on Rails
+  cheatsheet checks
+* Added --disable-owasp-top-10 flag to disable all Owasp Top 10 checks
+* Revamped help output
 
 ## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 
@@ -59,7 +75,6 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
 
 ## Version 1.0.5 - codename: Lightning McQueen (2014-03-18)
 
->>>>>>> issue_46_add_cve_2014_2538
 * Added a check for CVE-2014-2322
 * Added a check for CVE-2014-0036
 
