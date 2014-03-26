@@ -68,6 +68,10 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
   cheatsheet checks
 * Added --disable-owasp-top-10 flag to disable all Owasp Top 10 checks
 * Revamped help output
+* Added YAML Codesake::Dawn configuration support. Now you can specify your
+  preferences in a .codesake-dawn.yaml file in your home directory (or you can
+  use the --config-file option to specify the file you want to use). It returns
+  an embedded default configuration if the supplied filename doesn't exist.
 
 ## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 
