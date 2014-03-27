@@ -20,29 +20,11 @@ MVC (Model View Controller) frameworks, like:
 
 ---
 
-Codesake::Dawn version 1.0 has 142 security checks loaded in its knowledge
-base. Most of them are CVE bulletins, that applies to gems, framework or the
-ruby interpreter itself.
+Codesake::Dawn version 1.1 has 169 security checks loaded in its knowledge
+base. Most of them are CVE bulletins applying to gems or the ruby interpreter
+itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
-You can dump all security checks in the knowledge base by using the -k
-flag:
-
-```
-$ dawn -k|--list-knowledge-base
-```
-
-Useful in scripts, you can even supply a parameter to ```-k``` flag to check if
-a security control has been implemented or not.
-
-```
-$ dawn -k CVE-2013-6421
-07:59:30 [*] dawn v1.0.0 is starting up
-CVE-2013-6421 found in knowledgebase.
-
-$ dawn -k this_test_does_not_exist
-08:02:17 [*] dawn v1.0.0 is starting up
-this_test_does_not_exist not found in knowledgebase
-```
+## An overall introduction
 
 When you run Codesake::Dawn on your code it parses your project Gemfile.lock
 looking for the gems used and it tries to detect the ruby interpreter version
@@ -192,6 +174,28 @@ rake dawn:run                  # Execute codesake-dawn on the current directory
 ...
 ```
 
+### Interacting with the knowledge base
+
+You can dump all security checks in the knowledge base this way
+
+```
+$ dawn --list-knowledge-base
+```
+
+Useful in scripts, you can use ```--search-knowledge-base``` or ```-S``` with
+as parameter the check name you want to see if it's implemented as a security
+control or not.
+
+```
+$ dawn -S CVE-2013-6421
+07:59:30 [*] dawn v1.1.0 is starting up
+CVE-2013-6421 found in knowledgebase.
+
+$ dawn -S this_test_does_not_exist
+08:02:17 [*] dawn v1.1.0 is starting up
+this_test_does_not_exist not found in knowledgebase
+```
+
 ### Codesake::Dawn security scan in action
 
 As output, Codesake::Dawn will put all security checks that are failed during the scan.
@@ -271,17 +275,15 @@ Mailing list: [https://groups.google.com/forum/#!forum/codesake-dawn](https://gr
 
 ## Supporters
 
-To me as project leader it's very important to have feedbacks.
+Feedbacks are great and we really love to hear your voice.
 
 If you're a proud codesake-dawn user, if you find it useful, if you integrated
 it in your release process and if you want to openly support the project you
-can put your reference here.
+can put your reference here. Just open an
+[issue](https://github.com/codesake-dawn/issues/new) with a statement saying
+how do you feel the tool and your company logo if any.
 
-You can support the project by forking the repo, adding a success story, a
-statement saying how do you feel the tool or your company logo as well and then
-submitting a pull request.
-
-More easily you can drop an email to [me](mailto:thesp0nge@gmail.com) sending a
+More easily you can drop an email to [paolo@codesake.com](mailto:paolo@codesake.com) sending a
 statement about your success story and I'll put on the
 [website](http://dawn.codesake.com/success-stories).
 
