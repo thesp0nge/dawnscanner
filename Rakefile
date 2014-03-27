@@ -14,17 +14,18 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.fork = false
 end
 
-RSpec::Core::RakeTask.new do |t| 
+RSpec::Core::RakeTask.new do |t|
   t.rspec_opts = ["--color"]
 end
 
 
 task :default => [ :spec, :features, :kb ]
 task :test => :spec
-task :release => [:build, :'checksum:calculate', :'checksum:commit']
+task :prepare => [:build, :'checksum:calculate', :'checksum:commit']
+task :release => [:prepare]
 
 desc "Create a new CVE test"
-task :cve, :name do |t,args| 
+task :cve, :name do |t,args|
   name      = args.name
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
@@ -88,7 +89,7 @@ end
 
 
 desc "Create a new Generic security check"
-task :check, :name do |t,args| 
+task :check, :name do |t,args|
   name      = args.name
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
@@ -184,6 +185,7 @@ end
 desc 'Add and commit latest checksum'
 task :commit do
   checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
-  system "git --add #{checksum_path} -m \"Adding #{Codesake::Dawn::VERSION} checksum to repo\""
+  system "git add #{checksum_path}"
+  system "git commit -v #{checksum_path} -m \"Adding #{Codesake::Dawn::VERSION} checksum to repo\""
 end
 end
