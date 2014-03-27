@@ -1,15 +1,15 @@
 # Codesake::Dawn - The security code scanner for Ruby
 
 Codesake::Dawn is a source code scanner designed to review your code for
-security issues. 
+security issues.
 
 Codesake::Dawn is able to scan your ruby standalone programs but its main usage
 is to deal with web applications. It supports applications written using majors
-MVC (Model View Controller) frameworks, like: 
+MVC (Model View Controller) frameworks, like:
 
 * [Ruby on Rails](http://rubyonrails.org)
 * [Sinatra](http://www.sinatrarb.com)
-* [Padrino](http://www.padrinorb.com) 
+* [Padrino](http://www.padrinorb.com)
 
 ---
 
@@ -28,7 +28,7 @@ You can dump all security checks in the knowledge base by using the -k
 flag:
 
 ```
-$ dawn -k|--list-knowledge-base 
+$ dawn -k|--list-knowledge-base
 ```
 
 Useful in scripts, you can even supply a parameter to ```-k``` flag to check if
@@ -75,19 +75,20 @@ $ gem install codesake-dawn --pre
 ```
 
 If you want to add dawn to your project Gemfile, you must add the following:
-    
+
     group :development do
       gem 'codesake-dawn', :require=>false
     end
 
-And then upgrade your bundle 
+And then upgrade your bundle
 
     $ bundle install
 
 You may want to build it from source, so you have to check it out from github first:
 
-    $ git clone https://github.com/codesake/codesake-dawn/codesake-dawn.git
+    $ git clone https://github.com/codesake/codesake-dawn.git
     $ cd codesake-dawn
+    $ bundle install
     $ rake install
 
 And the codesake-dawn gem will be built in a pkg directory and then installed
@@ -98,7 +99,7 @@ that.
 ## Usage
 
 You can start your code review with Codesake::Dawn very easily. Simply tell the tool
-where the project root directory. 
+where the project root directory.
 
 Underlying MVC framework is autodetected by Codesake::Dawn using target Gemfile.lock
 file. If autodetect fails for some reason, the tool will complain about it and
@@ -108,7 +109,7 @@ hand.
 Basic usage is to specify some optional command line option to fit best your
 needs, and to specify the target directory where your code is stored.
 
-``` 
+```
 $ dawn [options] target
 ```
 
@@ -159,7 +160,7 @@ rake dawn:run                  # Execute codesake-dawn on the current directory
 
 As output, Codesake::Dawn will put all security checks that are failed during the scan.
 
-This the result of Codedake::Dawn running against a 
+This the result of Codedake::Dawn running against a
 [Sinatra 1.4.2 web application](https://github.com/thesp0nge/railsberry2013) wrote for a talk I
 delivered in 2013 at [Railsberry conference](http://www.railsberry.com).
 
@@ -168,7 +169,7 @@ looking at Gemfile.lock, than it discards all security checks not appliable to
 Sinatra (49 security checks, in version 1.0, especially designed for Ruby on
 Rails) and it applies them.
 
-``` 
+```
 $ bundle exec dawn ~/src/hacking/railsberry2013
 08:09:47 [*] dawn v1.0.0 is starting up
 08:09:47 [$] dawn: scanning /Users/thesp0nge/src/hacking/railsberry2013
@@ -182,7 +183,7 @@ $ bundle exec dawn ~/src/hacking/railsberry2013
 08:09:47 [!] dawn: Evidence:
 08:09:47 [!] dawn: Vulnerable crack gem version found: 0.3.1
 08:09:47 [*] dawn is leaving
-``` 
+```
 
 ---
 
@@ -191,7 +192,7 @@ it's likely to return a friendly _no vulnerabilities found_ message. Keep it up
 working that way!
 
 This is Codesake::Dawn running against a Padrino web application I wrote for [a
-scorecard quiz game about application security](http://scorecard.armoredcode.com). 
+scorecard quiz game about application security](http://scorecard.armoredcode.com).
 Italian language only. Sorry.
 
 ```
@@ -247,7 +248,7 @@ This check will analyze the source code looking for the following patterns: XXX,
 
 ## Useful links
 
-Project homepage: [http://dawn.codesake.com](http://dawn.codesake.com) 
+Project homepage: [http://dawn.codesake.com](http://dawn.codesake.com)
 
 Twitter profile:  [@dawnscanner](https://twitter.com/dawnscanner)
 
@@ -259,7 +260,7 @@ Mailing list: [https://groups.google.com/forum/#!forum/codesake-dawn](https://gr
 
 ## Supporters
 
-To me as project leader it's very important to have feedbacks. 
+To me as project leader it's very important to have feedbacks.
 
 If you're a proud codesake-dawn user, if you find it useful, if you integrated
 it in your release process and if you want to openly support the project you
