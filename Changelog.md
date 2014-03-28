@@ -72,6 +72,7 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
   preferences in a .codesake-dawn.yaml file in your home directory (or you can
   use the --config-file option to specify the file you want to use). It returns
   an embedded default configuration if the supplied filename doesn't exist.
+* Nokogiri DoS security checks discovered in December 2013, now have their own CVE: CVE-2013-6460 and CVE-2013-6461
 
 ## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 

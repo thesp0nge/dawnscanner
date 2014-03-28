@@ -432,10 +432,10 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Codesake::Dawn::Kb::CVE_2013_6460
   end
-  it "must have test for Nokogiri_EntityExpansion_Dos_20131217" do
-    sc = kb.find("Nokogiri - Entity expasion denial of service - 20131217")
+  it "must have test for CVE-2013-6461" do
+    sc = kb.find("CVE-2013-6461")
     sc.should_not   be_nil
-    sc.class.should == Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217
+    sc.class.should == Codesake::Dawn::Kb::CVE_2013_6461
   end
   it "must have test for CVE-2013-4478" do
     sc = kb.find("CVE-2013-4478")
