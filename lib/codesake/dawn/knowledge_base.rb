@@ -31,12 +31,6 @@ require 'codesake/dawn/kb/owasp_ror_cheatsheet/sensitive_files'
 # https://groups.google.com/forum/#!topic/ruby-security-ann/flHbLMb07tE
 require "codesake/dawn/kb/simpleform_xss_20131129"
 
-# Two different denial of service issues affecting Nokogiri gem when using Jruby interpreter
-# December, 17 2013
-#
-# https://groups.google.com/forum/#!topic/ruby-security-ann/DeJpjTAg1FA
-require "codesake/dawn/kb/nokogiri_entityexpansion_dos_20131217"
-
 # CVE - 2004
 require "codesake/dawn/kb/cve_2004_0755"
 require "codesake/dawn/kb/cve_2004_0983"
@@ -207,6 +201,7 @@ require "codesake/dawn/kb/cve_2013_6417"
 require "codesake/dawn/kb/cve_2013_6421"
 require "codesake/dawn/kb/cve_2013_6459"
 require "codesake/dawn/kb/cve_2013_6460"
+require "codesake/dawn/kb/cve_2013_6461"
 require "codesake/dawn/kb/cve_2013_7086"
 
 # CVE - 2014
@@ -444,6 +439,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2013_6421.new, 
           Codesake::Dawn::Kb::CVE_2013_6459.new, 
           Codesake::Dawn::Kb::CVE_2013_6460.new,
+          Codesake::Dawn::Kb::CVE_2013_6461.new,
           Codesake::Dawn::Kb::CVE_2013_7086.new, 
           Codesake::Dawn::Kb::CVE_2014_0036.new, 
           Codesake::Dawn::Kb::CVE_2014_0080.new, 
@@ -472,7 +468,6 @@ module Codesake
         @aux_checks =
         [
           Codesake::Dawn::Kb::SimpleForm_Xss_20131129.new,
-          Codesake::Dawn::Kb::Nokogiri_EntityExpansion_Dos_20131217.new,
         ]
 
         ret = []
