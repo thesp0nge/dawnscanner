@@ -36,7 +36,7 @@ task :cve, :name do |t,args|
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
 
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Codesake::Dawn::KnowledgeBase.find(nil, name).nil?
+  raise "### It seems that #{name} is already in Dawn knowledge base" unless Codesake::Dawn::KnowledgeBase.new.find(nil, name).nil?
   raise "### Invalid CVE title: #{name}" if name.nil? or name.empty? or /CVE-\d{4}-\d{4}/.match(name).nil?
   raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
   raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
