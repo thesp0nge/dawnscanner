@@ -18,6 +18,7 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
 * Added a check for CVE-2013-2512
 * Added a check for CVE-2013-2513
 * Added a check for CVE-2013-2516
+* Added a check for CVE-2013-4203
 * Added a check for CVE-2013-4413
 * Added a check for CVE-2013-4489
 * Added a check for CVE-2013-4593
@@ -52,8 +53,10 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
   or just old. I enabled only check against ruby
 * Added a --seach-knowledge-base removing the optional parameter to
   --list-knowledge-base that is just for listing.
-* Renamed '--list-knowledgebase' to '--list-knowledge-base' and '-k' short option was removed
-* Added a --list-known-families option printing out Codesake::Dawn supported check family name
+* Renamed '--list-knowledgebase' to '--list-knowledge-base' and '-k' short
+  option was removed
+* Added a --list-known-families option printing out Codesake::Dawn supported
+  check family name
 * Removed '-f' short option for list-known-framework
 * Added family and severity to Owasp RoR Cheatsheet files
 * Add a method to return severity level. If it's provided by check constructor
@@ -72,7 +75,8 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
   preferences in a .codesake-dawn.yaml file in your home directory (or you can
   use the --config-file option to specify the file you want to use). It returns
   an embedded default configuration if the supplied filename doesn't exist.
-* Nokogiri DoS security checks discovered in December 2013, now have their own CVE: CVE-2013-6460 and CVE-2013-6461
+* Nokogiri DoS security checks discovered in December 2013, now have their own
+  CVE: CVE-2013-6460 and CVE-2013-6461
 
 ## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 

@@ -36,7 +36,7 @@ task :cve, :name do |t,args|
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
 
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Codesake::Dawn::KnowledgeBase.new.find(nil, name).nil?
+  raise "### It seems that #{name} is already in Dawn knowledge base" unless Codesake::Dawn::KnowledgeBase.find(nil, name).nil?
   raise "### Invalid CVE title: #{name}" if name.nil? or name.empty? or /CVE-\d{4}-\d{4}/.match(name).nil?
   raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
   raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
@@ -213,14 +213,25 @@ namespace :rubysec do
       advisory = YAML.load_file(path)
       if advisory['cve']
         cve = "CVE-"+advisory['cve']
-        found = Codesake::Dawn::KnowledgeBase.find(nil, cve)
-        puts "#{cve} NOT in dawn v#{Codesake::Dawn::VERSION} knowledge base" unless found
-        list << cve unless found
+        # Exclusion
+        # CVE-2007-6183 is a vulnerability in gnome2 ruby binding. Not a gem, I don't care
+        # CVE-2013-1878 is a duplicate of CVE-2013-2617 that is in knowledge base
+        # CVE-2013-1876 is a duplicate of CVE-2013-2615 that is in knowledge base
+        exclusion = ["CVE-2007-6183", "CVE-2013-1876", "CVE-2013-1878"]
+        if exclusion.include?(cve) 
+          puts "#{cve} is in the exclusion list"
+        else
+          found = Codesake::Dawn::KnowledgeBase.find(nil, cve)
+          puts "#{cve} NOT in dawn v#{Codesake::Dawn::VERSION} knowledge base" unless found
+          list << cve unless found
+        end
       end
     end
-    File.open("missing_rubyadvisory_cvs_#{Time.now.strftime("%Y%m%d")}.txt", "w") do |f|
-      f.puts "Missing CVE bulletins - v#{Codesake::Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
-      f.puts list
+    unless list.empty?
+      File.open("missing_rubyadvisory_cvs_#{Time.now.strftime("%Y%m%d")}.txt", "w") do |f|
+        f.puts "Missing CVE bulletins - v#{Codesake::Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
+        f.puts list
+      end
     end
     system "rm -rf #{target_dir}ruby-advisory-db"
 
