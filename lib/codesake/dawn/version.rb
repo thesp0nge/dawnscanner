@@ -17,11 +17,12 @@ module Codesake
     # |"Holly Shiftwell"|  5.0.0  |
     # |   "Guido"       |  6.0.0  |
     # |   "Luigi"       |  7.0.0  |
+    # | "Doc Hudson"    |  8.0.0  |
 
-    VERSION   = "1.1.0.rc1"
+    VERSION   = "1.1.0.rc2"
     CODENAME  = "Lightning McQueen"
     #RELEASE   = "(development)"
-    RELEASE   = "20140326"
+    RELEASE   = "20140328"
 
   end
 end

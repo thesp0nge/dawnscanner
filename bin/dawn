@@ -129,7 +129,7 @@ opts.each do |opt, val|
     Kernel.exit(0)
 
   when '--list-knowledge-base'
-    puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose]) 
+    puts Codesake::Dawn::Core.dump_knowledge_base(options[:verbose])
     Kernel.exit(0)
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"

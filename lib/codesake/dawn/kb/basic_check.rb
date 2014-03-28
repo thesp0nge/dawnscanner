@@ -118,6 +118,7 @@ module Codesake
           @check_family = :cve if !options[:name].nil? && options[:name].start_with?('CVE-')
 
           if $logger.nil?
+            require 'codesake-commons'
             $logger  = Codesake::Commons::Logging.instance
             $logger.helo "dawn-basic-check", Codesake::Dawn::VERSION
           end

@@ -24,6 +24,12 @@ task :test => :spec
 task :prepare => [:build, :'checksum:calculate', :'checksum:commit']
 task :release => [:prepare]
 
+# namespace :check do
+# desc "Create a dependency check"
+# task :dependency, :name do |t, args|
+# end
+
+# end
 desc "Create a new CVE test"
 task :cve, :name do |t,args|
   name      = args.name
@@ -188,4 +194,35 @@ task :commit do
   system "git add #{checksum_path}"
   system "git commit -v #{checksum_path} -m \"Adding #{Codesake::Dawn::VERSION} checksum to repo\""
 end
+end
+
+###############################################################################
+# ruby-advisory-rb integration
+###############################################################################
+
+namespace :rubysec do
+  desc 'Find new CVE bulletins to add to Codesake::Dawn'
+  task :find do
+    git_url = 'git@github.com:rubysec/ruby-advisory-db.git'
+    target_dir = './tmp/'
+    system "mkdir -p #{target_dir}"
+    # system "rm -rf #{target_dir}ruby-advisory-db"
+    # system "git clone #{git_url} #{target_dir}ruby-advisory-db"
+    list = []
+    Dir.glob("#{target_dir}ruby-advisory-db/gems/*/*.yml") do |path|
+      advisory = YAML.load_file(path)
+      if advisory['cve']
+        cve = "CVE-"+advisory['cve']
+        found = Codesake::Dawn::KnowledgeBase.find(nil, cve)
+        puts "#{cve} NOT in dawn v#{Codesake::Dawn::VERSION} knowledge base" unless found
+        list << cve unless found
+      end
+    end
+    File.open("missing_rubyadvisory_cvs_#{Time.now.strftime("%Y%m%d")}.txt", "w") do |f|
+      f.puts "Missing CVE bulletins - v#{Codesake::Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
+      f.puts list
+    end
+    # system "rm -rf #{target_dir}ruby-advisory-db"
+
+  end
 end
