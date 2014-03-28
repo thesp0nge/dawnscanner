@@ -206,8 +206,8 @@ namespace :rubysec do
     git_url = 'git@github.com:rubysec/ruby-advisory-db.git'
     target_dir = './tmp/'
     system "mkdir -p #{target_dir}"
-    # system "rm -rf #{target_dir}ruby-advisory-db"
-    # system "git clone #{git_url} #{target_dir}ruby-advisory-db"
+    system "rm -rf #{target_dir}ruby-advisory-db"
+    system "git clone #{git_url} #{target_dir}ruby-advisory-db"
     list = []
     Dir.glob("#{target_dir}ruby-advisory-db/gems/*/*.yml") do |path|
       advisory = YAML.load_file(path)
@@ -222,7 +222,7 @@ namespace :rubysec do
       f.puts "Missing CVE bulletins - v#{Codesake::Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
       f.puts list
     end
-    # system "rm -rf #{target_dir}ruby-advisory-db"
+    system "rm -rf #{target_dir}ruby-advisory-db"
 
   end
 end
