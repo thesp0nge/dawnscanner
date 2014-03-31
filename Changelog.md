@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Sun Mar 23 23:06:38 CET 2014_
+_latest update: Mon Mar 31 09:05:57 CEST 2014_
 
 ## Version 1.1.0 - codename: Lightning McQueen (2014-xx-xx)
 
@@ -24,6 +24,7 @@ _latest update: Sun Mar 23 23:06:38 CET 2014_
 * Added a check for CVE-2013-4593
 * Added a check for CVE-2013-5671
 * Added a check for CVE-2014-0080
+* Added a check for CVE-2014-2525
 * Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
   Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
   test, so all the cheatsheet content is covered since now.
