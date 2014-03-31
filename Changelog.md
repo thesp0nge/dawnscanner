@@ -7,7 +7,7 @@ frameworks.
 
 _latest update: Mon Mar 31 09:05:57 CEST 2014_
 
-## Version 1.1.0 - codename: Lightning McQueen (2014-xx-xx)
+## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
 * Added a check for CVE-2011-5036
 * Added a check for CVE-2012-6109
