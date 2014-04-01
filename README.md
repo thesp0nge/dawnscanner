@@ -17,6 +17,7 @@ MVC (Model View Controller) frameworks, like:
 [![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
 [![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
 [![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/codesake/codesake-dawn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ---
 
@@ -349,5 +350,4 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/codesake/codesake-dawn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
