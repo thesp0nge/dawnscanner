@@ -6,13 +6,14 @@ class DependencyMockup
   def initialize
     message = "This is a mock"
     super(
-      :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK, 
+      :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
       :applies=>['sinatra', 'padrino', 'rails'],
       :message=> message
     )
     # self.debug = true
 
     self.safe_dependencies = [{:name=>'this_gem', :version=>['0.3.0', '1.3.3', '2.3.3', '2.4.2', '9.4.31.2']}]
+    self.save_major = true
   end
 end
 
@@ -22,6 +23,23 @@ describe "The security check for gem dependency should" do
     @check = DependencyMockup.new
   end
   # let (:check) {Mockup.new}
+
+  it "gives an unkown priority value" do
+    @check.priority.should == "unknown"
+  end
+
+  it "gives the assigned priority value" do
+    @check.priority = :critical
+    @check.priority.should == "critical"
+  end
+  it "gives an unknown severity since no CVSS is provided and no severity is given" do
+    @check.severity.should  == "unknown"
+  end
+
+  it "gives the severity level provided. No CVSS is here" do
+    @check.severity = :critical
+    @check.severity.should  == "critical"
+  end
 
   it "fires if vulnerable 0.2.9 version is detected" do
     @check.dependencies = [{:name=>"this_gem", :version=>'0.2.9'}]
@@ -42,21 +60,14 @@ describe "The security check for gem dependency should" do
     @check.vuln?.should    be_false
   end
 
-  it "fires when a non vulnerable version is found but there is a fixed version with higher minor release" do
-    @check.dependencies = [{:name=>"this_gem", :version=>'2.3.3'}]
-    @check.vuln?.should    be_true
-  end
-  it "should tell me there is a fixed version with 2 as major and 4 as minor release number" do
-    @check.is_there_an_higher_minor_version?(['0.3.0', '1.3.3', '2.3.3', '2.4.2', '9.4.31.2'], '2.3.3').should  be_true
-  end
   it "doesn't fires when a non vulnerable version is found and there is a fixed version with higher minor release but I asked to honor the minor version (useful with rails gem)" do
     @check.dependencies = [{:name=>"this_gem", :version=>'2.3.3'}]
-    @check.save_minor_fixes = true
+    @check.save_minor = true
     @check.vuln?.should    be_false
   end
   it "fires when a vulnerable version (2.3.2) is found even if I asked to save minors..." do
     @check.dependencies = [{:name=>"this_gem", :version=>'2.3.2'}]
-    @check.save_minor_fixes = true
+    @check.save_minor = true
     @check.vuln?.should    be_true
 
   end

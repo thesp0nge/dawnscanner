@@ -44,19 +44,44 @@ module Codesake
         # Put the check in debug mode
         attr_accessor :debug
 
-        # Tells a version is not vulnerable even if in the fixes array that has
-        # a minor version number higher than the current.
-        # This is useful especially for rails version where 3.0.x, 3.1.y, 3.2.z
-        # are separated branches and the patch is provided for all of those. So
-        # if version 3.1.10 is safe and you have it, you don't be prompted
-        # about 3.2.x.
-        attr_accessor :save_minor_fixes
+        # This is a flag for the security check family. Valid values are:
+        #   + generic_check
+        #   + code_quality
+        #   + cve_bulletin
+        #   + code_style
+        #   + owasp_ror_cheatsheet
+        #   + owasp_top_10_n (where n is a number between 1 and 10)
+        attr_accessor :check_family
+        ALLOWED_FAMILIES = [:generic_check, :code_quality, :cve_bulletin, :code_style, :owasp_ror_cheatsheet, :owasp_top_10_1, :owasp_top_10_2, :owasp_top_10_3, :owasp_top_10_4, :owasp_top_10_5, :owasp_top_10_6, :owasp_top_10_7, :owasp_top_10_8, :owasp_top_10_9, :owasp_top_10_10]
+
+        # This is the check severity level. It tells how dangerous is the
+        # vulnerability for you application.
+        #
+        # Valid values are:
+        #   + :critical
+        #   + :high
+        #   + :medium
+        #   + :low
+        #   + :info
+        #   + :none
+        attr_accessor :severity
+
+        # This is the check priority level. It tells how fast you should
+        # mitigate the vulnerability.
+        #
+        # Valid values are:
+        #   + :critical
+        #   + :high
+        #   + :medium
+        #   + :low
+        #   + :info
+        #   + :none
+        attr_accessor :priority
 
         def initialize(options={})
           @applies                  = []
           @ruby_version             = ""
           @ruby_vulnerable_versions = []
-          @save_minor_fixes         = false
 
           @name         = options[:name]
           @cvss         = options[:cvss]
@@ -78,7 +103,81 @@ module Codesake
           @mitigated    = false
           @status       = false
           @debug        = false
-    
+          @severity     = :none
+          @priority     = :none
+          @check_family = :generic_check
+
+          @severity         = options[:severity] unless options[:severity].nil?
+          @priority         = options[:priority] unless options[:priority].nil?
+          @check_family     = options[:check_family] unless options[:check_family].nil?
+
+          # FIXME.20140325
+          #
+          # I don't want to manually fix 150+ ruby files to add something I can
+          # deal here
+          @check_family = :cve if !options[:name].nil? && options[:name].start_with?('CVE-')
+
+          if $logger.nil?
+            require 'codesake-commons'
+            $logger  = Codesake::Commons::Logging.instance
+            $logger.helo "dawn-basic-check", Codesake::Dawn::VERSION
+          end
+        end
+
+        def self.families
+          return ALLOWED_FAMILIES.map { |x| x.to_s }
+        end
+
+        def family=(item)
+          if ! ALLOWED_FAMILIES.find_index(item.to_sym).nil?
+            instance_variable_set(:@check_family, item.to_sym)
+            return item
+          else
+            $logger.err("invalid check family: #{item}")
+            instance_variable_set(:@check_family, :generic_check)
+            return @family
+          end
+        end
+
+        def family
+          return "CVE bulletin"                   if @check_family == :cve
+          return "Ruby coding style"              if @check_family == :code_style
+          return "Ruby code quality check"        if @check_family == :code_quality
+          return "Owasp Ruby on Rails cheatsheet" if @check_family == :owasp_ror_cheatsheet
+          return "Owasp Top 10"                   if @check_family.to_s.start_with?('owasp_top_10')
+          return "Unknown"
+        end
+
+        def priority
+          return (@priority == :none)? "unknown" : @priority.to_s
+        end
+        def severity
+          return @severity.to_s unless @severity == :none
+
+          # if not set and if cvss is available, than use CVSS
+          unless self.cvss.nil?
+
+            score = Cvss::Engine.new.score(self.cvss)
+            case score
+            when 10
+              return "critical"
+            when 7..9
+              return "high"
+            when 4..6
+              return "medium"
+            when 2..3
+              return "low"
+            when 0..1
+              return "info"
+            else 
+              return "unknown"
+            end
+          else
+            return "unknown"
+          end
+
+          # if not set, no cvss available just return unknown
+          return "unknown"
         end
 
         def applies_to?(name)
@@ -90,84 +189,8 @@ module Codesake
         def nvd_link
           "http://web.nvd.nist.gov/view/vuln/detail?vulnId=#{@name}"
         end
-
-        # Public: checks if the ruby version used for target application works a pre-requisite to exploit a particular vulnerability.
-        #
-        #   Take the CVE-2013-1655 as example. The Puppet rubygem vulnerability
-        #   can be exploited only if the ruby version is 1.9.3 or following. For
-        #   such a reason this method will check for the ruby version used by the
-        #   target.
-        #
-        # Returns:
-        #   true if the running ruby is vulnerable or false otherwise
-        def is_ruby_vulnerable_version?
-          return false if @ruby_vulnerable_versions.nil?
-
-          found = false
-
-          
-          @ruby_vulnerable_versions.each do |v|
-            found = true if v == @ruby_version
-          end
-
-          found
-        end
-
-        # @target_version = '2.3.11'
-        # @fixes_version = ['2.3.18', '3.2.13', '3.1.12' ] 
-        def is_vulnerable_version?(target = nil, fixes = nil)
-          target  = @target_version if target.nil?
-          fixes   = @fixes_version  if fixes.nil?
-          return false if target.nil? || fixes.empty?
-
-          ret = false
-
-          target_v_array = target.split(".").map! { |n| n.to_i }
-          fixes.sort.each do |fv|
-            fixes_v_array = fv.split(".").map! { |n| n.to_i }
-
-            debug_me "target_array = #{target_v_array}"
-            debug_me "fixes_array = #{fixes_v_array}"
-            if target_v_array[0] == fixes_v_array[0]
-              # SAME MAJOR RELEASE
-              ret = true if target_v_array[1] < fixes_v_array[1] # same major but previous minor
-              if target_v_array[1] == fixes_v_array[1] 
-                # SAME MINOR RELEASE
-                # This is the case of version number made by 2 digits (e.g.
-                # 3.12). If both major and minor are the same then there is no
-                # vuln
-                return false if target_v_array.count == 2 
-
-                ret = true if target_v_array[2] < fixes_v_array[2] 
-                # In order to support CVE-2013-7086 security check we must be able to 
-                # hande the 'fourth' version number -> 1.5.0.4 
-                debug_me "target array count = #{target_v_array.count}"
-                debug_me "fixes array count = #{fixes_v_array.count}"
-                debug_me "same patchlevel?: #{(target_v_array[2] == fixes_v_array[2])}"
-                if (target_v_array[2] == fixes_v_array[2]) && target_v_array.count == 4 && fixes_v_array.count == 4
-                  ret = true if target_v_array[3] < fixes_v_array[3]
-                  ret = false if target_v_array[3] >= fixes_v_array[3]
-                end
-                ret = false if (target_v_array[2] == fixes_v_array[2]) && target_v_array.count != 4 && fixes_v_array.count != 4
-                ret = false if target_v_array[2] > fixes_v_array[2] 
-
-              end
-            end
-            # This is the save minor version workaround.
-            # fixes is something like ['2.2.2', '3.1.1', '3.2.2']
-            # target is '3.1.1' and save_minor_fixes is true
-            # I don't want that check for 3.2.2 marks this as vulnerable, so I will save it
-            debug_me "save minor fixes flag is #{save_minor_fixes}"
-            debug_me "is_there_an_higher_minor_version? is #{is_there_an_higher_minor_version?(fixes, fv)}"
-            if target_v_array[0] == fixes_v_array[0] && target_v_array[1] == fixes_v_array[1] && target_v_array[2] >= fixes_v_array[2] && is_there_an_higher_minor_version?(fixes, fv) && save_minor_fixes
-              debug_me "Honoring save_minor_fixes flag. Found a version #{target} that matches #{fixes} but there is another fixed version with higher minor version"
-              return false
-            end
-            debug_me("RET IS #{ret}")
-
-          end
-
-          ret
+        def rubysec_advisories_link
+          "http://www.rubysec.com/advisories/#{@name}/"
         end
 
         def cvss_score
@@ -177,17 +200,6 @@ module Codesake
 
         def mitigated?
           self.mitigated
-        end
-
-        # checks in the array if there is another string with higher minor version but the same major as the parameter element)
-        def is_there_an_higher_minor_version?(array, element)
-          ev = element.split(".").map! { |n| n.to_i }
-          array.sort.each do |a|
-            av = a.split(".").map! { |n| n.to_i }
-            return true if ev[0] == av[0] && ev[1] < av[1]
-          end
-          return false
-
         end
 
       end

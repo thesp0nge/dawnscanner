@@ -5,7 +5,81 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Sun Mar 23 22:36:42 CET 2014_
+_latest update: Mon Mar 31 09:05:57 CEST 2014_
+
+## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
+
+* Added a check for CVE-2011-5036
+* Added a check for CVE-2012-6109
+* Added a check for CVE-2013-0183
+* Added a check for CVE-2013-0184
+* Added a check for CVE-2013-0262
+* Added a check for CVE-2013-1607
+* Added a check for CVE-2013-2512
+* Added a check for CVE-2013-2513
+* Added a check for CVE-2013-2516
+* Added a check for CVE-2013-4203
+* Added a check for CVE-2013-4413
+* Added a check for CVE-2013-4489
+* Added a check for CVE-2013-4593
+* Added a check for CVE-2013-5671
+* Added a check for CVE-2014-0080
+* Added a check for CVE-2014-2525
+* Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
+  Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
+  test, so all the cheatsheet content is covered since now.
+* Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
+  tables. A bit of bin/dawn refactoring was necessary.
+* Added a --json (-j) to produce JSON reports
+* Added a --html (-h) to produce HTML reports
+* Added a --file (-F) flag to save report to supplied filename
+* Added Codesake::Dawn gem signature as described in
+  http://guides.rubygems.org/security/. README is modified accordingly with new
+  installation suggestions. Added also gem SHA512 checksum in repository.
+* Added a not_affected attribute to dependency check to flag as not vulnerable
+  previous versions
+* CVE-2013-2090: we were uncertain about previous cremefraiche version if they
+  were vulnerable or not. Gem author, yanked all previous version but the
+  latest released 29 January 2014. We removed the rspec check for version <
+  0.6.x
+* basic_check.rb: due to the great @rubysec guys work, the link to their site
+  is provided as well. True to be told, there are some CVE valid but not found
+  on NVID website, so having @rubysec link is even more accurate in those
+  situations.
+* New Codesake::Dawn::Kb::VersionCheck class to provide version specific
+  checks, supporting beta version number, release candidate and pre. Fully
+  integrated with DepedencyCheck and RubyVersionCheck
+* Issue #34. I added a deprecation check. However I haven't found an official
+  link saying which are MVC gem version to be considered officially deprecated
+  or just old. I enabled only check against ruby
+* Added a --seach-knowledge-base removing the optional parameter to
+  --list-knowledge-base that is just for listing.
+* Renamed '--list-knowledgebase' to '--list-knowledge-base' and '-k' short
+  option was removed
+* Added a --list-known-families option printing out Codesake::Dawn supported
+  check family name
+* Removed '-f' short option for list-known-framework
+* Added family and severity to Owasp RoR Cheatsheet files
+* Add a method to return severity level. If it's provided by check constructor
+  then that value is used, otherwise is calculated using CVSS.  If no value and
+  no CVSS are available the return value is "unknown".
+* Removed old ruby version check from BasicCheck. It's outdated and no longer
+  needed
+* Added --disable-cve-bulletins flag to disable all CVE security checks
+* Added --disable-code-quality flag to disable all code quality checks
+* Added --disable-code-style flag to disable all code style checks
+* Added --disable-owasp-ror-cheatsheet flag to disable all Owasp Ruby on Rails
+  cheatsheet checks
+* Added --disable-owasp-top-10 flag to disable all Owasp Top 10 checks
+* Revamped help output
+* Added YAML Codesake::Dawn configuration support. Now you can specify your
+  preferences in a .codesake-dawn.yaml file in your home directory (or you can
+  use the --config-file option to specify the file you want to use). It returns
+  an embedded default configuration if the supplied filename doesn't exist.
+* Nokogiri DoS security checks discovered in December 2013, now have their own
+  CVE: CVE-2013-6460 and CVE-2013-6461
+
+## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 
 ## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 
@@ -166,7 +240,7 @@ _latest update: Sun Mar 23 22:36:42 CET 2014_
 ## Version 0.85 - codename: elevator (2013-12-17)
 
 * refactoring bin/dawn script: some stuff were moved into Codesake::Core class
-* Added a check against Denial of Service vulnerability for Nokogiri 1.5.x 
+* Added a check against Denial of Service vulnerability for Nokogiri 1.5.x
   and 1.6.0 when used with JRuby.
 * Added a check against Denial of Service vulnerability due to entity expansion
   for Nokogiri 1.5.x and 1.6.0 when used with JRuby.
@@ -199,7 +273,7 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-2065
 * adding test for CVE-2013-4389
 * adding test for CVE-2010-1330
-* adding test for CVE-2011-0446 
+* adding test for CVE-2011-0446
 * adding test for CVE-2011-0995
 * adding test for CVE-2011-2929
 * adding test for CVE-2011-4815
@@ -268,7 +342,7 @@ able to scan something. It deserves a special release.
 * adding test for CVE-2013-2616
 * adding test for CVE-2013-2617
 * adding test for CVE-2013-3221
-* make output less verbose. Only vulnerabilities and severity will be shown 
+* make output less verbose. Only vulnerabilities and severity will be shown
 * adding a '--verbose' option to see also the whole knowledge base info about each findings
 * adding a '--output' option
 * adding a '--count-only' option

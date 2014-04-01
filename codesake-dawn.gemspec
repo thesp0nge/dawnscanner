@@ -7,15 +7,21 @@ Gem::Specification.new do |gem|
   gem.name          = "codesake-dawn"
   gem.version       = Codesake::Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
-  gem.email         = ["thesp0nge@gmail.com"]
-  gem.description   = %q{dawn is a security static source code scanner for web applications written in ruby. It supports major MVC frameworks like sinatra, padrino and ruby on rails. dawn output is a list of security vulnerabilities affecting your code. Latest stable version contains more than 150 secutiy checks with their own mitigation suggestion.}
-  gem.summary       = %q{dawn is a security static source code scanner for sinatra, padrino and ruby on rails web applications.}
+  gem.email         = ["paolo@codesake.com"]
+  gem.description   = %q{Codesake::Dawn is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Codesake::Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 150 security checks with their own mitigation suggestion.}
+  gem.summary       = %q{Codesake::Dawn is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
   gem.homepage      = "http://dawn.codesake.com"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+
+  gem.cert_chain  = ['certs/paolo_at_codesake_dot_com.pem']
+  gem.signing_key = File.expand_path("~/.ssh/paolo_at_codesake_dot_com-private_key.pem") if $0 =~ /gem\z/
+  gem.post_install_message = "Thank you for installing Codesake::Dawn security source code scanner for Ruby. Start securing your code by running \"dawn project_folder\" right now or just run \"dawn --help\" if you want to explore all possible command line flags."
+
+  gem.required_ruby_version = '>= 1.9.2'
 
   gem.add_dependency "codesake-commons", "~> 0.95.0"
   gem.add_dependency 'cvss'
@@ -25,6 +31,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'ruby_parser'
   gem.add_dependency 'sys-uname'
   gem.add_dependency 'grit'
+  gem.add_dependency 'terminal-table'
+  gem.add_dependency 'justify'
 
   gem.add_dependency ('coveralls')
 

@@ -4,7 +4,7 @@ describe "CVE-2013-0175 security check" do
   let (:check) {Codesake::Dawn::Kb::CVE_2013_0175.new}
   it "knows its name" do
     check.name.should == "CVE-2013-0175"
-  end 
+  end
   it "has a 7.5 cvss score" do
     check.cvss_score == 7.5
   end

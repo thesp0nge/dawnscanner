@@ -14,16 +14,24 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.fork = false
 end
 
-RSpec::Core::RakeTask.new do |t| 
+RSpec::Core::RakeTask.new do |t|
   t.rspec_opts = ["--color"]
 end
 
 
 task :default => [ :spec, :features, :kb ]
 task :test => :spec
+task :prepare => [:build, :'checksum:calculate', :'checksum:commit']
+task :release => [:prepare]
 
+# namespace :check do
+# desc "Create a dependency check"
+# task :dependency, :name do |t, args|
+# end
+
+# end
 desc "Create a new CVE test"
-task :cve, :name do |t,args| 
+task :cve, :name do |t,args|
   name      = args.name
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
@@ -87,7 +95,7 @@ end
 
 
 desc "Create a new Generic security check"
-task :check, :name do |t,args| 
+task :check, :name do |t,args|
   name      = args.name
   SRC_DIR   = "./lib/codesake/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
@@ -164,4 +172,68 @@ task :kb do
   end
   puts "KnowledgeBase.md file successfully generated"
 
+end
+
+require 'digest/sha2'
+namespace :checksum do
+
+desc 'Calculate gem checksum'
+task :calculate do
+  system 'mkdir -p checksum > /dev/null'
+  built_gem_path = "pkg/codesake-dawn-#{Codesake::Dawn::VERSION}.gem"
+  checksum = Digest::SHA512.new.hexdigest(File.read(built_gem_path))
+  checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
+  File.open(checksum_path, 'w' ) {|f| f.write(checksum) }
+
+  puts "#{checksum_path}: #{checksum}"
+end
+
+desc 'Add and commit latest checksum'
+task :commit do
+  checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
+  system "git add #{checksum_path}"
+  system "git commit -v #{checksum_path} -m \"Adding #{Codesake::Dawn::VERSION} checksum to repo\""
+end
+end
+
+###############################################################################
+# ruby-advisory-rb integration
+###############################################################################
+
+namespace :rubysec do
+  desc 'Find new CVE bulletins to add to Codesake::Dawn'
+  task :find do
+    git_url = 'git@github.com:rubysec/ruby-advisory-db.git'
+    target_dir = './tmp/'
+    system "mkdir -p #{target_dir}"
+    system "rm -rf #{target_dir}ruby-advisory-db"
+    system "git clone #{git_url} #{target_dir}ruby-advisory-db"
+    list = []
+    Dir.glob("#{target_dir}ruby-advisory-db/gems/*/*.yml") do |path|
+      advisory = YAML.load_file(path)
+      if advisory['cve']
+        cve = "CVE-"+advisory['cve']
+        # Exclusion
+        # CVE-2007-6183 is a vulnerability in gnome2 ruby binding. Not a gem, I don't care
+        # CVE-2013-1878 is a duplicate of CVE-2013-2617 that is in knowledge base
+        # CVE-2013-1876 is a duplicate of CVE-2013-2615 that is in knowledge base
+        exclusion = ["CVE-2007-6183", "CVE-2013-1876", "CVE-2013-1878"]
+        if exclusion.include?(cve) 
+          puts "#{cve} is in the exclusion list"
+        else
+          found = Codesake::Dawn::KnowledgeBase.find(nil, cve)
+          puts "#{cve} NOT in dawn v#{Codesake::Dawn::VERSION} knowledge base" unless found
+          list << cve unless found
+        end
+      end
+    end
+    unless list.empty?
+      File.open("missing_rubyadvisory_cvs_#{Time.now.strftime("%Y%m%d")}.txt", "w") do |f|
+        f.puts "Missing CVE bulletins - v#{Codesake::Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
+        f.puts list
+      end
+    end
+    system "rm -rf #{target_dir}ruby-advisory-db"
+
+  end
 end
