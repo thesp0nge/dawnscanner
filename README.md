@@ -275,7 +275,7 @@ The list of knowledge base content: [http://dawn.codesake.com/knowledge-base](ht
 
 Mailing list: [https://groups.google.com/forum/#!forum/codesake-dawn](https://groups.google.com/forum/#!forum/codesake-dawn)
 
-## Supporters
+## Support us
 
 Feedbacks are great and we really love to hear your voice.
 
