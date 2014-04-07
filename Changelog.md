@@ -7,6 +7,10 @@ frameworks.
 
 _latest update: Mon Mar 31 09:05:57 CEST 2014_
 
+* Fix issue #54. There were some unconsistence in command line call when
+  forcing the MVC instead of autodetect it. I refactored the part and it was
+  back to work now.
+
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
 * Added a check for CVE-2011-5036
