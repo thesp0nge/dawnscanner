@@ -52,7 +52,7 @@ install hasn’t been tampered, you must first add ```paolo@codesake.com```
 public signing certificate as trusted to your gem specific keyring.
 
 ```
-$ gem cert --add <(curl -Ls https://raw.github.com/codesake/codesake-dawn/certs/paolo_at_codesake_dot_com.pem)
+$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/codesake/codesake-dawn/master/certs/paolo_at_codesake_dot_com.pem)
 ```
 
 You can install latest Codesake::Dawn version, fetching it from
