@@ -7,6 +7,10 @@ frameworks.
 
 _latest update: Mon Mar 31 09:05:57 CEST 2014_
 
+* Fixed issue #55. Introducing yaml config file, gemfile_name default value is
+  empty string not nil anymore. Therefore bin/dawn must check for emptyness not
+  for nil value.
+
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
 * Added a check for CVE-2011-5036
