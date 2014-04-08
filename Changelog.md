@@ -7,6 +7,9 @@ frameworks.
 
 _latest update: Mon Mar 31 09:05:57 CEST 2014_
 
+* Issue #57: @zoltrain made a pull request to add vulnerability properties to
+  json output in reporter class.
+
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
 * Added a check for CVE-2011-5036
