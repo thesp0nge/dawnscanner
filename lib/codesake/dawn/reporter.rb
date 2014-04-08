@@ -206,7 +206,15 @@ module Codesake
         result[:reflected_xss_count] = @engine.reflected_xss.count
         result[:vulnerabilities]=[]
         @engine.vulnerabilities.each do |v|
-          result[:vulnerabilities] << v[:name]
+          result[:vulnerabilities] << {
+            :name => v[:name],
+            :cve_link => v[:cve_link],
+            :severity => v[:severity],
+            :priority => v[:priority],
+            :cvss_score => v[:cvss_score],
+            :message => v[:message],
+            :remediation => v[:remediation]
+          }
         end
         result[:mitigated_vuln] = @engine.mitigated_issues
         result[:reflected_xss] = []
