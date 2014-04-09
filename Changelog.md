@@ -17,6 +17,9 @@ _latest update: Mon Mar 31 09:05:57 CEST 2014_
 * Fix issue #54. There were some unconsistence in command line call when
   forcing the MVC instead of autodetect it. I refactored the part and it was
   back to work now.
+* Fixed issue #55. Introducing yaml config file, gemfile_name default value is
+  empty string not nil anymore. Therefore bin/dawn must check for emptyness not
+  for nil value.
 
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 

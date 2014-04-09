@@ -110,7 +110,7 @@ opts.each do |opt, val|
   when '--gem-lock'
     options[:gemfile_scan] = true
     unless val.empty?
-      options[:gemfile_name] = val 
+      options[:gemfile_name] = val
       guess = Codesake::Dawn::Core.guess_mvc(val)
     end
   when '--verbose'
@@ -152,8 +152,8 @@ target=ARGV.shift
 
 $logger.helo APPNAME, Codesake::Dawn::VERSION
 trap("INT")   { $logger.die('[INTERRUPTED]') }
-$logger.die("missing target") if target.nil? && options[:gemfile_name].nil?
-$logger.die("invalid directory (#{target})") if options[:gemfile_name].nil?  &&! Codesake::Dawn::Core.is_good_target?(target) 
+$logger.die("missing target") if target.nil? && options[:gemfile_name].empty?
+$logger.die("invalid directory (#{target})") if options[:gemfile_name].empty?  &&! Codesake::Dawn::Core.is_good_target?(target)
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
 $logger.log("security check enabled: #{options[:enabled_checks]}") if options[:debug]
 
