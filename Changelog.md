@@ -7,6 +7,12 @@ frameworks.
 
 _latest update: Mon Mar 31 09:05:57 CEST 2014_
 
+## Version 1.1.1 - codename: Lightning McQueen (2014-0x-xx)
+
+* Fixing issue #52. The trailing '/' must be removed in File.exist? A begin -
+  rescue block was added so to handle any exception. The default configuration
+  is returned in case of error.
+
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
 * Added a check for CVE-2011-5036
