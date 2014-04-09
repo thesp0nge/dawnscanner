@@ -163,17 +163,20 @@ $logger.log("security check enabled: #{options[:enabled_checks]}") if options[:d
 
 unless options[:gemfile_scan]
   begin
-    engine = Codesake::Dawn::Core.detect_mvc(target)  if options[:mvc].empty?
+    if options[:mvc].empty?
+      engine = Codesake::Dawn::Core.detect_mvc(target)
+      $logger.log("using #{engine.class.name} engine via autodect") if options[:debug]
+    else
+      engine = Codesake::Dawn::Rails.new(target)      if options[:mvc] == :rails
+      engine = Codesake::Dawn::Sinatra.new(target)    if options[:mvc] == :sinatra
+      engine = Codesake::Dawn::Padrino.new(target)    if options[:mvc] == :padrino
+    end
   rescue ArgumentError => e
     $logger.die(e.message)
   end
 else
   engine = Codesake::Dawn::GemfileLock.new(target, options[:gemfile_name], guess) # if options[:gemfile_scan]
 end
-
-engine = Codesake::Dawn::Rails.new(target)                      if options[:mvc] == :rails && options[:gemfile_scan].nil?
-engine = Codesake::Dawn::Sinatra.new(target)                    if options[:mvc] == :sinatra && options[:gemfile_scan].nil?
-engine = Codesake::Dawn::Padrino.new(target)                    if options[:mvc] == :padrino && options[:gemfile_scan].nil? 
 
 $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
 

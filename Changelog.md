@@ -14,6 +14,9 @@ _latest update: Mon Mar 31 09:05:57 CEST 2014_
   is returned in case of error.
 * Fixed issue #53. Both get_rbenv_ruby_ver and get_rvm_ruby_ver doesn't prepand
   @target when trying to fetch ruby version file content.
+* Fix issue #54. There were some unconsistence in command line call when
+  forcing the MVC instead of autodetect it. I refactored the part and it was
+  back to work now.
 
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
