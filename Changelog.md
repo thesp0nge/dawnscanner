@@ -7,6 +7,11 @@ frameworks.
 
 _latest update: Mon Mar 31 09:05:57 CEST 2014_
 
+* Issue #38. During the discussion, @shaneog pointed out that
+  --disable-ror-cheatsheet flag worked but disabling the whole family from the
+  YAML config file didn't. Due to a silly typo the magic didn't happened. Fixed
+  now.
+
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
 * Added a check for CVE-2011-5036

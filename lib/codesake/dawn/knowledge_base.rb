@@ -233,7 +233,7 @@ module Codesake
 
       def initialize(options={})
         @enabled_checks = Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES
-        @enabled_checks = options[:enabled_checks] unless options[:enabled_check].nil?
+        @enabled_checks = options[:enabled_checks] unless options[:enabled_checks].nil?
 
         @security_checks = load_security_checks
       end
