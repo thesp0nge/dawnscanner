@@ -140,7 +140,6 @@ module Codesake
       end
 
       def self.read_conf(file=nil)
-
         conf = {:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
         file = file.chop if file.end_with? '/'
         begin
@@ -154,7 +153,8 @@ module Codesake
         c = YAML.load_file(file)
 
         cf = c["config"]
-        cc = cf["enabled_checks"]
+        cc = cf[:enabled_checks]
+
         # TODO
         # I must add some sanity check here
         conf[:verbose] = cf["verbose"] unless cf["verbose"].nil?

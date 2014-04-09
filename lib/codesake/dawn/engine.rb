@@ -162,10 +162,10 @@ module Codesake
       def load_knowledge_base(enabled_checks=[])
         debug_me("load_knowledge_base called. Enabled checks are: #{enabled_checks}")
         if @name == "Gemfile.lock"
-          @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>@enabled_checks}).all if @force.empty?
-          @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>@enabled_checks}).all_by_mvc(@force) unless @force.empty? 
+          @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all if @force.empty?
+          @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@force) unless @force.empty? 
         else
-          @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>@enabled_checks}).all_by_mvc(@name) 
+          @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@name) 
 
         end
         debug_me("#{@checks.count} checks loaded")
