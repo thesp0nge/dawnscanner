@@ -20,6 +20,8 @@ _latest update: Mon Mar 31 09:05:57 CEST 2014_
 * Fixed issue #55. Introducing yaml config file, gemfile_name default value is
   empty string not nil anymore. Therefore bin/dawn must check for emptyness not
   for nil value.
+* Issue #57: @zoltrain made a pull request to add vulnerability properties to
+  json output in reporter class.
 
 ## Version 1.1.0 - codename: Lightning McQueen (2014-04-04)
 
