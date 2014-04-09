@@ -135,7 +135,7 @@ module Codesake
         unless @target.nil?
 
           # does target use rbenv?
-          ver = get_rbenv_ruby_ver 
+          ver = get_rbenv_ruby_ver
           # does the target use rvm?
           ver = get_rvm_ruby_ver if  ver[:version].empty? && ver[:patchlevel].empty?
           # take the running ruby otherwise
@@ -366,12 +366,12 @@ module Codesake
       private
       def get_rbenv_ruby_ver
         return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".rbenv-version"))
-        hash = File.read('.rbenv-version').split('-')
+        hash = File.read(File.join(@target, '.rbenv-version')).split('-')
         return {:version=>hash[0], :patchlevel=>hash[1]}
       end
       def get_rvm_ruby_ver
         return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".ruby-version"))
-        hash = File.read('.ruby-version').split('-')
+        hash = File.read(File.join(@target, '.ruby-version')).split('-')
         return {:version=>hash[0], :patchlevel=>hash[1]}
       end
 
