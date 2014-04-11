@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Mon Mar 31 09:05:57 CEST 2014_
+_latest update: Wed Apr  9 17:26:49 CEST 2014_
 
-## Version 1.1.1 - codename: Lightning McQueen (2014-0x-xx)
+## Version 1.1.1 - codename: Lightning McQueen (2014-04-11)
 
 * Fixing issue #52. The trailing '/' must be removed in File.exist? A begin -
   rescue block was added so to handle any exception. The default configuration
