@@ -217,6 +217,11 @@ require "codesake/dawn/kb/cve_2014_2322"
 require "codesake/dawn/kb/cve_2014_2525"
 require "codesake/dawn/kb/cve_2014_2538"
 
+# OSVDB
+
+require "codesake/dawn/kb/osvdb_105971"
+
+
 module Codesake
   module Dawn
     # XXX: Check if it best using a singleton here
@@ -454,6 +459,9 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2014_2322.new,
           Codesake::Dawn::Kb::CVE_2014_2525.new,
           Codesake::Dawn::Kb::CVE_2014_2538.new,
+
+          # OSVDB Checks are still here since are all about dependencies
+          Codesake::Dawn::Kb::OSVDB_105971.new
         ]
         # END @cve_security_checks array
         # START @owasp_ror_cheatsheet_checks array
