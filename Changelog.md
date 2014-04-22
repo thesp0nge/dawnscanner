@@ -5,7 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Apr  9 17:26:49 CEST 2014_
+_latest update: Fri Apr 18 07:55:10 CEST 2014_
+
+* Adding a check for OSVDB-105971: remote code execution for sfpagent ruby gem
 
 ## Version 1.1.1 - codename: Lightning McQueen (2014-04-11)
 
@@ -98,8 +100,6 @@ _latest update: Wed Apr  9 17:26:49 CEST 2014_
   an embedded default configuration if the supplied filename doesn't exist.
 * Nokogiri DoS security checks discovered in December 2013, now have their own
   CVE: CVE-2013-6460 and CVE-2013-6461
-
-## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 
 ## Version 1.0.6 - codename: Lightning McQueen (2014-03-23)
 
