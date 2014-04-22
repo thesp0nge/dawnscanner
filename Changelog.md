@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Fri Apr 18 07:55:10 CEST 2014_
 
+## Version 1.1.2 - codename: Lightning McQueen (2014-04-22)
+
 * Adding a check for OSVDB-105971: remote code execution for sfpagent ruby gem
 
 ## Version 1.1.1 - codename: Lightning McQueen (2014-04-11)
