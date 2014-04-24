@@ -58,9 +58,7 @@ opts.quiet=true
 engine  = nil
 
 
-find_conf = Codesake::Dawn::Core.find_conf(true)
-puts "got #{find_conf}"
-options = Codesake::Dawn::Core.read_conf()
+options = Codesake::Dawn::Core.read_conf(Codesake::Dawn::Core.find_conf(true))
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 

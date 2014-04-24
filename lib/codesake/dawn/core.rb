@@ -136,21 +136,18 @@ module Codesake
 
         # Calculate the conf file path
         conf_path = File.expand_path('~') +'/.'+conf_name
-        puts conf_path
 
         # Open the conf file and write our default config to it
         File.open(conf_path, 'w') do |f|
           rv = f.write(YAML.dump(conf))
-          puts "write returned #{rv}"
         end
 
-        puts "line 147 #{conf_path}"
-        return conf_path
+        conf_path
       end
 
       def self.read_conf(file=nil)
         conf = {:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
-        file = file.chop if file.end_with? '/'
+        file = file.chop if (not file.nil? and file.end_with? '/')
         begin
           return conf if file.nil?
           return conf if ! File.exist?(file)
