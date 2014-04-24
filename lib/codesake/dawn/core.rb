@@ -134,9 +134,15 @@ module Codesake
         # on the current directory with the default configuration.
         conf = {"config"=>{:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}}
 
-        File.open(File.expand_path('~') +'/.'+conf_name, 'w') do |f|
+        # Calculate the conf file path
+        conf_path = File.expand_path('~') +'/.'+conf_name
+
+        # Open the conf file and write our default config to it
+        File.open(conf_path, 'w') do |f|
           f.write(YAML.dump(conf))
         end
+
+        conf_path
       end
 
       def self.read_conf(file=nil)
