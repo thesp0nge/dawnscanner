@@ -19,7 +19,7 @@ module Codesake
     # |   "Luigi"       |  7.0.0  |
     # | "Doc Hudson"    |  8.0.0  |
 
-    VERSION   = "1.1.2"
+    VERSION   = "1.1.3"
     CODENAME  = "Lightning McQueen"
     # RELEASE   = "(development)"
     RELEASE   = "20140422"
