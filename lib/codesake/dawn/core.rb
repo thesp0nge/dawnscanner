@@ -118,12 +118,12 @@ module Codesake
           '~/',
           '/usr/local/etc/',
         ]
-        path_order.each do |p|
-          fn = p + conf_name if p.start_with?('/')
-          # if outside $HOME the config file must be hidden
-          fn = File.expand_path(p) + '/.'+conf_name if ! p.start_with?('/')
-          return fn if File.exist?(fn)
-        end
+        # path_order.each do |p|
+        #   fn = p + conf_name if p.start_with?('/')
+        #   # if outside $HOME the config file must be hidden
+        #   fn = File.expand_path(p) + '/.'+conf_name if ! p.start_with?('/')
+        #   return fn if File.exist?(fn)
+        # end
 
         # Codesake::Dawn didn't find a config file.
         # If create_if_none flag is set to false, than I'll return nil so the
@@ -136,14 +136,16 @@ module Codesake
 
         # Calculate the conf file path
         conf_path = File.expand_path('~') +'/.'+conf_name
+        puts conf_path
 
         # Open the conf file and write our default config to it
         File.open(conf_path, 'w') do |f|
-          f.write(YAML.dump(conf))
+          rv = f.write(YAML.dump(conf))
+          puts "write returned #{rv}"
         end
 
-        puts conf_path
-        conf_path
+        puts "line 147 #{conf_path}"
+        return conf_path
       end
 
       def self.read_conf(file=nil)
