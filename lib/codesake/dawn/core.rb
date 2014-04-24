@@ -142,6 +142,7 @@ module Codesake
           f.write(YAML.dump(conf))
         end
 
+        puts conf_path
         conf_path
       end
 
