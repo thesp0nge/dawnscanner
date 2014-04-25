@@ -118,12 +118,12 @@ module Codesake
           '~/',
           '/usr/local/etc/',
         ]
-        # path_order.each do |p|
-        #   fn = p + conf_name if p.start_with?('/')
-        #   # if outside $HOME the config file must be hidden
-        #   fn = File.expand_path(p) + '/.'+conf_name if ! p.start_with?('/')
-        #   return fn if File.exist?(fn)
-        # end
+        path_order.each do |p|
+          fn = p + conf_name if p.start_with?('/')
+          # if outside $HOME the config file must be hidden
+          fn = File.expand_path(p) + '/.'+conf_name if ! p.start_with?('/')
+          return fn if File.exist?(fn)
+        end
 
         # Codesake::Dawn didn't find a config file.
         # If create_if_none flag is set to false, than I'll return nil so the
