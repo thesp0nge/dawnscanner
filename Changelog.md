@@ -7,8 +7,6 @@ frameworks.
 
 _latest update: Fri Apr 18 07:55:10 CEST 2014_
 
-## Version 1.1.3 - codename: Lightning McQueen (2014-0x-0x)
-
 * Fix issue #62 about codesake-dawn config filename
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
