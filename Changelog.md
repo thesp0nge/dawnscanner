@@ -9,6 +9,9 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
 
 * Fix issue #62 about codesake-dawn config filename
 * Adding a check for CVE-2013-2105: HTML injection in show_in_browser rubygem
+* Fix issue #76 about codesake-dawn gem name being changed. On November 1st,
+  2014 we will rename the codesake-dawn name to just 'dawn' cleaning up also
+  the namespace.
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
 
