@@ -156,8 +156,17 @@ task :check, :name do |t,args|
 
 end
 
+namespace :kb do
+  desc 'Check information lint'
+  task :lint do
+    Codesake::Dawn::KnowledgeBase.new.all.each do |check|
+      l = check.lint
+      puts "check #{check.name} has this attribute(s) with a nil value: #{l.to_s}" unless l.size == 0
+    end
+
+  end
 desc 'Creates a KnowledgeBase.md file'
-task :kb do
+task :create do
   checks = Codesake::Dawn::KnowledgeBase.new.all
   open("KnowledgeBase.md", "w") do |file|
     file.puts "# Codesake::Dawn Knowledge base"
@@ -172,6 +181,7 @@ task :kb do
   end
   puts "KnowledgeBase.md file successfully generated"
 
+end
 end
 
 require 'digest/sha2'

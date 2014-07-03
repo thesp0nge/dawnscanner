@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Fri Apr 18 07:55:10 CEST 2014_
 
+* Fix issue #74. Now BasicChack has its own cve, osvdb attributes and a rake
+  task will perform a sanity check if those values have been initialized
 * Fix issue #62 about codesake-dawn config filename
 * Adding a check for CVE-2013-2105: HTML injection in show_in_browser rubygem
 

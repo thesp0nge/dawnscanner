@@ -8,6 +8,8 @@ module Codesake
         include Codesake::Dawn::Utils
 
         attr_reader :name
+        attr_reader :cve
+        attr_reader :osvdb
         attr_reader :cvss
         attr_reader :cwe
         attr_reader :owasp
@@ -86,6 +88,8 @@ module Codesake
           @name         = options[:name]
           @cvss         = options[:cvss]
           @cwe          = options[:cwe]
+          @cve          = options[:cve]
+          @osvdb        = options[:osvdb]
           @owasp        = options[:owasp]
           @release_date = options[:release_date]
           @applies      = options[:applies] unless options[:applies].nil?
@@ -202,6 +206,19 @@ module Codesake
           self.mitigated
         end
 
+        # Performs a self check against some core values from being not nil
+        #
+        # @return an Array with attributes with a nil value
+        def lint
+          ret = []
+          ret << :cve if @cve.nil?
+          ret << :osvdb if @osvdb.nil?
+          ret << :cvss if @cvss.nil?
+          ret << :severity if @severity == :none
+          ret << :priority if @priority == :none
+
+          ret
+        end
       end
     end
   end
