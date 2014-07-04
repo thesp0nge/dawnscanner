@@ -9,6 +9,8 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
 
 * Fix issue #62 about codesake-dawn config filename
 * Adding a check for CVE-2013-2105: HTML injection in show_in_browser rubygem
+* Adding a check for OSVDB-108570: arbitrary command execution for
+  backup_checksum gem (issue #70)
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
 
