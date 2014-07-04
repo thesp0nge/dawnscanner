@@ -196,6 +196,9 @@ module Codesake
         def rubysec_advisories_link
           "http://www.rubysec.com/advisories/#{@name}/"
         end
+        def osvdb_link
+          "http://osvdb.org/show/osvdb/#{@osvdb}"
+        end
 
         def cvss_score
           return Cvss::Engine.new.score(self.cvss) unless self.cvss.nil?
