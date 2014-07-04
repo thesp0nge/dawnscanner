@@ -275,7 +275,9 @@ module Codesake
           # if the safe_version_rc is 0 then the detected_version_rc is
           # vulnerable by design, since the safe version is a stable and we
           # detected a rc.
+          debug_me "entering is_vulnerable_rc?: s=#{safe_version_rc}, d=#{detected_version_rc}"
           return true if safe_version_rc == 0 && detected_version_rc != 0
+          return false if safe_version_rc != 0 && detected_version_rc == 0
           return false if safe_version_rc <= detected_version_rc
           return true if safe_version_rc > detected_version_rc
 

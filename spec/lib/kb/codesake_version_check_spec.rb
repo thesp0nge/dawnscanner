@@ -94,7 +94,7 @@ describe "The version check should" do
       @check.is_vulnerable_version?('2.3.0', '2.3.0.rc9').should be_true
     end
     it "reports a safe condition when a rc version is safe and the stable version is detected" do
-      @check.is_vulnerable_version?('2.3.0.rc9', '2.3.0').should be_true
+      @check.is_vulnerable_version?('2.3.0.rc9', '2.3.0').should be_false
     end
     it "reports a vulnerability when a previous rc version is detected" do
       @check.is_vulnerable_version?('2.3.0', '2.2.10.rc2').should be_true
