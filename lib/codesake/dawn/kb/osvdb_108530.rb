@@ -18,7 +18,7 @@ module Codesake
             :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"We are not currently aware of a solution for this vulnerability. Keep track on kajam gem updates",
-            :aux_links=>["http://seclists.org/oss-sec/2014/q2/118"]
+            :aux_links=>["http://www.vapid.dhs.org/advisories/kajam-1.0.3.rc2-2nd-vuln.html"]
            })
            self.safe_dependencies = [{:name=>"kajam", :version=>['1.0.3.rc3']}]
 
