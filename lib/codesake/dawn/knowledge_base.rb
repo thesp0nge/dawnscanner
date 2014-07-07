@@ -218,6 +218,7 @@ require "codesake/dawn/kb/cve_2014_1234"
 require "codesake/dawn/kb/cve_2014_2322"
 require "codesake/dawn/kb/cve_2014_2525"
 require "codesake/dawn/kb/cve_2014_2538"
+require "codesake/dawn/kb/cve_2014_3483"
 
 # OSVDB
 
@@ -463,6 +464,7 @@ module Codesake
           Codesake::Dawn::Kb::CVE_2014_2322.new,
           Codesake::Dawn::Kb::CVE_2014_2525.new,
           Codesake::Dawn::Kb::CVE_2014_2538.new,
+          Codesake::Dawn::Kb::CVE_2014_3483.new,
 
           # OSVDB Checks are still here since are all about dependencies
           Codesake::Dawn::Kb::OSVDB_105971.new
