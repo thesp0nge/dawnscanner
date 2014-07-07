@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.2'
 
-  gem.add_dependency "codesake-commons", "~> 0.95.0"
+  gem.add_dependency "codesake-commons", "~> 1.0.0"
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
   gem.add_dependency 'parser'

@@ -147,9 +147,9 @@ module Codesake
 
       def self.read_conf(file=nil)
         conf = {:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Codesake::Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
-        file = file.chop if (not file.nil? and file.end_with? '/')
         begin
           return conf if file.nil?
+          file = file.chop if (not file.nil? and file.end_with? '/')
           return conf if ! File.exist?(file)
         rescue => e
           $logger.err "it seems you've found a bug in core.rb@#{__LINE__}: #{e.message}"
