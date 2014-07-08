@@ -13,6 +13,8 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
 * Adding a check for CVE-2013-2105: HTML injection in show_in_browser rubygem
 * Fixing issue #68. I moved some file variable operation after the check for
   nil value. I can't reproduce on my station the offending bug :-(
+* Adding a check for OSVDB-108570: arbitrary command execution for
+  backup_checksum gem (issue #70)
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
 
