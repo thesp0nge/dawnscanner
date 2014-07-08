@@ -174,6 +174,7 @@ task :create do
     file.puts "---"
     checks.each do |c|
       file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
+      file.puts "* [#{c.name}](#{c.osvdb_link}): #{c.message}" if c.name.start_with?('OSVDB')
       file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE')
     end
 
