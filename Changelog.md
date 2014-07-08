@@ -9,9 +9,10 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
 
 * Adding a check for OSVDB-108569: information disclosure in backup_checksum
   gem (issue #69)
+* Fix issue #74. Now BasicChack has its own cve, osvdb attributes and a rake
+  task will perform a sanity check if those values have been initialized
 * Fix issue #62 about codesake-dawn config filename
 * Adding a check for CVE-2013-2105: HTML injection in show_in_browser rubygem
-<<<<<<< HEAD
 * Fixing issue #68. I moved some file variable operation after the check for
   nil value. I can't reproduce on my station the offending bug :-(
 * Adding a check for OSVDB-108570: arbitrary command execution for
