@@ -11,6 +11,7 @@ module Codesake
            super({
             :name=> "OSVDB-105971",
             :cvss=>"",
+            :osvdb=> "105971",
             :release_date => Date.new(2014, 4, 16),
             :cwe=>"",
             :owasp=>"A9",
