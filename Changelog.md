@@ -7,7 +7,7 @@ frameworks.
 
 _latest update: Tue Jul  8 08:40:15 CEST 2014_
 
-## Version 1.x.0 - codename: Lightning McQueen (2014-07-xx)
+## Version 1.2.0 - codename: Lightning McQueen (2014-07-xx)
 
 * Adding a check for OSVDB-108569: information disclosure in backup_checksum
   gem (issue #69)
