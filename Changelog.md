@@ -23,6 +23,8 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
   (issue #72)
 * Adding a check for CVE-2014-3482: SQL Injection on Rails 3.2.x due to
   PostgreSQL adapter for active record (issue #73)
+* Adding a check for CVE-2014-3483: Ruby on Rails 4.x SQL Injection due to
+  PostgreSQL adapter (issue #75)
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
 
