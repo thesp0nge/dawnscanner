@@ -16,6 +16,7 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
 * Adding a check for OSVDB-108570: arbitrary command execution for
   backup_checksum gem (issue #70)
 * Adding a check for OSVDB-108530: remote code execution for kajam gem (issue #71)
+* Adding a check for OSVDB-108563: remote code execution in gyazo rubygem (issue #72)
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
 

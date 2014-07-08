@@ -225,6 +225,7 @@ require "codesake/dawn/kb/osvdb_105971"
 require "codesake/dawn/kb/osvdb_108569"
 require "codesake/dawn/kb/osvdb_108570"
 require "codesake/dawn/kb/osvdb_108530"
+require "codesake/dawn/kb/osvdb_108563"
 
 
 module Codesake
@@ -472,6 +473,7 @@ module Codesake
           Codesake::Dawn::Kb::OSVDB_108569.new,
           Codesake::Dawn::Kb::OSVDB_108570.new,
           Codesake::Dawn::Kb::OSVDB_108530.new,
+          Codesake::Dawn::Kb::OSVDB_108563.new,
         ]
         # END @cve_security_checks array
         # START @owasp_ror_cheatsheet_checks array
