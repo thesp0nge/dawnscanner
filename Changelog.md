@@ -5,7 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Fri Apr 18 07:55:10 CEST 2014_
+_latest update: Tue Jul  8 08:40:15 CEST 2014_
+
+## Version 1.x.0 - codename: Lightning McQueen (2014-07-xx)
 
 * Adding a check for OSVDB-108569: information disclosure in backup_checksum
   gem (issue #69)
@@ -25,6 +27,9 @@ _latest update: Fri Apr 18 07:55:10 CEST 2014_
   PostgreSQL adapter for active record (issue #73)
 * Adding a check for CVE-2014-3483: Ruby on Rails 4.x SQL Injection due to
   PostgreSQL adapter (issue #75)
+* Fix issue #76 about codesake-dawn gem name being changed. On November 1st,
+  2014 we will rename the codesake-dawn name to just 'dawn' cleaning up also
+  the namespace.
 
 ## Version 1.1.3 - codename: Lightning McQueen (2014-05-06)
 

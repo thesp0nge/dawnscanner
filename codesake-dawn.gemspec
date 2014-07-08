@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.cert_chain  = ['certs/paolo_at_codesake_dot_com.pem']
   gem.signing_key = File.expand_path("~/.ssh/paolo_at_codesake_dot_com-private_key.pem") if $0 =~ /gem\z/
-  gem.post_install_message = "Thank you for installing Codesake::Dawn security source code scanner for Ruby. Start securing your code by running \"dawn project_folder\" right now or just run \"dawn --help\" if you want to explore all possible command line flags."
+  gem.post_install_message = "Thank you for installing \"dawn\", a security source code scanner for Ruby. Start securing your code by running \"dawn project_folder\" right now or just run \"dawn --help\" if you want to explore all possible command line flags.\n\n**PLEASE READ THIS** On November 1st, 2014 codesake-dawn gem will change the name in 'dawn'. On this date the first 'dawn' gem will be published and 'codesake-dawn' will be just a placeholder requiring the new gem."
 
   gem.required_ruby_version = '>= 1.9.2'
 
