@@ -903,6 +903,7 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Codesake::Dawn::Kb::CVE_2013_2105
   end
+<<<<<<< HEAD
   it "must have test for OSVDB-108569" do
     sc = kb.find("OSVDB-108569")
     sc.should_not   be_nil
@@ -924,5 +925,11 @@ describe "The Codesake Dawn knowledge base" do
       sc = kb.find("OSVDB-108563")
         sc.should_not   be_nil
           sc.class.should == Codesake::Dawn::Kb::OSVDB_108563
+  end
+
+  it "must have test for CVE-2014-3482" do
+      sc = kb.find("CVE-2014-3482")
+        sc.should_not   be_nil
+          sc.class.should == Codesake::Dawn::Kb::CVE_2014_3482
   end
 end
