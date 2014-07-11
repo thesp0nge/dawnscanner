@@ -12,5 +12,4 @@ describe "The CVE-2014-3482 vulnerability" do
     @check.dependencies = [{:name=>"rails", :version=>"3.2.19"}]
     @check.vuln?.should   be_false
   end
-  it "must be filled with CVSS information"
 end

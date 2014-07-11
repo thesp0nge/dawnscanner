@@ -11,7 +11,7 @@ module Codesake
             :name=> "CVE-2014-3482",
             :cve=>"CVE-2014-3482",
             :osvdb=>"108664",
-            :cvss=>"",
+            :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:P",
             :release_date => Date.new(2014, 7, 2),
             :cwe=>"",
             :owasp=>"A1",

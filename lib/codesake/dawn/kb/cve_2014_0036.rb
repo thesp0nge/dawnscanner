@@ -10,7 +10,7 @@ module Codesake
 
            super({
             :name=>"CVE-2014-0036",
-            :cvss=>"",
+            :cvss=>"AV:N/AC:M/Au:N/C:P/I:P/A:P",
             :release_date => Date.new(2014, 3, 5),
             :cwe=>"20",
             :owasp=>"A9",
