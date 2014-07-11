@@ -10,7 +10,8 @@ module Codesake
 
            super({
             :name=> "OSVDB-105971",
-            :cvss=>"",
+            :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            :cve=>"2014-2888",
             :osvdb=> "105971",
             :release_date => Date.new(2014, 4, 16),
             :cwe=>"",

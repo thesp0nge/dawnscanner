@@ -12,6 +12,4 @@ describe "The OSVDB_105971 vulnerability" do
     @check.dependencies = [{:name=>"sfpagent", :version=>"0.4.15"}]
     @check.vuln?.should   be_false
   end
-  it "must be filled with CVE identifier"
-  it "must be filled with CVSS information"
 end

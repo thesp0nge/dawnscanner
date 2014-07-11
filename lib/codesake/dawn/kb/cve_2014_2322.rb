@@ -11,7 +11,7 @@ module Codesake
 
            super({
             :name=>"CVE-2014-2322",
-            :cvss=>"",
+            :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:P",
             :release_date => Date.new(2014, 3, 10),
             :cwe=>"",
             :owasp=>"A9",
