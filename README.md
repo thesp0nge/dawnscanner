@@ -22,7 +22,7 @@ MVC (Model View Controller) frameworks, like:
 
 ---
 
-Codesake::Dawn version 1.1 has 171 security checks loaded in its knowledge
+Codesake::Dawn version 1.2 has 180 security checks loaded in its knowledge
 base. Most of them are CVE bulletins applying to gems or the ruby interpreter
 itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
