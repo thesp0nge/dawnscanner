@@ -117,6 +117,7 @@ module Codesake
 
       def detect_views
         return build_view_array(File.join(self.target, "views")) if File.exist?(File.join(self.target, "views"))
+        []
       end
 
       # e = Haml::Engine.new(File.read(template))
