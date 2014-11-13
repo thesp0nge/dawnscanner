@@ -19,7 +19,7 @@ module Codesake
         error! if self.appname == ""
         @views = detect_views
         @sinks = detect_sinks(self.appname) unless self.appname == ""
-        @reflected_xss = detect_reflected_xss unless self.appname == ""
+        @reflected_xss = detect_reflected_xss unless self.appname == "" || !@views
         @mount_point = (mp.nil?)? "" : mp
       end
 
