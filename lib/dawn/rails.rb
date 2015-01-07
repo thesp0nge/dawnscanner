@@ -1,17 +1,13 @@
-require "codesake/dawn/engine"
+require "dawn/engine"
 
-module Codesake
-  module Dawn
-    class Rails
-      include Codesake::Dawn::Engine
+module Dawn
+  class Rails
+    include Codesake::Dawn::Engine
 
 
-      def initialize(dir=nil)
-        super(dir, "rails")
-      end
-      
-     
-
+    def initialize(dir=nil)
+      super(dir, "rails")
     end
+
   end
 end
