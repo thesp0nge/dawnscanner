@@ -6,8 +6,8 @@ require 'cucumber'
 require 'cucumber/rake/task'
 
 require 'fileutils'
-require "codesake/dawn/utils"
-require "codesake/dawn/knowledge_base"
+require "dawn/utils"
+require "dawn/knowledge_base"
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty -x"
@@ -33,10 +33,10 @@ task :release => [:prepare]
 desc "Create a new CVE test"
 task :cve, :name do |t,args|
   name      = args.name
-  SRC_DIR   = "./lib/codesake/dawn/kb/"
+  SRC_DIR   = "./lib/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
 
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Codesake::Dawn::KnowledgeBase.find(nil, name).nil?
+  raise "### It seems that #{name} is already in Dawn knowledge base" unless Dawn::KnowledgeBase.find(nil, name).nil?
   raise "### Invalid CVE title: #{name}" if name.nil? or name.empty? or /CVE-\d{4}-\d{4}/.match(name).nil?
   raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
   raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
@@ -48,8 +48,7 @@ task :cve, :name do |t,args|
   class_name = name.gsub("-", "_")
 
   open(rb_filename, "w") do |file|
-    file.puts "module Codesake"
-    file.puts "\tmodule Dawn"
+    file.puts "module Dawn"
     file.puts "\t\tmodule Kb"
     file.puts "\t\t\t# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
     file.puts "\t\t\tclass #{class_name}"
@@ -62,7 +61,6 @@ task :cve, :name do |t,args|
     file.puts "\t\t\t\tend"
     file.puts "\t\t\tend"
     file.puts "\t\tend"
-    file.puts "\tend"
     file.puts "end"
   end
   puts "#{rb_filename} created"
@@ -72,7 +70,7 @@ task :cve, :name do |t,args|
 
     file.puts "describe \"The #{name} vulnerability\" do"
     file.puts "\tbefore(:all) do"
-    file.puts "\t\t@check = Codesake::Dawn::Kb::#{class_name}.new"
+    file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
     file.puts "\t\t# @check.debug = true"
     file.puts "\tend"
     file.puts "\tit \"is reported when...\""
@@ -80,13 +78,13 @@ task :cve, :name do |t,args|
   end
   puts "#{spec_filename} created"
 
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
-  puts "require \"codesake/dawn/kb/#{class_name.downcase}\""
+  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/knowledgebase_spec.rb in order to reflect changes"
+  puts "*** PLEASE ADD THIS CODE IN lib/dawn/knowledge_base.rb in order to reflect changes"
+  puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"
   puts "  sc.should_not   be_nil"
-  puts "  sc.class.should == Codesake::Dawn::Kb::#{class_name}"
+  puts "  sc.class.should == Dawn::Kb::#{class_name}"
   puts "end"
 
 
@@ -97,10 +95,10 @@ end
 desc "Create a new Generic security check"
 task :check, :name do |t,args|
   name      = args.name
-  SRC_DIR   = "./lib/codesake/dawn/kb/"
+  SRC_DIR   = "./lib/dawn/kb/"
   SPEC_DIR  = "./spec/lib/kb/"
 
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Codesake::Dawn::KnowledgeBase.find(nil, name).nil?
+  raise "### It seems that #{name} is already in Dawn knowledge base" unless Dawn::KnowledgeBase.find(nil, name).nil?
   raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
   raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
 
@@ -111,8 +109,7 @@ task :check, :name do |t,args|
   class_name = name.gsub("-", "_")
 
   open(rb_filename, "w") do |file|
-    file.puts "module Codesake"
-    file.puts "\tmodule Dawn"
+    file.puts "module Dawn"
     file.puts "\t\tmodule Kb"
     file.puts "\t\t\t# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
     file.puts "\t\t\tclass #{class_name}"
@@ -125,7 +122,6 @@ task :check, :name do |t,args|
     file.puts "\t\t\t\tend"
     file.puts "\t\t\tend"
     file.puts "\t\tend"
-    file.puts "\tend"
     file.puts "end"
   end
   puts "#{rb_filename} created"
@@ -135,7 +131,7 @@ task :check, :name do |t,args|
 
     file.puts "describe \"The #{name} vulnerability\" do"
     file.puts "\tbefore(:all) do"
-    file.puts "\t\t@check = Codesake::Dawn::Kb::#{class_name}.new"
+    file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
     file.puts "\t\t# @check.debug = true"
     file.puts "\tend"
     file.puts "\tit \"is reported when...\""
@@ -144,13 +140,13 @@ task :check, :name do |t,args|
   puts "#{spec_filename} created"
 
 
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN lib/codesake/dawn/knowledge_base.rb in order to reflect changes"
-  puts "require \"codesake/dawn/kb/#{class_name.downcase}\""
+  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/knowledgebase_spec.rb in order to reflect changes"
+  puts "*** PLEASE ADD THIS CODE IN lib/dawn/knowledge_base.rb in order to reflect changes"
+  puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"
   puts "  sc.should_not   be_nil"
-  puts "  sc.class.should == Codesake::Dawn::Kb::#{class_name}"
+  puts "  sc.class.should == Dawn::Kb::#{class_name}"
   puts "end"
 
 
@@ -159,7 +155,7 @@ end
 namespace :kb do
   desc 'Check information lint'
   task :lint do
-    Codesake::Dawn::KnowledgeBase.new.all.each do |check|
+    Dawn::KnowledgeBase.new.all.each do |check|
       l = check.lint
       puts "check #{check.name} has this attribute(s) with a nil value: #{l.to_s}" unless l.size == 0
     end
@@ -167,10 +163,10 @@ namespace :kb do
   end
 desc 'Creates a KnowledgeBase.md file'
 task :create do
-  checks = Codesake::Dawn::KnowledgeBase.new.all
+  checks = Dawn::KnowledgeBase.new.all
   open("KnowledgeBase.md", "w") do |file|
-    file.puts "# Codesake::Dawn Knowledge base"
-    file.puts "\nThe knowledge base library for Codesake::Dawn version #{Codesake::Dawn::VERSION} contains #{checks.count} security checks."
+    file.puts "# Dawn Knowledge base"
+    file.puts "\nThe knowledge base library for Dawn version #{Dawn::VERSION} contains #{checks.count} security checks."
     file.puts "---"
     checks.each do |c|
       file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
@@ -191,9 +187,9 @@ namespace :checksum do
 desc 'Calculate gem checksum'
 task :calculate do
   system 'mkdir -p checksum > /dev/null'
-  built_gem_path = "pkg/codesake-dawn-#{Codesake::Dawn::VERSION}.gem"
+  built_gem_path = "pkg/dawnscanner-#{Dawn::VERSION}.gem"
   checksum = Digest::SHA512.new.hexdigest(File.read(built_gem_path))
-  checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
+  checksum_path = "checksum/dawnscanner-#{Dawn::VERSION}.gem.sha512"
   File.open(checksum_path, 'w' ) {|f| f.write(checksum) }
 
   puts "#{checksum_path}: #{checksum}"
@@ -201,9 +197,9 @@ end
 
 desc 'Add and commit latest checksum'
 task :commit do
-  checksum_path = "checksum/codesake-dawn-#{Codesake::Dawn::VERSION}.gem.sha512"
+  checksum_path = "checksum/dawnscanner-#{Dawn::VERSION}.gem.sha512"
   system "git add #{checksum_path}"
-  system "git commit -v #{checksum_path} -m \"Adding #{Codesake::Dawn::VERSION} checksum to repo\""
+  system "git commit -v #{checksum_path} -m \"Adding #{Dawn::VERSION} checksum to repo\""
 end
 end
 
@@ -212,7 +208,7 @@ end
 ###############################################################################
 
 namespace :rubysec do
-  desc 'Find new CVE bulletins to add to Codesake::Dawn'
+  desc 'Find new CVE bulletins to add to Dawn'
   task :find do
     git_url = 'git@github.com:rubysec/ruby-advisory-db.git'
     target_dir = './tmp/'
@@ -232,15 +228,15 @@ namespace :rubysec do
         if exclusion.include?(cve) 
           puts "#{cve} is in the exclusion list"
         else
-          found = Codesake::Dawn::KnowledgeBase.find(nil, cve)
-          puts "#{cve} NOT in dawn v#{Codesake::Dawn::VERSION} knowledge base" unless found
+          found = Dawn::KnowledgeBase.find(nil, cve)
+          puts "#{cve} NOT in dawn v#{Dawn::VERSION} knowledge base" unless found
           list << cve unless found
         end
       end
     end
     unless list.empty?
       File.open("missing_rubyadvisory_cvs_#{Time.now.strftime("%Y%m%d")}.txt", "w") do |f|
-        f.puts "Missing CVE bulletins - v#{Codesake::Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
+        f.puts "Missing CVE bulletins - v#{Dawn::VERSION} - #{Time.now.strftime("%d %B %Y")}"
         f.puts list
       end
     end
