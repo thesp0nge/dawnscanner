@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Codesake::Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["paolo@codesake.com"]
-  gem.description   = %q{Codesake::Dawn is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Codesake::Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 150 security checks with their own mitigation suggestion.}
-  gem.summary       = %q{Codesake::Dawn is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
+  gem.description   = %q{Codesake::Dawn is a security source code scanner for ruby powered code. Starting from January 07, 2015 this gem is renamed to dawnscanner and this version is no longer supported. Please, upgrade your Gemfile.}
+  gem.summary   = %q{Codesake::Dawn is a security source code scanner for ruby powered code. Starting from January 07, 2015 this gem is renamed to dawnscanner and this version is no longer supported. Please, upgrade your Gemfile.}
   gem.homepage      = "http://dawn.codesake.com"
 
   gem.files         = `git ls-files`.split($/)
@@ -19,8 +19,11 @@ Gem::Specification.new do |gem|
 
   gem.cert_chain  = ['certs/paolo_at_codesake_dot_com.pem']
   gem.signing_key = File.expand_path("~/.ssh/paolo_at_codesake_dot_com-private_key.pem") if $0 =~ /gem\z/
-  gem.post_install_message = "Thank you for installing \"dawn\", a security source code scanner for Ruby. Start securing your code by running \"dawn project_folder\" right now or just run \"dawn --help\" if you want to explore all possible command line flags.\n\n**PLEASE READ THIS** On November 1st, 2014 codesake-dawn gem will change the name in 'dawn'. On this date the first 'dawn' gem will be published and 'codesake-dawn' will be just a placeholder requiring the new gem."
-
+  gem.post_install_message = <<-MESSAGE
+!    The 'codesake-dawn' gem has been deprecated and has been replaced by 'dawnscanner'.
+!    See: https://rubygems.org/gems/dawnscanner
+!    And: https://github.com/thesp0nge/dawnscanner
+MESSAGE
   gem.required_ruby_version = '>= 1.9.2'
 
   gem.add_dependency "codesake-commons", "~> 1.0.0"

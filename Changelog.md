@@ -7,6 +7,11 @@ frameworks.
 
 _latest update: Fri Jul 11 18:06:30 CEST 2014_
 
+## Version 1.2.99 - codename: Lightning McQueen (2015-01-07)
+
+* Add a deprecation message. This is the last codesake-dawn release. New gem
+  will be called dawnscanner.
+
 ## Version 1.2.0 - codename: Lightning McQueen (2014-07-14)
 
 * Adding a check for OSVDB-108569: information disclosure in backup_checksum
