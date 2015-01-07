@@ -1,4 +1,3 @@
-module Codesake
   module Dawn
     module Kb
       class DeprecationCheck
@@ -23,7 +22,7 @@ module Codesake
 
         def vuln?
           debug_me "vuln? @detected is #{@detected}"
-          v = Codesake::Dawn::Kb::VersionCheck.new
+          v = Dawn::Kb::VersionCheck.new
           v.debug = self.debug
           v.detected = @detected[:version]
 
@@ -37,4 +36,3 @@ module Codesake
       end
     end
   end
-end
