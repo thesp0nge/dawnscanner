@@ -7,10 +7,10 @@ describe "The CVE-2013-4413 vulnerability" do
 
   it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"wicked", :version=>"1.0.0"}]
-    @check.vuln?.should   be_true
+    @check.vuln?.should   == true
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"wicked", :version=>"1.0.1"}]
-    @check.vuln?.should   be_false
+    @check.vuln?.should   == false
   end
 end

@@ -6,10 +6,10 @@ describe "The CVE-2014-2538 vulnerability" do
 	end
   it "is reported when rack-ssl vulnerable version it has been found (1.3.9)" do
     @check.dependencies = [{:name=>'rack-ssl', :version=>'1.3.9'}]
-    @check.vuln?.should   be_true
+    @check.vuln?.should   == true
   end
   it "is reported when rack-ssl not vulnerable version it has been found (1.4.0)" do
     @check.dependencies = [{:name=>'rack-ssl', :version=>'1.4.0'}]
-    @check.vuln?.should   be_false
+    @check.vuln?.should   == false
   end
 end

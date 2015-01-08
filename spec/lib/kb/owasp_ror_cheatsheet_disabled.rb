@@ -11,11 +11,11 @@ describe "The OWASP Ruby on Rails cheatsheet" do
   end 
 
   it "is correctly applied" do
-    @applied.should be_true
+    @applied.should == true
   end
 
   it "fires up vulnerabilities" do
-    @engine.is_vulnerable_to?("Owasp Ror Cheatsheet").should be_true
+    @engine.is_vulnerable_to?("Owasp Ror Cheatsheet").should == true
   end
 
   it "says that running operating system commands from a ruby app can be dangerous" do

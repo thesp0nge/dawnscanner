@@ -22,9 +22,9 @@ module Dawn
         at_least_one = false
         @checks.each do |check|
           check_vuln = false
-          check.detected_ruby   = @options[:detected_ruby]    if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
-          check.dependencies    = @options[:dependencies]     if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-          check.root_dir        = @options[:root_dir]         if check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
+          check.detected_ruby   = @options[:detected_ruby]    if check.kind == Dawn::KnowledgeBase::RUBY_VERSION_CHECK
+          check.dependencies    = @options[:dependencies]     if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK
+          check.root_dir        = @options[:root_dir]         if check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
           check.debug           = self.debug
 
           check_vuln = check.vuln? if check.respond_to?(:vuln?)

@@ -6,10 +6,10 @@ describe "The OSVDB_105971 vulnerability" do
 	end
   it "is reported when a vulnerable version it has been found (0.4.14)" do
     @check.dependencies = [{:name=>"sfpagent", :version=>"0.4.14"}]
-    @check.vuln?.should   be_true
+    @check.vuln?.should   == true
   end
   it "is not reported when a safe version it has been found (0.4.15)" do
     @check.dependencies = [{:name=>"sfpagent", :version=>"0.4.15"}]
-    @check.vuln?.should   be_false
+    @check.vuln?.should   == false
   end
 end
