@@ -14,16 +14,16 @@ box:
 
 ---
 
-[![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
-[![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
-[![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
-[![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/codesake/codesake-dawn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![Inline docs](http://inch-ci.org/github/codesake/codesake-dawn.png?branch=master)](http://inch-ci.org/github/codesake/codesake-dawn)
+[![Gem Version](https://badge.fury.io/rb/dawnscanner.png)](http://badge.fury.io/rb/dawnscanner)
+[![Build Status](https://travis-ci.org/thesp0nge/dawnscanner.png?branch=master)](https://travis-ci.org/thesp0nge/dawnscanner)
+[![Dependency Status](https://gemnasium.com/thesp0nge/dawnscanner.png)](https://gemnasium.com/thesp0nge/dawnscanner)
+[![Coverage Status](https://coveralls.io/repos/thesp0nge/dawnscanner/badge.png)](https://coveralls.io/r/thesp0nge/dawnscanner)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/thesp0nge/dawnscanner/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Inline docs](http://inch-ci.org/github/thesp0nge/dawnscanner.png?branch=master)](http://inch-ci.org/github/thesp0nge/dawnscanner)
 
 ---
 
-Dawn version 1.1 has 171 security checks loaded in its knowledge
+Dawn version 1.2 has 180 security checks loaded in its knowledge
 base. Most of them are CVE bulletins applying to gems or the ruby interpreter
 itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
@@ -177,7 +177,7 @@ execute.
 ```
 $ rake -T
 ...
-rake dawn:run                  # Execute codesake-dawn on the current directory
+rake dawn:run                  # Execute dawnscanner on the current directory
 ...
 ```
 
@@ -276,7 +276,7 @@ Twitter profile:  [@dawnscanner](https://twitter.com/dawnscanner)
 
 Github repository:   [https://github.com/thesp0nge/dawn](https://github.com/thesp0nge/dawn)
 
-Mailing list: [https://groups.google.com/forum/#!forum/codesake-dawn](https://groups.google.com/forum/#!forum/codesake-dawn)
+Mailing list: [https://groups.google.com/forum/#!forum/dawnscanner](https://groups.google.com/forum/#!forum/dawnscanner)
 
 ## Support us
 
@@ -313,11 +313,11 @@ First of all, I use the branching model described in [this
 post](http://nvie.com/posts/a-successful-git-branching-model/). There are two
 major branches:
 
-* master: it contains in every moment the code for the latest codesake-dawn
+* master: it contains in every moment the code for the latest dawnscanner
   released gem. You can't make branches from here unless you're working on a
   bugfix.
 * development: it contains the unstable code that is going to be the next
-  codesake-dawn realease. You start from here. Pick a task on the Roadmap.md
+  dawnscanner realease. You start from here. Pick a task on the Roadmap.md
   and create a separated branch to work on your feature to. When you're ready
   (remember to include also spec files), submit your pull request. If the code
   will be fine, it will be merged into the development tree ready to be include
