@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe "The Codesake::Dawn engine for sinatra applications" do
-  before(:all) {@engine= Codesake::Dawn::Sinatra.new('./spec/support/sinatra-safe')}
+describe "The Dawn engine for sinatra applications" do
+  before(:all) {@engine= Dawn::Sinatra.new('./spec/support/sinatra-safe')}
 
   it "has a proper name" do
     @engine.name.should   ==    "sinatra"
@@ -36,7 +36,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     @engine.checks.should_not be_empty
   end
   it "has check for CVE-2013-1800" do
-    Codesake::Dawn::KnowledgeBase.find(@engine.checks, "CVE-2013-1800").should_not  be_nil
+    Dawn::KnowledgeBase.find(@engine.checks, "CVE-2013-1800").should_not  be_nil
   end
 
   it "applies all checks" do
@@ -66,7 +66,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
   end  
 
   describe "applied do the sinatra-vulnerable application" do
-    before (:all) {@engine= Codesake::Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')}
+    before (:all) {@engine= Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')}
     it "has a valid target" do
       @engine.target.should ==   "./spec/support/sinatra-vulnerable"
       @engine.target_is_dir?.should  be_true
@@ -89,7 +89,7 @@ describe "The Codesake::Dawn engine for sinatra applications" do
     end
 
     it "applies automagically all the tests if no test has been applied" do
-      e2 =  Codesake::Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')
+      e2 =  Dawn::Sinatra.new('./spec/support/sinatra-vulnerable')
       e2.vulnerabilities.should_not be_empty
     end
 

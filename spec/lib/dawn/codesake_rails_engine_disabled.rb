@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe "The Codesake::Dawn engine for rails applications" do
-  before(:all){@engine = Codesake::Dawn::Rails.new}
+describe "The Dawn engine for rails applications" do
+  before(:all){@engine = Dawn::Rails.new}
 
   it "detects the version used in the hello_world_3.1.0 application" do
     @engine.set_target("./spec/support/hello_world_3.1.0")
