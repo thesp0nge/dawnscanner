@@ -5,7 +5,7 @@ require 'dawn/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "dawnscanner"
-  gem.version       = Codesake::Dawn::VERSION
+  gem.version       = Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["paolo@codesake.com"]
   gem.description   = %q{Dawn is a security source code scanner for ruby powered code.}
