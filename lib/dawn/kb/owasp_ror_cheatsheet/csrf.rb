@@ -1,4 +1,3 @@
-module Codesake
   module Dawn
     module Kb
       module OwaspRorCheatSheet
@@ -10,7 +9,7 @@ module Codesake
 
             super({
               :name=>"Owasp Ror CheatSheet: Cross Site Request Forgery",
-              :kind=>Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
+              :kind=>Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
               :applies=>["rails"],
               :glob=>"application_controller.rb",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
@@ -28,4 +27,3 @@ module Codesake
       end
     end
   end
-end

@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-05-30
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"310",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
+            :kind=>Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
             :message=>message,
             :mitigation=>"At the moment we're writing this (May 2013) there is no mitigation against this vulnerability. You must consider changing your hashing algorithm",
             :aux_links=>["https://bugzilla.redhat.com/show_bug.cgi?id=880671"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

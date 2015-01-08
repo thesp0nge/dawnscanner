@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-08
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"79",
             :owasp=>"A3", 
             :applies=>["rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade rails to version 3.0.11, 3.1.2 or a version up to 2.3.12 if you are stuck on 2.3.x branch . As a general rule, using the latest stable version is recommended.",
             :aux_links=>["http://groups.google.com/group/rubyonrails-security/msg/c65c24fbc4b6dd82?dmode=source&output=gplain"]
@@ -28,4 +27,3 @@ module Codesake
 			end
 		end
 	end
-end

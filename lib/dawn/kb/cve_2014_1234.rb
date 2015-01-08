@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-02-05
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"200",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade paratrooper-newrelic version up to version 1.0.1.",
             :aux_links=>["http://www.vapid.dhs.org/advisories/paratrooper-newrelic-api.html"]
@@ -25,4 +24,3 @@ module Codesake
 			end
 		end
 	end
-end

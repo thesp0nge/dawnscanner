@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-02-06
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"22",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade rack version up to version 1.5.2 or 1.4.5 or higher.",
             :aux_links=>["https://groups.google.com/forum/#%21msg/rack-devel/mZsuRonD7G8/DpZIOmMLbOgJ"]
@@ -25,4 +24,3 @@ module Codesake
 			end
 		end
 	end
-end

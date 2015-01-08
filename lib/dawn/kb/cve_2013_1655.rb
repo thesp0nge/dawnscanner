@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 
@@ -11,7 +10,7 @@ module Codesake
 
           super({
             :name=>"CVE-2013-1655_a",
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
           })
 
           self.safe_dependencies = [{:name=>"puppet", :version=>['2.7.21', '3.1.1']}]
@@ -27,7 +26,7 @@ module Codesake
 
           super({
             :name=>"CVE-2013-1655_b",
-            :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
+            :kind=>Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
           })
 
           self.safe_rubies = [
@@ -53,7 +52,7 @@ module Codesake
             :cwe=>"20",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
+            :kind=>Dawn::KnowledgeBase::COMBO_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade puppet gem to a newer version",
             :aux_links=>["https://puppetlabs.com/security/cve/cve-2013-1655/"],
@@ -64,4 +63,3 @@ module Codesake
       end
     end
   end
-end

@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-14
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"79",
             :owasp=>"A3", 
             :applies=>["sinatra", "padrino", "rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade will_paginage version to 3.0.5. As a general rule, using the latest stable version is recommended.",
             :aux_links=>["https://github.com/mislav/will_paginate/releases/tag/v3.0.5"]
@@ -27,4 +26,3 @@ module Codesake
 			end
 		end
 	end
-end

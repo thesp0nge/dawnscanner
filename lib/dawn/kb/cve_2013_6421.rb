@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-12-17
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"94", 
             :owasp=>"A9",
             :applies=>["rails", "padrino", "sinatra"],
-            :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind => Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade sprout rubygem",
             :aux_links => ["http://www.openwall.com/lists/oss-security/2013/12/03/1"]
@@ -27,4 +26,3 @@ module Codesake
 			end
 		end
 	end
-end

@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-03-14
@@ -16,7 +15,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9",
             :applies=>["sinatra", "padrino", "rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"At March, 14 2014 a fixed Arabic-Prawn release is not available. Please sanitize your input before passing it to this gem and upgrade to higher versions as soon as possible",
             :aux_links=>["http://packetstormsecurity.com/files/125679/Ruby-Gem-Arabic-Prawn-0.0.1-Command-Injection.html"]
@@ -27,4 +26,3 @@ module Codesake
 			end
 		end
 	end
-end

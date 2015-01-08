@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 
@@ -11,7 +10,7 @@ module Codesake
 
           super({
             :name=>"CVE-2011-0995_a",
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
           })
 
           self.safe_dependencies = [{:name=>"sqlite3", :version=>['1.2.4']}]
@@ -26,7 +25,7 @@ module Codesake
 
           super({
             :name=>"CVE-2011-0995_b",
-            :kind=>Codesake::Dawn::KnowledgeBase::OS_CHECK,
+            :kind=>Dawn::KnowledgeBase::OS_CHECK,
           })
 
           self.safe_os = [{:family=>"linux", :vendor=>"suse", :version=>['11sp2']}]
@@ -48,7 +47,7 @@ module Codesake
             :cwe=>"264",
             :owasp=>"A9", 
             :applies=>["sinatra", "padrino", "rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
+            :kind=>Dawn::KnowledgeBase::COMBO_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade rails version at least to 2.3.15, 3.2.5, 3.1.5 or 3.0.13. As a general rule, using the latest stable rails version is recommended.",
             :aux_links=>["http://support.novell.com/security/cve/CVE-2011-0995.html"],
@@ -60,4 +59,3 @@ module Codesake
 			end
 		end
 	end
-end

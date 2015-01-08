@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-03-14
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"20",
             :owasp=>"A9",
             :applies=>["sinatra", "padrino", "rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade rbovirt version at least to 0.0.24. As a general rule, using the latest version is recommended.",
             :aux_links=>["http://www.securityfocus.com/bid/66006"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

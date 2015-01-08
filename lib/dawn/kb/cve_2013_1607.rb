@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-02-07
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"To mitigate this vulnerability you must upgrade pdfkit gem version to 0.5.3 or higher.",
             :aux_links=>["https://github.com/pdfkit/pdfkit/issues/164"]
@@ -24,4 +23,3 @@ module Codesake
 			end
 		end
 	end
-end

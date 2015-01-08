@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-05-27
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9", 
             :applies=>["rails", "padrino", "sinatra"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade md2pdf gem version to the latest version available.",
             :aux_links=>["http://www.securityfocus.com/bid/59061"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

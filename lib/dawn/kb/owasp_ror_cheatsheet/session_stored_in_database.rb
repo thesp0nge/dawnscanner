@@ -1,4 +1,3 @@
-module Codesake
   module Dawn
     module Kb
       module OwaspRorCheatSheet
@@ -11,7 +10,7 @@ module Codesake
 
             super({
               :name=>"Owasp Ror CheatSheet: Session management",
-              :kind=>Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
+              :kind=>Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
               :applies=>["rails"],
               :glob=>"session_store.rb",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
@@ -30,4 +29,3 @@ module Codesake
       end
     end
   end
-end

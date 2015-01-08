@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-14
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"", 
             :owasp=>"A9",
             :applies=>["rails", "sinatra", "padrino"],
-            :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind => Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade ruby-cache version up to 1.1.1. As a general rule, using the latest stable rails version is recommended.",
             :aux_links => ["https://github.com/rtomayko/rack-cache/pull/52"]
@@ -27,4 +26,3 @@ module Codesake
 			end
 		end
 	end
-end

@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
       class CVE_2014_2525_a
@@ -8,13 +7,13 @@ module Codesake
           message = "When relying on system wide libyaml, this must be > 0.1.5"
           super({
             :name=>"CVE-2014-2525-a",
-            :kind=>Codesake::Dawn::KnowledgeBase::CUSTOM_CHECK,
+            :kind=>Dawn::KnowledgeBase::CUSTOM_CHECK,
           })
         end
         def vuln?
           require 'yaml'
           lyv = Psych.libyaml_version.join(".")
-          c = Codesake::Dawn::Kb::VersionCheck.new
+          c = Dawn::Kb::VersionCheck.new
           return c.is_vulnerable_version?('0.1.6', lyv)
         end
       end
@@ -25,7 +24,7 @@ module Codesake
           message = "When non relying on system wide libyaml, psych gem must be > 2.0.5"
           super({
             :name=>"CVE-2014-2525-b",
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
           })
           self.safe_dependencies = [{:name=>"psych", :version=>['2.0.5']}]
         end
@@ -46,7 +45,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9",
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
+            :kind=>Dawn::KnowledgeBase::COMBO_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade your system libyaml or upgrade psych gem to version 2.0.5 or higher that is linked with a safe libyaml version.",
             :aux_links=>["https://www.ruby-lang.org/en/news/2014/03/29/heap-overflow-in-yaml-uri-escape-parsing-cve-2014-2525"],
@@ -58,4 +57,3 @@ module Codesake
 			end
 		end
 	end
-end

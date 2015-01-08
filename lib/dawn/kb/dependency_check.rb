@@ -48,7 +48,7 @@ module Dawn
             end
 
             if dep[:name] == safe_dep[:name]
-              v = Codesake::Dawn::Kb::VersionCheck.new(
+              v = Dawn::Kb::VersionCheck.new(
                 {
                   :safe=>safe_dep[:version],
                   :detected=>dep[:version],

@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-02-06
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade fog-dragonfly version up to version 0.8.2.",
             :aux_links=>["http://seclists.org/fulldisclosure/2013/Sep/18"]
@@ -25,4 +24,3 @@ module Codesake
 			end
 		end
 	end
-end

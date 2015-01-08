@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-05-17
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"94",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade command_wrap gem to a newer version",
             :aux_links=>["http://seclists.org/fulldisclosure/2013/Mar/175"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

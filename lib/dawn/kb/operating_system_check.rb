@@ -1,4 +1,3 @@
-module Codesake
   module Dawn
     module Kb
       module OperatingSystemCheck
@@ -95,4 +94,3 @@ module Codesake
       end
     end
   end
-end

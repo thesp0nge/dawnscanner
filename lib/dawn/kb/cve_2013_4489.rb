@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-02-05
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9",
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade grit version up to version at least to 5.4.1 or 6.2.3. Using the latest version however is always suggested.",
             :aux_links=>["http://seclists.org/oss-sec/2013/q4/224"]
@@ -27,4 +26,3 @@ module Codesake
 			end
 		end
 	end
-end

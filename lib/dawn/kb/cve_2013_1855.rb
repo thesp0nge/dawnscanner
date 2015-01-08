@@ -1,4 +1,3 @@
-module Codesake
   module Dawn
     module Kb
       class CVE_2013_1855 
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"79", 
             :owasp=>"A3",
             :applies=>["rails"],
-            :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind => Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade rails version at least to 2.3.18, 3.0.8, 3.1.12 and 3.2.13. As a general rule, using the latest stable rails version is recommended.",
             :aux_links => ["https://groups.google.com/d/msg/rubyonrails-security/4_QHo4BqnN8/_RrdfKk12I4J"]
@@ -24,4 +23,3 @@ module Codesake
       end
     end
   end
-end

@@ -2,7 +2,7 @@ require "dawn/engine"
 
 module Dawn
   class Rails
-    include Codesake::Dawn::Engine
+    include Engine
 
 
     def initialize(dir=nil)

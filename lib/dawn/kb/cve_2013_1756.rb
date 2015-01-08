@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-15
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"20", 
             :owasp=>"A9",
             :applies=>["rails", "sinatra", "padrino"],
-            :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind => Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade dragonfly gem to 0.9.13. However the maintainer suggests upgrading to 0.9.14 since it fix another non security related bug",
             :aux_links => ["http://www.osvdb.com/show/osvdb/90647"]
@@ -25,4 +24,3 @@ module Codesake
 			end
 		end
 	end
-end

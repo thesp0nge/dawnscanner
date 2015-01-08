@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-09
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"79",
             :owasp=>"A3", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade redmine version at least to 0.8.6 or higher. As a general rule, using the latest stable rails version is recommended.",
             :aux_links=>["http://www.redmine.org/wiki/redmine/Changelog#v086-2009-11-04"]
@@ -28,4 +27,3 @@ module Codesake
 			end
 		end
 	end
-end

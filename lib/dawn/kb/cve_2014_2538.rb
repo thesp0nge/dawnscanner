@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-03-23
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"79",
             :owasp=>"A3",
             :applies=>["rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"A new version for rack-ssl version it has been released. Pleas upgrade at least to version 1.4.0 or higher.",
             :aux_links=>["http://seclists.org/oss-sec/2014/q1/594"]
@@ -25,4 +24,3 @@ module Codesake
 			end
 		end
 	end
-end

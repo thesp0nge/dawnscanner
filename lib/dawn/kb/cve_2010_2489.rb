@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-09
@@ -9,7 +8,7 @@ module Codesake
           message =  "CVE_2010_2489_a: ruby 1.9.2-p429  has problems"
           super({
             :name=>"CVE_2010_2489_a",
-            :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
+            :kind=>Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
           })
           self.safe_rubies = [
             {:engine=>"ruby", :version=>"1.9.2", :patchlevel=>"p430"},
@@ -25,7 +24,7 @@ module Codesake
           message =  "CVE_2010_2489_a: Only on Windows"
           super({
             :name=>"CVE_2010_2489_ab",
-            :kind=>Codesake::Dawn::KnowledgeBase::OS_CHECK,
+            :kind=>Dawn::KnowledgeBase::OS_CHECK,
           })
 
           self.safe_os = [
@@ -48,7 +47,7 @@ module Codesake
             :cwe=>"119",
             :owasp=>"A9", 
             :applies=>["sinatra", "padrino", "rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
+            :kind=>Dawn::KnowledgeBase::COMBO_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade your ruby interpreter",
             :aux_links=>["http://www.ruby-lang.org/en/news/2010/07/02/ruby-1-9-1-p429-is-released/"],
@@ -59,4 +58,3 @@ module Codesake
 			end
 		end
 	end
-end

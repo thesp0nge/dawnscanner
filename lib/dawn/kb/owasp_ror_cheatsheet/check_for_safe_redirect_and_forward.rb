@@ -1,4 +1,3 @@
-module Codesake
   module Dawn
     module Kb
       module OwaspRorCheatSheet
@@ -30,7 +29,7 @@ Setting this to true will essentially strip out any host information.
 
             super({
               :name=>"Owasp Ror CheatSheet: Check for safe redirect and forward",
-              :kind=>Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
+              :kind=>Dawn::KnowledgeBase::PATTERN_MATCH_CHECK,
               :applies=>["rails"],
               :glob=>"*.rb",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
@@ -56,4 +55,3 @@ Setting this to true will essentially strip out any host information.
       end
     end
   end
-end

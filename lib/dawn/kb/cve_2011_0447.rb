@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-05-29
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"352",
             :owasp=>"A9", 
             :applies=>["rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade rails version at least to 2.3.11 or 3.0.4. As a general rule, using the latest stable rails version is recommended.",
             :aux_links=>["http://weblog.rubyonrails.org/2011/2/8/csrf-protection-bypass-in-ruby-on-rails"]
@@ -27,4 +26,3 @@ module Codesake
 			end
 		end
 	end
-end

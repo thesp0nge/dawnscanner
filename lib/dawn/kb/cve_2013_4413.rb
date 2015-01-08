@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-02-05
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9",
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade wicked version up to version 1.0.1.",
             :aux_links=>["http://schneems.com/post/63478235238/wicked-1-0-1-released-with-critical-security-fix"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

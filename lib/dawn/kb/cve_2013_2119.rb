@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-10
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"16",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade passenger to version 3.0.21, 4.0.5 or above",
             :aux_links=>["http://blog.phusion.nl/2013/05/29/phusion-passenger-4-0-5-released/", "http://blog.phusion.nl/2013/05/29/phusion-passenger-3-0-21-released/"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-07
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"This vulnerability should never occur due to the rubygem evolution. However if it has been found, please upgrade your whole development environment ot something newer",
             :aux_links=>["http://www.securityfocus.com/archive/1/archive/1/458128/100/0/threaded"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

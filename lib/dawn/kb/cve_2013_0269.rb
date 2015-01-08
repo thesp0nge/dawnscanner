@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-05-10
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade JSON gem to version 1.5.5, 1.6.8 or 1.7.7 or latest version available",
             :aux_links=>["https://groups.google.com/d/topic/rubyonrails-security/4_YvCpLzL58/discussion"]
@@ -26,4 +25,3 @@ module Codesake
 			end
 		end
 	end
-end

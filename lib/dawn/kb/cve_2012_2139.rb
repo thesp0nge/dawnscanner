@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2014-01-14
@@ -14,7 +13,7 @@ module Codesake
             :cwe=>"22", 
             :owasp=>"A9",
             :applies=>["rails", "sinatra", "padrino"],
-            :kind => Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind => Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message => message,
             :mitigation=>"Please upgrade mail_gem version up to 2.4.4. As a general rule, using the latest stable rails version is recommended.",
             :aux_links => ["https://github.com/mikel/mail/commit/29aca25218e4c82991400eb9b0c933626aefc98f"]
@@ -25,4 +24,3 @@ module Codesake
 			end
 		end
 	end
-end

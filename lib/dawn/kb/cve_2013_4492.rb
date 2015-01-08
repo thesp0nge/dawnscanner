@@ -1,4 +1,3 @@
-module Codesake
 	module Dawn
 		module Kb
 			# Automatically created with rake on 2013-12-11
@@ -15,7 +14,7 @@ module Codesake
             :cwe=>"79",
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
-            :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+            :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade ruby-i18n to version 0.6.6. As a general rule, using the latest stable version is recommended.",
             :aux_links=>["https://groups.google.com/forum/message/raw?msg=ruby-security-ann/pLrh6DUw998/bLFEyIO4k_EJ"]
@@ -28,4 +27,3 @@ module Codesake
 			end
 		end
 	end
-end
