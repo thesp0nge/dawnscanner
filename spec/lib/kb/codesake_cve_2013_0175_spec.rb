@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "CVE-2013-0175 security check" do
-  let (:check) {Codesake::Dawn::Kb::CVE_2013_0175.new}
+  let (:check) {Dawn::Kb::CVE_2013_0175.new}
   it "knows its name" do
     check.name.should == "CVE-2013-0175"
   end

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 class DependencyMockup
-  include Codesake::Dawn::Kb::DependencyCheck
+  include Dawn::Kb::DependencyCheck
 
   def initialize
     message = "This is a mock"
     super(
-      :kind=>Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+      :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
       :applies=>['sinatra', 'padrino', 'rails'],
       :message=> message
     )

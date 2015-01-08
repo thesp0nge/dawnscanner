@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "The version check should" do
   before(:all) do
-    @check = Codesake::Dawn::Kb::VersionCheck.new
+    @check = Dawn::Kb::VersionCheck.new
     @check.safe=['0.4.5', '0.5.4', '0.7.8']
     @check.deprecated=['0.1.x', '0.2.x', '0.3.x', '1.x']
     @check.excluded=['0.6.4']
@@ -141,7 +141,7 @@ describe "The version check should" do
   end
   # deprecation check
   it "reports nonsense deprecation" do
-    nonsense = Codesake::Dawn::Kb::VersionCheck.new
+    nonsense = Dawn::Kb::VersionCheck.new
     nonsense.deprecated = ['x.0.0']
     nonsense.is_deprecated?('2.2.3').should be_true
   end

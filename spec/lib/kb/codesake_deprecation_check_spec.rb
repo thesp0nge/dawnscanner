@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "The deprecation check for Ruby and MVC" do
   before (:all) do
-    @check = Codesake::Dawn::Kb::DeprecationCheck.new
+    @check = Dawn::Kb::DeprecationCheck.new
     @check.enable_warning = false
     # @check.debug = true
   end

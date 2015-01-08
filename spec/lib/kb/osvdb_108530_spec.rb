@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The OSVDB-108530 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::OSVDB_108530.new
+		@check = Dawn::Kb::OSVDB_108530.new
 		# @check.debug = true
 	end
   it "is reported when a vulnerable version it has been found (1.0.3.rc2)" do

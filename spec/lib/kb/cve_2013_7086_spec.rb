@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2013-7086 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2013_7086.new
+		@check = Dawn::Kb::CVE_2013_7086.new
 		# @check.debug = true
 	end
 	it "is detected for gem 1.0.5.3" do

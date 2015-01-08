@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2012-6109 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2012_6109.new
+		@check = Dawn::Kb::CVE_2012_6109.new
 		# @check.debug = true
 	end
   it "is reported when the vulnerable gem is detected - 1.0.1" do

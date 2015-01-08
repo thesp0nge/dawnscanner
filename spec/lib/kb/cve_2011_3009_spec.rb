@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "The CVE-2011-3009 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2011_3009.new
+		@check = Dawn::Kb::CVE_2011_3009.new
 		# @check.debug = true
 	end
   it "fires if ruby version is vulnerable (1.8.6-p111)" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2011-5036 vulnerability" do
   before(:all) do
-    @check = Codesake::Dawn::Kb::CVE_2011_5036.new
+    @check = Dawn::Kb::CVE_2011_5036.new
     # @check.debug = true
   end
   it "is reported when the vulnerable gem is detected - 1.0.1" do

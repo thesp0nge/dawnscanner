@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "The CVE-2013-1655 vulnerability" do
   before(:all) do 
-    @check = Codesake::Dawn::Kb::CVE_2013_1655.new
+    @check = Dawn::Kb::CVE_2013_1655.new
     # @check.debug = true
   end
   it "is detected if vulnerable version of puppet rubygem is detect when running on ruby 1.9.3 and 2.0.0" do

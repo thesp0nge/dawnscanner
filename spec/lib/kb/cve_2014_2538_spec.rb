@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2014-2538 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2014_2538.new
+		@check = Dawn::Kb::CVE_2014_2538.new
 		# @check.debug = true
 	end
   it "is reported when rack-ssl vulnerable version it has been found (1.3.9)" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2013-5671 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2013_5671.new
+		@check = Dawn::Kb::CVE_2013_5671.new
 		# @check.debug = true
 	end
 

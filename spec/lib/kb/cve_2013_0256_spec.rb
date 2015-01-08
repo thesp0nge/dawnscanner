@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2013-0256 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2013_0256.new
+		@check = Dawn::Kb::CVE_2013_0256.new
 		# @check.debug = true
 	end
   it "fires when vulnerable ruby (1.9.3-p382) and rdoc version (2.3.0) has been found" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The OSVDB-108563 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::OSVDB_108563.new
+		@check = Dawn::Kb::OSVDB_108563.new
 		# @check.debug = true
 	end
 

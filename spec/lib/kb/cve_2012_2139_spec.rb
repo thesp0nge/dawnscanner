@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2012-2139 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2012_2139.new
+		@check = Dawn::Kb::CVE_2012_2139.new
 		# @check.debug = true
 	end
   it "is reported when mail_gem version 2.4.3 is used" do

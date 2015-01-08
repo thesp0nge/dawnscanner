@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2012-2671 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2012_2671.new
+		@check = Dawn::Kb::CVE_2012_2671.new
 		# @check.debug = true
 	end
   it "is reported when ruby-cache version 0.5 is used" do

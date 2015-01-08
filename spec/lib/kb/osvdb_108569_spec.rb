@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The OSVDB-108569 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::OSVDB_108569.new
+		@check = Dawn::Kb::OSVDB_108569.new
 		# @check.debug = true
 	end
   it "is reported when a vulnerable backup_checksum gem version it has been found (3.0.23)" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2014-3482 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2014_3482.new
+		@check = Dawn::Kb::CVE_2014_3482.new
 		# @check.debug = true
 	end
   it "is reported when a vulnerable version it has been found (3.2.18)" do

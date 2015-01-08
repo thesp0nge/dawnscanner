@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2013-4203 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2013_4203.new
+		@check = Dawn::Kb::CVE_2013_4203.new
 		# @check.debug = true
 	end
   it "is reported when a vulnerable rgpg version is detected (0.2.2)" do

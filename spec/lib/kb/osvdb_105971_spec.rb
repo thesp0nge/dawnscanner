@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The OSVDB_105971 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::OSVDB_105971.new
+		@check = Dawn::Kb::OSVDB_105971.new
 		# @check.debug = true
 	end
   it "is reported when a vulnerable version it has been found (0.4.14)" do

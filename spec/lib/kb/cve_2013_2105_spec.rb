@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2013-2105 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2013_2105.new
+		@check = Dawn::Kb::CVE_2013_2105.new
 		# @check.debug = true
 	end
   it "is reported when show_in_browser vulnerable version is reported (0.0.3)" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "The CVE-2014-3483 vulnerability" do
 	before(:all) do
-		@check = Codesake::Dawn::Kb::CVE_2014_3483.new
+		@check = Dawn::Kb::CVE_2014_3483.new
 		# @check.debug = true
 	end
   it "is reported when a rails gem version 4.0.6 is detected" do

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 class Mockup
-  include Codesake::Dawn::Kb::RubyVersionCheck
+  include Dawn::Kb::RubyVersionCheck
 
   def initialize
     message = "This is a mock"
     super(
-      :kind=>Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK, 
+      :kind=>Dawn::KnowledgeBase::RUBY_VERSION_CHECK, 
       :applies=>['sinatra', 'padrino', 'rails'],
       :message=> message
     )

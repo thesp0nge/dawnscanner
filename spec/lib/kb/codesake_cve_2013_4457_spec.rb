@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "The CVE-2013-4457 vulnerability" do
   before(:all) do 
-    @check = Codesake::Dawn::Kb::CVE_2013_4457.new
+    @check = Dawn::Kb::CVE_2013_4457.new
     # @check.debug = true
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
