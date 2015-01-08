@@ -10,7 +10,7 @@ _latest update: Fri Jul 11 18:06:30 CEST 2014_
 ## Version 1.2.5 - codename: Lightning McQueen (2015-01-07)
 
 * gem name changed from codesake-dawn to dawnscanner. Binary program remains
-  'dawn' but the repository is moved here: https://github.com/thesp0nge/dawn
+  'dawn' but the repository is moved here: https://github.com/thesp0nge/dawnscanner
 
 ## Version 1.2.0 - codename: Lightning McQueen (2014-07-14)
 
