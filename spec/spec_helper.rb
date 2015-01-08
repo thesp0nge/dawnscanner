@@ -1,5 +1,5 @@
 require 'coveralls'
-require 'codesake-dawn'
+require 'dawnscanner'
 require 'codesake-commons'
 
 def give_a_number

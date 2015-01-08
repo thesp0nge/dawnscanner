@@ -1,11 +1,12 @@
-# Codesake::Dawn - The security code scanner for Ruby
+# Dawn - The raising security scanner for ruby web applications
 
-Codesake::Dawn is a source code scanner designed to review your code for
-security issues.
+Dawn is a source code scanner designed to review your ruby code for security
+issues.
 
-Codesake::Dawn is able to scan your ruby standalone programs but its main usage
-is to deal with web applications. It supports applications written using majors
-MVC (Model View Controller) frameworks, like:
+Dawn is able to scan plain ruby scripts (e.g. command line applications) but
+all its features are unleashed when dealing with web applications source code.
+Dawn is able to scan major MVC (Model View Controller) frameworks, out of the
+box:
 
 * [Ruby on Rails](http://rubyonrails.org)
 * [Sinatra](http://www.sinatrarb.com)
@@ -13,22 +14,22 @@ MVC (Model View Controller) frameworks, like:
 
 ---
 
-[![Gem Version](https://badge.fury.io/rb/codesake-dawn.png)](http://badge.fury.io/rb/codesake-dawn)
-[![Build Status](https://travis-ci.org/codesake/codesake-dawn.png?branch=master)](https://travis-ci.org/codesake/codesake-dawn)
-[![Dependency Status](https://gemnasium.com/codesake/codesake-dawn.png)](https://gemnasium.com/codesake/codesake-dawn)
-[![Coverage Status](https://coveralls.io/repos/codesake/codesake-dawn/badge.png)](https://coveralls.io/r/codesake/codesake-dawn)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/codesake/codesake-dawn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![Inline docs](http://inch-ci.org/github/codesake/codesake-dawn.png?branch=master)](http://inch-ci.org/github/codesake/codesake-dawn)
+[![Gem Version](https://badge.fury.io/rb/dawnscanner.png)](http://badge.fury.io/rb/dawnscanner)
+[![Build Status](https://travis-ci.org/thesp0nge/dawnscanner.png?branch=master)](https://travis-ci.org/thesp0nge/dawnscanner)
+[![Dependency Status](https://gemnasium.com/thesp0nge/dawnscanner.png)](https://gemnasium.com/thesp0nge/dawnscanner)
+[![Coverage Status](https://coveralls.io/repos/thesp0nge/dawnscanner/badge.png)](https://coveralls.io/r/thesp0nge/dawnscanner)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/thesp0nge/dawnscanner/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Inline docs](http://inch-ci.org/github/thesp0nge/dawnscanner.png?branch=master)](http://inch-ci.org/github/thesp0nge/dawnscanner)
 
 ---
 
-Codesake::Dawn version 1.2 has 180 security checks loaded in its knowledge
+Dawn version 1.2 has 180 security checks loaded in its knowledge
 base. Most of them are CVE bulletins applying to gems or the ruby interpreter
 itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
 ## An overall introduction
 
-When you run Codesake::Dawn on your code it parses your project Gemfile.lock
+When you run Dawn on your code it parses your project Gemfile.lock
 looking for the gems used and it tries to detect the ruby interpreter version
 you are using or you declared in your ruby version management tool you like
 most (RVM, rbenv, ...).
@@ -37,47 +38,47 @@ Then the tool tries to detect the MVC framework your web application uses and
 it applies the security check accordingly. There checks designed to match rails
 application or checks that are appliable to any ruby code.
 
-Codesake::Dawn can also understand the code in your views and to backtrack
+Dawn can also understand the code in your views and to backtrack
 sinks to spot cross site scripting and sql injections introduced by the code
 you actually wrote. In the project roadmap this is the code most of the future
 development effort will be focused on.
 
-Codesake::Dawn security scan result is a list of vulnerabilities with some
+Dawn security scan result is a list of vulnerabilities with some
 mitigation actions you want to follow in order to build a stronger web
 application.
 
 ## Installation
 
-codesake-dawn rubygem is cryptographically signed. To be sure the gem you
+dawnscanner rubygem is cryptographically signed. To be sure the gem you
 install hasn’t been tampered, you must first add ```paolo@codesake.com```
 public signing certificate as trusted to your gem specific keyring.
 
 ```
-$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/codesake/codesake-dawn/master/certs/paolo_at_codesake_dot_com.pem)
+$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/thesp0nge/dawn/master/certs/paolo_at_codesake_dot_com.pem)
 ```
 
-You can install latest Codesake::Dawn version, fetching it from
+You can install latest Dawn version, fetching it from
 [Rubygems](https://rubygems.org) by typing:
 
 ```
-$ gem install codesake-dawn -P MediumSecurity
+$ gem install dawnscanner -P MediumSecurity
 ```
 
 The MediumSecurity trust profile will verify signed gems, but allow the
 installation of unsigned dependencies. This is necessary because not all of
-Codesake::Dawn’s dependencies are signed, so we cannot use HighSecurity.
+Dawn’s dependencies are signed, so we cannot use HighSecurity.
 
 In order to install a release candidate version, the gem install command line
 is the following:
 
 ```
-$ gem install codesake-dawn --pre -P MediumSecurity
+$ gem install dawnscanner --pre -P MediumSecurity
 ```
 
 If you want to add dawn to your project Gemfile, you must add the following:
 
     group :development do
-      gem 'codesake-dawn', :require=>false
+      gem 'dawnscanner', :require=>false
     end
 
 And then upgrade your bundle
@@ -86,22 +87,22 @@ And then upgrade your bundle
 
 You may want to build it from source, so you have to check it out from github first:
 
-    $ git clone https://github.com/codesake/codesake-dawn.git
-    $ cd codesake-dawn
+    $ git clone https://github.com/thesp0nge/dawn.git
+    $ cd dawn
     $ bundle install
     $ rake install
 
-And the codesake-dawn gem will be built in a pkg directory and then installed
+And the dawnscanner gem will be built in a pkg directory and then installed
 on your system. Please note that you have to manage dependencies on your own
 this way. It makes sense only if you want to hack the code or something like
 that.
 
 ## Usage
 
-You can start your code review with Codesake::Dawn very easily. Simply tell the tool
+You can start your code review with Dawn very easily. Simply tell the tool
 where the project root directory.
 
-Underlying MVC framework is autodetected by Codesake::Dawn using target Gemfile.lock
+Underlying MVC framework is autodetected by Dawn using target Gemfile.lock
 file. If autodetect fails for some reason, the tool will complain about it and
 you have to specify if it's a rails, sinatra or padrino web application by
 hand.
@@ -113,7 +114,8 @@ needs, and to specify the target directory where your code is stored.
 $ dawn [options] target
 ```
 
-In case of need, there is a quick command line option reference running ```dawn -h``` at your OS prompt.
+In case of need, there is a quick command line option reference running 
+```dawn -h``` at your OS prompt.
 
 ```
 $ dawn -h
@@ -145,7 +147,7 @@ Disable security check family
        --disable-owasp-ror-cheatsheet   disable all Owasp Ruby on Rails cheatsheet checks
        --disable-owasp-top-10           disable all Owasp Top 10 checks
 
-Flags useful to query Codesake::Dawn
+Flags useful to query Dawn
 
        -S, --search-knowledge-base [check_name]   search check_name in the knowledge base
            --list-knowledge-base                  list knowledge-base content
@@ -162,18 +164,20 @@ Service flags
 
 ### Rake task
 
-To include Codesake::Dawn in your rake task list, you simply have to put this line in your ```Rakefile```
+To include Dawn in your rake task list, you simply have to put this line in
+your ```Rakefile```
 
 ```
 require 'codesake/dawn/tasks'
 ```
 
-Then executing ```$ rake -T``` you will have a ```dawn:run``` task you want to execute.
+Then executing ```$ rake -T``` you will have a ```dawn:run``` task you want to
+execute.
 
 ```
 $ rake -T
 ...
-rake dawn:run                  # Execute codesake-dawn on the current directory
+rake dawn:run                  # Execute dawnscanner on the current directory
 ...
 ```
 
@@ -199,15 +203,15 @@ $ dawn -S this_test_does_not_exist
 this_test_does_not_exist not found in knowledgebase
 ```
 
-### Codesake::Dawn security scan in action
+### Dawn security scan in action
 
-As output, Codesake::Dawn will put all security checks that are failed during the scan.
+As output, Dawn will put all security checks that are failed during the scan.
 
 This the result of Codedake::Dawn running against a
 [Sinatra 1.4.2 web application](https://github.com/thesp0nge/railsberry2013) wrote for a talk I
 delivered in 2013 at [Railsberry conference](http://www.railsberry.com).
 
-As you may see, Codesake::Dawn first detects MVC running the application by
+As you may see, Dawn first detects MVC running the application by
 looking at Gemfile.lock, than it discards all security checks not appliable to
 Sinatra (49 security checks, in version 1.0, especially designed for Ruby on
 Rails) and it applies them.
@@ -232,11 +236,11 @@ $ dawn ~/src/hacking/railsberry2013
 
 ---
 
-When you run Codesake::Dawn on a web application with up to date dependencies,
+When you run Dawn on a web application with up to date dependencies,
 it's likely to return a friendly _no vulnerabilities found_ message. Keep it up
 working that way!
 
-This is Codesake::Dawn running against a Padrino web application I wrote for [a
+This is Dawn running against a Padrino web application I wrote for [a
 scorecard quiz game about application security](http://scorecard.armoredcode.com).
 Italian language only. Sorry.
 
@@ -250,7 +254,7 @@ Italian language only. Sorry.
 18:42:39 [*] dawn is leaving
 ```
 
-If you need a fancy HTML report about your scan, just ask it to Codesake::Dawn
+If you need a fancy HTML report about your scan, just ask it to Dawn
 with the ```--html``` flag used with the ```--file``` since I wanto to save the
 HTML to disk.
 
@@ -266,29 +270,27 @@ $ dawn /Users/thesp0nge/src/hacking/rt_first_app --html --file report.html
 
 ## Useful links
 
-Project homepage: [http://dawn.codesake.com](http://dawn.codesake.com)
+Project homepage: [http://dawnscanner.org](http://dawnscanner.org)
 
 Twitter profile:  [@dawnscanner](https://twitter.com/dawnscanner)
 
-Github repository:   [https://github.com/codesake/codesake\-dawn](https://github.com/codesake/codesake-dawn)
+Github repository:   [https://github.com/thesp0nge/dawn](https://github.com/thesp0nge/dawn)
 
-The list of knowledge base content: [http://dawn.codesake.com/knowledge-base](http://dawn.codesake.com/knowledge-base)
-
-Mailing list: [https://groups.google.com/forum/#!forum/codesake-dawn](https://groups.google.com/forum/#!forum/codesake-dawn)
+Mailing list: [https://groups.google.com/forum/#!forum/dawnscanner](https://groups.google.com/forum/#!forum/dawnscanner)
 
 ## Support us
 
 Feedbacks are great and we really love to hear your voice.
 
-If you're a proud codesake-dawn user, if you find it useful, if you integrated
+If you're a proud dawnscanner user, if you find it useful, if you integrated
 it in your release process and if you want to openly support the project you
 can put your reference here. Just open an
-[issue](https://github.com/codesake-dawn/issues/new) with a statement saying
+[issue](https://github.com/thesp0nge/dawn/issues/new) with a statement saying
 how do you feel the tool and your company logo if any.
 
-More easily you can drop an email to [paolo@codesake.com](mailto:paolo@codesake.com) sending a
-statement about your success story and I'll put on the
-[website](http://dawn.codesake.com/success-stories).
+More easily you can drop an email to
+[paolo@codesake.com](mailto:paolo@codesake.com) sending a statement about your
+success story and I'll put on the website.
 
 Thank you.
 
@@ -302,20 +304,20 @@ Thank you.
 
 [Matteo](https://github.com/matteocollina): for ideas on API and their usage with [github.com](https://github.com) hooks
 
-## Contribute to Codesake::Dawn
+## Contribute to Dawn
 
-Are you interested in contributing to Codesake::Dawn project? Great, here is
+Are you interested in contributing to Dawn project? Great, here is
 some very basic rules in order to make rocking pull requests.
 
 First of all, I use the branching model described in [this
 post](http://nvie.com/posts/a-successful-git-branching-model/). There are two
 major branches:
 
-* master: it contains in every moment the code for the latest codesake-dawn
+* master: it contains in every moment the code for the latest dawnscanner
   released gem. You can't make branches from here unless you're working on a
   bugfix.
 * development: it contains the unstable code that is going to be the next
-  codesake-dawn realease. You start from here. Pick a task on the Roadmap.md
+  dawnscanner realease. You start from here. Pick a task on the Roadmap.md
   and create a separated branch to work on your feature to. When you're ready
   (remember to include also spec files), submit your pull request. If the code
   will be fine, it will be merged into the development tree ready to be include
@@ -326,7 +328,7 @@ In this case, the branch name must be something like _issue\_#xx\_description_
 
 ## LICENSE
 
-Copyright (c) 2013, 2014 Paolo Perego
+Copyright (c) 2013, 2014, 2015 Paolo Perego
 
 MIT License
 

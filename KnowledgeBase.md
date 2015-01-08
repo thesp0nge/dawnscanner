@@ -1,6 +1,6 @@
-# Codesake::Dawn Knowledge base
+# Dawn Knowledge base
 
-The knowledge base library for Codesake::Dawn version 1.2.0 contains 180 security checks.
+The knowledge base library for Dawn version 1.2.0 contains 180 security checks.
 ---
 * Simple Form XSS - 20131129: There is a XSS vulnerability on Simple Form's label, hint and error options. When Simple Form creates a label, hint or error message it marks the text as being HTML safe, even though it may contain HTML tags. In applications where the text of these helpers can be provided by the users, malicious values can be provided and Simple Form will mark it as safe.
 * [CVE-2004-0755](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0755): The FileStore capability in CGI::Session for Ruby before 1.8.1, and possibly PStore, creates files with insecure permissions, which can allow local users to steal session information and hijack sessions.

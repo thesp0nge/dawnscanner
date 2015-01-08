@@ -1,4 +1,5 @@
 .DS_Store
+.coveralls.yml
 *.log
 *.sw?
 *.gem

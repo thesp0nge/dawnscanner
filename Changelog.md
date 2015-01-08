@@ -1,16 +1,18 @@
-# Codesake Dawn - changelog
+# Dawn - changelog
 
-Codesake::Dawn is a static analysis security scanner for ruby written web applications.
+Dawn is a static analysis security scanner for ruby written web applications.
 It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Fri Jul 11 18:06:30 CEST 2014_
+_latest update: Thu Jan  8 17:19:37 CET 2015_
 
 ## Version 1.2.99 - codename: Lightning McQueen (2015-01-07)
 
 * Add a deprecation message. This is the last codesake-dawn release. New gem
   will be called dawnscanner.
+* gem name changed from codesake-dawn to dawnscanner. Binary program remains
+  'dawn' but the repository is moved here: https://github.com/thesp0nge/dawnscanner
 
 ## Version 1.2.0 - codename: Lightning McQueen (2014-07-14)
 
@@ -83,14 +85,14 @@ _latest update: Fri Jul 11 18:06:30 CEST 2014_
 * Added a check for CVE-2014-0080
 * Added a check for CVE-2014-2525
 * Added remaining compliance checks against Owasp Ruby on Rails cheatsheet.
-  Some other checks in the cheatsheet can't be turned into a Codesake::Dawn
+  Some other checks in the cheatsheet can't be turned into a Dawn
   test, so all the cheatsheet content is covered since now.
 * Added a --ascii-tabular-report (-a) to produce a report formatted with ascii
   tables. A bit of bin/dawn refactoring was necessary.
 * Added a --json (-j) to produce JSON reports
 * Added a --html (-h) to produce HTML reports
 * Added a --file (-F) flag to save report to supplied filename
-* Added Codesake::Dawn gem signature as described in
+* Added Dawn gem signature as described in
   http://guides.rubygems.org/security/. README is modified accordingly with new
   installation suggestions. Added also gem SHA512 checksum in repository.
 * Added a not_affected attribute to dependency check to flag as not vulnerable
@@ -103,7 +105,7 @@ _latest update: Fri Jul 11 18:06:30 CEST 2014_
   is provided as well. True to be told, there are some CVE valid but not found
   on NVID website, so having @rubysec link is even more accurate in those
   situations.
-* New Codesake::Dawn::Kb::VersionCheck class to provide version specific
+* New Dawn::Kb::VersionCheck class to provide version specific
   checks, supporting beta version number, release candidate and pre. Fully
   integrated with DepedencyCheck and RubyVersionCheck
 * Issue #34. I added a deprecation check. However I haven't found an official
@@ -113,7 +115,7 @@ _latest update: Fri Jul 11 18:06:30 CEST 2014_
   --list-knowledge-base that is just for listing.
 * Renamed '--list-knowledgebase' to '--list-knowledge-base' and '-k' short
   option was removed
-* Added a --list-known-families option printing out Codesake::Dawn supported
+* Added a --list-known-families option printing out Dawn supported
   check family name
 * Removed '-f' short option for list-known-framework
 * Added family and severity to Owasp RoR Cheatsheet files
@@ -129,7 +131,7 @@ _latest update: Fri Jul 11 18:06:30 CEST 2014_
   cheatsheet checks
 * Added --disable-owasp-top-10 flag to disable all Owasp Top 10 checks
 * Revamped help output
-* Added YAML Codesake::Dawn configuration support. Now you can specify your
+* Added YAML Dawn configuration support. Now you can specify your
   preferences in a .codesake-dawn.yaml file in your home directory (or you can
   use the --config-file option to specify the file you want to use). It returns
   an embedded default configuration if the supplied filename doesn't exist.
@@ -172,7 +174,7 @@ _latest update: Fri Jul 11 18:06:30 CEST 2014_
 
 * Fixing issue #27. With rainbow gem version 2.0.0 there is an exception while
   codesake-commons logging facilities tries to print something with the .color
-  method. Now Codesake::Dawn uses a new codesake-commons gem version that fixes
+  method. Now Dawn uses a new codesake-commons gem version that fixes
   how rainbow gem deals with colorized output.
 
 ## Version 1.0.1 - codename: Lightning McQueen (2014-01-25)

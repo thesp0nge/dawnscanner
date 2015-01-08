@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 
-describe "The Codesake::Dawn engine for padrino applications" do 
+describe "The Dawn engine for padrino applications" do 
   before(:all) do 
-    @engine = Codesake::Dawn::Padrino.new('./spec/support/hello_world_padrino')
+    @engine = Dawn::Padrino.new('./spec/support/hello_world_padrino')
   end
     
 
