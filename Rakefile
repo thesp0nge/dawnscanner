@@ -181,15 +181,15 @@ task :create do
 end
 end
 
-require 'digest/sha2'
+require 'digest/sha1'
 namespace :checksum do
 
 desc 'Calculate gem checksum'
 task :calculate do
   system 'mkdir -p checksum > /dev/null'
   built_gem_path = "pkg/dawnscanner-#{Dawn::VERSION}.gem"
-  checksum = Digest::SHA512.new.hexdigest(File.read(built_gem_path))
-  checksum_path = "checksum/dawnscanner-#{Dawn::VERSION}.gem.sha512"
+  checksum = Digest::SHA1.new.hexdigest(File.read(built_gem_path))
+  checksum_path = "checksum/dawnscanner-#{Dawn::VERSION}.gem.sha1"
   File.open(checksum_path, 'w' ) {|f| f.write(checksum) }
 
   puts "#{checksum_path}: #{checksum}"
@@ -197,7 +197,7 @@ end
 
 desc 'Add and commit latest checksum'
 task :commit do
-  checksum_path = "checksum/dawnscanner-#{Dawn::VERSION}.gem.sha512"
+  checksum_path = "checksum/dawnscanner-#{Dawn::VERSION}.gem.sha1"
   system "git add #{checksum_path}"
   system "git commit -v #{checksum_path} -m \"Adding #{Dawn::VERSION} checksum to repo\""
 end
