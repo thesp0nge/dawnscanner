@@ -23,7 +23,7 @@ box:
 
 ---
 
-Dawn version 1.2 has 180 security checks loaded in its knowledge
+Dawn version 1.3 has 180 security checks loaded in its knowledge
 base. Most of them are CVE bulletins applying to gems or the ruby interpreter
 itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
@@ -50,11 +50,11 @@ application.
 ## Installation
 
 dawnscanner rubygem is cryptographically signed. To be sure the gem you
-install hasn’t been tampered, you must first add ```paolo@codesake.com```
+install hasn’t been tampered, you must first add ```paolo@dawnscanner.org```
 public signing certificate as trusted to your gem specific keyring.
 
 ```
-$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/thesp0nge/dawn/master/certs/paolo_at_codesake_dot_com.pem)
+$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/thesp0nge/dawnscanner/master/certs/paolo_at_dawnscanner_dot_org.pem)
 ```
 
 You can install latest Dawn version, fetching it from
@@ -87,7 +87,7 @@ And then upgrade your bundle
 
 You may want to build it from source, so you have to check it out from github first:
 
-    $ git clone https://github.com/thesp0nge/dawn.git
+    $ git clone https://github.com/thesp0nge/dawnscanner.git
     $ cd dawn
     $ bundle install
     $ rake install
@@ -168,7 +168,7 @@ To include Dawn in your rake task list, you simply have to put this line in
 your ```Rakefile```
 
 ```
-require 'codesake/dawn/tasks'
+require 'dawn/tasks'
 ```
 
 Then executing ```$ rake -T``` you will have a ```dawn:run``` task you want to
@@ -274,7 +274,7 @@ Project homepage: [http://dawnscanner.org](http://dawnscanner.org)
 
 Twitter profile:  [@dawnscanner](https://twitter.com/dawnscanner)
 
-Github repository:   [https://github.com/thesp0nge/dawn](https://github.com/thesp0nge/dawn)
+Github repository:   [https://github.com/thesp0nge/dawnscanner](https://github.com/thesp0nge/dawnscanner)
 
 Mailing list: [https://groups.google.com/forum/#!forum/dawnscanner](https://groups.google.com/forum/#!forum/dawnscanner)
 
@@ -289,7 +289,7 @@ can put your reference here. Just open an
 how do you feel the tool and your company logo if any.
 
 More easily you can drop an email to
-[paolo@codesake.com](mailto:paolo@codesake.com) sending a statement about your
+[paolo@dawnscanner.org](mailto:paolo@dawnscanner.org) sending a statement about your
 success story and I'll put on the website.
 
 Thank you.

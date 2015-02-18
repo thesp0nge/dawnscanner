@@ -17,8 +17,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.cert_chain  = ['certs/paolo_at_codesake_dot_com.pem']
-  gem.signing_key = File.expand_path("~/.ssh/paolo_at_codesake_dot_com-private_key.pem") if $0 =~ /gem\z/
+  gem.cert_chain  = ['certs/paolo_at_dawnscanner_dot_org.pem']
+  gem.signing_key = File.expand_path("~/.ssh/paolo_at_dawnscanner_dot_org_private_key.pem") if $0 =~ /gem\z/
 
   gem.required_ruby_version = '>= 1.9.2'
 
