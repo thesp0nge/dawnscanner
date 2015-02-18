@@ -40,7 +40,7 @@ module Dawn
     end
 
     def html_report
-      html_head = "<!doctype html>\n<html>\n<head>\n<title>Codesake::Dawn report for #{File.basename(@engine.target)}</title>"
+      html_head = "<!doctype html>\n<html>\n<head>\n<title>Dawn report for #{File.basename(@engine.target)}</title>"
       html_head += "<script src=\"./support/bootstrap.js\"></script>\n"
       html_head += "<link href=\"./support/codesake.css\" media=\"all\" rel=\"stylesheet\" />\n"
       html_head += "<link href=\"./support/bootstrap.min.css\" media=\"all\" rel=\"stylesheet\" />\n"
@@ -54,21 +54,21 @@ module Dawn
       html_body += "<li class=\"\"><a href=\"https://dawn.codesake.com\">Home</a></li>\n"
       html_body += "<li class=\"active\"><a href=\"https://github.com/codesake/codesake-dawn\">Github repo</a></li>\n"
       html_body += "</ul>\n"
-      html_body += "<h3 class=\"muted\">Codesake::Dawn</h3>\n"
+      html_body += "<h3 class=\"muted\">Dawn</h3>\n"
       html_body += "</div>\n"
       html_body += "<h1>Security code review results for \"#{File.basename(@engine.target)}\"</h1>\n"
       html_body += "<hr />\n"
       html_body += "<h2>Scan detail</h2>\n"
       html_body += "<div class=\"row\">\n"
-      html_body += "<p>The scan was last executed #{@engine.scan_start.strftime("%d %b %Y - %T")} and Codesake::Dawn founds #{@engine.count_vulnerabilities} vulnerabilities</p>\n"
+      html_body += "<p>The scan was last executed #{@engine.scan_start.strftime("%d %b %Y - %T")} and Dawn founds #{@engine.count_vulnerabilities} vulnerabilities</p>\n"
       html_body += "</div>\n"
       html_body += "<hr />\n"
       html_body += "<h2>Scan details</h2>\n"
       html_body += "<table class=\"table-striped table-bordered table\">\n"
       html_body += "<thead><tr><td>Key</td><td>Value</td></tr></thead>\n"
       html_body += "<tbody>\n"
-      html_body += "<tr><td>Dawn version</td><td>#{Codesake::Dawn::VERSION}</td></tr>" unless Codesake::Dawn::RELEASE == "(development)\n"
-      html_body += "<tr><td>Dawn development version</td><td>#{Codesake::Dawn::VERSION}</td></tr>" if Codesake::Dawn::RELEASE == "(development)\n"
+      html_body += "<tr><td>Dawn version</td><td>#{Dawn::VERSION}</td></tr>" unless Codesake::Dawn::RELEASE == "(development)\n"
+      html_body += "<tr><td>Dawn development version</td><td>#{Dawn::VERSION}</td></tr>" if Codesake::Dawn::RELEASE == "(development)\n"
       html_body += "<tr><td>Scan duration</td><td>#{@engine.scan_time.round(3)} sec</td></tr>\n"
       html_body += "<tr><td>Target</td><td>#{@engine.target}</td></tr>\n"
       html_body += "<tr><td>MVC detected framework</td><td>#{@engine.name} v#{@engine.get_mvc_version}</td></tr>" unless @engine.name == "Gemfile.lock\n"
@@ -102,7 +102,7 @@ module Dawn
       html_body += "<div id=\"push\"></div>\n"
       html_body += "<div id=\"footer\">\n"
       html_body += "<div class=\"container\">\n"
-      html_body += "<p class=\"muted credit\">&copy; <a href=\"http://dawn.codesake.com\">Codesake::Dawn</a> &mdash; #{Time.now.strftime("%Y")} &mdash; engine v#{Codesake::Dawn::VERSION} (#{Codesake::Dawn::RELEASE})</p>\n"
+      html_body += "<p class=\"muted credit\">&copy; <a href=\"http://dawn.codesake.com\">Dawn</a> &mdash; #{Time.now.strftime("%Y")} &mdash; engine v#{Codesake::Dawn::VERSION} (#{Codesake::Dawn::RELEASE})</p>\n"
       html_body += "</div>\n"
       html_body += "</div>\n"
       html_body += "</div>\n"
@@ -122,8 +122,8 @@ module Dawn
 
       # 0_First table: executive summary
       rows = []
-      rows << ['Dawn version', Codesake::Dawn::VERSION] unless Codesake::Dawn::RELEASE == "(development)"
-      rows << ['Dawn development version', Codesake::Dawn::VERSION] if Codesake::Dawn::RELEASE == "(development)"
+      rows << ['Dawn version', Dawn::VERSION] unless Dawn::RELEASE == "(development)"
+      rows << ['Dawn development version', Dawn::VERSION] if Codesake::Dawn::RELEASE == "(development)"
       rows << ['Scan started', @engine.scan_start]
       rows << ['Scan duration', "#{@engine.scan_time.round(3)} sec"]
       rows << ['Target', @engine.target]
@@ -188,8 +188,8 @@ module Dawn
       return {:status=>"KO", :message=>"no security checks applied"}.to_json unless @ret
 
       result[:status]="OK"
-      result[:dawn_version] = Codesake::Dawn::VERSION
-      result[:dawn_status] = "Develoment version" if Codesake::Dawn::RELEASE == "(development)"
+      result[:dawn_version] = Dawn::VERSION
+      result[:dawn_status] = "Develoment version" if Dawn::RELEASE == "(development)"
       result[:scan_started] = @engine.scan_start
       result[:scan_duration] = "#{@engine.scan_time.round(3)} sec"
       result[:target]=@engine.target
