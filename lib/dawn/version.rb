@@ -21,6 +21,6 @@ module Dawn
   VERSION   = "1.3.1"
   CODENAME  = "Lightning McQueen"
   # RELEASE   = "(development)"
-  RELEASE   = "20150218"
+  RELEASE   = "20150219"
 
 end
