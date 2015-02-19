@@ -67,8 +67,8 @@ module Dawn
       html_body += "<table class=\"table-striped table-bordered table\">\n"
       html_body += "<thead><tr><td>Key</td><td>Value</td></tr></thead>\n"
       html_body += "<tbody>\n"
-      html_body += "<tr><td>Dawn version</td><td>#{Dawn::VERSION}</td></tr>" unless Codesake::Dawn::RELEASE == "(development)\n"
-      html_body += "<tr><td>Dawn development version</td><td>#{Dawn::VERSION}</td></tr>" if Codesake::Dawn::RELEASE == "(development)\n"
+      html_body += "<tr><td>Dawn version</td><td>#{Dawn::VERSION}</td></tr>" unless Dawn::RELEASE == "(development)\n"
+      html_body += "<tr><td>Dawn development version</td><td>#{Dawn::VERSION}</td></tr>" if Dawn::RELEASE == "(development)\n"
       html_body += "<tr><td>Scan duration</td><td>#{@engine.scan_time.round(3)} sec</td></tr>\n"
       html_body += "<tr><td>Target</td><td>#{@engine.target}</td></tr>\n"
       html_body += "<tr><td>MVC detected framework</td><td>#{@engine.name} v#{@engine.get_mvc_version}</td></tr>" unless @engine.name == "Gemfile.lock\n"
@@ -102,7 +102,7 @@ module Dawn
       html_body += "<div id=\"push\"></div>\n"
       html_body += "<div id=\"footer\">\n"
       html_body += "<div class=\"container\">\n"
-      html_body += "<p class=\"muted credit\">&copy; <a href=\"http://dawn.codesake.com\">Dawn</a> &mdash; #{Time.now.strftime("%Y")} &mdash; engine v#{Codesake::Dawn::VERSION} (#{Codesake::Dawn::RELEASE})</p>\n"
+      html_body += "<p class=\"muted credit\">&copy; <a href=\"http://dawn.codesake.com\">Dawn</a> &mdash; #{Time.now.strftime("%Y")} &mdash; engine v#{Dawn::VERSION} (#{Dawn::RELEASE})</p>\n"
       html_body += "</div>\n"
       html_body += "</div>\n"
       html_body += "</div>\n"
@@ -123,7 +123,7 @@ module Dawn
       # 0_First table: executive summary
       rows = []
       rows << ['Dawn version', Dawn::VERSION] unless Dawn::RELEASE == "(development)"
-      rows << ['Dawn development version', Dawn::VERSION] if Codesake::Dawn::RELEASE == "(development)"
+      rows << ['Dawn development version', Dawn::VERSION] if Dawn::RELEASE == "(development)"
       rows << ['Scan started', @engine.scan_start]
       rows << ['Scan duration', "#{@engine.scan_time.round(3)} sec"]
       rows << ['Target', @engine.target]

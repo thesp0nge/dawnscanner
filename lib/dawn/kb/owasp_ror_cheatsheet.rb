@@ -16,16 +16,16 @@ module Codesake
           super({
             :name=>"Owasp Ror Cheatsheet", 
             :applies=>["rails"],
-            :kind=>Codesake::Dawn::KnowledgeBase::COMBO_CHECK,
+            :kind=>Dawn::KnowledgeBase::COMBO_CHECK,
             :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
             :message=>message,
             :mitigation=>"Please refere to the Ruby on Rails cheatsheet available from owasp.org to mitigate this vulnerability",
             :checks=>[
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::Csrf.new,
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new, 
-              Codesake::Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders.new, 
+              Dawn::Kb::OwaspRorCheatSheet::CommandInjection.new,
+              Dawn::Kb::OwaspRorCheatSheet::Csrf.new,
+              Dawn::Kb::OwaspRorCheatSheet::SessionStoredInDatabase.new,
+              Dawn::Kb::OwaspRorCheatSheet::MassAssignmentInModel.new, 
+              Dawn::Kb::OwaspRorCheatSheet::SecurityRelatedHeaders.new, 
 
 
             ],

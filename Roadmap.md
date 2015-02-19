@@ -1,11 +1,11 @@
 # Codesake Dawn - roadmap
 
-Codesake::Dawn is a static analysis security scanner for ruby written web applications.
+Dawnscanner is a static analysis security scanner for ruby written web applications.
 It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-This is an ongoing roadmap for the Codesake::Dawn source code review tool.
+This is an ongoing roadmap for the Dawnscanner source code review tool.
 
 _latest update: Mon Mar 31 13:01:21 CEST 2014_
 
@@ -13,7 +13,7 @@ _latest update: Mon Mar 31 13:01:21 CEST 2014_
 
 * create a task to check for new CVE in NVD website
 * SQLite3 integration for saving data. Each project will have its own SQLite
-  database containing reviews, findings and all. A table with Codesake::Dawn version it
+  database containing reviews, findings and all. A table with Dawnscanner version it
   created the database will be inserted as well
 * add a language check. It will handle a ruby script as input and a
   ruby\_parser line as unsafe pattern. It will compile the ruby and look for
@@ -33,7 +33,7 @@ _latest update: Mon Mar 31 13:01:21 CEST 2014_
 * Cross Site Scripting detection: it must be done for all MVC frameworks
   (including Rack) and it must cover either reflected than stored attack
   patterns
-* Add a --github option to Codesake::Dawn to clone a remote repository, perform
+* Add a --github option to Dawnscanner to clone a remote repository, perform
   a bundle install and do a code review.
 * Add support for github hooks
 * Add premilinary SQL injection detection for Ruby on Rails
@@ -47,13 +47,13 @@ _latest update: Mon Mar 31 13:01:21 CEST 2014_
 
 # Spinoff projects
 
-Codesake::Dawn is a security scanner for ruby code. Modern web applications
+Dawnscanner is a security scanner for ruby code. Modern web applications
 however are wrote in a plenty of great technologies deserving a good tool for
 security scan.
 
 Node.js and Go are very promising programming languages and a tool similiar to
-Codesake::Dawn can be wrote also to support them:
+Dawnscanner can be wrote also to support them:
 
-Initially they were in the Codesake::Dawn roadmap for a 2.0.0 version. However
+Initially they were in the Dawnscanner roadmap for a 2.0.0 version. However
 we decide to drop this in the name of being focused on ruby programming
 language.

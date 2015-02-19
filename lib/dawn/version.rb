@@ -18,7 +18,7 @@ module Dawn
   # |   "Luigi"       |  7.0.0  |
   # | "Doc Hudson"    |  8.0.0  |
 
-  VERSION   = "1.3.0"
+  VERSION   = "1.3.1"
   CODENAME  = "Lightning McQueen"
   # RELEASE   = "(development)"
   RELEASE   = "20150218"

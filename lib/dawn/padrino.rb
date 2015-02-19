@@ -52,7 +52,7 @@ module Dawn
               end
 
               target = File.dirname(sinatra_app_rb )
-              apps << Codesake::Dawn::Sinatra.new(target, mp)
+              apps << Dawn::Sinatra.new(target, mp)
             end
           rescue Racc::ParseError => e
             debug_me(e.message)

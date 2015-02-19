@@ -73,7 +73,7 @@ module Dawn
 
       if $logger.nil?
         $logger  = Codesake::Commons::Logging.instance
-        $logger.helo "dawn-engine", Codesake::Dawn::VERSION
+        $logger.helo "dawn-engine", Dawn::VERSION
 
       end
       $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
@@ -161,10 +161,10 @@ module Dawn
     def load_knowledge_base(enabled_checks=[])
       debug_me("load_knowledge_base called. Enabled checks are: #{enabled_checks}")
       if @name == "Gemfile.lock"
-        @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all if @force.empty?
-        @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@force) unless @force.empty? 
+        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all if @force.empty?
+        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@force) unless @force.empty? 
       else
-        @checks = Codesake::Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@name) 
+        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@name) 
 
       end
       debug_me("#{@checks.count} checks loaded")
@@ -239,21 +239,21 @@ module Dawn
 
       @checks.each do |check|
         if check.name == name
-          unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @name == "Gemfile.lock")
+          unless ((check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Dawn::KnowledgeBase::COMBO_CHECK ) && @name == "Gemfile.lock")
             debug_me "applying check #{check.name}" 
             @applied_checks += 1
             @applied << { :name=>name }
             check.ruby_version = @ruby_version[:version]
-            check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
-            check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-            check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
-            check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            check.detected_ruby  = @ruby_version if check.kind == Dawn::KnowledgeBase::RUBY_VERSION_CHECK
+            check.dependencies = self.connected_gems if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK
+            check.root_dir = self.target if check.kind  == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
+            check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Dawn::KnowledgeBase::COMBO_CHECK
 
             check_vuln = check.vuln?
 
-            @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Dawn::KnowledgeBase::COMBO_CHECK
 
-            @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+            @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Dawn::KnowledgeBase::COMBO_CHECK
 
             @mitigated_issues << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
             return true
@@ -290,22 +290,22 @@ module Dawn
       end
 
       @checks.each do |check|
-        unless ((check.kind == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
+        unless ((check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
 
           @applied << { :name => name }
           debug_me "applying check #{check.name}" 
           @applied_checks += 1
 
           check.ruby_version = @ruby_version[:version]
-          check.detected_ruby  = @ruby_version if check.kind == Codesake::Dawn::KnowledgeBase::RUBY_VERSION_CHECK
-          check.dependencies = self.connected_gems if check.kind == Codesake::Dawn::KnowledgeBase::DEPENDENCY_CHECK
-          check.root_dir = self.target if check.kind  == Codesake::Dawn::KnowledgeBase::PATTERN_MATCH_CHECK 
-          check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+          check.detected_ruby  = @ruby_version if check.kind == Dawn::KnowledgeBase::RUBY_VERSION_CHECK
+          check.dependencies = self.connected_gems if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK
+          check.root_dir = self.target if check.kind  == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK 
+          check.options = {:detected_ruby => self.ruby_version, :dependencies => self.connected_gems, :root_dir => self.target } if check.kind == Dawn::KnowledgeBase::COMBO_CHECK
           check_vuln = check.vuln?
 
-          @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+          @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Dawn::KnowledgeBase::COMBO_CHECK
 
-          @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Codesake::Dawn::KnowledgeBase::COMBO_CHECK
+          @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Dawn::KnowledgeBase::COMBO_CHECK
 
           @mitigated_issues << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
         else
