@@ -25,6 +25,9 @@ _latest update: Tue Feb 24 08:02:56 CET 2015_
 * Issue #7: Improving HTML output and let the user the capability to provide a
   basic layout to customize report
 * adding test for CVE-2011-4969  XSS in jquery < 1.6.2
+* add source code metrics gathering (lines of code, lines of comments,
+  cyclomatic complexity index, ...)
+
 
 ## Version 1.5.0
 
@@ -47,6 +50,10 @@ _latest update: Tue Feb 24 08:02:56 CET 2015_
 * Add automatic mitigation patch generation
 * Add support for Javascript
 
+## Version 1.7.0
+
+* Add automatic mitigation patch generation
+
 # Spinoff projects
 
 Dawnscanner is a security scanner for ruby code. Modern web applications
@@ -59,3 +66,8 @@ Dawnscanner can be wrote also to support them:
 Initially they were in the Dawnscanner roadmap for a 2.0.0 version. However
 we decide to drop this in the name of being focused on ruby programming
 language.
+
+PHP has a good open source code scanners ecosystem, instead JAVA has not.
+Players started open and eventually they turned in big commercial bloatware
+GUIs that are useless from the security specialist perspective. A simple
+bytecode analyzer, with some checks, can be a possible spinoff project.
