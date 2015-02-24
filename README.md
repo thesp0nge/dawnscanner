@@ -88,7 +88,7 @@ And then upgrade your bundle
 You may want to build it from source, so you have to check it out from github first:
 
     $ git clone https://github.com/thesp0nge/dawnscanner.git
-    $ cd dawn
+    $ cd dawnscanner
     $ bundle install
     $ rake install
 
