@@ -24,6 +24,42 @@ task :test => :spec
 task :prepare => [:build, :'checksum:calculate', :'checksum:commit']
 task :release => [:prepare]
 
+namespace :version do
+  desc 'Calculate some infos you want to put in version.rb'
+  task :update do
+    build_number  = `git describe --tags --long | cut -d \'-\' -f 2`
+    commit_hash   = `git describe --tags --long | cut -d \'-\' -f 3`
+    release       = Time.now.strftime("%Y%m%d")
+    branch        = `git symbolic-ref HEAD 2> /dev/null`
+    branch_name   = branch.split('/')[2]
+    a=[]
+    File.open("VERSION", "r") do |f|
+      a = f.readlines
+    end
+    version = a[a.length - 1].split('-')[0]# .chomp
+    codename = a[a.length - 1].split('-')[1]
+
+    File.open("./lib/dawn/version.rb", "w") do |f|
+
+      f.puts("module Dawn")
+
+      if branch_name != "master"
+        av = version.split('.')
+        f.puts "    VERSION = \"#{av[0]}.#{av[1]}.#{commit_hash.chop}\""
+        f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
+        f.puts "    RELEASE = \"(development)\""
+      else
+        f.puts "    VERSION = \"#{version.rstrip!}\""
+        f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
+        f.puts "    RELEASE = \"#{release}\""
+      end
+      f.puts "    BUILD = \"#{build_number.chop}\""
+      f.puts "    COMMIT = \"#{commit_hash.chop}\""
+      f.puts "end"
+    end
+  end
+end
+
 # namespace :check do
 # desc "Create a dependency check"
 # task :dependency, :name do |t, args|
