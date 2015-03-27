@@ -12,6 +12,8 @@
             :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:N",
             :release_date => Date.new(2008, 3, 1),
             :cwe=>"",
+            :severity=>:high,
+            :priority=>:high,
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,

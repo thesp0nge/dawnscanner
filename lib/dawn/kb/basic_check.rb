@@ -171,11 +171,11 @@ module Dawn
             return "critical"
           when 7..9
             return "high"
-          when 4..6
+          when 4..7
             return "medium"
-          when 2..3
+          when 2..4
             return "low"
-          when 0..1
+          when 0..2
             return "info"
           else
             return "unknown"
@@ -220,7 +220,7 @@ module Dawn
         ret = []
         ret << :cve if self.cve.nil?
         ret << :osvdb if @osvdb.nil?
-        ret << :cvss if @cvss.nil?
+        ret << :cvss if self.cvss.nil? || self.cvss.empty? || self.cvss == "not assigned"
         ret << :severity if self.severity == "unknown"
         ret << :priority if self.priority == "unknown"
 

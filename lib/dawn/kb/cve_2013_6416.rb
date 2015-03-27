@@ -9,7 +9,7 @@
 
           super({
             :name=>"CVE-2013-6416",
-            :cvss=>"AV:N/AC:M/Au:N/C:N/I:P/A:N) ",
+            :cvss=>"AV:N/AC:M/Au:N/C:N/I:P/A:N",
             :release_date => Date.new(2013, 12, 7),
             :cwe=>"79",
             :owasp=>"A9", 

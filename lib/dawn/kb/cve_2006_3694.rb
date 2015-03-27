@@ -11,6 +11,8 @@
             :cvss=>"AV:N/AC:L/Au:N/C:P/I:P/A:N",
             :release_date => Date.new(2006, 7, 21),
             :cwe=>"",
+            :severity=>:medium,
+            :priority=>:medium,
             :owasp=>"A9", 
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Dawn::KnowledgeBase::RUBY_VERSION_CHECK,
