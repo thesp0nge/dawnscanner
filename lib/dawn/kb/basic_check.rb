@@ -151,6 +151,11 @@ module Dawn
         return "Unknown"
       end
 
+      def cve
+        return @cve unless @cve.nil?
+        return @name.gsub("CVE-", "") if @cve.nil? && @name.start_with?("CVE-")
+      end
+
       def priority
         return (@priority == :none)? "unknown" : @priority.to_s
       end
@@ -172,7 +177,7 @@ module Dawn
             return "low"
           when 0..1
             return "info"
-          else 
+          else
             return "unknown"
           end
         else
@@ -213,11 +218,11 @@ module Dawn
       # @return an Array with attributes with a nil value
       def lint
         ret = []
-        ret << :cve if @cve.nil?
+        ret << :cve if self.cve.nil?
         ret << :osvdb if @osvdb.nil?
         ret << :cvss if @cvss.nil?
-        ret << :severity if @severity == :none
-        ret << :priority if @priority == :none
+        ret << :severity if self.severity == "unknown"
+        ret << :priority if self.priority == "unknown"
 
         ret
       end
