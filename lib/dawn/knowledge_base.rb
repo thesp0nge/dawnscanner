@@ -228,6 +228,7 @@ require "dawn/kb/osvdb_108569"
 require "dawn/kb/osvdb_108570"
 require "dawn/kb/osvdb_108530"
 require "dawn/kb/osvdb_108563"
+require "dawn/kb/osvdb_119878"
 require "dawn/kb/osvdb_119927"
 
 
@@ -479,6 +480,7 @@ module Dawn
           Dawn::Kb::OSVDB_108570.new,
           Dawn::Kb::OSVDB_108530.new,
           Dawn::Kb::OSVDB_108563.new,
+          Dawn::Kb::OSVDB_119878.new,
           Dawn::Kb::OSVDB_119927.new,
       ]
         # END @cve_security_checks array

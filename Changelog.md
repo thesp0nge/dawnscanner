@@ -10,6 +10,7 @@ _latest update: Sat Apr  4 18:19:17 CEST 2015_
 ## Version 1.4.0 - codename: Tom Mater (2015-xx-xx)
 
 * Adding a check for OSVDB-119927: MITM attack for http gem (issue #131)
+* Adding a check for OSVDB-119878: Session Fixation for rest-client gem (issue #130)
 
 ## Version 1.3.1 - codename: Lightning McQueen (2015-02-19)
 
