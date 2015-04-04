@@ -5,9 +5,13 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Feb 24 08:00:25 CET 2015_
+_latest update: Sat Apr  4 18:19:17 CEST 2015_
 
-## Version 1.3.1 - codename: Lightning McQueen (2015-02-1r98)
+## Version 1.4.0 - codename: Tom Mater (2015-xx-xx)
+
+* Adding a check for OSVDB-119927: MITM attack for http gem (issue #131)
+
+## Version 1.3.1 - codename: Lightning McQueen (2015-02-19)
 
 * Fixed last namespace pollution errors. Codesake namespace went away (issue
   #101)
