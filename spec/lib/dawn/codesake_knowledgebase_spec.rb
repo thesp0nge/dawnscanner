@@ -957,4 +957,9 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Dawn::Kb::OSVDB_118579
   end
+  it "must have test for OSVDB_118830" do
+    sc = kb.find("OSVDB_118830")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_118830
+  end
 end

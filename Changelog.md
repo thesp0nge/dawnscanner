@@ -13,7 +13,7 @@ _latest update: Sat Apr  4 18:19:17 CEST 2015_
 * Adding a check for OSVDB-119878: Session Fixation for rest-client gem (issue #130)
 * Adding a check for OSVDB-118954: Denial of service for rails gem (issue #129)
 * Adding a check for OSVDB-118579: MySQL credentials disclosure due to a flaw
-  in execute() in xaviershay-dm-rails gem (issue #128)
+* Adding a check for OSVDB-118830: Sensitive information stored in production logs (issue #127)
 
 ## Version 1.3.1 - codename: Lightning McQueen (2015-02-19)
 
