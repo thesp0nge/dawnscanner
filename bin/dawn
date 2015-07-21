@@ -6,14 +6,18 @@ require 'terminal-table'
 
 require 'justify'
 
-require 'codesake-commons'
+# require 'codesake-commons'
 require 'dawnscanner'
 
 APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
-$logger  = Codesake::Commons::Logging.instance
+# $logger  = Codesake::Commons::Logging.instance
+require 'logger'
+$logger = Logger.new(STDOUT)
+$logger.datetime_format = "%H:%M:%S"
+
 opts    = GetoptLong.new(
   # report formatting options
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
@@ -144,7 +148,7 @@ end
 rescue GetoptLong::InvalidOption => e
 
   $logger.helo APPNAME, Dawn::VERSION
-  $logger.err e.message
+  $logger.error e.message
   Kernel.exit(Dawn::Core.help)
 end
 
@@ -155,7 +159,7 @@ trap("INT")   { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].empty?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].empty?  &&! Dawn::Core.is_good_target?(target)
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
-$logger.log("security check enabled: #{options[:enabled_checks]}") if options[:debug]
+$logger.debug("security check enabled: #{options[:enabled_checks]}") if options[:debug]
 
 
 ## MVC auto detect.
@@ -165,7 +169,7 @@ unless options[:gemfile_scan]
   begin
     if options[:mvc].empty?
       engine = Dawn::Core.detect_mvc(target)
-      $logger.log("using #{engine.class.name} engine via autodect") if options[:debug]
+      $logger.debug("using #{engine.class.name} engine via autodect") if options[:debug]
     else
       engine = Dawn::Rails.new(target)      if options[:mvc] == :rails
       engine = Dawn::Sinatra.new(target)    if options[:mvc] == :sinatra

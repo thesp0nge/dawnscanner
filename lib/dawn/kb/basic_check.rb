@@ -121,8 +121,18 @@ module Dawn
         @check_family = :cve if !options[:name].nil? && options[:name].start_with?('CVE-')
 
         if $logger.nil?
-          require 'codesake-commons'
-          $logger  = Codesake::Commons::Logging.instance
+          # This is the old codesake-commons logging.
+          #
+          # Starting from 20150720 we will use the standard library Logger
+          # class. This is mainly to remove codesake-commons dependency and to
+          # have a clean API
+          #
+          # require 'codesake-commons'
+          # $logger  = Codesake::Commons::Logging.instance
+          # $logger.helo "dawn-basic-check", Dawn::VERSION
+
+          require 'logger'
+          $logger = Logger.new(STDOUT)
           $logger.helo "dawn-basic-check", Dawn::VERSION
         end
       end

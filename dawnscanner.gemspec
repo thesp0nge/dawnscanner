@@ -21,7 +21,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.2'
 
-  gem.add_dependency "codesake-commons", "~> 1.0.0"
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
   gem.add_dependency 'parser'
@@ -31,6 +30,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'grit'
   gem.add_dependency 'terminal-table'
   gem.add_dependency 'justify'
+  gem.add_dependency 'logger-colors'
 
   gem.add_dependency ('coveralls')
 

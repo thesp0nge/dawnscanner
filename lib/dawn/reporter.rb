@@ -227,34 +227,34 @@ module Dawn
 
     def ascii_plain_report
 
-      $logger.log "scanning #{@engine.target}"
-      $logger.log "#{@engine.name} v#{@engine.get_mvc_version} detected" unless @engine.name == "Gemfile.lock"
-      $logger.log "#{@engine.force} v#{@engine.get_mvc_version} detected" if @engine.name == "Gemfile.lock"
-      $logger.log "applying all security checks"
+      $logger.info "scanning #{@engine.target}"
+      $logger.info "#{@engine.name} v#{@engine.get_mvc_version} detected" unless @engine.name == "Gemfile.lock"
+      $logger.info "#{@engine.force} v#{@engine.get_mvc_version} detected" if @engine.name == "Gemfile.lock"
+      $logger.info "applying all security checks"
       if @ret
-        $logger.log "#{@engine.applied_checks} security checks applied - #{@engine.skipped_checks} security checks skipped"
+        $logger.info "#{@engine.applied_checks} security checks applied - #{@engine.skipped_checks} security checks skipped"
       else
-        $logger.err "no security checks in the knowledge base"
+        $logger.error "no security checks in the knowledge base"
       end
 
       if @engine.count_vulnerabilities != 0
-        $logger.log "#{@engine.count_vulnerabilities} vulnerabilities found"
+        $logger.info "#{@engine.count_vulnerabilities} vulnerabilities found"
         @engine.vulnerabilities.each do |vuln|
-          $logger.err "#{vuln[:name]} check failed"
-          $logger.log "Severity: #{vuln[:severity]}"
-          $logger.log "Priority: #{vuln[:priority]}"
-          $logger.log "Description: #{vuln[:message]}"
-          $logger.log "Solution: #{vuln[:remediation]}"
-          $logger.log "Evidence:"
+          $logger.error "#{vuln[:name]} check failed"
+          $logger.info "Severity: #{vuln[:severity]}"
+          $logger.info "Priority: #{vuln[:priority]}"
+          $logger.info "Description: #{vuln[:message]}"
+          $logger.info "Solution: #{vuln[:remediation]}"
+          $logger.info "Evidence:"
           vuln[:evidences].each do |evidence|
-            $logger.log "\t#{evidence}"
+            $logger.info "\t#{evidence}"
           end
         end
         if @engine.has_reflected_xss?
-          $logger.log "#{@engine.reflected_xss.count} reflected XSS found"
+          $logger.info "#{@engine.reflected_xss.count} reflected XSS found"
           @engine.reflected_xss.each do |vuln|
-            $logger.log "request parameter \"#{vuln[:sink_source]}\" is used without escaping in #{vuln[:sink_view]}. It was read here: #{vuln[:sink_file]}@#{vuln[:sink_line]}"
-            $logger.err "evidence: #{vuln[:sink_evidence]}"
+            $logger.info "request parameter \"#{vuln[:sink_source]}\" is used without escaping in #{vuln[:sink_view]}. It was read here: #{vuln[:sink_file]}@#{vuln[:sink_line]}"
+            $logger.error "evidence: #{vuln[:sink_evidence]}"
           end
         end
 
@@ -263,11 +263,11 @@ module Dawn
       end
 
       if @engine.mitigated_issues.count != 0
-        $logger.log "#{@engine.mitigated_issues.count} mitigated vulnerabilities found"
+        $logger.info "#{@engine.mitigated_issues.count} mitigated vulnerabilities found"
         @engine.mitigated_issues.each do |vuln|
           $logger.ok "#{vuln[:name]} mitigated"
           vuln[:evidences].each do |evidence|
-            $logger.err evidence
+            $logger.error evidence
           end
         end
       end
