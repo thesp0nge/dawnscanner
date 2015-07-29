@@ -121,8 +121,18 @@ module Dawn
         @check_family = :cve if !options[:name].nil? && options[:name].start_with?('CVE-')
 
         if $logger.nil?
-          require 'codesake-commons'
-          $logger  = Codesake::Commons::Logging.instance
+          # This is the old codesake-commons logging.
+          #
+          # Starting from 20150720 we will use the standard library Logger
+          # class. This is mainly to remove codesake-commons dependency and to
+          # have a clean API
+          #
+          # require 'codesake-commons'
+          # $logger  = Codesake::Commons::Logging.instance
+          # $logger.helo "dawn-basic-check", Dawn::VERSION
+
+          require 'dawn/logger'
+          $logger = Logger.new(STDOUT)
           $logger.helo "dawn-basic-check", Dawn::VERSION
         end
       end
@@ -151,6 +161,11 @@ module Dawn
         return "Unknown"
       end
 
+      def cve
+        return @cve unless @cve.nil?
+        return @name.gsub("CVE-", "") if @cve.nil? && @name.start_with?("CVE-")
+      end
+
       def priority
         return (@priority == :none)? "unknown" : @priority.to_s
       end
@@ -166,13 +181,13 @@ module Dawn
             return "critical"
           when 7..9
             return "high"
-          when 4..6
+          when 4..7
             return "medium"
-          when 2..3
+          when 2..4
             return "low"
-          when 0..1
+          when 0..2
             return "info"
-          else 
+          else
             return "unknown"
           end
         else
@@ -213,11 +228,11 @@ module Dawn
       # @return an Array with attributes with a nil value
       def lint
         ret = []
-        ret << :cve if @cve.nil?
+        ret << :cve if self.cve.nil?
         ret << :osvdb if @osvdb.nil?
-        ret << :cvss if @cvss.nil?
-        ret << :severity if @severity == :none
-        ret << :priority if @priority == :none
+        ret << :cvss if self.cvss.nil? || self.cvss.empty? || self.cvss == "not assigned"
+        ret << :severity if self.severity == "unknown"
+        ret << :priority if self.priority == "unknown"
 
         ret
       end

@@ -5,9 +5,26 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Feb 24 08:00:25 CET 2015_
+_latest update: Sat Apr  4 18:19:17 CEST 2015_
 
-## Version 1.3.1 - codename: Lightning McQueen (2015-02-1r98)
+## Version 1.4.0 - codename: Tom Mater (2015-xx-xx)
+
+* Adding a check for CVE-2015-293: XSS in the paperclip gem (issue #139)
+* Adding a check for CVE-2015-1840: CSRF in jquery-rails and jquery-ujs gems.
+  Please note that this is the first (and I hope the only) dependency check
+  splitted in two parts. People from NVD assigned a single CVE to a
+  vulnerability affecting two related but different gems. (issue #135)
+* Adding a check for CVE-2015-3224: Whitelist bypass rack gem (issue #133)
+* Adding a check for CVE-2015-3225: DoS in rack gem (issue #136)
+* Adding a check for CVE-2015-3226: XSS in activesupport gem (issue #134)
+* Adding a check for CVE-2015-3227: DoS in activesupport gem (issue #137)
+* Adding a check for OSVDB-119927: MITM attack for http gem (issue #131)
+* Adding a check for OSVDB-119878: Session Fixation for rest-client gem (issue #130)
+* Adding a check for OSVDB-118954: Denial of service for rails gem (issue #129)
+* Adding a check for OSVDB-118579: MySQL credentials disclosure due to a flaw
+* Adding a check for OSVDB-118830: Sensitive information stored in production logs (issue #127)
+
+## Version 1.3.1 - codename: Lightning McQueen (2015-02-19)
 
 * Fixed last namespace pollution errors. Codesake namespace went away (issue
   #101)

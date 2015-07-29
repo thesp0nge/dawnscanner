@@ -910,31 +910,82 @@ describe "The Codesake Dawn knowledge base" do
   end
 
   it "must have test for OSVDB-108570" do
-      sc = kb.find("OSVDB-108570")
-        sc.should_not   be_nil
-          sc.class.should == Dawn::Kb::OSVDB_108570
+    sc = kb.find("OSVDB-108570")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_108570
   end
 
   it "must have test for OSVDB-108530" do
-      sc = kb.find("OSVDB-108530")
-        sc.should_not   be_nil
-          sc.class.should == Dawn::Kb::OSVDB_108530
+    sc = kb.find("OSVDB-108530")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_108530
   end
   it "must have test for OSVDB-108563" do
-      sc = kb.find("OSVDB-108563")
-        sc.should_not   be_nil
-          sc.class.should == Dawn::Kb::OSVDB_108563
+    sc = kb.find("OSVDB-108563")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_108563
   end
 
   it "must have test for CVE-2014-3482" do
-      sc = kb.find("CVE-2014-3482")
-        sc.should_not   be_nil
-          sc.class.should == Dawn::Kb::CVE_2014_3482
+    sc = kb.find("CVE-2014-3482")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_3482
   end
 
   it "must have test for CVE-2014-3483" do
-      sc = kb.find("CVE-2014-3483")
-        sc.should_not   be_nil
-          sc.class.should == Dawn::Kb::CVE_2014_3483
+    sc = kb.find("CVE-2014-3483")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_3483
   end
+  it "must have test for OSVDB_119927" do
+    sc = kb.find("OSVDB_119927")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_119927
+  end
+  it "must have test for OSVDB_119878" do
+    sc = kb.find("OSVDB_119878")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_119878
+  end
+  it "must have test for OSVDB_118954" do
+    sc = kb.find("OSVDB_118954")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_118954
+  end
+  it "must have test for OSVDB_118579" do
+    sc = kb.find("OSVDB_118579")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_118579
+  end
+  it "must have test for OSVDB_118830" do
+    sc = kb.find("OSVDB_118830")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::OSVDB_118830
+  end
+  it "must have test for CVE-2015-3224" do
+    sc = kb.find("CVE-2015-3224")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_3224
+  end
+  it "must have test for CVE-2015-3225" do
+    sc = kb.find("CVE-2015-3225")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_3225
+  end
+  it "must have test for CVE-2015-3227" do
+    sc = kb.find("CVE-2015-3227")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_3227
+  end
+  it "must have test for CVE-2015-3226" do
+    sc = kb.find("CVE-2015-3226")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_3226
+  end
+  it "must have test for CVE-2015-2963" do
+    sc = kb.find("CVE-2015-2963")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_2963
+  end
+  it "CVE-2015-1840 can't be tested. Trust me. It works"
 end

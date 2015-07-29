@@ -7,6 +7,7 @@ require "dawn/sinatra"
 require "dawn/padrino"
 require "dawn/gemfile_lock"
 require "dawn/reporter"
-require "codesake-commons"
+require "dawn/logger"
+# require "codesake-commons"
 
 require "date"

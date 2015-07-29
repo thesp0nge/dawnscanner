@@ -221,6 +221,21 @@ require "dawn/kb/cve_2014_2538"
 require "dawn/kb/cve_2014_3482"
 require "dawn/kb/cve_2014_3483"
 
+# CVE - 2015
+
+
+# CVE-2015-1840 is spread in two classes because a single CVE is assigned to a
+# vulnerability affecting two differents but related gems. An idiot hack to
+# mitigate an idiot decision.
+require "dawn/kb/cve_2015_1840/cve_2015_1840_a"
+require "dawn/kb/cve_2015_1840/cve_2015_1840_b"
+require "dawn/kb/cve_2015_2963"
+require "dawn/kb/cve_2015_3224"
+require "dawn/kb/cve_2015_3225"
+require "dawn/kb/cve_2015_3226"
+require "dawn/kb/cve_2015_3227"
+
+
 # OSVDB
 
 require "dawn/kb/osvdb_105971"
@@ -228,6 +243,12 @@ require "dawn/kb/osvdb_108569"
 require "dawn/kb/osvdb_108570"
 require "dawn/kb/osvdb_108530"
 require "dawn/kb/osvdb_108563"
+require "dawn/kb/osvdb_118579"
+require "dawn/kb/osvdb_118830"
+require "dawn/kb/osvdb_118954"
+require "dawn/kb/osvdb_119878"
+require "dawn/kb/osvdb_119927"
+
 
 
 module Dawn
@@ -470,6 +491,14 @@ module Dawn
           Dawn::Kb::CVE_2014_2538.new,
           Dawn::Kb::CVE_2014_3482.new,
           Dawn::Kb::CVE_2014_3483.new,
+          Dawn::Kb::CVE_2015_1840_a.new,
+          Dawn::Kb::CVE_2015_1840_b.new,
+          Dawn::Kb::CVE_2015_2963.new,
+          Dawn::Kb::CVE_2015_3224.new,
+          Dawn::Kb::CVE_2015_3225.new,
+          Dawn::Kb::CVE_2015_3226.new,
+          Dawn::Kb::CVE_2015_3227.new,
+
 
           # OSVDB Checks are still here since are all about dependencies
           Dawn::Kb::OSVDB_105971.new,
@@ -477,6 +506,11 @@ module Dawn
           Dawn::Kb::OSVDB_108570.new,
           Dawn::Kb::OSVDB_108530.new,
           Dawn::Kb::OSVDB_108563.new,
+          Dawn::Kb::OSVDB_118579.new,
+          Dawn::Kb::OSVDB_118830.new,
+          Dawn::Kb::OSVDB_118954.new,
+          Dawn::Kb::OSVDB_119878.new,
+          Dawn::Kb::OSVDB_119927.new,
       ]
         # END @cve_security_checks array
         # START @owasp_ror_cheatsheet_checks array

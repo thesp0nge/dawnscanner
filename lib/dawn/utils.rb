@@ -8,11 +8,11 @@ module Dawn
       __debug_me_and_return(msg, false)
     end
     def debug_me(msg)
-      $logger.log(msg) if @debug
+      $logger.debug(msg) if @debug
     end
 
     def __debug_me_and_return(msg, status)
-      $logger.log(msg) if @debug
+      $logger.debug(msg) if @debug
       return status
     end
   end
