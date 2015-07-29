@@ -31,7 +31,7 @@ namespace :version do
     commit_hash   = `git describe --tags --long | cut -d \'-\' -f 3`
     release       = Time.now.strftime("%Y%m%d")
     branch        = `git symbolic-ref HEAD 2> /dev/null`
-    branch_name   = branch.split('/')[2]
+    branch_name   = branch.split('/')[2].chomp
     a=[]
     File.open("VERSION", "r") do |f|
       a = f.readlines
@@ -43,12 +43,14 @@ namespace :version do
 
       f.puts("module Dawn")
 
+      puts "#{branch_name}|"
       if branch_name != "master"
         av = version.split('.')
         f.puts "    VERSION = \"#{av[0]}.#{av[1]}.#{commit_hash.chop}\""
         f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
         f.puts "    RELEASE = \"(development)\""
       else
+        puts "here"
         f.puts "    VERSION = \"#{version.rstrip!}\""
         f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
         f.puts "    RELEASE = \"#{release}\""

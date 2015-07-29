@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Sat Apr  4 18:19:17 CEST 2015_
+_latest update: Wed Jul 29 23:10:24 CEST 2015_
 
-## Version 1.4.0 - codename: Tom Mater (2015-xx-xx)
+## Version 1.3.5 - codename: Lightning McQueen (2015-07-29)
 
 * Adding a check for CVE-2015-293: XSS in the paperclip gem (issue #139)
 * Adding a check for CVE-2015-1840: CSRF in jquery-rails and jquery-ujs gems.

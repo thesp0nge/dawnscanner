@@ -23,7 +23,7 @@ box:
 
 ---
 
-Dawn version 1.3 has 180 security checks loaded in its knowledge
+Dawn version 1.3.5 has 192 security checks loaded in its knowledge
 base. Most of them are CVE bulletins applying to gems or the ruby interpreter
 itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
