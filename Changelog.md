@@ -9,6 +9,7 @@ _latest update: Sat Apr  4 18:19:17 CEST 2015_
 
 ## Version 1.4.0 - codename: Tom Mater (2015-xx-xx)
 
+* Adding a check for CVE-2015-3226: XSS in activesupport gem (issue #134)
 * Adding a check for CVE-2015-3227: DoS in activesupport gem (issue #137)
 * Adding a check for OSVDB-119927: MITM attack for http gem (issue #131)
 * Adding a check for OSVDB-119878: Session Fixation for rest-client gem (issue #130)
