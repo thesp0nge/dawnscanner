@@ -16,7 +16,7 @@ VALID_OUTPUT_FORMAT   = %w(console json csv html)
 # $logger  = Codesake::Commons::Logging.instance
 require 'logger'
 $logger = Logger.new(STDOUT)
-$logger.datetime_format = "%H:%M:%S"
+$logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 
 opts    = GetoptLong.new(
   # report formatting options
