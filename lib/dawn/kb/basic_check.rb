@@ -131,7 +131,7 @@ module Dawn
           # $logger  = Codesake::Commons::Logging.instance
           # $logger.helo "dawn-basic-check", Dawn::VERSION
 
-          require 'logger'
+          require 'dawn/logger'
           $logger = Logger.new(STDOUT)
           $logger.helo "dawn-basic-check", Dawn::VERSION
         end
