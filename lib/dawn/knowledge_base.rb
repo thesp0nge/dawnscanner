@@ -223,12 +223,13 @@ require "dawn/kb/cve_2014_3483"
 
 # CVE - 2015
 
+
 # CVE-2015-1840 is spread in two classes because a single CVE is assigned to a
 # vulnerability affecting two differents but related gems. An idiot hack to
 # mitigate an idiot decision.
 require "dawn/kb/cve_2015_1840/cve_2015_1840_a"
 require "dawn/kb/cve_2015_1840/cve_2015_1840_b"
-
+require "dawn/kb/cve_2015_2963"
 require "dawn/kb/cve_2015_3224"
 require "dawn/kb/cve_2015_3225"
 require "dawn/kb/cve_2015_3226"
@@ -492,6 +493,7 @@ module Dawn
           Dawn::Kb::CVE_2014_3483.new,
           Dawn::Kb::CVE_2015_1840_a.new,
           Dawn::Kb::CVE_2015_1840_b.new,
+          Dawn::Kb::CVE_2015_2963.new,
           Dawn::Kb::CVE_2015_3224.new,
           Dawn::Kb::CVE_2015_3225.new,
           Dawn::Kb::CVE_2015_3226.new,
