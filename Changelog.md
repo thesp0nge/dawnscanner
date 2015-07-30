@@ -7,6 +7,9 @@ frameworks.
 
 _latest update: Wed Jul 29 23:10:24 CEST 2015_
 
+* Adding a check for CVE-2015-3448: Information leakage in rest-client gem
+  (issue #125)
+
 ## Version 1.3.5 - codename: Lightning McQueen (2015-07-29)
 
 * Adding a check for CVE-2015-293: XSS in the paperclip gem (issue #139)
