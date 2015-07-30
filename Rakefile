@@ -261,24 +261,25 @@ namespace :kb do
     end
 
   end
-desc 'Creates a KnowledgeBase.md file'
-task :create do
-  checks = Dawn::KnowledgeBase.new.all
-  open("KnowledgeBase.md", "w") do |file|
-    file.puts "# Dawn Knowledge base"
-    file.puts "\nThe knowledge base library for Dawn version #{Dawn::VERSION} contains #{checks.count} security checks."
-    file.puts "---"
-    checks.each do |c|
-      file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
-      file.puts "* [#{c.name}](#{c.osvdb_link}): #{c.message}" if c.name.start_with?('OSVDB')
-      file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE')
+
+  desc 'Creates a KnowledgeBase.md file'
+  task :create do
+    checks = Dawn::KnowledgeBase.new.all
+    open("KnowledgeBase.md", "w") do |file|
+      file.puts "# Dawn Knowledge base"
+      file.puts "\nThe knowledge base library for Dawn version #{Dawn::VERSION} contains #{checks.count} security checks."
+      file.puts "---"
+      checks.each do |c|
+        file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
+        file.puts "* [#{c.name}](#{c.osvdb_link}): #{c.message}" if c.name.start_with?('OSVDB')
+        file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE')
+      end
+
+      file.puts "\n\n_Last updated: #{Time.now.strftime("%a %d %b %T %Z %Y")}_"
     end
+    puts "KnowledgeBase.md file successfully generated"
 
-    file.puts "\n\n_Last updated: #{Time.now.strftime("%a %d %b %T %Z %Y")}_"
   end
-  puts "KnowledgeBase.md file successfully generated"
-
-end
 end
 
 require 'digest/sha1'
@@ -325,7 +326,7 @@ namespace :rubysec do
         # CVE-2013-1878 is a duplicate of CVE-2013-2617 that is in knowledge base
         # CVE-2013-1876 is a duplicate of CVE-2013-2615 that is in knowledge base
         exclusion = ["CVE-2007-6183", "CVE-2013-1876", "CVE-2013-1878"]
-        if exclusion.include?(cve) 
+        if exclusion.include?(cve)
           puts "#{cve} is in the exclusion list"
         else
           found = Dawn::KnowledgeBase.find(nil, cve)
