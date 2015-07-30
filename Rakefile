@@ -19,7 +19,7 @@ RSpec::Core::RakeTask.new do |t|
 end
 
 
-task :default => [ :spec, :features, :kb ]
+task :default => [ :spec, :features, :'kb:create', :'kb:lint' ]
 task :test => :spec
 task :prepare => [:build, :'checksum:calculate', :'checksum:commit']
 task :release => [:prepare]
