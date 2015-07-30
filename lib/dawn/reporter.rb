@@ -30,7 +30,7 @@ module Dawn
         File.open(@filename, "w") do |f|
           f.puts output
         end
-        $logger.ok "#{@filename} created (#{output.length} bytes)"
+        $logger.info "#{@filename} created (#{output.length} bytes)"
       end
     end
     def is_valid_format?(format)
@@ -259,13 +259,13 @@ module Dawn
         end
 
       else
-        $logger.ok "no vulnerabilities found."
+        $logger.info "no vulnerabilities found."
       end
 
       if @engine.mitigated_issues.count != 0
         $logger.info "#{@engine.mitigated_issues.count} mitigated vulnerabilities found"
         @engine.mitigated_issues.each do |vuln|
-          $logger.ok "#{vuln[:name]} mitigated"
+          $logger.info "#{vuln[:name]} mitigated"
           vuln[:evidences].each do |evidence|
             $logger.error evidence
           end
