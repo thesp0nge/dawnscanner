@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Wed Jul 29 23:10:24 CEST 2015_
 
+* Adding a check for CVE-2014-7829: Directory traversal in several rails
+  versions
 * Adding a check for CVE-2014-8090: DoS in REXML parser in some ruby
   interpreter versions.
 * Adding a check for CVE-2012-6674: XSS in RedCloth gem (issue #143)
