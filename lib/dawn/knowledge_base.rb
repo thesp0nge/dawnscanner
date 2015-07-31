@@ -134,6 +134,7 @@ require "dawn/kb/cve_2012_6109"
 require "dawn/kb/cve_2012_6134"
 require "dawn/kb/cve_2012_6496"
 require "dawn/kb/cve_2012_6497"
+require "dawn/kb/cve_2012_6684"
 
 # CVE - 2013
 require "dawn/kb/cve_2013_0155"
@@ -412,6 +413,7 @@ module Dawn
           Dawn::Kb::CVE_2012_6134.new,
           Dawn::Kb::CVE_2012_6496.new,
           Dawn::Kb::CVE_2012_6497.new,
+          Dawn::Kb::CVE_2012_6684.new,
           Dawn::Kb::CVE_2013_0155.new,
           Dawn::Kb::CVE_2013_0156.new,
           Dawn::Kb::CVE_2013_0162.new,

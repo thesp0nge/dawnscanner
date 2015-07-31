@@ -7,6 +7,7 @@ frameworks.
 
 _latest update: Wed Jul 29 23:10:24 CEST 2015_
 
+* Adding a check for CVE-2012-6674: XSS in RedCloth gem (issue #143)
 * Adding a check for CVE-2014-9490: Denial of Service in raven-ruby gem (issue
   #124)
 * Adding a check for CVE-2015-3448: Information leakage in rest-client gem
