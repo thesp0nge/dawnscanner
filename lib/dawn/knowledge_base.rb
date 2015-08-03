@@ -221,6 +221,7 @@ require "dawn/kb/cve_2014_2525"
 require "dawn/kb/cve_2014_2538"
 require "dawn/kb/cve_2014_3482"
 require "dawn/kb/cve_2014_3483"
+require "dawn/kb/cve_2014_3916"
 require "dawn/kb/cve_2014_7829"
 require "dawn/kb/cve_2014_8090"
 require "dawn/kb/cve_2014_9490"
@@ -497,6 +498,7 @@ module Dawn
           Dawn::Kb::CVE_2014_2538.new,
           Dawn::Kb::CVE_2014_3482.new,
           Dawn::Kb::CVE_2014_3483.new,
+          Dawn::Kb::CVE_2014_3916.new,
           Dawn::Kb::CVE_2014_7829.new,
           Dawn::Kb::CVE_2014_8090.new,
           Dawn::Kb::CVE_2014_9490.new,

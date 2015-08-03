@@ -5,8 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Jul 29 23:10:24 CEST 2015_
+_latest update: Mon Aug  3 19:43:15 CEST 2015_
 
+* Adding a check for CVE-2014-3916: DoS in Ruby interpreter 1.9.x, 2.0.x, 2.1.x
 * Adding a check for CVE-2014-7829: Directory traversal in several rails
   versions
 * Adding a check for CVE-2014-8090: DoS in REXML parser in some ruby
