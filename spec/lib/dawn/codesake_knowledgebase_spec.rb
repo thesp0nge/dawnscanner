@@ -1019,4 +1019,9 @@ describe "The Codesake Dawn knowledge base" do
     sc.class.should == Dawn::Kb::CVE_2014_3916
   end
   it "not sure if it must have check for CVE-2014-3248. Too much gem involved in a single CVE only with ruby 1.9.1 and with social engineering required"
+  it "must have test for CVE-2014-4975" do
+    sc = kb.find("CVE-2014-4975")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_4975
+  end
 end
