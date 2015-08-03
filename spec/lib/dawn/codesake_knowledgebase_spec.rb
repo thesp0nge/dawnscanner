@@ -1018,4 +1018,5 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Dawn::Kb::CVE_2014_3916
   end
+  it "not sure if it must have check for CVE-2014-3248. Too much gem involved in a single CVE only with ruby 1.9.1 and with social engineering required"
 end
