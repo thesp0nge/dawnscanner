@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.cert_chain  = ['certs/paolo_at_dawnscanner_dot_org.pem']
   gem.signing_key = File.expand_path("~/.ssh/paolo_at_dawnscanner_dot_org_private_key.pem") if $0 =~ /gem\z/
 
-  gem.required_ruby_version = '>= 1.9.2'
+  gem.required_ruby_version = '>= 1.9.3'
 
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
