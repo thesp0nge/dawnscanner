@@ -1029,4 +1029,9 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Dawn::Kb::CVE_2014_7819
   end
+  it "must have test for CVE-2014-7818" do
+    sc = kb.find("CVE-2014-7818")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_7818
+  end
 end

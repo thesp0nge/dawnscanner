@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Mon Aug  3 19:59:54 CEST 2015_
 
+* Adding a check for CVE-2014-7818: Directory traversal in Action Pack
+  contained in Ruby on Rails before 3.2.20, 4.0.11, 4.1.7 and 4.2.0.beta3
 * Adding a check for CVE-2014-7819: Directory traversal in multiple sprocket
   versions.
 * Adding a check for CVE-2014-4975: DoS in Ruby interpreter 1.9.x, 2.0.x, 2.1.x
