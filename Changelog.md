@@ -5,7 +5,23 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Jul 29 23:10:24 CEST 2015_
+_latest update: Mon Aug  3 19:59:54 CEST 2015_
+
+* Adding a check for CVE-2014-7818: Directory traversal in Action Pack
+  contained in Ruby on Rails before 3.2.20, 4.0.11, 4.1.7 and 4.2.0.beta3
+* Adding a check for CVE-2014-7819: Directory traversal in multiple sprocket
+  versions.
+* Adding a check for CVE-2014-4975: DoS in Ruby interpreter 1.9.x, 2.0.x, 2.1.x
+* Adding a check for CVE-2014-3916: DoS in Ruby interpreter 1.9.x, 2.0.x, 2.1.x
+* Adding a check for CVE-2014-7829: Directory traversal in several rails
+  versions
+* Adding a check for CVE-2014-8090: DoS in REXML parser in some ruby
+  interpreter versions.
+* Adding a check for CVE-2012-6674: XSS in RedCloth gem (issue #143)
+* Adding a check for CVE-2014-9490: Denial of Service in raven-ruby gem (issue
+  #124)
+* Adding a check for CVE-2015-3448: Information leakage in rest-client gem
+  (issue #125)
 
 ## Version 1.3.5 - codename: Lightning McQueen (2015-07-29)
 

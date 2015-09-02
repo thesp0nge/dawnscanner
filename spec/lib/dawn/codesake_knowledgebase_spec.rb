@@ -988,4 +988,50 @@ describe "The Codesake Dawn knowledge base" do
     sc.class.should == Dawn::Kb::CVE_2015_2963
   end
   it "CVE-2015-1840 can't be tested. Trust me. It works"
+  it "must have test for CVE-2015-3448" do
+    sc = kb.find("CVE-2015-3448")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_3448
+  end
+  it "must have test for CVE-2014-9490" do
+    sc = kb.find("CVE-2014-9490")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_9490
+  end
+  it "must have test for CVE-2012-6684" do
+    sc = kb.find("CVE-2012-6684")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2012_6684
+  end
+  it "must have test for CVE-2014-8090" do
+    sc = kb.find("CVE-2014-8090")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_8090
+  end
+  it "must have test for CVE-2014-7829" do
+    sc = kb.find("CVE-2014-7829")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_7829
+  end
+  it "must have test for CVE-2014-3916" do
+    sc = kb.find("CVE-2014-3916")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_3916
+  end
+  it "not sure if it must have check for CVE-2014-3248. Too much gem involved in a single CVE only with ruby 1.9.1 and with social engineering required"
+  it "must have test for CVE-2014-4975" do
+    sc = kb.find("CVE-2014-4975")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_4975
+  end
+  it "must have test for CVE-2014-7819" do
+    sc = kb.find("CVE-2014-7819")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_7819
+  end
+  it "must have test for CVE-2014-7818" do
+    sc = kb.find("CVE-2014-7818")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2014_7818
+  end
 end

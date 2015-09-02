@@ -134,6 +134,7 @@ require "dawn/kb/cve_2012_6109"
 require "dawn/kb/cve_2012_6134"
 require "dawn/kb/cve_2012_6496"
 require "dawn/kb/cve_2012_6497"
+require "dawn/kb/cve_2012_6684"
 
 # CVE - 2013
 require "dawn/kb/cve_2013_0155"
@@ -220,6 +221,13 @@ require "dawn/kb/cve_2014_2525"
 require "dawn/kb/cve_2014_2538"
 require "dawn/kb/cve_2014_3482"
 require "dawn/kb/cve_2014_3483"
+require "dawn/kb/cve_2014_3916"
+require "dawn/kb/cve_2014_4975"
+require "dawn/kb/cve_2014_7818"
+require "dawn/kb/cve_2014_7819"
+require "dawn/kb/cve_2014_7829"
+require "dawn/kb/cve_2014_8090"
+require "dawn/kb/cve_2014_9490"
 
 # CVE - 2015
 
@@ -234,6 +242,7 @@ require "dawn/kb/cve_2015_3224"
 require "dawn/kb/cve_2015_3225"
 require "dawn/kb/cve_2015_3226"
 require "dawn/kb/cve_2015_3227"
+require "dawn/kb/cve_2015_3448"
 
 
 # OSVDB
@@ -410,6 +419,7 @@ module Dawn
           Dawn::Kb::CVE_2012_6134.new,
           Dawn::Kb::CVE_2012_6496.new,
           Dawn::Kb::CVE_2012_6497.new,
+          Dawn::Kb::CVE_2012_6684.new,
           Dawn::Kb::CVE_2013_0155.new,
           Dawn::Kb::CVE_2013_0156.new,
           Dawn::Kb::CVE_2013_0162.new,
@@ -491,6 +501,13 @@ module Dawn
           Dawn::Kb::CVE_2014_2538.new,
           Dawn::Kb::CVE_2014_3482.new,
           Dawn::Kb::CVE_2014_3483.new,
+          Dawn::Kb::CVE_2014_3916.new,
+          Dawn::Kb::CVE_2014_4975.new,
+          Dawn::Kb::CVE_2014_7818.new,
+          Dawn::Kb::CVE_2014_7819.new,
+          Dawn::Kb::CVE_2014_7829.new,
+          Dawn::Kb::CVE_2014_8090.new,
+          Dawn::Kb::CVE_2014_9490.new,
           Dawn::Kb::CVE_2015_1840_a.new,
           Dawn::Kb::CVE_2015_1840_b.new,
           Dawn::Kb::CVE_2015_2963.new,
@@ -498,6 +515,7 @@ module Dawn
           Dawn::Kb::CVE_2015_3225.new,
           Dawn::Kb::CVE_2015_3226.new,
           Dawn::Kb::CVE_2015_3227.new,
+          Dawn::Kb::CVE_2015_3448.new,
 
 
           # OSVDB Checks are still here since are all about dependencies

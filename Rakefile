@@ -116,8 +116,8 @@ task :cve, :name do |t,args|
   end
   puts "#{spec_filename} created"
 
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN lib/dawn/knowledge_base.rb in order to reflect changes"
+  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN ./spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
+  puts "*** PLEASE ADD THIS CODE IN ./lib/dawn/knowledge_base.rb in order to reflect changes"
   puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"
@@ -179,8 +179,8 @@ task :osvdb, :name do |t,args|
   puts "#{spec_filename} created"
 
 
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN lib/dawn/knowledge_base.rb in order to reflect changes"
+  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN ./spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
+  puts "*** PLEASE ADD THIS CODE IN ./lib/dawn/knowledge_base.rb in order to reflect changes"
   puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"
@@ -240,8 +240,8 @@ task :check, :name do |t,args|
   puts "#{spec_filename} created"
 
 
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN spec/lib/dawn/knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN lib/dawn/knowledge_base.rb in order to reflect changes"
+  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN ./spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
+  puts "*** PLEASE ADD THIS CODE IN ./lib/dawn/knowledge_base.rb in order to reflect changes"
   puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"

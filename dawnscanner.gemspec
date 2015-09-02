@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["paolo@dawnscanner.org"]
-  gem.description   = %q{Dawn is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 150 security checks with their own mitigation suggestion.}
-  gem.summary       = %q{Dawn is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
+  gem.description   = %q{Dawnscanner is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 150 security checks with their own mitigation suggestion.}
+  gem.summary       = %q{Dawnscanner is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
   gem.homepage      = "http://dawnscanner.org"
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -32,7 +32,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'justify'
   gem.add_dependency 'logger-colors'
 
-  gem.add_dependency ('coveralls')
+  gem.add_development_dependency ('coveralls')
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
