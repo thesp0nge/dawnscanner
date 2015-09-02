@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Mon Aug  3 19:59:54 CEST 2015_
 
+* Adding a check for CVE-2014-7819: Directory traversal in multiple sprocket
+  versions.
 * Adding a check for CVE-2014-4975: DoS in Ruby interpreter 1.9.x, 2.0.x, 2.1.x
 * Adding a check for CVE-2014-3916: DoS in Ruby interpreter 1.9.x, 2.0.x, 2.1.x
 * Adding a check for CVE-2014-7829: Directory traversal in several rails
