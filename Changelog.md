@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Wed Sep 16 18:20:21 CEST 2015_
 
+## Version 1.4.0 - codename: Tow Mater (2015-09-16)
+
 * Fixing issue #144. CVE-2013-4491 detected rails version 3.2.22 as vulnerable
   meanwhile it is not.
 * Adding a check for CVE-2014-7818: Directory traversal in Action Pack
