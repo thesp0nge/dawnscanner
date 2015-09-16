@@ -5,8 +5,10 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Mon Aug  3 19:59:54 CEST 2015_
+_latest update: Wed Sep 16 18:20:21 CEST 2015_
 
+* Fixing issue #144. CVE-2013-4491 detected rails version 3.2.22 as vulnerable
+  meanwhile it is not.
 * Adding a check for CVE-2014-7818: Directory traversal in Action Pack
   contained in Ruby on Rails before 3.2.20, 4.0.11, 4.1.7 and 4.2.0.beta3
 * Adding a check for CVE-2014-7819: Directory traversal in multiple sprocket

@@ -20,6 +20,7 @@
             :aux_links=>["https://groups.google.com/forum/message/raw?msg=ruby-security-ann/pLrh6DUw998/bLFEyIO4k_EJ"]
           })
 
+          self.save_major = true
           self.safe_dependencies = [{:name=>"rails", :version=>['3.2.16', '4.0.2', '3.1.9999', '3.0.9999']}]
 
 				end
