@@ -9,7 +9,7 @@ This is an ongoing roadmap for the Dawnscanner source code review tool.
 
 _latest update: Tue Feb 24 08:02:56 CET 2015_
 
-## Version 1.4.0
+## Version 1.5.0
 
 * clear Codesake:Commons dependency mess. This will dramatically simplify
   dawnscanner installation
@@ -29,7 +29,7 @@ _latest update: Tue Feb 24 08:02:56 CET 2015_
   cyclomatic complexity index, ...)
 
 
-## Version 1.5.0
+## Version 1.6.0
 
 * Add a ruby deprecation check, accordingly to
   https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
@@ -43,14 +43,14 @@ _latest update: Tue Feb 24 08:02:56 CET 2015_
 * Add support for github hooks
 * Add premilinary SQL injection detection for Ruby on Rails
 
-## Version 1.6.0
+## Version 1.7.0
 
 * Add insecure direct object reference detection for all MVC frameworks (including Rack)
 * SQL Injection detection: it must be done for all MVC frameworks (including Rack)
 * Add automatic mitigation patch generation
 * Add support for Javascript
 
-## Version 1.7.0
+## Version 1.8.0
 
 * Add automatic mitigation patch generation
 
