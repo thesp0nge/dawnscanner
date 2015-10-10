@@ -18,7 +18,7 @@ module Dawn
             :mitigation=>"Please upgrade activesupport gem to latest version or at least 4.1.12 or 4.2.3. This is automatically done by upgrading your Rails environment if you are using it.",
             :aux_links=>["https://groups.google.com/forum/message/raw?msg=rubyonrails-security/7VlB_pck3hU/3QZrGIaQW6cJ"]
            })
-
+          self.save_minor = true
           self.safe_dependencies = [{:name=>"activesupport", :version=>['4.1.12', '4.2.3', '3.99.99']}]
 
 				end
