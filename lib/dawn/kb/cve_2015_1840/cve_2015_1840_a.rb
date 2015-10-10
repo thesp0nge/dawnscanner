@@ -19,7 +19,7 @@ module Dawn
             :mitigation=>"Please upgrade jquery-ujs and jquery-rails gems to latest version.",
             :aux_links=>["https://github.com/rails/jquery-rails/blob/master/CHANGELOG.md", "https://github.com/rails/jquery-ujs/blob/master/CHANGELOG.md"]
            })
-
+          self.save_major = true
           self.safe_dependencies = [{:name=>"jquery-rails", :version=>['4.0.2', '3.1.3']}]
 
 				end
