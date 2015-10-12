@@ -16,6 +16,10 @@ describe "The CVE-2015-3225 vulnerability" do
     @check.dependencies = [{:name=>"rack", :version=>'1.5.4'}]
     @check.vuln?.should   == false
   end
+  it "is not reported when safe rack gem is used (1.5.5)" do
+    @check.dependencies = [{:name=>"rack", :version=>'1.5.5'}]
+    @check.vuln?.should   == false
+  end
   it "is not reported when safe rack gem is used (1.6.3)" do
     @check.dependencies = [{:name=>"rack", :version=>'1.6.3'}]
     @check.vuln?.should   == false

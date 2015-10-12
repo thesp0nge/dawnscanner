@@ -16,6 +16,10 @@ describe "The CVE-2015-3227 vulnerability" do
     @check.dependencies = [{:name=>"activesupport", :version=>'4.1.12'}]
     @check.vuln?.should   == false
   end
+  it "is not reported when safe active_support gem is used (4.1.13)" do
+    @check.dependencies = [{:name=>"activesupport", :version=>'4.1.13'}]
+    @check.vuln?.should   == false
+  end
   it "is not reported when safe active_support gem is used (4.2.3)" do
     @check.dependencies = [{:name=>"activesupport", :version=>'4.2.3'}]
     @check.vuln?.should   == false
