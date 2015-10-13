@@ -19,7 +19,7 @@ module Dawn
             :mitigation=>"Please upgrade rack gem to latest version or at least 1.5.4 or 1.6.2.",
             :aux_links=>["https://groups.google.com/forum/message/raw?msg=rubyonrails-security/gcUbICUmKMc/qiCotVZwXrMJ"]
            })
-
+          self.save_minor = true
           self.safe_dependencies = [{:name=>"rack", :version=>['1.5.4', '1.6.2']}]
 
 				end

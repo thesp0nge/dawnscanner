@@ -21,6 +21,10 @@ describe "The CVE-2015-1840 vulnerability" do
     @check_a.dependencies = [{:name=>"jquery-rails", :version=>'3.1.3'}]
     @check_a.vuln?.should   == false
   end
+  it "is reported when vulnerable jquery-rails gem is used (3.1.4)" do
+    @check_a.dependencies = [{:name=>"jquery-rails", :version=>'3.1.4'}]
+    @check_a.vuln?.should   == false
+  end
   it "is reported when vulnerable jquery-rails gem is used 4.0.2)" do
     @check_a.dependencies = [{:name=>"jquery-rails", :version=>'4.0.2'}]
     @check_a.vuln?.should   == false
