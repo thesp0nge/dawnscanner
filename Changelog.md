@@ -5,7 +5,11 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Sep 16 18:20:21 CEST 2015_
+_latest update: Tue Oct 13 09:53:14 CEST 2015_
+
+* Applying pull request #145. Thanks to @wmotti, a typo in CVE-2015-1840 has
+  been fixed and the following false positives have been fixed as well:
+  jquery-rails 3.1.4, rack 1.5.5, activesupport 4.1.13
 
 ## Version 1.4.0 - codename: Tow Mater (2015-09-16)
 
