@@ -5,7 +5,13 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Oct 13 09:53:14 CEST 2015_
+_latest update: Tue Oct 13 11:36:46 CEST 2015_
+
+## Version 1.4.2 - codename: Tow Mater (2015-10-13)
+
+* Applying pull request #140. Thanks to @j15e for fixing an issue with logger
+  method causing dawn to abort. Thank you also to Igor to prompt me about this
+  issue existing again.
 
 ## Version 1.4.1 - codename: Tow Mater (2015-10-13)
 
