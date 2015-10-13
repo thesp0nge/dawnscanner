@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Tue Oct 13 09:53:14 CEST 2015_
 
+## Version 1.4.1 - codename: Tow Mater (2015-10-13)
+
 * Applying pull request #145. Thanks to @wmotti, a typo in CVE-2015-1840 has
   been fixed and the following false positives have been fixed as well:
   jquery-rails 3.1.4, rack 1.5.5, activesupport 4.1.13
