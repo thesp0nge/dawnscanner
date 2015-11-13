@@ -7,10 +7,16 @@ frameworks.
 
 This is an ongoing roadmap for the Dawnscanner source code review tool.
 
-_latest update: Tue Feb 24 08:02:56 CET 2015_
+_latest update: Fri Nov 13 16:44:11 CET 2015_
 
 ## Version 1.5.0
 
+* separate dependencies check from model, view and controller analysis.
+* separate steps prints from results that must be saved on file.
+* add a '--ab-decision' flag. Can be a good idea to make dawnscanner able just
+  to say a quick "go/no go" for a release with a small json output like
+  {decision:"GO", vulns: 12, mean\_cvss: 3.2} or {decision:"NO GO", vulns: 9,
+  mean\_cvss:9.2}
 * clear Codesake:Commons dependency mess. This will dramatically simplify
   dawnscanner installation
 * Add a --github option to Dawnscanner to clone a remote repository, perform
@@ -27,7 +33,6 @@ _latest update: Tue Feb 24 08:02:56 CET 2015_
 * adding test for CVE-2011-4969  XSS in jquery < 1.6.2
 * add source code metrics gathering (lines of code, lines of comments,
   cyclomatic complexity index, ...)
-
 
 ## Version 1.6.0
 
@@ -54,20 +59,11 @@ _latest update: Tue Feb 24 08:02:56 CET 2015_
 
 * Add automatic mitigation patch generation
 
-# Spinoff projects
+## Version 2.x.x
 
-Dawnscanner is a security scanner for ruby code. Modern web applications
-however are wrote in a plenty of great technologies deserving a good tool for
-security scan.
-
-Node.js and Go are very promising programming languages and a tool similiar to
-Dawnscanner can be wrote also to support them:
-
-Initially they were in the Dawnscanner roadmap for a 2.0.0 version. However
-we decide to drop this in the name of being focused on ruby programming
-language.
-
-PHP has a good open source code scanners ecosystem, instead JAVA has not.
-Players started open and eventually they turned in big commercial bloatware
-GUIs that are useless from the security specialist perspective. A simple
-bytecode analyzer, with some checks, can be a possible spinoff project.
+* Add WordPress themes/plugin support
+* Add Joomla support
+* Add node.js support
+* Add Go support
+* Add Maven support
+* Add general PHP support
