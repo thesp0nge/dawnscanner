@@ -7,6 +7,8 @@ frameworks.
 
 This is an ongoing roadmap for the Dawnscanner source code review tool.
 
+The document is _dynamic_ and feature schedule may vary. If you do need a feature to be included sooner, please open an [issue on github](https://github.com/thesp0nge/dawnscanner/issues/new)
+
 _latest update: Fri Nov 13 16:44:11 CET 2015_
 
 ## Version 1.5.0
@@ -59,9 +61,16 @@ _latest update: Fri Nov 13 16:44:11 CET 2015_
 
 * Add automatic mitigation patch generation
 
-## Version 2.x.x
+## Version 2.x.x and later
 
+This section is the long term part of dawnscanner roadmap. It anticipates
+features they deserve maybe a major release update.
+
+
+* Add Lotus support
 * Add WordPress themes/plugin support
+* Add Opal support
+* Add Ember support
 * Add Joomla support
 * Add node.js support
 * Add Go support

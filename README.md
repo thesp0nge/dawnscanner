@@ -285,7 +285,7 @@ Feedbacks are great and we really love to hear your voice.
 If you're a proud dawnscanner user, if you find it useful, if you integrated
 it in your release process and if you want to openly support the project you
 can put your reference here. Just open an
-[issue](https://github.com/thesp0nge/dawn/issues/new) with a statement saying
+[issue](https://github.com/thesp0nge/dawnscanner/issues/new) with a statement saying
 how do you feel the tool and your company logo if any.
 
 More easily you can drop an email to
@@ -304,7 +304,7 @@ Thank you.
 
 [Matteo](https://github.com/matteocollina): for ideas on API and their usage with [github.com](https://github.com) hooks
 
-## Contribute to Dawn
+## Contribute to Dawnscanner
 
 Are you interested in contributing to Dawn project? Great, here is
 some very basic rules in order to make rocking pull requests.
@@ -328,7 +328,7 @@ In this case, the branch name must be something like _issue\_#xx\_description_
 
 ## LICENSE
 
-Copyright (c) 2013, 2014, 2015 Paolo Perego
+Copyright (c) 2013-2015 Paolo Perego <paolo@dawnscanner.org>
 
 MIT License
 
