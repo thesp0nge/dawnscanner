@@ -38,6 +38,11 @@ _latest update: Fri Nov 13 16:44:11 CET 2015_
 
 ## Version 1.6.0
 
+* Add a new way to handle KB. Like wpscan, the KB must be separated and
+  deployed using dawnscanner.org web site and a --update flag, people can use
+  to upgrade and have new checks. Of course, new checks would be also rely on
+  newer APIs, so a require dawnscanner info must be given and user forced also
+  to upgrade the tool. KB download must be digitally signed and encrypted.
 * Add a ruby deprecation check, accordingly to
   https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
 * Add preliminary Cross Site Scripting detection for Ruby on Rails.
