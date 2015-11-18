@@ -74,8 +74,8 @@ _latest update: Wed Nov 18 08:29:46 CET 2015_
 
 ## Version 2.5.0 (est. December 2016)
 
-* Issue #7: Improving HTML output and let the user the capability to provide a
-  basic layout to customize report
+* Improving HTML output and let the user the capability to provide a basic
+  layout to customize report
 * Add automatic mitigation patch generation for Ruby
 * Add node.js support
 * Add Opal support
