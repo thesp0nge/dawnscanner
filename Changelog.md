@@ -5,7 +5,41 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Oct 13 11:36:46 CEST 2015_
+_latest update: Wed Nov 18 16:27:06 CET 2015_
+
+  * Issue #149 - Improve dawn prints
+  * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
+  * Issue #147 - NVD/OSVDB task
+  * Issue #146 - Dependency check for installation troubles
+  * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
+  * Issue #130 - Adding a check for OSVDB 119878 : rest-client Gem for Ruby abstract_response.rb Redirection Response Set-Cookie Headers Handling Session Fixation
+  * Issue #129 - Adding a check for OSVDB 118954 : Ruby on Rails ActiveModel::Name to_json Call Infinite Loop Remote DoS
+  * Issue #126 - Adding a check for OSVDB 117903 : ruby-saml URI SAML Response Handling Remote Command Execution
+  * Issue #124 - Adding a check for OSVDB 115654 : Sentry raven-ruby lib/raven/okjson.rb Exponent / Scientific Notation Value Handling Resource Consumption DoS
+  * Issue #123 - Adding a check for OSVDB 116010 : Doorkeeper Gem for Ruby access_token Disclosure CSRF
+  * Issue #122 - Adding a check for OSVDB 116052 : Ruby on Rails Action Pack Gem ActionController::Parameters Unpermitted Hash Object Key Issue
+  * Issue #121 - Adding a check for OSVDB 116420 : Ruby on Rails Action View Gem number_to_percentage() Function NAN Handling Remote DoS
+  * Issue #120 - Adding a check for OSVDB 114817 : Ruby on Rails Action Pack Gem Unspecified Request Handling File Enumeration
+  * Issue #119 - Adding a check for OSVDB 114641 : Ruby lib/rexml/entity.rb NULL String Handling Recursive XML External Entity (XXE) Expansion Resource Consumption Remote DoS
+  * Issue #118 - Adding a check for OSVDB 113965 : Sprockets Gem for Ruby Unspecified Request Handling File Enumeration
+  * Issue #117 - Adding a check for OSVDB 113986 : Ruby on Rails Action Pack Gem Unspecified Request Handling File Enumeration
+  * Issue #116 - Adding a check for OSVDB 113747 : Ruby lib/rexml/entity.rb XML External Entity (XXE) Expansion Remote DoS
+  * Issue #115 - Adding a check for OSVDB 112346 : Web Console Gem for Ruby on Rails Unspecified Issue
+  * Issue #114 - Adding a check for OSVDB 112347 : Ruby on Rails Active Job Global ID String Argument Deserialization Unspecified Object Injection
+  * Issue #113 - Adding a check for OSVDB 112683 : as Gem for Ruby Process List Local Plaintext Credentials Disclosure
+  * Issue #112 - Adding a check for OSVDB 115891 : Active Resource (ARes) Gem for Ruby lib/active_resource/base.rb Thread Object Instantiation Unspecified Issue
+  * Issue #111 - Adding a check for OSVDB 110796 : FlavourSaver Gem for Ruby Kernel::send Method Template Helper Calling Remote Code Execution
+  * Issue #110 - Adding a check for OSVDB 108971 : Ruby pack.c encodes() Function Remote Stack Buffer Overflow
+  * Issue #109 - Adding a check for OSVDB 110439 : Dragonfly Gem for Ruby Image Uploading & Processing Remote Command Execution
+  * Issue #108 - Adding a check for OSVDB 110147 : Active Record Gem for Ruby create_with Method Strong Parameter Protection Bypass
+  * Issue #107 - Adding a check for OSVDB 110004 : Bundler Gem for Ruby Multiple Top-level Source Lines Gemfile Handling Gem Installation Spoofing
+  * Issue #106 - Adding a check for OSVDB 108899 : brbackup Gem for Ruby /lib/brbackup.rb name Parameter SQL Injection
+  * Issue #105 - Adding a check for OSVDB 108901 : brbackup Gem for Ruby Process List Local Plaintext Password Disclosure
+  * Issue #104 - Adding a check for OSVDB 108900 : brbackup Gem for Ruby dbuser Variable Shell Metacharacter Injection Remote Command Execution
+  * Issue #103 - Ruby pack.c encodes() Function Remote Stack Buffer Overflow
+  * Issue #96 - Sinatra apps without views: NoMethodError
+  * Issue #94 - dawn: Owasp Ror CheatSheet: Session management check failed
+  * Issue #92 - Fix CVE-2014-3483 incorrectly triggers for a Rails 3 app.
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 
