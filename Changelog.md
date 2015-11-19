@@ -47,6 +47,7 @@ _latest update: Wed Nov 18 16:27:06 CET 2015_
   detection will be automatic.
 * Marked --gem-lock flag as deprecated. The dependencies check now is done
   using --dependencies flag
+* Engine apply method it has been refactored to delete duplicated code
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 
