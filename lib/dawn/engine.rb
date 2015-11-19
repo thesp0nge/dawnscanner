@@ -205,7 +205,7 @@ module Dawn
     end
 
     def get_mvc_version
-      "#{@mvc_version}" if is_good_mvc? 
+      "#{@mvc_version}" if is_good_mvc?
     end
 
 
@@ -217,8 +217,8 @@ module Dawn
     # name - the security check to be applied
     #
     # Examples
-    #   
-    #   engine.apply("CVE-2013-1800") 
+    #
+    #   engine.apply("CVE-2013-1800")
     #   # => boolean
     #
     # Returns a true value if the security check was successfully applied or false
@@ -249,6 +249,7 @@ module Dawn
     def apply_all
       @scan_start = Time.now
       debug_me("SCAN STARTED: #{@scan_start}")
+
       # FIXME.20140325
       # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
       # Reason is simple, load_knowledge_base now needs enabled check array

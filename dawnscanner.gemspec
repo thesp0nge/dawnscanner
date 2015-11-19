@@ -23,17 +23,21 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
-  gem.add_dependency 'parser'
-  gem.add_dependency 'ptools'
   gem.add_dependency 'ruby_parser'
   gem.add_dependency 'sys-uname'
-  gem.add_dependency 'grit'
   gem.add_dependency 'terminal-table'
   gem.add_dependency 'justify'
   gem.add_dependency 'logger-colors'
 
-  gem.add_development_dependency ('coveralls')
+  # This gem is used to extract info from a git archives. This feature will be
+  # available in dawnscanner 2.0.0. Disabling the dependency right now.
+  # gem.add_dependency 'grit'
 
+  # Marked to be unused right now
+  # gem.add_dependency 'parser'
+  # gem.add_dependency 'ptools'
+
+  gem.add_development_dependency ('coveralls')
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency('tomdoc')

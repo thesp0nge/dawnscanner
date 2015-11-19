@@ -10,7 +10,6 @@ _latest update: Wed Nov 18 16:27:06 CET 2015_
 * Issue #149 - Improve dawn prints
 * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #147 - NVD/OSVDB task
-* Issue #146 - Dependency check for installation troubles
 * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
 * Issue #130 - Adding a check for OSVDB 119878 : rest-client Gem for Ruby abstract_response.rb Redirection Response Set-Cookie Headers Handling Session Fixation
 * Issue #129 - Adding a check for OSVDB 118954 : Ruby on Rails ActiveModel::Name to_json Call Infinite Loop Remote DoS
@@ -50,6 +49,10 @@ _latest update: Wed Nov 18 16:27:06 CET 2015_
 * Engine apply method it has been refactored to delete duplicated code
 * Engine \_do\_apply method it has been marked as private with some touch of
   refactoring
+* Issue #146 - Dependency check for installation troubles. Removed 'parser' and
+  'ptools' gem from Gemfile and commented out 'grit' until version 2.0.0.
+  Unfortunately I can't handle signed third party gems with an expired
+  certificate.
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 
