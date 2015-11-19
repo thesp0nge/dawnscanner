@@ -246,34 +246,6 @@ module Dawn
       false
     end
 
-    def _do_apply(check)
-      unless ((check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
-
-        @applied << { :name => name }
-        debug_me "applying check #{check.name}"
-        @applied_checks += 1
-
-        check.ruby_version  = @ruby_version[:version]
-        check.detected_ruby = @ruby_version                           if check.kind == Dawn::KnowledgeBase::RUBY_VERSION_CHECK
-        check.dependencies  = self.connected_gems                     if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK
-        check.root_dir      = self.target                             if check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
-        check.options       = {:detected_ruby => self.ruby_version,
-                               :dependencies => self.connected_gems,
-                               :root_dir => self.target }             if check.kind == Dawn::KnowledgeBase::COMBO_CHECK
-        check_vuln          = check.vuln?
-
-        @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check_vuln && check.kind !=  Dawn::KnowledgeBase::COMBO_CHECK
-
-        @vulnerabilities  << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>check.vulnerable_checks} if check_vuln && check.kind ==  Dawn::KnowledgeBase::COMBO_CHECK
-
-        @mitigated_issues << {:name=> check.name, :severity=>check.severity, :priority=>check.priority, :kind=>check.check_family, :message=>check.message, :remediation=>check.remediation, :evidences=>check.evidences, :vulnerable_checks=>nil} if check.mitigated?
-      else
-        debug_me "skipping check #{check.name}"
-        @skipped_checks += 1
-      end
-
-    end
-
     def apply_all
       @scan_start = Time.now
       debug_me("SCAN STARTED: #{@scan_start}")
@@ -342,7 +314,7 @@ module Dawn
     end
 
     def count_vulnerabilities
-      ret = 0 
+      ret = 0
       ret = @vulnerabilities.count unless @vulnerabilities.nil?
       ret +=  @reflected_xss.count unless @reflected_xss.nil?
 
@@ -359,6 +331,53 @@ module Dawn
       return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".ruby-version"))
       hash = File.read(File.join(@target, '.ruby-version')).split('-')
       return {:version=>hash[0], :patchlevel=>hash[1]}
+    end
+    def _do_apply(check)
+      unless ((check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
+
+        @applied << { :name => name }
+        debug_me "applying check #{check.name}"
+        @applied_checks += 1
+
+        check.ruby_version  = @ruby_version[:version]
+        check.detected_ruby = @ruby_version                           if check.kind == Dawn::KnowledgeBase::RUBY_VERSION_CHECK
+        check.dependencies  = self.connected_gems                     if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK
+        check.root_dir      = self.target                             if check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
+        check.options       = {:detected_ruby => self.ruby_version,
+                               :dependencies => self.connected_gems,
+                               :root_dir => self.target }             if check.kind == Dawn::KnowledgeBase::COMBO_CHECK
+        check_vuln          = check.vuln?
+
+        if check_vuln
+
+          vc = nil
+          vc = check.vulnerable_checks if check.kind == Dawn::KnowledgeBase::COMBO_CHECK
+
+          @vulnerabilities  << {:name=> check.name,
+                                :severity=>check.severity,
+                                :priority=>check.priority,
+                                :kind=>check.check_family,
+                                :message=>check.message,
+                                :remediation=>check.remediation,
+                                :evidences=>check.evidences,
+                                :vulnerable_checks=>vc}
+
+        end
+
+        @mitigated_issues << {:name=> check.name,
+                              :severity=>check.severity,
+                              :priority=>check.priority,
+                              :kind=>check.check_family,
+                              :message=>check.message,
+                              :remediation=>check.remediation,
+                              :evidences=>check.evidences,
+                              :vulnerable_checks=>nil} if check.mitigated?
+      else
+        debug_me "skipping check #{check.name}"
+        @skipped_checks += 1
+      end
+
+      true
     end
 
   end
