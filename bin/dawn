@@ -229,7 +229,7 @@ $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine
 engine.load_knowledge_base(options[:enabled_checks])
 ret = engine.apply_all
 
-if options[:output] == "count" 
+if options[:output] == "count"
   puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
   puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
   Kernel.exit(0)
