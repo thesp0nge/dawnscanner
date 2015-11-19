@@ -31,7 +31,11 @@ opts    = GetoptLong.new(
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
 
+  # Deprecated in 1.5.x
+  # To be removed in 2.0.0
   [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],
+  [ '--dependencies',           '-d',   GetoptLong::REQUIRED_ARGUMENT],
+
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
 
@@ -115,10 +119,18 @@ opts.each do |opt, val|
     options[:filename] = val
   when '--gem-lock'
     options[:gemfile_scan] = true
+    $logger.warn "--gem-lock flag it has been deprecated. It will be removed in version 2.0.0. Please use '--dependencies' instead"
     unless val.empty?
       options[:gemfile_name] = val
       guess = Dawn::Core.guess_mvc(val)
     end
+  when '--dependencies'
+    options[:gemfile_scan] = true
+    unless val.empty?
+      options[:gemfile_name] = val
+      guess = Dawn::Core.guess_mvc(val)
+    end
+
   when '--verbose'
     options[:verbose]=true
   when '--count-only'
