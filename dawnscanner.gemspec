@@ -28,6 +28,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'terminal-table'
   gem.add_dependency 'justify'
   gem.add_dependency 'logger-colors'
+  gem.add_dependency 'ptools'
 
   # This gem is used to extract info from a git archives. This feature will be
   # available in dawnscanner 2.0.0. Disabling the dependency right now.
@@ -35,7 +36,6 @@ Gem::Specification.new do |gem|
 
   # Marked to be unused right now
   # gem.add_dependency 'parser'
-  # gem.add_dependency 'ptools'
 
   gem.add_development_dependency ('coveralls')
   gem.add_development_dependency 'rake'
