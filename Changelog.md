@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Nov 18 16:27:06 CET 2015_
+_latest update: Tue Nov 24 08:39:41 CET 2015_
 
 * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #147 - NVD/OSVDB task
