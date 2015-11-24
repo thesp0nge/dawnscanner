@@ -7,7 +7,6 @@ frameworks.
 
 _latest update: Wed Nov 18 16:27:06 CET 2015_
 
-* Issue #149 - Improve dawn prints
 * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #147 - NVD/OSVDB task
 * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
@@ -53,6 +52,21 @@ _latest update: Wed Nov 18 16:27:06 CET 2015_
   'ptools' gem from Gemfile and commented out 'grit' until version 2.0.0.
   Unfortunately I can't handle signed third party gems with an expired
   certificate.
+* Ascii Table Reporting: now reports in ascii table are the default and now
+  tables are written in separated text files under a
+  dawnscanner/results/target/timestamp specific folder in $HOME directory.
+  Issue #149.
+* HTML Reporting: now reports are saved in their own folder (please, refere
+  yourself to Ascii Table point for folder naming convention) with their own JS
+  and CSS folder. This will lead customers to easy organize HTML output fitting
+  their needs. Issue #149
+* HTML Reporting: fixing up link and findings in report body. Issue #149
+* Reports: removed 'priority' from all reports. Pretty useless, it can be
+  removed in future release. Issue #149.
+* Added '--console' to ask report in ascii text, no tables. Before this release
+  this flag was useless since ascii text was the standard format. Issue #149.
+* Deprecated '--ascii-tabular-report'. It takes ages for writing... better
+  '--tabular'. Issue #149.
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 

@@ -67,12 +67,15 @@ module Dawn
       @ruby_version = get_ruby_version if dir.nil?
       @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
 
-      @views        = detect_views 
+      @views        = detect_views
       @controllers  = detect_controllers
       @models       = detect_models
 
+      @output_dir_name = output_dir
+
       if $logger.nil?
-        $logger  = Codesake::Commons::Logging.instance
+        require 'logger'
+        $logger = Logger.new(STDOUT)
         $logger.helo "dawn-engine", Dawn::VERSION
 
       end
@@ -85,7 +88,7 @@ module Dawn
         # impersonificate the engine for the mvc it was detected
         debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}" 
         $logger.err "there are no connected gems... it seems Gemfile.lock parsing failed" if options[:guessed_mvc][:connected_gems].empty?
-        @name = options[:guessed_mvc][:name] 
+        @name = options[:guessed_mvc][:name]
         @mvc_version = options[:guessed_mvc][:version]
         @connected_gems = options[:guessed_mvc][:connected_gems]
         @gemfile_lock_sudo = true
@@ -207,6 +210,39 @@ module Dawn
     def get_mvc_version
       "#{@mvc_version}" if is_good_mvc?
     end
+
+    ########################################################################
+    ## Output stuff - START
+    ########################################################################
+
+    # Creates the directory name where dawnscanner results will be saved
+    #
+    # Examples
+    #   engine.create_output_dir
+    #   # => /Users/thesp0nge/dawnscanner/results/railsgoat/20151123
+    #   # => /Users/thesp0nge/dawnscanner/results/railsgoat/20151123_1 (if
+    #               previous directory name exists)
+    def output_dir
+      @output_dir_name = File.join(Dir.home, 'dawnscanner', 'results', File.basename(@target), Time.now.strftime('%Y%m%d'))
+      if Dir.exist?(@output_dir_name)
+        i=1
+        while (Dir.exist?(@output_dir_name)) do
+          @output_dir_name = File.join(Dir.home, 'dawnscanner', 'results', File.basename(@target), "#{Time.now.strftime('%Y%m%d')}_#{i}")
+          i+=1
+        end
+      end
+      @output_dir_name
+    end
+
+    # Creates the directory
+    def create_output_dir
+      FileUtils.mkdir_p(@output_dir_name)
+      @output_dir_name
+    end
+
+    ########################################################################
+    ## Output stuff - END
+    ########################################################################
 
 
 
@@ -361,6 +397,8 @@ module Dawn
                                 :message=>check.message,
                                 :remediation=>check.remediation,
                                 :evidences=>check.evidences,
+                                :cve_link=>check.cve_link,
+                                :cvss_score=>check.cvss_score,
                                 :vulnerable_checks=>vc}
 
         end

@@ -20,9 +20,14 @@ $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 
 opts    = GetoptLong.new(
   # report formatting options
+
+  # Deprecated in 1.5.x
+  # To be removed in 2.0.0
   [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
+  [ '--tabular',                '-T',   GetoptLong::NO_ARGUMENT],
   [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
   [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
+  [ '--console',                '-K',   GetoptLong::NO_ARGUMENT],
 
   # MVC forcing
   # Deprecated in 1.5.x
@@ -105,7 +110,12 @@ opts.each do |opt, val|
     Kernel.exit(0)
   when '--json'
     options[:output] = "json"
+  when '--console'
+    options[:output] = "console"
+  when '--tabular'
+    options[:output] = "tabular"
   when '--ascii-tabular-report'
+    $logger.warn "--ascii-tabular-report' it has been deprecated. It will be removed in version 2.0.0. Please use '--tabular' instead"
     options[:output] = "tabular"
   when '--html'
     options[:output] = "html"

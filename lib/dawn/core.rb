@@ -19,8 +19,10 @@ module Dawn
       printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application (DEPRECATED)"
       printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock (DEPRECATED)"
       printf "\n   -d, --dependencies\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
-      printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using table in ascii art"
+      printf "\n\nReporting\n"
+      printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using tables in ascii art (DEPRECATED)"
       printf "\n   -j, --json\t\t\t\t\tcause dawn to format findings using json"
+      printf "\n   -K, --console\t\t\t\t\tcause dawn to format findings using plain ascii text"
       printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
       printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
       printf "\n   -F, --file filename\t\t\t\ttells dawn to write output to filename"
@@ -132,7 +134,7 @@ module Dawn
 
       # If create_if_none flag is set to true, than I'll create a config file
       # on the current directory with the default configuration.
-      conf = {"config"=>{:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}}
+      conf = {"config"=>{:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}}
 
       # Calculate the conf file path
       conf_path = File.expand_path('~') +'/.'+conf_name
@@ -146,7 +148,7 @@ module Dawn
     end
 
     def self.read_conf(file=nil)
-      conf = {:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
       begin
         return conf if file.nil?
         file = file.chop if (not file.nil? and file.end_with? '/')

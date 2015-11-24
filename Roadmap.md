@@ -71,11 +71,14 @@ _latest update: Wed Nov 18 08:29:46 CET 2015_
   to upgrade and have new checks. Of course, new checks would be also rely on
   newer APIs, so a require dawnscanner info must be given and user forced also
   to upgrade the tool. KB download must be digitally signed and encrypted.
+* Improving HTML output
+
+### Deprecates
+
+* BasicCheck.priority
 
 ## Version 2.5.0 (est. December 2016)
 
-* Improving HTML output and let the user the capability to provide a basic
-  layout to customize report
 * Add automatic mitigation patch generation for Ruby
 * Add node.js support
 * Add Opal support
