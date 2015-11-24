@@ -240,8 +240,10 @@ engine.load_knowledge_base(options[:enabled_checks])
 ret = engine.apply_all
 
 if options[:output] == "count"
-  puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
-  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
+  STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
+  STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"
+
+  $logger.bye
   Kernel.exit(0)
 end
 

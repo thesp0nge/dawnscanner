@@ -67,6 +67,8 @@ _latest update: Wed Nov 18 16:27:06 CET 2015_
   this flag was useless since ascii text was the standard format. Issue #149.
 * Deprecated '--ascii-tabular-report'. It takes ages for writing... better
   '--tabular'. Issue #149.
+* -C, vulnerability count: now output is written to STDERR and fixed an issue
+  causing output to be written always in JSON, even when not requested'
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 
