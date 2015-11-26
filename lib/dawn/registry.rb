@@ -11,6 +11,7 @@ module Dawn
     property :scan_duration,    Float
     property :scan_status,      Enum[ :completed, :failed ], :default=>:failed
     property :issues_found,     Integer
+    property :message,          String, :length=>255
 
 
     property :created_at, DateTime
@@ -27,6 +28,7 @@ module Dawn
       self.issues_found   = options[:issues_found]
       self.scan_started   = options[:scan_started]
       self.scan_duration  = options[:scan_duration]
+      self.message        = options[:message]
 
       save
     end

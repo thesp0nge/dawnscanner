@@ -164,7 +164,8 @@ opts.each do |opt, val|
   when '--list-scan-registry'
     puts "#{APPNAME} v#{Dawn::VERSION} scan registry\n\n"
     Dawn::Registry.all.each do |entry|
-      puts "#{entry.scan_started.strftime("[%Y-%m-%d %H:%M:%S]")}  #{entry.scan_status.upcase} -- : #{entry.target}: #{entry.issues_found} issues found - #{entry.output_dir}"
+      puts "#{entry.scan_started.strftime("[%Y-%m-%d %H:%M:%S]")}  #{entry.scan_status.upcase} -- : #{entry.target}: #{entry.issues_found} issues found - #{entry.output_dir}" if entry.scan_status == :completed
+      puts "#{entry.scan_started.strftime("[%Y-%m-%d %H:%M:%S]")}  #{entry.scan_status.upcase} -- : #{entry.target}: #{entry.message}" if entry.scan_status == :failed
     end
     Kernel.exit(0)
 
@@ -190,6 +191,7 @@ end
 target=ARGV.shift
 
 $logger.helo APPNAME, Dawn::VERSION
+r = Dawn::Registry.new
 
 unless Dir.exist?(Dawn::Core.registry_db_folder)
   FileUtils.mkdir_p(Dawn::Core.registry_db_folder)
@@ -224,6 +226,7 @@ unless options[:gemfile_scan]
       engine = Dawn::Padrino.new(target)    if options[:mvc] == :padrino
     end
   rescue ArgumentError => e
+    r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>e.message, :scan_status=>:failed})
     $logger.die(e.message)
   end
 else
@@ -233,6 +236,7 @@ end
 
 if engine.nil?
   $logger.error("MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues")
+  r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
   $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags")
 end
 ## end MVC auto detect.
@@ -240,6 +244,7 @@ end
 if options[:exit_on_warn]
   Kernel.at_exit do
     if engine.count_vulnerabilities != 0
+      r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
       Kernel.exit(engine.count_vulnerabilities)
     end
   end
@@ -250,13 +255,20 @@ if options[:debug]
   engine.debug = true
 end
 
-$logger.die "missing target framework option" if engine.nil?
 $logger.warn "this is a development Dawn version" if Dawn::RELEASE == "(development)"
-$logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
+
+if engine.nil?
+  r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>"missing target framework option", :scan_status=>:failed})
+  $logger.die "missing target framework option"
+end
+
+if ! options[:gemfile_scan] && ! engine.can_apply?
+  r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>"nothing to do on #{target}", :scan_status=>:failed})
+  $logger.die "nothing to do on #{target}"
+end
 
 engine.load_knowledge_base(options[:enabled_checks])
 ret = engine.apply_all
-r = Dawn::Registry.new
 
 if options[:output] == "count"
   STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
