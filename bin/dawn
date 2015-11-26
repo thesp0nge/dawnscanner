@@ -25,9 +25,7 @@ $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 opts    = GetoptLong.new(
   # report formatting options
 
-  # Deprecated in 1.5.x
-  # To be removed in 2.0.0
-  [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
+  [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
   [ '--tabular',                '-T',   GetoptLong::NO_ARGUMENT],
   [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
   [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
