@@ -6,7 +6,6 @@ require 'terminal-table'
 
 require 'justify'
 
-# require 'codesake-commons'
 require 'dawnscanner'
 
 APPNAME = File.basename($0)
