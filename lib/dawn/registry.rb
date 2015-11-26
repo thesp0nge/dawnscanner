@@ -32,6 +32,13 @@ module Dawn
 
       save
     end
+
+    def self.dump
+      all.each do |entry|
+        puts "#{entry.scan_started.strftime("[%Y-%m-%d %H:%M:%S]")}  #{entry.scan_status.upcase} -- : #{entry.target}: #{entry.issues_found} issues found - #{entry.output_dir}" if entry.scan_status == :completed
+        puts "#{entry.scan_started.strftime("[%Y-%m-%d %H:%M:%S]")}  #{entry.scan_status.upcase} -- : #{entry.target}: #{entry.message}" if entry.scan_status == :failed
+      end
+    end
   end
 end
 
