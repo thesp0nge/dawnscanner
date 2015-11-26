@@ -13,7 +13,12 @@ APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
-# $logger  = Codesake::Commons::Logging.instance
+# Datamapper stuff
+DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")
+DataMapper::Logger.new(Dawn::Core.sql_log_name, :debug)
+DataMapper.finalize
+DataMapper.auto_upgrade!
+
 require 'logger'
 $logger = Logger.new(STDOUT)
 $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
@@ -57,6 +62,7 @@ opts    = GetoptLong.new(
   [ '--list-knowledge-base',            GetoptLong::NO_ARGUMENT],
   [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
   [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
+  [ '--list-scan-registry',             GetoptLong::NO_ARGUMENT],
   # please save output to file
   [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
   # specify an alternate config file
@@ -155,6 +161,12 @@ opts.each do |opt, val|
     puts "#{val} found in knowledgebase." if found
     puts "#{val} not found in knowledgebase" if ! found
     Kernel.exit(0)
+  when '--list-scan-registry'
+    puts "#{APPNAME} v#{Dawn::VERSION} scan registry\n\n"
+    Dawn::Registry.all.each do |entry|
+      puts "#{entry.scan_started.strftime("[%Y-%m-%d %H:%M:%S]")}  #{entry.scan_status.upcase} -- : #{entry.target}: #{entry.issues_found} issues found - #{entry.output_dir}"
+    end
+    Kernel.exit(0)
 
   when '--list-knowledge-base'
     puts Dawn::Core.dump_knowledge_base(options[:verbose])
@@ -178,6 +190,12 @@ end
 target=ARGV.shift
 
 $logger.helo APPNAME, Dawn::VERSION
+
+unless Dir.exist?(Dawn::Core.registry_db_folder)
+  FileUtils.mkdir_p(Dawn::Core.registry_db_folder)
+  $logger.info "#{Dawn::Core.registry_db_folder} created" if Dir.exist?(Dawn::Core.registry_db_folder)
+end
+
 trap("INT") { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].empty?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].empty?  &&! Dawn::Core.is_good_target?(target)
@@ -238,14 +256,28 @@ $logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine
 
 engine.load_knowledge_base(options[:enabled_checks])
 ret = engine.apply_all
+r = Dawn::Registry.new
 
 if options[:output] == "count"
   STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
   STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"
 
+  r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
   $logger.bye
   Kernel.exit(0)
 end
 
 Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym, :filename=>options[:filename]}).report
+if (r.do_save({:target=>File.basename(engine.target),
+           :scan_started=>engine.scan_start,
+           :scan_duration => engine.scan_time.round(3),
+           :issues_found=>engine.vulnerabilities.count,
+           :output_dir=>engine.output_dir_name,
+           :scan_status=>:completed}))
+  $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
+else
+  r.errors.each do |error|
+    $logger.error error
+  end
+end
 $logger.bye

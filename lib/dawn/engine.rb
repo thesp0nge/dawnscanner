@@ -43,6 +43,7 @@ module Dawn
     attr_reader   :applied_checks
     attr_reader   :skipped_checks
 
+    attr_reader   :output_dir_name
     def initialize(dir=nil, name="", options={})
       @name = name
       @scan_start = Time.now

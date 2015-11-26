@@ -29,6 +29,19 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'justify'
   gem.add_dependency 'logger-colors'
   gem.add_dependency 'ptools'
+  gem.add_dependency 'sqlite3'
+  gem.add_dependency 'sqlite3'
+  gem.add_dependency 'dm-sqlite-adapter'
+  gem.add_dependency 'data_mapper'
+
+  # Dependencies for code stats
+  gem.add_dependency 'code_metrics'
+  gem.add_dependency 'metric_fu-Saikuro'
+  gem.add_dependency 'flay'
+  gem.add_dependency 'churn'
+  gem.add_dependency 'flog'
+  gem.add_dependency 'reek'
+  gem.add_dependency 'cane'
 
   # This gem is used to extract info from a git archives. This feature will be
   # available in dawnscanner 2.0.0. Disabling the dependency right now.

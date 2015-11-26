@@ -8,6 +8,9 @@ require "dawn/padrino"
 require "dawn/gemfile_lock"
 require "dawn/reporter"
 require "dawn/logger"
-# require "codesake-commons"
+
+# Datamapper classes
+require 'data_mapper'
+require "dawn/registry"
 
 require "date"

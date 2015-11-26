@@ -3,6 +3,16 @@ require "yaml"
 module Dawn
   class Core
 
+    def self.registry_db_folder
+      "#{File.join(Dir.home, 'dawnscanner', 'db')}"
+    end
+    def self.registry_db_name
+      "#{File.join(registry_db_folder, 'dawnscanner.db')}"
+    end
+    def self.sql_log_name
+      "#{File.join(registry_db_folder, 'dawnscanner-sql.log')}"
+    end
+
     # TODO.20140326
     # All those methods must moved from here to Util class and a
     # Dawn::Core namespace must be created.
@@ -38,6 +48,7 @@ module Dawn
       printf "\n       --list-knowledge-base\t\t\tlist knowledge-base content"
       printf "\n       --list-known-families\t\t\tlist security check families contained in dawn's knowledge base"
       printf "\n       --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
+      printf "\n       --list-scan-registry\t\t\tlist past scan informations stored in scan registry (#{Dawn::Core.registry_db_name})"
       printf "\n\nService flags\n"
       printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
       printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"

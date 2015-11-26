@@ -69,6 +69,9 @@ _latest update: Tue Nov 24 08:39:41 CET 2015_
   '--tabular'. Issue #149.
 * -C, vulnerability count: now output is written to STDERR and fixed an issue
   causing output to be written always in JSON, even when not requested'
+* Adding SQLite3 and Data Mapper dependencies
+* Created a scan registry stored in $HOME/dawnscanner/db directory
+* Added a '--list-scan-registry' flag to print all registry entries
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 
