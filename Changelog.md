@@ -72,6 +72,7 @@ _latest update: Tue Nov 24 08:39:41 CET 2015_
 * Adding SQLite3 and Data Mapper dependencies
 * Created a scan registry stored in $HOME/dawnscanner/db directory
 * Added a '--list-scan-registry' flag to print all registry entries
+* Changed config filename to dawnscanner.yaml
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 

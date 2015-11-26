@@ -125,7 +125,7 @@ module Dawn
     end
 
     def self.find_conf(create_if_none = false)
-      conf_name  = 'codesake-dawn.yaml'
+      conf_name  = 'dawnscanner.yaml'
       path_order = [
         './',
         '~/',
