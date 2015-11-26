@@ -38,9 +38,7 @@ opts    = GetoptLong.new(
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
 
-  # Deprecated in 1.5.x
-  # To be removed in 2.0.0
-  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],
+  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
   [ '--dependencies',           '-d',   GetoptLong::REQUIRED_ARGUMENT],
 
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
