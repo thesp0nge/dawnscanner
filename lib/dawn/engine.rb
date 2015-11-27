@@ -1,5 +1,3 @@
-require 'bundler'
-
 module Dawn
   module Engine
     include Dawn::Utils
@@ -44,6 +42,7 @@ module Dawn
     attr_reader   :skipped_checks
 
     attr_reader   :output_dir_name
+
     def initialize(dir=nil, name="", options={})
       @name = name
       @scan_start = Time.now
