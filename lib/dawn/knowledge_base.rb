@@ -558,6 +558,23 @@ module Dawn
 
           ret
     end
+
+    def self.dump(verbose=false)
+      puts "Security checks currently supported:"
+      i=0
+      self.new.all.each do |check|
+        i+=1
+        if verbose
+          puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
+          puts "Description\n#{check.message}"
+          puts "Remediation\n#{check.remediation}\n\n"
+        else
+          puts "#{check.name}"
+        end
+      end
+      puts "-----\nTotal: #{i}"
+
+    end
   end
 
 end

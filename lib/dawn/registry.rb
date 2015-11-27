@@ -3,15 +3,15 @@ module Dawn
     include DataMapper::Resource
     property :id, Serial
 
-    property :target,           String
+    property :target,           String, :default=>""
     property :registry_version, String, :default=>"0.5"
     property :dawn_version,     String, :default=>Dawn::VERSION
-    property :output_dir,       String, :length=>255
-    property :scan_started,     DateTime
-    property :scan_duration,    Float
+    property :output_dir,       String, :default=>"", :length=>255
+    property :scan_started,     DateTime, :default=>DateTime.now
+    property :scan_duration,    Float,  :default=>0
     property :scan_status,      Enum[ :completed, :failed ], :default=>:failed
-    property :issues_found,     Integer
-    property :message,          String, :length=>255
+    property :issues_found,     Integer,  :default=>-1
+    property :message,          String, :default=>"", :length=>255
 
 
     property :created_at, DateTime
@@ -41,5 +41,3 @@ module Dawn
     end
   end
 end
-
-# DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")

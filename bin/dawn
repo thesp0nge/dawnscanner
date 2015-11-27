@@ -3,7 +3,6 @@
 require 'getoptlong'
 require 'json'
 require 'terminal-table'
-
 require 'justify'
 
 require 'dawnscanner'
@@ -167,7 +166,7 @@ opts.each do |opt, val|
     Kernel.exit(0)
 
   when '--list-knowledge-base'
-    puts Dawn::Core.dump_knowledge_base(options[:verbose])
+    Dawn::KnowledgeBase.dump(options[:verbose])
     Kernel.exit(0)
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
@@ -236,7 +235,7 @@ end
 
 if engine.nil?
   $logger.error("MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues")
-  r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
+  r.do_save({:target=>File.basename(target), :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
   $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags")
 end
 ## end MVC auto detect.
@@ -258,12 +257,12 @@ end
 $logger.warn "this is a development Dawn version" if Dawn::RELEASE == "(development)"
 
 if engine.nil?
-  r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>"missing target framework option", :scan_status=>:failed})
+  r.do_save({:target=>File.basename(target), :message=>"missing target framework option", :scan_status=>:failed})
   $logger.die "missing target framework option"
 end
 
 if ! options[:gemfile_scan] && ! engine.can_apply?
-  r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>"nothing to do on #{target}", :scan_status=>:failed})
+  r.do_save({:target=>File.basename(target), :message=>"nothing to do on #{target}", :scan_status=>:failed})
   $logger.die "nothing to do on #{target}"
 end
 

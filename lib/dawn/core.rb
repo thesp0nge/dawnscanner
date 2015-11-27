@@ -58,26 +58,6 @@ module Dawn
       true
     end
 
-    def self.dump_knowledge_base(verbose = false)
-      kb = Dawn::KnowledgeBase.new
-      lines = []
-      lines << "Security checks currently supported:\n"
-
-      kb.all.each do |check|
-        if verbose
-          lines << "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
-          lines << "Description\n#{check.message}"
-          lines << "Remediation\n#{check.remediation}\n\n"
-        else
-          lines << "#{check.name}"
-        end
-      end
-      lines << "-----\nTotal: #{kb.all.count}"
-
-      lines.empty? ? 0 : lines.compact.join("\n")
-
-    end
-
     # guess_mvc is very close to detect_mvc despite it accepts a
     # filename as input and it tries to guess the mvc framework used from the
     # gems it founds in Gemfile.lock without creating an engine.
