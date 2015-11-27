@@ -272,7 +272,7 @@ namespace :kb do
       checks.each do |c|
         file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
         file.puts "* [#{c.name}](#{c.osvdb_link}): #{c.message}" if c.name.start_with?('OSVDB')
-        file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE')
+        file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE') && c.name.start_with('OSVDB')
       end
 
       file.puts "\n\n_Last updated: #{Time.now.strftime("%a %d %b %T %Z %Y")}_"
