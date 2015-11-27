@@ -78,6 +78,11 @@ options = Dawn::Core.read_conf(Dawn::Core.find_conf(true))
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
+###############################################################################
+# CLI argument start.
+#
+# Refactoring is necessary here
+###############################################################################
 begin
 opts.each do |opt, val|
   case opt
@@ -179,6 +184,9 @@ rescue GetoptLong::InvalidOption => e
   $logger.error e.message
   Kernel.exit(Dawn::Core.help)
 end
+###############################################################################
+# CLI argument stop
+###############################################################################
 
 target=ARGV.shift
 
