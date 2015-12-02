@@ -7,6 +7,7 @@ require "dawn/kb/operating_system_check"
 require "dawn/kb/combo_check"
 require "dawn/kb/version_check"
 require "dawn/kb/deprecation_check"
+require "dawn/kb/gem_check"
 
 # Q&A related checks
 ## Not revised code
@@ -243,6 +244,7 @@ require "dawn/kb/cve_2015_3225"
 require "dawn/kb/cve_2015_3226"
 require "dawn/kb/cve_2015_3227"
 require "dawn/kb/cve_2015_3448"
+require "dawn/kb/cve_2015_4020"
 
 
 # OSVDB
@@ -269,6 +271,7 @@ module Dawn
 
     include Dawn::Utils
 
+    GEM_CHECK           = :rubygem_check
     DEPENDENCY_CHECK    = :dependency_check
     PATTERN_MATCH_CHECK = :pattern_match_check
     RUBY_VERSION_CHECK  = :ruby_version_check
@@ -519,6 +522,7 @@ module Dawn
           Dawn::Kb::CVE_2015_3226.new,
           Dawn::Kb::CVE_2015_3227.new,
           Dawn::Kb::CVE_2015_3448.new,
+          Dawn::Kb::CVE_2015_4020.new,
 
 
           # OSVDB Checks are still here since are all about dependencies

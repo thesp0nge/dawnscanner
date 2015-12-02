@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Fri Nov 27 07:54:10 CET 2015_
+_latest update: Wed Dec  2 17:14:57 CET 2015_
 
 * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #147 - NVD/OSVDB task
@@ -41,6 +41,8 @@ _latest update: Fri Nov 27 07:54:10 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2016-01-xx)
 
+* Issue #163 - Adding a check for OSVDB 122162 : RubyGems remote_fetcher.rb api_endpoint() Function Missing SRV Record Hostname Validation Request Hijacking
+* Introduced a new core check Dawn::Kb::GemCheck for all checks related to RubyGems framework.
 * Issue #164 - Adding a check for OSVDB 121701 : open-uri-cached Gem for Ruby Unsafe Temporary File Creation Local Privilege Escalation
 * Issue #165 - Adding a check for OSVDB 120857 : refile Gem for Ruby remote_image_url Attachment Remote Command Execution
 * Issue #166 - Adding a check for OSVDB 120415 : redcarpet Gem for Ruby markdown.c parse_inline() Function XSS
