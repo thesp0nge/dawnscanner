@@ -254,6 +254,7 @@ require "dawn/kb/osvdb_108569"
 require "dawn/kb/osvdb_108570"
 require "dawn/kb/osvdb_108530"
 require "dawn/kb/osvdb_108563"
+require "dawn/kb/osvdb_117903"
 require "dawn/kb/osvdb_118579"
 require "dawn/kb/osvdb_118830"
 require "dawn/kb/osvdb_118954"
@@ -531,6 +532,7 @@ module Dawn
           Dawn::Kb::OSVDB_108570.new,
           Dawn::Kb::OSVDB_108530.new,
           Dawn::Kb::OSVDB_108563.new,
+          Dawn::Kb::OSVDB_117903.new,
           Dawn::Kb::OSVDB_118579.new,
           Dawn::Kb::OSVDB_118830.new,
           Dawn::Kb::OSVDB_118954.new,

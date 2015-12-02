@@ -12,7 +12,6 @@ _latest update: Wed Dec  2 18:45:33 CET 2015_
 * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
 * Issue #130 - Adding a check for OSVDB 119878 : rest-client Gem for Ruby abstract_response.rb Redirection Response Set-Cookie Headers Handling Session Fixation
 * Issue #129 - Adding a check for OSVDB 118954 : Ruby on Rails ActiveModel::Name to_json Call Infinite Loop Remote DoS
-* Issue #126 - Adding a check for OSVDB 117903 : ruby-saml URI SAML Response Handling Remote Command Execution
 * Issue #124 - Adding a check for OSVDB 115654 : Sentry raven-ruby lib/raven/okjson.rb Exponent / Scientific Notation Value Handling Resource Consumption DoS
 * Issue #123 - Adding a check for OSVDB 116010 : Doorkeeper Gem for Ruby access_token Disclosure CSRF
 * Issue #122 - Adding a check for OSVDB 116052 : Ruby on Rails Action Pack Gem ActionController::Parameters Unpermitted Hash Object Key Issue
@@ -41,6 +40,8 @@ _latest update: Wed Dec  2 18:45:33 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2016-01-xx)
 
+* Issue #126 - Adding a check for OSVDB 117903 : ruby-saml URI SAML Response
+  Handling Remote Command Execution
 * Issue #163 - Adding a check for OSVDB 122162 : RubyGems remote_fetcher.rb
   api_endpoint() Function Missing SRV Record Hostname Validation Request
   Hijacking
