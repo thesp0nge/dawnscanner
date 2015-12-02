@@ -1,11 +1,11 @@
-# Dawn - changelog
+# Dawnscanner - changelog
 
-Dawn is a static analysis security scanner for ruby written web applications.
+Dawnscanner is a static analysis security scanner for ruby written web applications.
 It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Dec  2 17:14:57 CET 2015_
+_latest update: Wed Dec  2 18:45:33 CET 2015_
 
 * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #147 - NVD/OSVDB task
@@ -41,11 +41,17 @@ _latest update: Wed Dec  2 17:14:57 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2016-01-xx)
 
-* Issue #163 - Adding a check for OSVDB 122162 : RubyGems remote_fetcher.rb api_endpoint() Function Missing SRV Record Hostname Validation Request Hijacking
-* Introduced a new core check Dawn::Kb::GemCheck for all checks related to RubyGems framework.
-* Issue #164 - Adding a check for OSVDB 121701 : open-uri-cached Gem for Ruby Unsafe Temporary File Creation Local Privilege Escalation
-* Issue #165 - Adding a check for OSVDB 120857 : refile Gem for Ruby remote_image_url Attachment Remote Command Execution
-* Issue #166 - Adding a check for OSVDB 120415 : redcarpet Gem for Ruby markdown.c parse_inline() Function XSS
+* Issue #163 - Adding a check for OSVDB 122162 : RubyGems remote_fetcher.rb
+  api_endpoint() Function Missing SRV Record Hostname Validation Request
+  Hijacking
+* Introduced a new core check Dawn::Kb::GemCheck for all checks related to
+  RubyGems framework.
+* Issue #164 - Adding a check for OSVDB 121701 : open-uri-cached Gem for Ruby
+  Unsafe Temporary File Creation Local Privilege Escalation
+* Issue #165 - Adding a check for OSVDB 120857 : refile Gem for Ruby
+  remote_image_url Attachment Remote Command Execution
+* Issue #166 - Adding a check for OSVDB 120415 : redcarpet Gem for Ruby
+  markdown.c parse_inline() Function XSS
 * Issue #161 - Mark as deprecated --rails, --padrino and --sinatra flags.  MVC
   detection will be automatic.
 * Marked --gem-lock flag as deprecated. The dependencies check now is done
@@ -125,10 +131,12 @@ _latest update: Wed Dec  2 17:14:57 CET 2015_
 * Adding a check for CVE-2015-3226: XSS in activesupport gem (issue #134)
 * Adding a check for CVE-2015-3227: DoS in activesupport gem (issue #137)
 * Adding a check for OSVDB-119927: MITM attack for http gem (issue #131)
-* Adding a check for OSVDB-119878: Session Fixation for rest-client gem (issue #130)
+* Adding a check for OSVDB-119878: Session Fixation for rest-client gem (issue
+  #130)
 * Adding a check for OSVDB-118954: Denial of service for rails gem (issue #129)
 * Adding a check for OSVDB-118579: MySQL credentials disclosure due to a flaw
-* Adding a check for OSVDB-118830: Sensitive information stored in production logs (issue #127)
+* Adding a check for OSVDB-118830: Sensitive information stored in production
+  logs (issue #127)
 
 ## Version 1.3.1 - codename: Lightning McQueen (2015-02-19)
 
@@ -144,7 +152,8 @@ _latest update: Wed Dec  2 17:14:57 CET 2015_
 * Add a deprecation message. This is the last codesake-dawn release. New gem
   will be called dawnscanner.
 * gem name changed from codesake-dawn to dawnscanner. Binary program remains
-  'dawn' but the repository is moved here: https://github.com/thesp0nge/dawnscanner
+  'dawn' but the repository is moved here:
+  https://github.com/thesp0nge/dawnscanner
 
 ## Version 1.2.0 - codename: Lightning McQueen (2014-07-14)
 
@@ -288,9 +297,13 @@ _latest update: Wed Dec  2 17:14:57 CET 2015_
   CVE-2014-0080 will be only available with dawn 1.1.
 
   Backported checks are:
-    + CVE-2014-1233: The paratrooper-pingdom gem 1.0.0 for Ruby allows local users to obtain the App-Key, username, and password values by listing the curl process.
-    + CVE-2014-1234: The paratrooper-newrelic gem 1.0.1 for Ruby allows local users to obtain the X-Api-Key value by listing the curl process.
-    + CVE-2014-0081: Multiple cross-site scripting (XSS) vulnerabilities in rails
+    + CVE-2014-1233: The paratrooper-pingdom gem 1.0.0 for Ruby allows local
+      users to obtain the App-Key, username, and password values by listing the
+      curl process.
+    + CVE-2014-1234: The paratrooper-newrelic gem 1.0.1 for Ruby allows local
+      users to obtain the X-Api-Key value by listing the curl process.
+    + CVE-2014-0081: Multiple cross-site scripting (XSS) vulnerabilities in
+      rails
     + CVE-2014-0082: Denial of service in Rails before 3.2.17
 
   New security checks are for Owasp ROR Cheatsheet:
