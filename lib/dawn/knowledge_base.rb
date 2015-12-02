@@ -257,6 +257,7 @@ require "dawn/kb/osvdb_118830"
 require "dawn/kb/osvdb_118954"
 require "dawn/kb/osvdb_119878"
 require "dawn/kb/osvdb_119927"
+require "dawn/kb/osvdb_120415"
 
 
 
@@ -529,6 +530,7 @@ module Dawn
           Dawn::Kb::OSVDB_118954.new,
           Dawn::Kb::OSVDB_119878.new,
           Dawn::Kb::OSVDB_119927.new,
+          Dawn::Kb::OSVDB_120415.new,
       ]
         # END @cve_security_checks array
         # START @owasp_ror_cheatsheet_checks array

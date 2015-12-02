@@ -41,6 +41,7 @@ _latest update: Fri Nov 27 07:54:10 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2016-01-xx)
 
+* Issue #166 - Adding a check for OSVDB 120415 : redcarpet Gem for Ruby markdown.c parse_inline() Function XSS
 * Isssue #161 - Mark as deprecated --rails, --padrino and --sinatra flags.  MVC
   detection will be automatic.
 * Marked --gem-lock flag as deprecated. The dependencies check now is done
@@ -74,6 +75,7 @@ _latest update: Fri Nov 27 07:54:10 CET 2015_
 * Added a '--list-scan-registry' flag to print all registry entries
 * Changed config filename to dawnscanner.yaml
 * Kb dump method moved from Dawn::Core to Dawn::KnowledgeBase
+* Added a title for checks, useful for quick reporting
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
 

@@ -1,3 +1,6 @@
+# Statistics stuff
+require 'code_metrics/statistics'
+
 module Dawn
   module Engine
     include Dawn::Utils
@@ -18,6 +21,7 @@ module Dawn
     attr_reader :ruby_version
 
     attr_reader :engine_error
+    attr_reader :stats
 
     attr_reader :reflected_xss
 
@@ -66,6 +70,8 @@ module Dawn
       set_target(dir) unless dir.nil?
       @ruby_version = get_ruby_version if dir.nil?
       @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
+
+      @stats        = gather_statistics
 
       @views        = detect_views
       @controllers  = detect_controllers
@@ -419,5 +425,11 @@ module Dawn
       true
     end
 
+    def gather_statistics
+      dirs = CodeMetrics::StatsDirectories.new
+      puts target
+      dirs.add_directories("#{target}/**/*.rb", "#{target}")
+      puts CodeMetrics::Statistics.new(*dirs).to_s
+    end
   end
 end

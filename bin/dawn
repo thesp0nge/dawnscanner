@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'bundler'
 require 'getoptlong'
 require 'json'
 require 'terminal-table'
