@@ -41,6 +41,7 @@ _latest update: Fri Nov 27 07:54:10 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2016-01-xx)
 
+* Issue #165 - Adding a check for OSVDB 120857 : refile Gem for Ruby remote_image_url Attachment Remote Command Execution
 * Issue #166 - Adding a check for OSVDB 120415 : redcarpet Gem for Ruby markdown.c parse_inline() Function XSS
 * Issue #161 - Mark as deprecated --rails, --padrino and --sinatra flags.  MVC
   detection will be automatic.

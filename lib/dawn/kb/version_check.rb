@@ -31,6 +31,8 @@ module Dawn
         debug_me "Safe versions array is #{@safe}"
         debug_me "Deprecated versions array is #{@deprecated}. I'll mark them as vulnerable" unless @deprecated.nil?
         debug_me "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable" unless @excluded.nil?
+        debug_me "SAVE_MINOR FLAG = #{@save_minor}"
+        debug_me "SAVE_MAJOR FLAG = #{@save_major}"
 
         @status = :deprecated if is_detected_deprecated?
         return debug_me_and_return_false("detected version #{detected} is marked to be excluded for vulnerable ones")   if is_detected_excluded?
