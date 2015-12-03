@@ -13,9 +13,6 @@ _latest update: Wed Dec  2 18:45:33 CET 2015_
 * Issue #130 - Adding a check for OSVDB 119878 : rest-client Gem for Ruby abstract_response.rb Redirection Response Set-Cookie Headers Handling Session Fixation
 * Issue #129 - Adding a check for OSVDB 118954 : Ruby on Rails ActiveModel::Name to_json Call Infinite Loop Remote DoS
 * Issue #123 - Adding a check for OSVDB 116010 : Doorkeeper Gem for Ruby access_token Disclosure CSRF
-* Issue #122 - Adding a check for OSVDB 116052 : Ruby on Rails Action Pack Gem ActionController::Parameters Unpermitted Hash Object Key Issue
-* Issue #121 - Adding a check for OSVDB 116420 : Ruby on Rails Action View Gem number_to_percentage() Function NAN Handling Remote DoS
-* Issue #120 - Adding a check for OSVDB 114817 : Ruby on Rails Action Pack Gem Unspecified Request Handling File Enumeration
 * Issue #119 - Adding a check for OSVDB 114641 : Ruby lib/rexml/entity.rb NULL String Handling Recursive XML External Entity (XXE) Expansion Resource Consumption Remote DoS
 * Issue #118 - Adding a check for OSVDB 113965 : Sprockets Gem for Ruby Unspecified Request Handling File Enumeration
 * Issue #117 - Adding a check for OSVDB 113986 : Ruby on Rails Action Pack Gem Unspecified Request Handling File Enumeration
