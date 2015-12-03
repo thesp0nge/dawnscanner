@@ -74,7 +74,6 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 * Added a title for checks, useful for quick reporting
 
 ## To be added in 1.5.5
-* Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
 * Issue #119 - Adding a check for OSVDB 114641 : Ruby lib/rexml/entity.rb NULL String Handling Recursive XML External Entity (XXE) Expansion Resource Consumption Remote DoS
 * Issue #118 - Adding a check for OSVDB 113965 : Sprockets Gem for Ruby Unspecified Request Handling File Enumeration
@@ -95,6 +94,8 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 * Issue #103 - Ruby pack.c encodes() Function Remote Stack Buffer Overflow
 * Issue #96 - Sinatra apps without views: NoMethodError
 
+## To be added in 2.0.0
+* Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
