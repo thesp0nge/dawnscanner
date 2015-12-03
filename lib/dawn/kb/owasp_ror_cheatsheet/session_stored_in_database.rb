@@ -15,7 +15,7 @@
               :glob=>"session_store.rb",
               :aux_links=>["https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet"],
               :message=>message,
-              :attack_pattern => ["Application.config.session_store :active_record_store"],
+              :attack_pattern => ["Application.config.session_store :active_record_store", "Rails.application.config.session_store ActionDispatch::Session::CacheStore"],
               :negative_search=>true,
               :avoid_comments=>true,
               :check_family=>:owasp_ror_cheatsheet,
