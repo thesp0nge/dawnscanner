@@ -12,10 +12,8 @@ require "dawn/kb/gem_check"
 # Q&A related checks
 ## Not revised code
 require "dawn/kb/not_revised_code"
-# require "dawn/kb/owasp_ror_cheatsheet"
 
 ## Owasp ROR Cheatsheet
-
 require 'dawn/kb/owasp_ror_cheatsheet/command_injection'
 require 'dawn/kb/owasp_ror_cheatsheet/csrf'
 require 'dawn/kb/owasp_ror_cheatsheet/session_stored_in_database'
