@@ -9,6 +9,7 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2015-12-xx)
 
+* Issue #92 - Fix CVE-2014-3483 incorrectly triggers for a Rails 3 app.
 * Issue #94 - dawn: Owasp Ror CheatSheet: Session management check failed
 * Adding a check for CVE-2015-1819 : DoS in libxml embedded in nokogiri
   versions prior to 1.6.6.4
@@ -93,7 +94,6 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 * Issue #104 - Adding a check for OSVDB 108900 : brbackup Gem for Ruby dbuser Variable Shell Metacharacter Injection Remote Command Execution
 * Issue #103 - Ruby pack.c encodes() Function Remote Stack Buffer Overflow
 * Issue #96 - Sinatra apps without views: NoMethodError
-* Issue #92 - Fix CVE-2014-3483 incorrectly triggers for a Rails 3 app.
 
 
 
