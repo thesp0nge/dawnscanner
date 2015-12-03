@@ -164,7 +164,9 @@ module Dawn
         dva = version_string_to_array(@detected)[:version]
         @safe.sort.each do |s|
           sva = version_string_to_array(s)[:version]
+          debug_me("#SVA=#{sva};DVA=#{dva};SM=#{is_same_major?(sva, dva)};sm=#{is_same_minor?(sva, dva)}; ( dva[2] >= sva[2] )=#{(dva[2] >= sva[2])}")
           return true if is_same_major?(sva, dva) && is_same_minor?(sva, dva) && dva[2] >= sva[2] && hm
+          return true if is_same_major?(sva, dva) && hm
         end
         return false
       end
