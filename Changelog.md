@@ -9,6 +9,9 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2015-12-xx)
 
+* Issue #130 - Adding a check for OSVDB 119878 : rest-client Gem for Ruby
+  abstract_response.rb Redirection Response Set-Cookie Headers Handling Session
+  Fixation
 * Issue #123 - Adding a check for OSVDB 116010 : Doorkeeper Gem for Ruby
   access_token Disclosure CSRF
 * Issue #124 - Adding a check for OSVDB 115654 : Sentry raven-ruby
@@ -65,7 +68,6 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 ## To be added in 1.5.5
 * Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
-* Issue #130 - Adding a check for OSVDB 119878 : rest-client Gem for Ruby abstract_response.rb Redirection Response Set-Cookie Headers Handling Session Fixation
 * Issue #129 - Adding a check for OSVDB 118954 : Ruby on Rails ActiveModel::Name to_json Call Infinite Loop Remote DoS
 * Issue #119 - Adding a check for OSVDB 114641 : Ruby lib/rexml/entity.rb NULL String Handling Recursive XML External Entity (XXE) Expansion Resource Consumption Remote DoS
 * Issue #118 - Adding a check for OSVDB 113965 : Sprockets Gem for Ruby Unspecified Request Handling File Enumeration
