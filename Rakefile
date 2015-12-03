@@ -280,8 +280,8 @@ namespace :kb do
   task :create do
     checks = Dawn::KnowledgeBase.new.all
     open("KnowledgeBase.md", "w") do |file|
-      file.puts "# Dawn Knowledge base"
-      file.puts "\nThe knowledge base library for Dawn version #{Dawn::VERSION} contains #{checks.count} security checks."
+      file.puts "# Dawnscanner Knowledge base"
+      file.puts "\nThe knowledge base library for dawnscanner version #{Dawn::VERSION} contains #{checks.count} security checks."
       file.puts "---"
       checks.each do |c|
         file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
