@@ -11,17 +11,19 @@ The document is _dynamic_ and feature schedule may vary. If you do need a
 feature to be included sooner, please open an [issue on
 github](https://github.com/thesp0nge/dawnscanner/issues/new)
 
-_latest update: Wed Nov 18 08:29:46 CET 2015_
+_latest update: Thu Dec  3 08:26:06 CET 2015_
 
 ## Version 1.5.0
 
-* clear Codesake:Commons dependency mess. This will dramatically simplify
-  dawnscanner installation
-* create a task to check for new CVE in NVD website
-* adding test for CVE-2011-4969  XSS in jquery < 1.6.2
 * close all issues on github marked for milestone 1.5.0
 * improve STDOUT prints: it must says the current stage and all findings or
   warnings must be on STDERR instead.
+
+## Version 1.5.5 (est. Jan 2016)
+
+* adding test for CVE-2011-4969  XSS in jquery < 1.6.2
+* close all issues on github marked for milestone 1.5.5
+
 
 ## Version 2.0.0 (est. June 2016)
 
@@ -72,6 +74,12 @@ _latest update: Wed Nov 18 08:29:46 CET 2015_
   newer APIs, so a require dawnscanner info must be given and user forced also
   to upgrade the tool. KB download must be digitally signed and encrypted.
 * Improving HTML output
+
+### New Knowledge Base
+
+* Issue #147 : In the KB revamp, a task to automate security issues search
+  either in CVE archive than OSVDB or Ruby related mailing lists, it must be
+  created.
 
 ### Deprecates
 
