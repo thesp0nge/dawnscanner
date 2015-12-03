@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Thu Dec  3 08:32:31 CET 2015_
+_latest update: Thu Dec  3 18:29:33 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2015-12-xx)
 
@@ -73,29 +73,7 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 * Kb dump method moved from Dawn::Core to Dawn::KnowledgeBase
 * Added a title for checks, useful for quick reporting
 
-## To be added in 1.5.5
-* Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
-* Issue #119 - Adding a check for OSVDB 114641 : Ruby lib/rexml/entity.rb NULL String Handling Recursive XML External Entity (XXE) Expansion Resource Consumption Remote DoS
-* Issue #118 - Adding a check for OSVDB 113965 : Sprockets Gem for Ruby Unspecified Request Handling File Enumeration
-* Issue #117 - Adding a check for OSVDB 113986 : Ruby on Rails Action Pack Gem Unspecified Request Handling File Enumeration
-* Issue #116 - Adding a check for OSVDB 113747 : Ruby lib/rexml/entity.rb XML External Entity (XXE) Expansion Remote DoS
-* Issue #115 - Adding a check for OSVDB 112346 : Web Console Gem for Ruby on Rails Unspecified Issue
-* Issue #114 - Adding a check for OSVDB 112347 : Ruby on Rails Active Job Global ID String Argument Deserialization Unspecified Object Injection
-* Issue #113 - Adding a check for OSVDB 112683 : as Gem for Ruby Process List Local Plaintext Credentials Disclosure
-* Issue #112 - Adding a check for OSVDB 115891 : Active Resource (ARes) Gem for Ruby lib/active_resource/base.rb Thread Object Instantiation Unspecified Issue
-* Issue #111 - Adding a check for OSVDB 110796 : FlavourSaver Gem for Ruby Kernel::send Method Template Helper Calling Remote Code Execution
-* Issue #110 - Adding a check for OSVDB 108971 : Ruby pack.c encodes() Function Remote Stack Buffer Overflow
-* Issue #109 - Adding a check for OSVDB 110439 : Dragonfly Gem for Ruby Image Uploading & Processing Remote Command Execution
-* Issue #108 - Adding a check for OSVDB 110147 : Active Record Gem for Ruby create_with Method Strong Parameter Protection Bypass
-* Issue #107 - Adding a check for OSVDB 110004 : Bundler Gem for Ruby Multiple Top-level Source Lines Gemfile Handling Gem Installation Spoofing
-* Issue #106 - Adding a check for OSVDB 108899 : brbackup Gem for Ruby /lib/brbackup.rb name Parameter SQL Injection
-* Issue #105 - Adding a check for OSVDB 108901 : brbackup Gem for Ruby Process List Local Plaintext Password Disclosure
-* Issue #104 - Adding a check for OSVDB 108900 : brbackup Gem for Ruby dbuser Variable Shell Metacharacter Injection Remote Command Execution
-* Issue #103 - Ruby pack.c encodes() Function Remote Stack Buffer Overflow
-* Issue #96 - Sinatra apps without views: NoMethodError
 
-## To be added in 2.0.0
-* Issue #148 - Adding a check for CVE-2011-4969:  XSS in jquery < 1.6.2
 
 
 ## Version 1.4.2 - codename: Tow Mater (2015-10-13)
