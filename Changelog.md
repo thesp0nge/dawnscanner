@@ -9,6 +9,8 @@ _latest update: Thu Dec  3 08:32:31 CET 2015_
 
 ## Version 1.5.0 - codename: Tow Mater (2015-12-xx)
 
+* Adding a check for CVE-2015-1819 : DoS in libxml embedded in nokogiri
+  versions prior to 1.6.6.4
 * Issue #129 - Adding a check for OSVDB 118954 : Ruby on Rails
   ActiveModel::Name to_json Call Infinite Loop Remote DoS
 * VersionCheck - fixed an issue about minor versioning logic, mostly used for
