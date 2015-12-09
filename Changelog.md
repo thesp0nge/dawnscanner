@@ -7,7 +7,7 @@ frameworks.
 
 _latest update: Thu Dec  3 18:29:33 CET 2015_
 
-## Version 1.5.0 - codename: Tow Mater (2015-12-xx)
+## Version 1.5.0 - codename: Tow Mater (2015-12-09)
 
 * Issue #92 - Fix CVE-2014-3483 incorrectly triggers for a Rails 3 app.
 * Issue #94 - dawn: Owasp Ror CheatSheet: Session management check failed
