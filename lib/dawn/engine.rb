@@ -71,7 +71,7 @@ module Dawn
       @ruby_version = get_ruby_version if dir.nil?
       @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
 
-      @stats        = gather_statistics
+      # @stats        = gather_statistics
 
       @views        = detect_views
       @controllers  = detect_controllers
