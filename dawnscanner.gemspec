@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Dawnscanner is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
   gem.homepage      = "http://dawnscanner.org"
   gem.files         = `git ls-files`.split($/)
+  gem.license       = "MIT"
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
@@ -29,7 +30,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'justify'
   gem.add_dependency 'logger-colors'
   gem.add_dependency 'ptools'
-  gem.add_dependency 'sqlite3'
   gem.add_dependency 'sqlite3'
   gem.add_dependency 'dm-sqlite-adapter'
   gem.add_dependency 'data_mapper'
