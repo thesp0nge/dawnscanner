@@ -31,6 +31,8 @@ module Dawn
         debug_me "Safe versions array is #{@safe}"
         debug_me "Deprecated versions array is #{@deprecated}. I'll mark them as vulnerable" unless @deprecated.nil?
         debug_me "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable" unless @excluded.nil?
+        debug_me "SAVE_MINOR FLAG = #{@save_minor}"
+        debug_me "SAVE_MAJOR FLAG = #{@save_major}"
 
         @status = :deprecated if is_detected_deprecated?
         return debug_me_and_return_false("detected version #{detected} is marked to be excluded for vulnerable ones")   if is_detected_excluded?
@@ -162,7 +164,9 @@ module Dawn
         dva = version_string_to_array(@detected)[:version]
         @safe.sort.each do |s|
           sva = version_string_to_array(s)[:version]
+          debug_me("#SVA=#{sva};DVA=#{dva};SM=#{is_same_major?(sva, dva)};sm=#{is_same_minor?(sva, dva)}; ( dva[2] >= sva[2] )=#{(dva[2] >= sva[2])}")
           return true if is_same_major?(sva, dva) && is_same_minor?(sva, dva) && dva[2] >= sva[2] && hm
+          return true if is_same_major?(sva, dva) && hm
         end
         return false
       end

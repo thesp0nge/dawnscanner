@@ -6,6 +6,7 @@ module Dawn
 
       include Dawn::Utils
 
+      attr_reader :title
       attr_reader :name
       attr_reader :cve
       attr_reader :osvdb
@@ -84,6 +85,7 @@ module Dawn
         @ruby_version             = ""
         @ruby_vulnerable_versions = []
 
+        @title        = options[:title]
         @name         = options[:name]
         @cvss         = options[:cvss]
         @cwe          = options[:cwe]
@@ -233,6 +235,7 @@ module Dawn
         ret << :cvss if self.cvss.nil? || self.cvss.empty? || self.cvss == "not assigned"
         ret << :severity if self.severity == "unknown"
         ret << :priority if self.priority == "unknown"
+        ret << :title if self.title.nil?
 
         ret
       end

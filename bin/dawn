@@ -1,35 +1,46 @@
 #!/usr/bin/env ruby
 
+require 'bundler'
 require 'getoptlong'
 require 'json'
 require 'terminal-table'
-
 require 'justify'
 
-# require 'codesake-commons'
 require 'dawnscanner'
 
 APPNAME = File.basename($0)
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
-# $logger  = Codesake::Commons::Logging.instance
+# Datamapper stuff
+DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")
+DataMapper::Logger.new(Dawn::Core.sql_log_name, :debug)
+DataMapper.finalize
+DataMapper.auto_upgrade!
+
 require 'logger'
 $logger = Logger.new(STDOUT)
 $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 
 opts    = GetoptLong.new(
   # report formatting options
-  [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT],
+
+  [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
+  [ '--tabular',                '-T',   GetoptLong::NO_ARGUMENT],
   [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
   [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
+  [ '--console',                '-K',   GetoptLong::NO_ARGUMENT],
 
   # MVC forcing
+  # Deprecated in 1.5.x
+  # To be removed in 2.0.0
   [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
   [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
   [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
 
-  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT],
+  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
+  [ '--dependencies',           '-d',   GetoptLong::REQUIRED_ARGUMENT],
+
   [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
   [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
 
@@ -46,6 +57,7 @@ opts    = GetoptLong.new(
   [ '--list-knowledge-base',            GetoptLong::NO_ARGUMENT],
   [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
   [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
+  [ '--list-scan-registry',             GetoptLong::NO_ARGUMENT],
   # please save output to file
   [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
   # specify an alternate config file
@@ -66,6 +78,11 @@ options = Dawn::Core.read_conf(Dawn::Core.find_conf(true))
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
+###############################################################################
+# CLI argument start.
+#
+# Refactoring is necessary here
+###############################################################################
 begin
 opts.each do |opt, val|
   case opt
@@ -99,7 +116,12 @@ opts.each do |opt, val|
     Kernel.exit(0)
   when '--json'
     options[:output] = "json"
+  when '--console'
+    options[:output] = "console"
+  when '--tabular'
+    options[:output] = "tabular"
   when '--ascii-tabular-report'
+    $logger.warn "--ascii-tabular-report' it has been deprecated. It will be removed in version 2.0.0. Please use '--tabular' instead"
     options[:output] = "tabular"
   when '--html'
     options[:output] = "html"
@@ -113,10 +135,18 @@ opts.each do |opt, val|
     options[:filename] = val
   when '--gem-lock'
     options[:gemfile_scan] = true
+    $logger.warn "--gem-lock flag it has been deprecated. It will be removed in version 2.0.0. Please use '--dependencies' instead"
     unless val.empty?
       options[:gemfile_name] = val
       guess = Dawn::Core.guess_mvc(val)
     end
+  when '--dependencies'
+    options[:gemfile_scan] = true
+    unless val.empty?
+      options[:gemfile_name] = val
+      guess = Dawn::Core.guess_mvc(val)
+    end
+
   when '--verbose'
     options[:verbose]=true
   when '--count-only'
@@ -131,9 +161,13 @@ opts.each do |opt, val|
     puts "#{val} found in knowledgebase." if found
     puts "#{val} not found in knowledgebase" if ! found
     Kernel.exit(0)
+  when '--list-scan-registry'
+    puts "#{APPNAME} scan registry\n\n"
+    Dawn::Registry.dump
+    Kernel.exit(0)
 
   when '--list-knowledge-base'
-    puts Dawn::Core.dump_knowledge_base(options[:verbose])
+    Dawn::KnowledgeBase.dump(options[:verbose])
     Kernel.exit(0)
   when '--list-known-framework'
     puts "Ruby MVC framework supported by #{APPNAME}:"
@@ -146,24 +180,40 @@ opts.each do |opt, val|
   end
 end
 rescue GetoptLong::InvalidOption => e
-
   $logger.helo APPNAME, Dawn::VERSION
   $logger.error e.message
   Kernel.exit(Dawn::Core.help)
 end
+###############################################################################
+# CLI argument stop
+###############################################################################
 
 target=ARGV.shift
 
 $logger.helo APPNAME, Dawn::VERSION
-trap("INT")   { $logger.die('[INTERRUPTED]') }
+r = Dawn::Registry.new
+
+unless Dir.exist?(Dawn::Core.registry_db_folder)
+  FileUtils.mkdir_p(Dawn::Core.registry_db_folder)
+  $logger.info "#{Dawn::Core.registry_db_folder} created" if Dir.exist?(Dawn::Core.registry_db_folder)
+end
+
+trap("INT") { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].empty?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].empty?  &&! Dawn::Core.is_good_target?(target)
 $logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
 $logger.debug("security check enabled: #{options[:enabled_checks]}") if options[:debug]
 
+# MVC flag deprecation warnings
+$logger.warn("the --rails is deprecated and it will be removed in version 2.0.0")   if options[:mvc] == :rails
+$logger.warn("the --sinatra is deprecated and it will be removed in version 2.0.0") if options[:mvc] == :sinatra
+$logger.warn("the --padrino is deprecated and it will be removed in version 2.0.0") if options[:mvc] == :padrino
+
 
 ## MVC auto detect.
-# Skipping MVC autodetect if it's already been done by guess_mvc when choosing Gemfile.lock scan
+
+# Skipping MVC autodetect if it's already been done by guess_mvc when choosing
+# Gemfile.lock scan
 
 unless options[:gemfile_scan]
   begin
@@ -176,17 +226,25 @@ unless options[:gemfile_scan]
       engine = Dawn::Padrino.new(target)    if options[:mvc] == :padrino
     end
   rescue ArgumentError => e
+    r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>e.message, :scan_status=>:failed})
     $logger.die(e.message)
   end
 else
   engine = Dawn::GemfileLock.new(target, options[:gemfile_name], guess) # if options[:gemfile_scan]
 end
 
-$logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags") if engine.nil?
+
+if engine.nil?
+  $logger.error("MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues")
+  r.do_save({:target=>File.basename(target), :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
+  $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags")
+end
+## end MVC auto detect.
 
 if options[:exit_on_warn]
   Kernel.at_exit do
     if engine.count_vulnerabilities != 0
+      r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
       Kernel.exit(engine.count_vulnerabilities)
     end
   end
@@ -197,18 +255,41 @@ if options[:debug]
   engine.debug = true
 end
 
-$logger.die "missing target framework option" if engine.nil?
 $logger.warn "this is a development Dawn version" if Dawn::RELEASE == "(development)"
-$logger.die "nothing to do on #{target}" if ! options[:gemfile_scan] && ! engine.can_apply? 
+
+if engine.nil?
+  r.do_save({:target=>File.basename(target), :message=>"missing target framework option", :scan_status=>:failed})
+  $logger.die "missing target framework option"
+end
+
+if ! options[:gemfile_scan] && ! engine.can_apply?
+  r.do_save({:target=>File.basename(target), :message=>"nothing to do on #{target}", :scan_status=>:failed})
+  $logger.die "nothing to do on #{target}"
+end
 
 engine.load_knowledge_base(options[:enabled_checks])
 ret = engine.apply_all
 
-if options[:output] == "count" 
-  puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
-  puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
+if options[:output] == "count"
+  STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
+  STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"
+
+  r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
+  $logger.bye
   Kernel.exit(0)
 end
 
 Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym, :filename=>options[:filename]}).report
+if (r.do_save({:target=>File.basename(engine.target),
+           :scan_started=>engine.scan_start,
+           :scan_duration => engine.scan_time.round(3),
+           :issues_found=>engine.vulnerabilities.count,
+           :output_dir=>engine.output_dir_name,
+           :scan_status=>:completed}))
+  $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
+else
+  r.errors.each do |error|
+    $logger.error error
+  end
+end
 $logger.bye

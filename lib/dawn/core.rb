@@ -3,6 +3,16 @@ require "yaml"
 module Dawn
   class Core
 
+    def self.registry_db_folder
+      "#{File.join(Dir.home, 'dawnscanner', 'db')}"
+    end
+    def self.registry_db_name
+      "#{File.join(registry_db_folder, 'dawnscanner.db')}"
+    end
+    def self.sql_log_name
+      "#{File.join(registry_db_folder, 'dawnscanner-sql.log')}"
+    end
+
     # TODO.20140326
     # All those methods must moved from here to Util class and a
     # Dawn::Core namespace must be created.
@@ -14,12 +24,15 @@ module Dawn
       puts "\t$ dawn -C --json a_sinatra_webapp_directory"
       puts "\t$ dawn --ascii-tabular-report my_rails_blog_ecommerce"
       puts "\t$ dawn --html -F my_report.html my_rails_blog_ecommerce"
-      printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application"
-      printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application"
-      printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application"
-      printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
-      printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using table in ascii art"
+      printf "\n   -r, --rails\t\t\t\t\tforce dawn to consider the target a rails application (DEPRECATED)"
+      printf "\n   -s, --sinatra\t\t\t\tforce dawn to consider the target a sinatra application (DEPRECATED)"
+      printf "\n   -p, --padrino\t\t\t\tforce dawn to consider the target a padrino application (DEPRECATED)"
+      printf "\n   -G, --gem-lock\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock (DEPRECATED)"
+      printf "\n   -d, --dependencies\t\t\t\tforce dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock"
+      printf "\n\nReporting\n"
+      printf "\n   -a, --ascii-tabular-report\t\t\tcause dawn to format findings using tables in ascii art (DEPRECATED)"
       printf "\n   -j, --json\t\t\t\t\tcause dawn to format findings using json"
+      printf "\n   -K, --console\t\t\t\t\tcause dawn to format findings using plain ascii text"
       printf "\n   -C, --count-only\t\t\t\tdawn will only count vulnerabilities (useful for scripts)"
       printf "\n   -z, --exit-on-warn\t\t\t\tdawn will return number of found vulnerabilities as exit code"
       printf "\n   -F, --file filename\t\t\t\ttells dawn to write output to filename"
@@ -35,6 +48,7 @@ module Dawn
       printf "\n       --list-knowledge-base\t\t\tlist knowledge-base content"
       printf "\n       --list-known-families\t\t\tlist security check families contained in dawn's knowledge base"
       printf "\n       --list-known-framework\t\t\tlist ruby MVC frameworks supported by dawn"
+      printf "\n       --list-scan-registry\t\t\tlist past scan informations stored in scan registry (#{Dawn::Core.registry_db_name})"
       printf "\n\nService flags\n"
       printf "\n   -D, --debug\t\t\t\t\tenters dawn debug mode"
       printf "\n   -V, --verbose\t\t\t\tthe output will be more verbose"
@@ -42,26 +56,6 @@ module Dawn
       printf "\n   -h, --help\t\t\t\t\tshow this help\n"
 
       true
-    end
-
-    def self.dump_knowledge_base(verbose = false)
-      kb = Dawn::KnowledgeBase.new
-      lines = []
-      lines << "Security checks currently supported:\n"
-
-      kb.all.each do |check|
-        if verbose
-          lines << "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
-          lines << "Description\n#{check.message}"
-          lines << "Remediation\n#{check.remediation}\n\n"
-        else
-          lines << "#{check.name}"
-        end
-      end
-      lines << "-----\nTotal: #{kb.all.count}"
-
-      lines.empty? ? 0 : lines.compact.join("\n")
-
     end
 
     # guess_mvc is very close to detect_mvc despite it accepts a
@@ -111,7 +105,7 @@ module Dawn
     end
 
     def self.find_conf(create_if_none = false)
-      conf_name  = 'codesake-dawn.yaml'
+      conf_name  = 'dawnscanner.yaml'
       path_order = [
         './',
         '~/',
@@ -131,7 +125,7 @@ module Dawn
 
       # If create_if_none flag is set to true, than I'll create a config file
       # on the current directory with the default configuration.
-      conf = {"config"=>{:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}}
+      conf = {"config"=>{:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}}
 
       # Calculate the conf file path
       conf_path = File.expand_path('~') +'/.'+conf_name
@@ -145,7 +139,7 @@ module Dawn
     end
 
     def self.read_conf(file=nil)
-      conf = {:verbose=>false, :output=>"console", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
       begin
         return conf if file.nil?
         file = file.chop if (not file.nil? and file.end_with? '/')

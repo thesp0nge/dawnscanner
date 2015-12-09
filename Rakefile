@@ -111,7 +111,14 @@ task :cve, :name do |t,args|
     file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
     file.puts "\t\t# @check.debug = true"
     file.puts "\tend"
-    file.puts "\tit \"is reported when...\""
+    file.puts "\tit \"is reported when the vulnerable gem is detected\" do"
+    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
+    file.puts "\t\t@check.vuln?.should   == true"
+    file.puts "\tend"
+    file.puts "\tit \"is not reported when a fixed release is detected\" do"
+    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
+    file.puts "\t\t@check.vuln?.should   == false"
+    file.puts "\tend"
     file.puts "end"
   end
   puts "#{spec_filename} created"
@@ -173,7 +180,14 @@ task :osvdb, :name do |t,args|
     file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
     file.puts "\t\t# @check.debug = true"
     file.puts "\tend"
-    file.puts "\tit \"is reported when...\""
+    file.puts "\tit \"is reported when the vulnerable gem is detected\" do"
+    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
+    file.puts "\t\t@check.vuln?.should   == true"
+    file.puts "\tend"
+    file.puts "\tit \"is not reported when a fixed release is detected\" do"
+    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
+    file.puts "\t\t@check.vuln?.should   == false"
+    file.puts "\tend"
     file.puts "end"
   end
   puts "#{spec_filename} created"
@@ -266,13 +280,13 @@ namespace :kb do
   task :create do
     checks = Dawn::KnowledgeBase.new.all
     open("KnowledgeBase.md", "w") do |file|
-      file.puts "# Dawn Knowledge base"
-      file.puts "\nThe knowledge base library for Dawn version #{Dawn::VERSION} contains #{checks.count} security checks."
+      file.puts "# Dawnscanner Knowledge base"
+      file.puts "\nThe knowledge base library for dawnscanner version #{Dawn::VERSION} contains #{checks.count} security checks."
       file.puts "---"
       checks.each do |c|
         file.puts "* [#{c.name}](#{c.cve_link}): #{c.message}" if c.name.start_with?('CVE')
         file.puts "* [#{c.name}](#{c.osvdb_link}): #{c.message}" if c.name.start_with?('OSVDB')
-        file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE')
+        file.puts "* #{c.name}: #{c.message}" unless c.name.start_with?('CVE') && c.name.start_with?('OSVDB')
       end
 
       file.puts "\n\n_Last updated: #{Time.now.strftime("%a %d %b %T %Z %Y")}_"

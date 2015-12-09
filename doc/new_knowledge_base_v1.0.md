@@ -64,6 +64,12 @@ In case of JSON, we can gather together vulnerabilities in files:
 SQL approach would be eventually, really close to JSON one, with tables instead
 of files.
 
+## Info
+
+Using either CVE or OSVDB identifiers as vulnerability keys is a poor choice.
+This lead of duplicated vulns in knowledge base and a lot of effort in checking
+if a vuln is present.
+
 ## Benchmark
 
 Those solutions must be benchmarked

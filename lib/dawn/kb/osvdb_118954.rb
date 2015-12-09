@@ -20,10 +20,12 @@ module Dawn
             :applies=>["rails"],
             :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Currently, there are no known workarounds or upgrades to correct this issue. However, a patch has been committed to the source code repository (e.g. GIT, CVS, SVN) that addresses this vulnerability. Until it is incorporated into the next release of the software, manually patching an existing installation is the only known available solution. Check the vendor links in the references section for more information.",
-            :aux_links=>[""]
+            :mitigation=>"Please upgrade to latest rails ruby gems",
+            :aux_links=>["https://github.com/rails/rails/pull/19055", "https://github.com/rails/rails/issues/19050"]
            })
-          self.safe_dependencies = [{:name=>"rails", :version=>['99.99.99']}]
+          self.save_minor=true
+          self.save_major=true
+          self.safe_dependencies = [{:name=>"rails", :version=>['4.2.1.rc3']}]
 
 				end
 			end
