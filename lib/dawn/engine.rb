@@ -71,7 +71,7 @@ module Dawn
       @ruby_version = get_ruby_version if dir.nil?
       @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
 
-      # @stats        = gather_statistics
+      @stats        = gather_statistics
 
       @views        = detect_views
       @controllers  = detect_controllers
@@ -425,11 +425,31 @@ module Dawn
       true
     end
 
+    require 'code_metrics/statistics_calculator'
+    def calculate_directory_statistics(directory, pattern = /.*\.(rb|js|coffee)$/)
+        stats = CodeMetrics::StatisticsCalculator.new
+
+        Dir.foreach(directory) do |file_name|
+          path = "#{directory}/#{file_name}"
+
+          if File.directory?(path) && (/^\./ !~ file_name)
+            stats.add(calculate_directory_statistics(path, pattern))
+          end
+
+          next unless file_name =~ pattern
+
+          stats.add_by_file_path(path)
+        end
+
+        stats
+      end
+
     def gather_statistics
-      dirs = CodeMetrics::StatsDirectories.new
-      puts target
-      dirs.add_directories("#{target}/**/*.rb", "#{target}")
-      puts CodeMetrics::Statistics.new(*dirs).to_s
+      dirs = []
+      dirs << ["#{target}/**/*.rb", "#{target}"]
+      # puts CodeMetrics::Statistics.new(*dirs).to_s
+      s=calculate_directory_statistics("#{target}")
+      puts s
     end
   end
 end
