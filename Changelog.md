@@ -9,6 +9,11 @@ _latest update: Thu Dec  3 18:29:33 CET 2015_
 
 ## Version 1.5.5 - codename: Tow Mater (2016-01-xx)
 
+## Version 1.5.2 - codename: Tow Mater (2015-12-16)
+
+* Back on issue #170. Engine.rb still requires code metrics stuff. Commented
+  out.
+
 ## Version 1.5.1 - codename: Tow Mater (2015-12-09)
 
 * Issue #170 - Error with code_metrics library cause Dawn to exit. Stats are
