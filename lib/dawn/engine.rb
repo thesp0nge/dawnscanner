@@ -1,5 +1,5 @@
 # Statistics stuff
-require 'code_metrics/statistics'
+# require 'code_metrics/statistics'
 
 module Dawn
   module Engine
@@ -425,11 +425,11 @@ module Dawn
       true
     end
 
-    def gather_statistics
-      dirs = CodeMetrics::StatsDirectories.new
-      puts target
-      dirs.add_directories("#{target}/**/*.rb", "#{target}")
-      puts CodeMetrics::Statistics.new(*dirs).to_s
-    end
+    # def gather_statistics
+      # dirs = CodeMetrics::StatsDirectories.new
+      # puts target
+      # dirs.add_directories("#{target}/**/*.rb", "#{target}")
+      # puts CodeMetrics::Statistics.new(*dirs).to_s
+    # end
   end
 end
