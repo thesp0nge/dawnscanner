@@ -6,18 +6,19 @@ module Dawn
       @ret = false
 
       @filename = options[:filename]
-      @ret = options[:apply_all_code] unless options[:apply_all_code].nil?
-      @format = options[:format] unless options[:format].nil?
-      @engine = options[:engine] unless options[:engine].nil?
+      @ret      = options[:apply_all_code] unless options[:apply_all_code].nil?
+      @format   = options[:format] unless options[:format].nil?
+      @engine   = options[:engine] unless options[:engine].nil?
 
       @format = :tabular unless is_valid_format?(@format)
     end
 
     def report
-      ascii_tabular_report  if @format == :tabular
-      json_report           if @format == :json
-      ascii_plain_report    if @format == :console
-      html_report           if @format == :html
+      return ascii_plain_report    unless @engine.gemfile_lock.nil?
+      return ascii_tabular_report  if @format == :tabular
+      return json_report           if @format == :json
+      return ascii_plain_report    if @format == :console
+      return html_report           if @format == :html
     end
     private
 

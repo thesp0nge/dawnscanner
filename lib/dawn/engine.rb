@@ -69,15 +69,20 @@ module Dawn
 
       set_target(dir) unless dir.nil?
       @ruby_version = get_ruby_version if dir.nil?
-      @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
+      @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil?
 
-      @stats        = gather_statistics
+      if @gemfile_lock.nil?
+        # When performing a dependency check, don't go in metric calc or MVC
+        # specific stuff
 
-      @views        = detect_views
-      @controllers  = detect_controllers
-      @models       = detect_models
+        @stats        = gather_statistics
+        @views        = detect_views
+        @controllers  = detect_controllers
+        @models       = detect_models
+        @output_dir_name = output_dir
 
-      @output_dir_name = output_dir
+      end
+
 
       if $logger.nil?
         require 'logger'

@@ -279,17 +279,36 @@ if options[:output] == "count"
   Kernel.exit(0)
 end
 
-Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym, :filename=>options[:filename]}).report
-if (r.do_save({:target=>File.basename(engine.target),
-           :scan_started=>engine.scan_start,
-           :scan_duration => engine.scan_time.round(3),
-           :issues_found=>engine.vulnerabilities.count,
-           :output_dir=>engine.output_dir_name,
-           :scan_status=>:completed}))
-  $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
+Dawn::Reporter.new({:engine=>         engine,
+                    :apply_all_code=> ret,
+                    :format=>         options[:output].to_sym,
+                    :filename=>       options[:filename]}    ).report
+
+if engine.gemfile_lock.nil?
+  if (r.do_save({:target=>File.basename(engine.target),
+                 :scan_started=>engine.scan_start,
+                 :scan_duration => engine.scan_time.round(3),
+                 :issues_found=>engine.vulnerabilities.count,
+                 :output_dir=>engine.output_dir_name,
+                 :scan_status=>:completed}))
+    $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
+  else
+    r.errors.each do |error|
+      $logger.error error
+    end
+  end
 else
-  r.errors.each do |error|
-    $logger.error error
+  if (r.do_save({:target=>engine.name,
+                 :scan_started=>engine.scan_start,
+                 :scan_duration => engine.scan_time.round(3),
+                 :issues_found=>engine.vulnerabilities.count,
+                 :output_dir=>"Depedency check over #{options[:gemfile_name]}",
+                 :scan_status=>:completed}))
+    $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
+  else
+    r.errors.each do |error|
+      $logger.error error
+    end
   end
 end
 $logger.bye
