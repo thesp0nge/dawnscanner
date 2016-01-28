@@ -11,6 +11,8 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
 
 * Issue #186 - Adding a check for CVE-2015-7576: Timing attack vulnerability in
   basic authentication in Action Controller
+* Issue #185 - Adding a check for CVE-2016-0751: Possible Object Leak and
+  Denial of Service attack in Action Pack
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
