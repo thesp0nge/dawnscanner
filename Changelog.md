@@ -21,6 +21,8 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   one of twos has it.
 * Issue #184 - Adding a check for CVE-2015-7577: Nested attributes rejection
   proc bypass in Active Record.
+* Issue #183 - Adding a check for CVE-2015-7579: XSS vulnerability in
+  rails-html-sanitizer
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
