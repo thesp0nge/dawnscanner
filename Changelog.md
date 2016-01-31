@@ -23,6 +23,8 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   proc bypass in Active Record.
 * Issue #183 - Adding a check for CVE-2015-7579: XSS vulnerability in
   rails-html-sanitizer
+* Issue #182 - Adding a check for CVE-2016-0752: Possible Information Leak
+  Vulnerability in Action View
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 

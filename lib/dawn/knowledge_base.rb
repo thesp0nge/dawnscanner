@@ -250,6 +250,7 @@ require "dawn/kb/cve_2015_7579"
 # CVE - 2016
 
 require "dawn/kb/cve_2016_0751"
+require "dawn/kb/cve_2016_0752"
 
 # OSVDB
 
@@ -535,6 +536,7 @@ module Dawn
           Dawn::Kb::CVE_2015_7577.new,
           Dawn::Kb::CVE_2015_7579.new,
           Dawn::Kb::CVE_2016_0751.new,
+          Dawn::Kb::CVE_2016_0752.new,
 
 
           # OSVDB Checks are still here since are all about dependencies
