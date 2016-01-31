@@ -13,6 +13,14 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   basic authentication in Action Controller
 * Issue #185 - Adding a check for CVE-2016-0751: Possible Object Leak and
   Denial of Service attack in Action Pack
+* BUGFIX in is_vulnerable_minor? in case of version length mismatch, there was
+  an error evaluating if safe_version.length > detected_version.length block
+* BUGFIX in is_vulnerable_aux_patch? when detected version has no auxiliary
+  patch (eg. 3.5.3) and safe version has it (eg. 3.5.3.1) the check was not
+  triggered the right way. Now aux patch is forced to 0 when missing and when
+  one of twos has it.
+* Issue #184 - Adding a check for CVE-2015-7577: Nested attributes rejection
+  proc bypass in Active Record.
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 

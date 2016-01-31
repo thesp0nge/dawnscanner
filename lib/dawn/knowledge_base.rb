@@ -244,6 +244,7 @@ require "dawn/kb/cve_2015_3227"
 require "dawn/kb/cve_2015_3448"
 require "dawn/kb/cve_2015_4020"
 require "dawn/kb/cve_2015_7576"
+require "dawn/kb/cve_2015_7577"
 
 # CVE - 2016
 
@@ -530,6 +531,7 @@ module Dawn
           Dawn::Kb::CVE_2015_3448.new,
           Dawn::Kb::CVE_2015_4020.new,
           Dawn::Kb::CVE_2015_7576.new,
+          Dawn::Kb::CVE_2015_7577.new,
           Dawn::Kb::CVE_2016_0751.new,
 
 

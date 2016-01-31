@@ -42,6 +42,7 @@ module Dawn
         return debug_me_and_return_false("detected version #{@detected} is higher than all version marked safe")  if is_detected_highest?
 
         @safe.sort.each do |s|
+          debug_me "vuln?: evaluating #{@detected} against save version: #{s}"
 
           @save_minor_fix   = save_minor_fix
           @save_major_fix   = save_major_fix
@@ -49,7 +50,7 @@ module Dawn
 
           vuln  = is_vulnerable_version?(s, @detected)
 
-          debug_me "VULN=#{vuln} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
+          debug_me "DETECTED #{@detected} is marked VULN=#{vuln} against #{s} ( SAVE_MINOR_FIX=#{@save_minor_fix} SAVE_MAJOR_FIX=#{@save_major_fix})"
           return true if vuln
         end
 
@@ -164,9 +165,12 @@ module Dawn
         dva = version_string_to_array(@detected)[:version]
         @safe.sort.each do |s|
           sva = version_string_to_array(s)[:version]
-          debug_me("#SVA=#{sva};DVA=#{dva};SM=#{is_same_major?(sva, dva)};sm=#{is_same_minor?(sva, dva)}; ( dva[2] >= sva[2] )=#{(dva[2] >= sva[2])}")
-          return true if is_same_major?(sva, dva) && is_same_minor?(sva, dva) && dva[2] >= sva[2] && hm
-          return true if is_same_major?(sva, dva) && hm
+          sM = is_same_major?(sva, dva)
+          sm = is_same_minor?(sva, dva)
+          debug_me("save_minor_fix: SVA=#{sva};DVA=#{dva};SAME_MAJOR? = #{sM}; SAME_MINOR?=#{sm}; ( dva[2] >= sva[2] )=#{(dva[2] >= sva[2])}")
+          debug_me("save_minor_fix: is_there_higher_minor_version? = #{hm}")
+          return true if sM and sm and dva[2] >= sva[2] && hm
+          return true if sM and hm
         end
         return false
       end
@@ -204,6 +208,8 @@ module Dawn
         return (safe_version[2] > detected_version[2])
       end
       def is_vulnerable_aux_patch?(safe_version, detected_version)
+        debug_me "is_vulnerable_aux_patch?: SV[3]=#{safe_version[3]}, DV[3]=#{detected_version[3]}"
+        return true if detected_version[3].nil? and ! safe_version[3].nil?
         return false if safe_version[3].nil? || detected_version[3].nil?
         return (safe_version[3] > detected_version[3])
       end
@@ -221,7 +227,7 @@ module Dawn
           # safe version is kinda more complex e.g. 2.3.2
           # in this case we return the version is vulnerable if the
           # detected_version major is less or equal the safe one.
-          return (safe_version[0] <= detected_version[0])
+          return (safe_version[0] < detected_version[0])
         end
 
         # support for x as safe minor version
@@ -323,7 +329,9 @@ module Dawn
         patch = is_vulnerable_patch?(safe_version_array, detected_version_array)
         aux_patch = is_vulnerable_aux_patch?(safe_version_array, detected_version_array)
 
-        debug_me "is_vulnerable_version? S=#{safe_version},D=#{detected_version} -> MAJOR=#{major} MINOR=#{minor} PATCH=#{patch} AUX_PATCH=#{aux_patch} SAVE_MINOR=#{@save_minor_fix} SAVE_MAJOR=#{@save_major_fix}"
+        debug_me "is_vulnerable_version? SAVE_VERSION=#{safe_version},DETECTED=#{detected_version} -> IS_VULN_MAJOR?=#{major} IS_VULN_MINOR?=#{minor} IS_VULN_PATCH?=#{patch} IS_VULN_AUX_PATCH=#{aux_patch} SAVE_MINOR_FIX=#{@save_minor_fix} SAVE_MAJOR_FIX=#{@save_major_fix}"
+
+        return debug_me_and_return_false("#{detected_version} doesn't have a vulnerable MAJOR number") if is_higher_major?(detected_version, safe_version) #and minor and patch 
 
         return is_vulnerable_beta?(sva[:beta], dva[:beta]) if is_same_version?(safe_version_array, detected_version_array) && is_beta_check?(sva[:beta], dva[:beta])
         return is_vulnerable_rc?(sva[:rc], dva[:rc]) if is_same_version?(safe_version_array, detected_version_array) && is_rc_check?(sva[:rc], dva[:rc])
