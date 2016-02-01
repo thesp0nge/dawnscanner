@@ -29,6 +29,8 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   Circumvention in Active Model
 * Issue #180 - Adding a check for CVE-2015-7578: Possible XSS vulnerability in
   rails-html-sanitizer
+* Issue #179 - Adding a check for CVE-2015-7581: Object leak vulnerability for
+  wildcard controller routes in Action Pack
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
