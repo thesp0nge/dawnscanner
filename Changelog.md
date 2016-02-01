@@ -25,6 +25,8 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   rails-html-sanitizer
 * Issue #182 - Adding a check for CVE-2016-0752: Possible Information Leak
   Vulnerability in Action View
+* Issue #181 - Adding a check for CVE-2016:0753: Possible Input Validation
+  Circumvention in Active Model
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
