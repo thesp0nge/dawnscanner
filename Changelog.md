@@ -44,6 +44,7 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   detected version doesn't have the pre number
 * Issue #173 handles a lot of CVE about nokogiri:
   - CVE-2015-5312: DoS in xmlStringLenDecodeEntities()
+  - CVE-2015-7497: DoS in xmlDictComputeFastQKey()
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
