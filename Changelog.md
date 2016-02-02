@@ -42,12 +42,13 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   detected version doesn't have the rc number
 * BUGFIX in is_vulnerable_pre? handling situation when either safe version or
   detected version doesn't have the pre number
-* Issue #173 handles a lot of CVE about nokogiri:
+* Issue #173 handles a lot of CVE about nokogiri rubygem due to libxml version embedded on it:
   - CVE-2015-5312: DoS in xmlStringLenDecodeEntities()
   - CVE-2015-7497: DoS in xmlDictComputeFastQKey()
   - CVE-2015-7498: DoS in xmlParseXmlDecl()
   - CVE-2015-7499: In memory information disclosure due to heap-based buffer overflow in the xmlGROW()
   - CVE-2015-7500: DoS in xmlParseMisc()
+  - CVE-2015-8241: Information disclosure and DoS in xmlNextChar()
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
