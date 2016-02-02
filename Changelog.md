@@ -52,6 +52,7 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   - CVE-2015-8242: Information disclosure and DoS in xmlSAX2TextNode()
   - CVE-2015-8317: Information disclosure in xmlParseXMLDecl()
 * Issue #171 - Adding a check for CVE-2015-7541: colorscore Gem for Ruby lib/colorscore/histogram.rb Arbitrary Command Injection
+* Issue #169 - Adding a check for CVE-2015-7519: Phusion Passenger Server allows to overwrite headers in some cases
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
