@@ -49,6 +49,7 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   - CVE-2015-7499: In memory information disclosure due to heap-based buffer overflow in the xmlGROW()
   - CVE-2015-7500: DoS in xmlParseMisc()
   - CVE-2015-8241: Information disclosure and DoS in xmlNextChar()
+  - CVE-2015-8242: Information disclosure and DoS in xmlSAX2TextNode()
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
