@@ -46,6 +46,7 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   - CVE-2015-5312: DoS in xmlStringLenDecodeEntities()
   - CVE-2015-7497: DoS in xmlDictComputeFastQKey()
   - CVE-2015-7498: DoS in xmlParseXmlDecl()
+  - CVE-2015-7499: In memory information disclosure due to heap-based buffer overflow in the xmlGROW()
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 

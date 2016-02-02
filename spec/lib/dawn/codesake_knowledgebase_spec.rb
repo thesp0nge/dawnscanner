@@ -1129,4 +1129,9 @@ it "must have test for CVE-2015-7498" do
   sc.should_not   be_nil
   sc.class.should == Dawn::Kb::CVE_2015_7498
 end
+it "must have test for CVE-2015-7499" do
+  sc = kb.find("CVE-2015-7499")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7499
+end
 end
