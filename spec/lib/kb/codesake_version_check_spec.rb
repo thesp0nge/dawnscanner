@@ -64,7 +64,7 @@ describe "The version check should" do
       @check.is_vulnerable_version?('2.3.0', '2.3.0.beta9').should == true
     end
     it "reports a safe condition when a beta version is safe and the stable version is detected" do
-      @check.is_vulnerable_version?('2.3.0.beta9', '2.3.0').should == true
+      @check.is_vulnerable_version?('2.3.0.beta9', '2.3.0').should == false
     end
     it "reports a vulnerability when a previous beta version is detected" do
       @check.is_vulnerable_version?('2.3.0', '2.2.10.beta2').should == true
@@ -124,7 +124,7 @@ describe "The version check should" do
       @check.is_vulnerable_version?('2.3.0', '2.3.0.pre9').should == true
     end
     it "reports a safe condition when a pre version is safe and the stable version is detected" do
-      @check.is_vulnerable_version?('2.3.0.pre9', '2.3.0').should == true
+      @check.is_vulnerable_version?('2.3.0.pre9', '2.3.0').should == false
     end
     it "reports a vulnerability when a previous pre version is detected" do
       @check.is_vulnerable_version?('2.3.0', '2.2.10.pre2').should == true

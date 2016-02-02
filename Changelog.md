@@ -31,6 +31,19 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   rails-html-sanitizer
 * Issue #179 - Adding a check for CVE-2015-7581: Object leak vulnerability for
   wildcard controller routes in Action Pack
+* BUGFIX in is_higher? when a version with an aux patch number was compared
+  with a one without ('1.2.3.4' vs '1.2.3') the incorrect result were
+  triggered.
+* BUGFIX in is_same_version? when a beta version is to be evaluated, during
+  comparison the beta number must be discarded.
+* BUGFIX in is_vulnerable_beta? handling situation when either safe version or
+  detected version doesn't have the beta number
+* BUGFIX in is_vulnerable_rc? handling situation when either safe version or
+  detected version doesn't have the rc number
+* BUGFIX in is_vulnerable_pre? handling situation when either safe version or
+  detected version doesn't have the pre number
+* Issue #173 handles a lot of CVE about nokogiri:
+  - CVE-2015-5312: DoS in xmlStringLenDecodeEntities()
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 

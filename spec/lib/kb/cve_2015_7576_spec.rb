@@ -2,7 +2,7 @@ require 'spec_helper'
 describe "The CVE-2015-7576 vulnerability" do
 	before(:all) do
 		@check = Dawn::Kb::CVE_2015_7576.new
-		# @check.debug = true
+		@check.debug = true
 	end
 	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"actionpack", :version=>"5.0.0.beta.1"}]
