@@ -1074,4 +1074,94 @@ describe "The Codesake Dawn knowledge base" do
     sc.should_not   be_nil
     sc.class.should == Dawn::Kb::CVE_2015_1819
   end
+  it "must have test for CVE-2015-7576" do
+    sc = kb.find("CVE-2015-7576")
+    sc.should_not   be_nil
+    sc.class.should == Dawn::Kb::CVE_2015_7576
+  end
+  it "must have test for CVE-2016-0751" do
+  sc = kb.find("CVE-2016-0751")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2016_0751
+end
+  it "must have test for CVE-2015-7577" do
+  sc = kb.find("CVE-2015-7577")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7577
+end
+it "must have test for CVE-2015-7579" do
+  sc = kb.find("CVE-2015-7579")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7579
+end
+it "must have test for CVE-2016-0752" do
+  sc = kb.find("CVE-2016-0752")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2016_0752
+end
+it "must have test for CVE-2016-0753" do
+  sc = kb.find("CVE-2016-0753")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2016_0753
+end
+it "must have test for CVE-2015-7578" do
+  sc = kb.find("CVE-2015-7578")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7578
+end
+it "must have test for CVE-2015-7581" do
+  sc = kb.find("CVE-2015-7581")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7581
+end
+it "must have test for CVE-2015-5312" do
+  sc = kb.find("CVE-2015-5312")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_5312
+end
+it "must have test for CVE-2015-7497" do
+  sc = kb.find("CVE-2015-7497")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7497
+end
+it "must have test for CVE-2015-7498" do
+  sc = kb.find("CVE-2015-7498")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7498
+end
+it "must have test for CVE-2015-7499" do
+  sc = kb.find("CVE-2015-7499")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7499
+end
+it "must have test for CVE-2015-7500" do
+  sc = kb.find("CVE-2015-7500")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7500
+end
+it "must have test for CVE-2015-8241" do
+  sc = kb.find("CVE-2015-8241")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_8241
+end
+it "must have test for CVE-2015-8242" do
+  sc = kb.find("CVE-2015-8242")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_8242
+end
+it "must have test for CVE-2015-8317" do
+  sc = kb.find("CVE-2015-8317")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_8317
+end
+it "must have test for CVE-2015-7541" do
+  sc = kb.find("CVE-2015-7541")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7541
+end
+it "must have test for CVE-2015-7519" do
+  sc = kb.find("CVE-2015-7519")
+  sc.should_not   be_nil
+  sc.class.should == Dawn::Kb::CVE_2015_7519
+end
 end

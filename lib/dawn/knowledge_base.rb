@@ -243,7 +243,27 @@ require "dawn/kb/cve_2015_3226"
 require "dawn/kb/cve_2015_3227"
 require "dawn/kb/cve_2015_3448"
 require "dawn/kb/cve_2015_4020"
+require "dawn/kb/cve_2015_5312"
+require "dawn/kb/cve_2015_7497"
+require "dawn/kb/cve_2015_7498"
+require "dawn/kb/cve_2015_7499"
+require "dawn/kb/cve_2015_7500"
+require "dawn/kb/cve_2015_7519"
+require "dawn/kb/cve_2015_7541"
+require "dawn/kb/cve_2015_7576"
+require "dawn/kb/cve_2015_7577"
+require "dawn/kb/cve_2015_7578"
+require "dawn/kb/cve_2015_7579"
+require "dawn/kb/cve_2015_7581"
+require "dawn/kb/cve_2015_8241"
+require "dawn/kb/cve_2015_8242"
+require "dawn/kb/cve_2015_8317"
 
+# CVE - 2016
+
+require "dawn/kb/cve_2016_0751"
+require "dawn/kb/cve_2016_0752"
+require "dawn/kb/cve_2016_0753"
 
 # OSVDB
 
@@ -525,6 +545,24 @@ module Dawn
           Dawn::Kb::CVE_2015_3227.new,
           Dawn::Kb::CVE_2015_3448.new,
           Dawn::Kb::CVE_2015_4020.new,
+          Dawn::Kb::CVE_2015_5312.new,
+          Dawn::Kb::CVE_2015_7497.new,
+          Dawn::Kb::CVE_2015_7498.new,
+          Dawn::Kb::CVE_2015_7499.new,
+          Dawn::Kb::CVE_2015_7500.new,
+          Dawn::Kb::CVE_2015_7519.new,
+          Dawn::Kb::CVE_2015_7541.new,
+          Dawn::Kb::CVE_2015_7576.new,
+          Dawn::Kb::CVE_2015_7577.new,
+          Dawn::Kb::CVE_2015_7578.new,
+          Dawn::Kb::CVE_2015_7579.new,
+          Dawn::Kb::CVE_2015_7581.new,
+          Dawn::Kb::CVE_2015_8241.new,
+          Dawn::Kb::CVE_2015_8242.new,
+          Dawn::Kb::CVE_2015_8317.new,
+          Dawn::Kb::CVE_2016_0751.new,
+          Dawn::Kb::CVE_2016_0752.new,
+          Dawn::Kb::CVE_2016_0753.new,
 
 
           # OSVDB Checks are still here since are all about dependencies
