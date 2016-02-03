@@ -190,6 +190,8 @@ end
 
 target=ARGV.shift
 
+target = File.expand_path(".") if target == "."
+
 $logger.helo APPNAME, Dawn::VERSION
 r = Dawn::Registry.new
 

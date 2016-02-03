@@ -5,7 +5,70 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Thu Dec  3 18:29:33 CET 2015_
+_latest update: Thu Jan 28 23:30:47 CET 2016_
+
+## Version 1.5.3 - codename: Tow Mater (2016-xx-xx)
+
+* Issue #186 - Adding a check for CVE-2015-7576: Timing attack vulnerability in
+  basic authentication in Action Controller
+* Issue #185 - Adding a check for CVE-2016-0751: Possible Object Leak and
+  Denial of Service attack in Action Pack
+* BUGFIX in is_vulnerable_minor? in case of version length mismatch, there was
+  an error evaluating if safe_version.length > detected_version.length block
+* BUGFIX in is_vulnerable_aux_patch? when detected version has no auxiliary
+  patch (eg. 3.5.3) and safe version has it (eg. 3.5.3.1) the check was not
+  triggered the right way. Now aux patch is forced to 0 when missing and when
+  one of twos has it.
+* Issue #184 - Adding a check for CVE-2015-7577: Nested attributes rejection
+  proc bypass in Active Record.
+* Issue #183 - Adding a check for CVE-2015-7579: XSS vulnerability in
+  rails-html-sanitizer
+* Issue #182 - Adding a check for CVE-2016-0752: Possible Information Leak
+  Vulnerability in Action View
+* Issue #181 - Adding a check for CVE-2016:0753: Possible Input Validation
+  Circumvention in Active Model
+* Issue #180 - Adding a check for CVE-2015-7578: Possible XSS vulnerability in
+  rails-html-sanitizer
+* Issue #179 - Adding a check for CVE-2015-7581: Object leak vulnerability for
+  wildcard controller routes in Action Pack
+* BUGFIX in is_higher? when a version with an aux patch number was compared
+  with a one without ('1.2.3.4' vs '1.2.3') the incorrect result were
+  triggered.
+* BUGFIX in is_same_version? when a beta version is to be evaluated, during
+  comparison the beta number must be discarded.
+* BUGFIX in is_vulnerable_beta? handling situation when either safe version or
+  detected version doesn't have the beta number
+* BUGFIX in is_vulnerable_rc? handling situation when either safe version or
+  detected version doesn't have the rc number
+* BUGFIX in is_vulnerable_pre? handling situation when either safe version or
+  detected version doesn't have the pre number
+* Issue #173 handles a lot of CVE about nokogiri rubygem due to libxml version embedded on it:
+  - CVE-2015-5312: DoS in xmlStringLenDecodeEntities()
+  - CVE-2015-7497: DoS in xmlDictComputeFastQKey()
+  - CVE-2015-7498: DoS in xmlParseXmlDecl()
+  - CVE-2015-7499: In memory information disclosure due to heap-based buffer
+    overflow in the xmlGROW()
+  - CVE-2015-7500: DoS in xmlParseMisc()
+  - CVE-2015-8241: Information disclosure and DoS in xmlNextChar()
+  - CVE-2015-8242: Information disclosure and DoS in xmlSAX2TextNode()
+  - CVE-2015-8317: Information disclosure in xmlParseXMLDecl()
+* Issue #171 - Adding a check for CVE-2015-7541: colorscore Gem for Ruby
+  lib/colorscore/histogram.rb Arbitrary Command Injection
+* Issue #169 - Adding a check for CVE-2015-7519: Phusion Passenger Server
+  allows to overwrite headers in some cases
+* BUGFIX in bin/dawn when target from command line is '.'. The directory name
+  must be expanded to save results
+* Issue #177 BUGFIX. HTML reporting is broken. The line "support_path =
+  File.join(Dir.pwd, 'support')" in reporter.rb:40 is used to build the path
+  for support files (css, js) to be copied in the output directory. If you call
+  dawn using '.' as target directory name, an exeception is raised. Fixed
+  changing the line this way: "support_path = File.join(File.dirname(__FILE__),
+  '..', '..', 'support')"
+* Issue #177 BUGFIX. HTML filename creation is honored when -F flag is used.
+* Issue #177 IMPROVEMENT. As @mort666 suggested, now bootstrap and jquery are
+  loaded from CDN and specific CSS is now embedded in the HTML report in a
+  minified form.
+
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 

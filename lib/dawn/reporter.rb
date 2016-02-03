@@ -26,7 +26,7 @@ module Dawn
       puts output if @filename.nil?
 
       unless @filename.nil?
-        $logger.warn "I will use codesake.css, bootstrap.min.css and bootstrap.js stored in ./support/ directory" if @format == :html
+        # $logger.warn "I will use codesake.css, bootstrap.min.css and bootstrap.js stored in ./support/ directory" if @format == :html
         File.open(@filename, "w") do |f|
           f.puts output
         end
@@ -37,7 +37,7 @@ module Dawn
     def write_html(path, content)
       css_path = File.join(path, 'css')
       js_path = File.join(path, 'js')
-      support_path = File.join(Dir.pwd, 'support')
+      support_path = File.join(File.dirname(__FILE__), '..', '..', 'support')
 
       FileUtils.mkdir_p(File.join(path, 'css'))
       FileUtils.mkdir_p(File.join(path, 'js'))
@@ -67,13 +67,18 @@ module Dawn
     end
 
     def html_report
-      output = @engine.create_output_dir
-
+      output = @engine.create_output_dir if @filename.nil?
       html_head = "<!doctype html>\n<html>\n<head>\n<title>Dawnscanner report for #{File.basename(@engine.target)}</title>"
-      html_head += "<script src=\"./js/bootstrap.js\"></script>\n"
-      html_head += "<link href=\"./css/codesake.css\" media=\"all\" rel=\"stylesheet\" />\n"
-      html_head += "<link href=\"./css/bootstrap.min.css\" media=\"all\" rel=\"stylesheet\" />\n"
+      html_head +=" <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">"
+
+      html_head += "<script src=\"https://code.jquery.com/jquery-2.2.0.min.js\"></script>"
+      html_head += "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
+
+      html_head += "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>"
+      html_head += "<style type=\"text/css\">body{padding-top:20px;padding-bottom:40px}.container-narrow{margin:0 auto;max-width:700px}.container-narrow>hr{margin:30px 0}.jumbotron,.marketing{margin:60px 0}.jumbotron{text-align:center}.jumbotron h1{font-size:72px;line-height:1}.jumbotron .btn{font-size:21px;padding:14px 24px}.marketing p+h4{margin-top:28px}#wrap{min-height:100%;height:auto!important;height:100%;margin:0 auto -60px}#footer,#push{height:60px}#footer{background-color:#f5f5f5}@media (max-width:767px){#footer{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}}
+</style>"
       html_head += "</head>\n"
+
       html_body =  "<body>\n"
       html_body +=  ""
       html_body += "<div id=\"wrap\">\n"
@@ -144,7 +149,11 @@ module Dawn
 
       html = html_head + html_body
 
-      write_html(output,  html)
+      unless @filename.nil?
+        write(html)
+      else
+        write_html(output,  html)
+      end
       true
     end
 
