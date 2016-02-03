@@ -46,13 +46,29 @@ _latest update: Thu Jan 28 23:30:47 CET 2016_
   - CVE-2015-5312: DoS in xmlStringLenDecodeEntities()
   - CVE-2015-7497: DoS in xmlDictComputeFastQKey()
   - CVE-2015-7498: DoS in xmlParseXmlDecl()
-  - CVE-2015-7499: In memory information disclosure due to heap-based buffer overflow in the xmlGROW()
+  - CVE-2015-7499: In memory information disclosure due to heap-based buffer
+    overflow in the xmlGROW()
   - CVE-2015-7500: DoS in xmlParseMisc()
   - CVE-2015-8241: Information disclosure and DoS in xmlNextChar()
   - CVE-2015-8242: Information disclosure and DoS in xmlSAX2TextNode()
   - CVE-2015-8317: Information disclosure in xmlParseXMLDecl()
-* Issue #171 - Adding a check for CVE-2015-7541: colorscore Gem for Ruby lib/colorscore/histogram.rb Arbitrary Command Injection
-* Issue #169 - Adding a check for CVE-2015-7519: Phusion Passenger Server allows to overwrite headers in some cases
+* Issue #171 - Adding a check for CVE-2015-7541: colorscore Gem for Ruby
+  lib/colorscore/histogram.rb Arbitrary Command Injection
+* Issue #169 - Adding a check for CVE-2015-7519: Phusion Passenger Server
+  allows to overwrite headers in some cases
+* BUGFIX in bin/dawn when target from command line is '.'. The directory name
+  must be expanded to save results
+* Issue #177 BUGFIX. HTML reporting is broken. The line "support_path =
+  File.join(Dir.pwd, 'support')" in reporter.rb:40 is used to build the path
+  for support files (css, js) to be copied in the output directory. If you call
+  dawn using '.' as target directory name, an exeception is raised. Fixed
+  changing the line this way: "support_path = File.join(File.dirname(__FILE__),
+  '..', '..', 'support')"
+* Issue #177 BUGFIX. HTML filename creation is honored when -F flag is used.
+* Issue #177 IMPROVEMENT. As @mort666 suggested, now bootstrap and jquery are
+  loaded from CDN and specific CSS is now embedded in the HTML report in a
+  minified form.
+
 
 ## Version 1.5.2 - codename: Tow Mater (2015-12-16)
 
