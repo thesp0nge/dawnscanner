@@ -24,7 +24,7 @@ box:
 
 ---
 
-dawnscanner version 1.5.2 has 209 security checks loaded in its knowledge
+dawnscanner version 1.6.0 has 227 security checks loaded in its knowledge
 base. Most of them are CVE bulletins applying to gems or the ruby interpreter
 itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
 
