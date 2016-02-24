@@ -5,7 +5,12 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Feb  3 10:59:00 CET 2016_
+_latest update: Wed Feb 24 10:15:17 CET 2016_
+
+## Version 1.6.1 - codename: Tow Mater (2016-02-24)
+
+* Issue #191 - Fixing an issue, applying a pull request by @fronzeSolid, about
+  CVE-2015-1820 false positive in check description.
 
 ## Version 1.6.0 - codename: Tow Mater (2016-02-03)
 
