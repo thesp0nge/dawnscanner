@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Thu Jan 28 23:30:47 CET 2016_
+_latest update: Wed Feb  3 10:59:00 CET 2016_
 
-## Version 1.5.3 - codename: Tow Mater (2016-xx-xx)
+## Version 1.6.0 - codename: Tow Mater (2016-02-03)
 
 * Issue #186 - Adding a check for CVE-2015-7576: Timing attack vulnerability in
   basic authentication in Action Controller

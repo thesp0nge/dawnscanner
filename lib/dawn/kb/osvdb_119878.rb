@@ -8,7 +8,7 @@ module Dawn
 				# include RubyVersionCheck
 
 				def initialize
-          message="ret-client Gem for Ruby contains a flaw in abstract_response.rb related to the handling of set-cookie headers in redirection responses that allows a remote, user-assisted attacker to conduct a session fixation attack. This flaw exists because the application, when establishing a new session, does not invalidate an existing session identifier and assign a new one. With a specially crafted request fixating the session identifier, a context-dependent attacker can ensure a user authenticates with the known session identifier, allowing the session to be subsequently hijacked."
+          message="rest-client Gem for Ruby contains a flaw in abstract_response.rb related to the handling of set-cookie headers in redirection responses that allows a remote, user-assisted attacker to conduct a session fixation attack. This flaw exists because the application, when establishing a new session, does not invalidate an existing session identifier and assign a new one. With a specially crafted request fixating the session identifier, a context-dependent attacker can ensure a user authenticates with the known session identifier, allowing the session to be subsequently hijacked."
 
           super({
             :name=> "OSVDB_119878",
@@ -21,10 +21,10 @@ module Dawn
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade rest-client gem version to 2.0.0.rc1 or later.",
-            :aux_links=>[""]
+            :mitigation=>"Please upgrade rest-client gem version to 1.8.0 or later.",
+            :aux_links=>["https://github.com/rest-client/rest-client/issues/369"]
            })
-          self.safe_dependencies = [{:name=>"rest-client", :version=>['2.0.0.rc1']}]
+          self.safe_dependencies = [{:name=>"rest-client", :version=>['1.8.0', '2.0.0.rc1', '2.0.0.rc2']}]
 
 				end
 			end
