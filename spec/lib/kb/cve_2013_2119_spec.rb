@@ -6,22 +6,22 @@ describe "The CVE-2013-2119 vulnerability" do
 	end
   it "fires when vulnerable passenger version is used" do
     @check.dependencies = [{:name=>"passenger", :version=>"4.0.4"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "fires when vulnerable passenger version is used" do
     @check.dependencies = [{:name=>"passenger", :version=>"4.0.0"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "fires when vulnerable passenger version is used" do
     @check.dependencies = [{:name=>"passenger", :version=>"3.0.20"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "doesn't fire when not vulnerable passenger version is used" do
     @check.dependencies = [{:name=>"passenger", :version=>"4.0.5"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when not vulnerable passenger version is used" do
     @check.dependencies = [{:name=>"passenger", :version=>"3.0.21"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

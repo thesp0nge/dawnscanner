@@ -7,11 +7,11 @@ describe "The CVE-2014-9490 vulnerability" do
 
   it "is reported when vulnerable raven-ruby gem is used (0.12.1)" do
     @check.dependencies = [{:name=>"raven-ruby", :version=>'0.12.1'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when safe raven-ruby gem is used (0.12.2)" do
     @check.dependencies = [{:name=>"raven-ruby", :version=>'0.12.2'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 end

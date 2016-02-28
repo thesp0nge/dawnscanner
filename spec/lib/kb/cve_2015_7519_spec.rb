@@ -6,18 +6,18 @@ describe "The CVE-2015-7519 vulnerability" do
 	end
 	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"passenger", :version=>"4.0.54"}]
-		@check.vuln?.should   == true
+		expect(@check.vuln?).to   eq(true)
 	end
 	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"passenger", :version=>"5.0.12"}]
-		@check.vuln?.should   == true
+		expect(@check.vuln?).to   eq(true)
 	end
 	it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"passenger", :version=>"4.0.60"}]
-		@check.vuln?.should   == false
+		expect(@check.vuln?).to   eq(false)
 	end
 	it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"passenger", :version=>"5.0.22"}]
-		@check.vuln?.should   == false
+		expect(@check.vuln?).to   eq(false)
 	end
 end

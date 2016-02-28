@@ -21,20 +21,20 @@ describe "The security check for Ruby interpreter version" do
 
   it "fires if ruby version is vulnerable" do
     check.detected_ruby = {:version=>"1.9.2", :patchlevel=>"p10000"}
-    check.vuln?.should    == true
+    expect(check.vuln?).to    eq(true)
   end
   it "doesn't fire if ruby version is not vulnerable and patchlevel is not vulnerable" do
     check.detected_ruby = {:version=>"1.9.4", :patchlevel=>"p10000"}
-    check.vuln?.should    == false
+    expect(check.vuln?).to    eq(false)
   end
 
   it "doesn't fire if ruby version is vulnerable and patchlevel is not vulnerable" do
     check.detected_ruby = {:version=>"1.9.3", :patchlevel=>"p10000"}
-    check.vuln?.should    == false
+    expect(check.vuln?).to    eq(false)
   end
 
   it "fires if ruby version is vulnerable and patchlevel is vulnerable" do
     check.detected_ruby = {:version=>"1.9.3", :patchlevel=>"p391"}
-    check.vuln?.should    == true
+    expect(check.vuln?).to    eq(true)
   end
 end

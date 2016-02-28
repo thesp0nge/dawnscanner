@@ -6,15 +6,15 @@ describe "The CVE-2012-2139 vulnerability" do
 	end
   it "is reported when mail_gem version 2.4.3 is used" do
     @check.dependencies = [{:name=>"mail_gem", :version=>"2.4.3"}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when mail_gem version 2.3.3 is used" do
     @check.dependencies = [{:name=>"mail_gem", :version=>"2.3.3"}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
 
   it "is not reported when mail_gem version 2.4.4 is used" do
     @check.dependencies = [{:name=>"mail_gem", :version=>"2.4.4"}]
-    @check.vuln?.should == false
+    expect(@check.vuln?).to eq(false)
   end
 end

@@ -7,21 +7,21 @@ describe "The CVE-2013-5671 vulnerability" do
 
   it "is reported when a fog-dragonfly gem version 0.8.2 is detected" do
     @check.dependencies = [{:name=>"fog-dragonfly", :version=>"0.8.2"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
 
   it "is reported when a fog-dragonfly gem version 0.8.0 is detected" do
     @check.dependencies = [{:name=>"fog-dragonfly", :version=>"0.8.0"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
 
   it "is reported when a fog-dragonfly gem version 0.7.5 is detected" do
     @check.dependencies = [{:name=>"fog-dragonfly", :version=>"0.7.5"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
 
   it "is not reported when a paratrooper-pingdom gem version 0.8.3 is detected" do
     @check.dependencies = [{:name=>"fog-dragonfly", :version=>"0.8.3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

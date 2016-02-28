@@ -7,10 +7,10 @@ describe "The CVE-2014-1234 vulnerability" do
 
   it "is reported when a paratrooper-newrelic gem version 1.0.1 is detected" do
     @check.dependencies = [{:name=>"paratrooper-newrelic", :version=>"1.0.1"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a paratrooper-newrelic gem version 1.0.2 is detected" do
     @check.dependencies = [{:name=>"paratrooper-newrelic", :version=>"1.0.2"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

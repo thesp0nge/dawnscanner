@@ -6,10 +6,10 @@ describe "The CVE-2014-3482 vulnerability" do
 	end
   it "is reported when a vulnerable version it has been found (3.2.18)" do
     @check.dependencies = [{:name=>"rails", :version=>"3.2.18"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a safe version it has been found (3.2.19)" do
     @check.dependencies = [{:name=>"rails", :version=>"3.2.19"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

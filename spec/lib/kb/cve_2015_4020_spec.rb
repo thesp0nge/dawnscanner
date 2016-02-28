@@ -6,19 +6,19 @@ describe "The CVE-2015-4020 vulnerability" do
 	end
   it "is reported when the vulnerable rubygem is detected" do
     @check.my_gem_version="2.4.3"
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is reported when the vulnerable rubygem is detected" do
     @check.my_gem_version="2.2.4"
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is reported when the vulnerable rubygem is detected" do
     @check.my_gem_version="2.0.16"
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a fixed release is detected" do
     @check.my_gem_version="2.4.9"
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 end

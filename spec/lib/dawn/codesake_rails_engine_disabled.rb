@@ -5,8 +5,8 @@ describe "The Dawn engine for rails applications" do
 
   it "detects the version used in the hello_world_3.1.0 application" do
     @engine.set_target("./spec/support/hello_world_3.1.0")
-    @engine.ruby_version[:version].should == RUBY_VERSION
-    @engine.ruby_version[:patchlevel].should == "p#{RUBY_PATCHLEVEL}"
+    expect(@engine.ruby_version[:version]).to eq(RUBY_VERSION)
+    expect(@engine.ruby_version[:patchlevel]).to eq("p#{RUBY_PATCHLEVEL}")
   end
 
 end
