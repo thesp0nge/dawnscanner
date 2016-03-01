@@ -115,11 +115,11 @@ task :cve, :name do |t,args|
     file.puts "\tend"
     file.puts "\tit \"is reported when the vulnerable gem is detected\" do"
     file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\t@check.vuln?.should   == true"
+    file.puts "\t\texpect(@check.vuln?).to   eq(true)"
     file.puts "\tend"
     file.puts "\tit \"is not reported when a fixed release is detected\" do"
     file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\t@check.vuln?.should   == false"
+    file.puts "\t\texpect(@check.vuln?).to   eq(false)"
     file.puts "\tend"
     file.puts "end"
   end
@@ -130,8 +130,8 @@ task :cve, :name do |t,args|
   puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"
-  puts "  sc.should_not   be_nil"
-  puts "  sc.class.should == Dawn::Kb::#{class_name}"
+  puts "  expect(sc).not_to   be_nil"
+  puts "  expect(sc.class).to eq(Dawn::Kb::#{class_name})"
   puts "end"
 
 
@@ -186,11 +186,11 @@ task :osvdb, :name do |t,args|
     file.puts "\tend"
     file.puts "\tit \"is reported when the vulnerable gem is detected\" do"
     file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\t@check.vuln?.should   == true"
+    file.puts "\t\texpect(@check.vuln?).to   eq(true)"
     file.puts "\tend"
     file.puts "\tit \"is not reported when a fixed release is detected\" do"
     file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\t@check.vuln?.should   == false"
+    file.puts "\t\texpect(@check.vuln?).to   eq(false)"
     file.puts "\tend"
     file.puts "end"
   end
@@ -202,8 +202,8 @@ task :osvdb, :name do |t,args|
   puts "require \"dawn/kb/#{class_name.downcase}\""
   puts "it \"must have test for #{name}\" do"
   puts "  sc = kb.find(\"#{name}\")"
-  puts "  sc.should_not   be_nil"
-  puts "  sc.class.should == Dawn::Kb::#{class_name}"
+  puts "  expect(sc).not_to   be_nil"
+  puts "  expect(sc.class).to eq(Dawn::Kb::#{class_name})"
   puts "end"
 
 end

@@ -5,7 +5,7 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Wed Feb 24 10:15:17 CET 2016_
+_latest update: Tue Mar  1 23:11:10 CET 2016_
 
 ## Version 1.6.2 - codename: Tow Mater (2016-03-02)
 
@@ -13,6 +13,8 @@ _latest update: Wed Feb 24 10:15:17 CET 2016_
   vulnerability in Action Pack
 * Issue #193 - Adding a check for CVE-2016-2097: Possible Information Leak
   Vulnerability in Action View
+* Issue #192 - Applying PULL REQUEST from @jasnow about RSPEC deprecation
+  warning fix.
 
 ## Version 1.6.1 - codename: Tow Mater (2016-02-24)
 
