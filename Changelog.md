@@ -7,6 +7,11 @@ frameworks.
 
 _latest update: Wed Feb 24 10:15:17 CET 2016_
 
+## Version 1.6.2 - codename: Tow Mater (2016-03-02)
+
+* Issue #194 - Adding a check for CVE-2016-2098: Possible remote code execution
+  vulnerability in Action Pack
+
 ## Version 1.6.1 - codename: Tow Mater (2016-02-24)
 
 * Issue #191 - Fixing an issue, applying a pull request by @fronzeSolid, about
