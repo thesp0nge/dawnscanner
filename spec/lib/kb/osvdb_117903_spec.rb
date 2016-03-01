@@ -6,18 +6,18 @@ describe "The OSVDB_117903 vulnerability" do
 	end
   it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"ruby-saml", :version=>"0.7.2"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"ruby-saml", :version=>"0.8.1"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"ruby-saml", :version=>"0.7.3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"ruby-saml", :version=>"0.8.2"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

@@ -6,10 +6,10 @@ describe "The CVE-2013-1607 vulnerability" do
 	end
   it "is reported when a pdfkit gem version 0.5.2 is detected" do
     @check.dependencies = [{:name=>"pdfkit", :version=>"0.5.2"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a pdfkit gem version 0.5.3 is detected" do
     @check.dependencies = [{:name=>"pdfkit", :version=>"0.5.3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

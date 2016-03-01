@@ -6,11 +6,11 @@ describe "The OSVDB-108570 vulnerability" do
 	end
   it "is reported when a vulnerable version it has been found (3.0.23)" do
     @check.dependencies = [{:name=>"backup_checksum", :version=>"3.0.23"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a safe version it has been found (0.4.15)" do
     @check.dependencies = [{:name=>"backup_checksum", :version=>"3.0.24"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "must be filled with CVE identifier"
   it "must be filled with CVSS information"

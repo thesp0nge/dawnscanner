@@ -6,18 +6,18 @@ describe "The CVE-2012-2671 vulnerability" do
 	end
   it "is reported when ruby-cache version 0.5 is used" do
     @check.dependencies = [{:name=>"rack-cache", :version=>'0.5'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when ruby-cache version 0.8 is used" do
     @check.dependencies = [{:name=>"rack-cache", :version=>'0.8'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when ruby-cache version 1.1.1 is used" do
     @check.dependencies = [{:name=>"rack-cache", :version=>'1.1.1'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is not reported when ruby-cache version 1.1.2 is used" do
     @check.dependencies = [{:name=>"rack-cache", :version=>'1.1.2'}]
-    @check.vuln?.should == false
+    expect(@check.vuln?).to eq(false)
   end
 end
