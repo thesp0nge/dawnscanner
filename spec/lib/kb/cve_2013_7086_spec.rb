@@ -6,17 +6,17 @@ describe "The CVE-2013-7086 vulnerability" do
 	end
 	it "is detected for gem 1.0.5.3" do
     @check.dependencies = [{:name=>"webbynode", :version=>'1.0.5.3'}]
-    @check.vuln?.should  == true
+    expect(@check.vuln?).to  eq(true)
   end
 
   it "is detected for gem 1.0.4.3" do
     @check.dependencies = [{:name=>"webbynode", :version=>'1.0.4.3'}]
-    @check.vuln?.should  == true
+    expect(@check.vuln?).to  eq(true)
   end
 
   it "is not detected for gem 1.0.5.4" do
     @check.dependencies = [{:name=>"webbynode", :version=>'1.0.5.4'}]
-    @check.vuln?.should  == false
+    expect(@check.vuln?).to  eq(false)
   end
 
 end

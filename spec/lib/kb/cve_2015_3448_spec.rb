@@ -6,11 +6,11 @@ describe "The CVE-2015-3448 vulnerability" do
 	end
   it "is reported when vulnerable rest-client gem is used (1.7.2)" do
     @check.dependencies = [{:name=>"rest-client", :version=>'1.7.2'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when safe rest-client gem is used (1.7.3)" do
     @check.dependencies = [{:name=>"rest-client", :version=>'1.7.3'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 end

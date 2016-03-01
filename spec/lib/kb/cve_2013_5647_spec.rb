@@ -6,14 +6,14 @@ describe "The CVE-2013-5647 vulnerability" do
 	end
   it "fires when vulnerable sounder 1.0.1 version is userd" do
     @check.dependencies = [{:name=>"sounder", :version=>'1.0.1'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "doesn't fire when sounder not vulnerable version is used" do
     @check.dependencies = [{:name=>"sounder", :version=>'1.0.2'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when a very old sounder version is used" do
     @check.dependencies = [{:name=>"sounder", :version=>'0.9.2'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end
