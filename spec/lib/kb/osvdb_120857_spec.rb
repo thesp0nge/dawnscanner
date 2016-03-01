@@ -6,27 +6,27 @@ describe "The OSVDB_120857 vulnerability" do
 	end
   it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"refile", :version=>"0.5.2"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"refile", :version=>"0.5.4"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"refile", :version=>"0.4.4"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"refile", :version=>"0.3.4"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"refile", :version=>"0.2.4"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"refile", :version=>"0.1.4"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 end

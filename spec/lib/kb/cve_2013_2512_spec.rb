@@ -6,10 +6,10 @@ describe "The CVE-2013-2512 vulnerability" do
 	end
   it "is reported when a ftpd gem version 0.2.1 is detected" do
     @check.dependencies = [{:name=>"ftpd", :version=>"0.2.1"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a ftpd gem version 0.2.2 is detected" do
     @check.dependencies = [{:name=>"ftpd", :version=>"0.2.2"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

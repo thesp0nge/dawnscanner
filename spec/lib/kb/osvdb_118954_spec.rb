@@ -6,15 +6,15 @@ describe "The OSVDB_118954 vulnerability" do
 	end
   it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"rails", :version=>"4.2.0"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"rails", :version=>"4.2.1.rc3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"rails", :version=>"4.0.3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 end

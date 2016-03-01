@@ -6,11 +6,11 @@ describe "The CVE-2015-3224 vulnerability" do
 	end
   it "is reported when vulnerable web-console gem is used (2.1.2)" do
     @check.dependencies = [{:name=>"web-console", :version=>'2.1.2'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when safe rack gem is used (2.1.3)" do
     @check.dependencies = [{:name=>"web-console", :version=>'2.1.3'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 end

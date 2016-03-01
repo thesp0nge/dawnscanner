@@ -7,11 +7,11 @@ describe "The OSVDB-108563 vulnerability" do
 
   it "is reported when a vulnerable version it has been found (1.0.0)" do
     @check.dependencies = [{:name=>"gyazo", :version=>"1.0.0"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a safe version it has been found (0.4.15)" do
     @check.dependencies = [{:name=>"gyazo", :version=>"1.0.1"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "must be filled with CVE identifier"
   it "must be filled with CVSS information"
