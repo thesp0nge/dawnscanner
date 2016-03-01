@@ -11,6 +11,8 @@ _latest update: Wed Feb 24 10:15:17 CET 2016_
 
 * Issue #194 - Adding a check for CVE-2016-2098: Possible remote code execution
   vulnerability in Action Pack
+* Issue #193 - Adding a check for CVE-2016-2097: Possible Information Leak
+  Vulnerability in Action View
 
 ## Version 1.6.1 - codename: Tow Mater (2016-02-24)
 

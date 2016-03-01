@@ -264,6 +264,7 @@ require "dawn/kb/cve_2015_8317"
 require "dawn/kb/cve_2016_0751"
 require "dawn/kb/cve_2016_0752"
 require "dawn/kb/cve_2016_0753"
+require "dawn/kb/cve_2016_2097"
 require "dawn/kb/cve_2016_2098"
 
 # OSVDB
@@ -564,6 +565,7 @@ module Dawn
           Dawn::Kb::CVE_2016_0751.new,
           Dawn::Kb::CVE_2016_0752.new,
           Dawn::Kb::CVE_2016_0753.new,
+          Dawn::Kb::CVE_2016_2097.new,
           Dawn::Kb::CVE_2016_2098.new,
 
 
