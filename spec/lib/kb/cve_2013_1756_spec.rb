@@ -6,18 +6,18 @@ describe "The CVE-2013-1756 vulnerability" do
 	end
   it "is reported when dragonfly version 0.9.12 is used" do
     @check.dependencies = [{:name=>"dragonfly", :version=>'0.9.12'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when dragonfly version 0.8.12 is used" do
     @check.dependencies = [{:name=>"dragonfly", :version=>'0.8.12'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when dragonfly version 0.7.12 is used" do
     @check.dependencies = [{:name=>"dragonfly", :version=>'0.7.12'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is not reported when dragonfly version 0.9.13 is used" do
     @check.dependencies = [{:name=>"dragonfly", :version=>'0.9.13'}]
-    @check.vuln?.should == false
+    expect(@check.vuln?).to eq(false)
   end
 end

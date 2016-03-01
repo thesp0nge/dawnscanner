@@ -6,18 +6,18 @@ describe "The CVE-2013-0162 vulnerability" do
 	end
   it "is reported when ruby_parser version 1.x is used" do
     @check.dependencies = [{:name=>"ruby_parser", :version=>'1.4.5'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when ruby_parser version 2.x is used" do
     @check.dependencies = [{:name=>"ruby_parser", :version=>'2.4.5'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is reported when ruby_parser version 3.0.x is used" do
     @check.dependencies = [{:name=>"ruby_parser", :version=>'3.0.5'}]
-    @check.vuln?.should == true
+    expect(@check.vuln?).to eq(true)
   end
   it "is not reported when ruby_parser version 3.1.1 is used" do
     @check.dependencies = [{:name=>"ruby_parser", :version=>'3.1.1'}]
-    @check.vuln?.should == false
+    expect(@check.vuln?).to eq(false)
   end
 end

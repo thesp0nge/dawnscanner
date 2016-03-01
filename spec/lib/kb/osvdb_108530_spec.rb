@@ -6,15 +6,15 @@ describe "The OSVDB-108530 vulnerability" do
 	end
   it "is reported when a vulnerable version it has been found (1.0.3.rc2)" do
     @check.dependencies = [{:name=>"kajam", :version=>"1.0.3.rc2"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a safe version it has been found (1.0.3)" do
     @check.dependencies = [{:name=>"kajam", :version=>"1.0.3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "is not reported when a safe version it has been found (1.0.4)" do
     @check.dependencies = [{:name=>"kajam", :version=>"1.0.4"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
   it "must be filled with CVE identifier"

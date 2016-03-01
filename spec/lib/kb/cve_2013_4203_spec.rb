@@ -6,10 +6,10 @@ describe "The CVE-2013-4203 vulnerability" do
 	end
   it "is reported when a vulnerable rgpg version is detected (0.2.2)" do
     @check.dependencies = [{:name=>"rgpg", :version=>"0.2.2"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a safe rgpg version is detected (0.2.3)" do
     @check.dependencies = [{:name=>"rgpg", :version=>"0.2.3"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

@@ -7,33 +7,33 @@ describe "The CVE-2013-4457 vulnerability" do
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.4.0'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.4.1'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.4.2'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.5.0'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.5.1'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is detected if vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.5.2'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
 
   it "is skipped if non vulnerable version of cocaine rubygem is detected" do
     @check.dependencies=[{:name=>"cocaine", :version=>'0.3.2'}]
     # @check.debug = true
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 
 

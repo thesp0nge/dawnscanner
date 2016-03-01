@@ -7,10 +7,10 @@ describe "The CVE-2013-4593 vulnerability" do
 
   it "is reported when a omniauth-facebook gem version 1.5.0 is detected" do
     @check.dependencies = [{:name=>"omniauth-facebook", :version=>"1.5.0"}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "is not reported when a omniauth-facebook gem version 1.5.1 is detected" do
     @check.dependencies = [{:name=>"omniauth-facebook", :version=>"1.5.1"}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
 end

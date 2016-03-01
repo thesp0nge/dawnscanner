@@ -6,39 +6,39 @@ describe "The CVE-2011-4319 vulnerability" do
 	end
   it "fires when vulnerable rails version it has been found (2.3.12)" do
     @check.dependencies = [{:name=>"rails", :version=>'2.3.12'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "fires when vulnerable rails version it has been found (3.0.10)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.0.10'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "fires when vulnerable rails version it has been found (3.1.1)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.0.10'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
   it "doesn't fire when safe rails version it has been found (2.3.13)" do
     @check.dependencies = [{:name=>"rails", :version=>'2.3.13'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when safe rails version it has been found (2.3.14)" do
     @check.dependencies = [{:name=>"rails", :version=>'2.3.14'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when safe rails version it has been found (3.0.11)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.0.11'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when safe rails version it has been found (3.0.12)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.0.12'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when safe rails version it has been found (3.1.2)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.1.2'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
   it "doesn't fire when safe rails version it has been found (3.2.0)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.2.0'}]
-    @check.vuln?.should   == false
+    expect(@check.vuln?).to   eq(false)
   end
           # self.safe_dependencies = [{:name=>"rails", :version=>['2.3.13', '3.0.11', '3.1.2']}]
 end
