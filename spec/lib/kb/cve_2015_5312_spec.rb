@@ -6,26 +6,26 @@ describe "The CVE-2015-5312 vulnerability" do
 	end
 	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"nokogiri", :version=>"1.6.5"}]
-		@check.vuln?.should   == true
+		expect(@check.vuln?).to   eq(true)
 	end
 	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"nokogiri", :version=>"1.6.0"}]
-		@check.vuln?.should   == true
+		expect(@check.vuln?).to   eq(true)
 	end
 	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"nokogiri", :version=>"1.6.7"}]
-		@check.vuln?.should   == true
+		expect(@check.vuln?).to   eq(true)
 	end
 	it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"nokogiri", :version=>"1.6.7.1"}]
-		@check.vuln?.should   == false
+		expect(@check.vuln?).to   eq(false)
 	end
 	it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"nokogiri", :version=>"1.5.6"}]
-		@check.vuln?.should   == false
+		expect(@check.vuln?).to   eq(false)
 	end
 	it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"nokogiri", :version=>"1.4.6"}]
-		@check.vuln?.should   == false
+		expect(@check.vuln?).to   eq(false)
 	end
 end

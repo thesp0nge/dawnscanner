@@ -6,6 +6,6 @@ describe "The CVE-2013-0263 vulnerability" do
 	end
   it "is not reported when rack version 1.4.5 is used" do
     @check.dependencies = [{:name=>"rack", :version=>'1.4.5'}]
-    @check.vuln?.should == false
+    expect(@check.vuln?).to eq(false)
   end
 end

@@ -6,6 +6,6 @@ describe "The CVE-2013-2105 vulnerability" do
 	end
   it "is reported when show_in_browser vulnerable version is reported (0.0.3)" do
     @check.dependencies = [{:name=>'show_in_browser', :version=>'0.0.3'}]
-    @check.vuln?.should   == true
+    expect(@check.vuln?).to   eq(true)
   end
 end
