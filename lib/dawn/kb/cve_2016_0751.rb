@@ -22,7 +22,9 @@ module Dawn
             :mitigation=>"Please upgrade actionpack gem to version 3.2.22.1, 4.1.14.1, 4.2.5.1, 5.0.0.beta1.1 or later.",
             :aux_links=>["http://securitytracker.com/id/1034816"]
            })
-          self.safe_dependencies = [{:name=>"actionpack", :version=>['3.2.22.1', '4.1.14.1', '4.2.5.1', '5.0.0.beta1.1']}]
+          self.save_minor=true
+          self.save_major=true
+          self.safe_dependencies = [{:name=>"actionpack", :version=>['3.2.22.1', '4.0.9999', '4.1.14.1', '4.2.5.1', '5.0.0.beta1.1']}]
 
 				end
 			end

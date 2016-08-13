@@ -17,6 +17,10 @@ it "is reported when the vulnerable gem is detected" do
 		expect(@check.vuln?).to   eq(true)
 	end
 	it "is reported when the vulnerable gem is detected" do
+    @check.dependencies = [{:name=>"actionpack", :version=>"4.0.3"}]
+		expect(@check.vuln?).to   eq(true)
+	end
+	it "is reported when the vulnerable gem is detected" do
     @check.dependencies = [{:name=>"actionpack", :version=>"3.2.22"}]
 		expect(@check.vuln?).to   eq(true)
 	end
