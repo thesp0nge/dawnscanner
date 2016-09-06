@@ -20,11 +20,13 @@ module Dawn
             :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
             :mitigation=>"Please upgrade activerecord gem to version 3.2.22.1, 4.1.14.1, 4.2.5.1, 5.0.0.beta1.1 or later.",
-            :aux_links=>["http://securitytracker.com/id/1034816"]
+            :aux_links=>["http://securitytracker.com/id/1034816", "https://groups.google.com/forum/#!topic/rubyonrails-security/cawsWcQ6c8g"]
            })
           self.save_minor=true
           self.save_major=true
-          self.safe_dependencies = [{:name=>"activerecord", :version=>['3.2.22.1', '4.1.14.1', '4.2.5.1', '5.0.0.beta1.1']}]
+          self.debug = true
+          self.safe_dependencies = [{:name=>"activerecord", :version=>['3.1.9999','3.2.22.1', '4.1.14.1', '4.2.5.1', '5.0.0.beta1.1']}]
+          self.not_affected = {:name=>"actionpack", :version=>['3.0.x']}
 
 				end
 			end
