@@ -76,7 +76,7 @@ engine  = nil
 
 options = Dawn::Core.read_conf(Dawn::Core.find_conf(true))
 check = ""
-guess = {:name=>"", :version=>"", :connected_gems=>[]}
+guess = {:name=>"", :version=>"", :connected_gems=>[], :signature=>""}
 
 ###############################################################################
 # CLI argument start.
@@ -193,6 +193,10 @@ target=ARGV.shift
 target = File.expand_path(".") if target == "."
 
 $logger.helo APPNAME, Dawn::VERSION
+
+## Dynamic BUG list prompt
+$logger.bug("GEMFILE LOCK is always set, so first branch is always executed. Please refactor dependencies check", __FILE__, __LINE__)
+
 r = Dawn::Registry.new
 
 unless Dir.exist?(Dawn::Core.registry_db_folder)

@@ -63,7 +63,7 @@ module Dawn
     # gems it founds in Gemfile.lock without creating an engine.
 
     def self.guess_mvc(gemfile_lock)
-      ret = {:name=>"", :version=>"", :connected_gems=>[]}
+      ret = {:name=>"", :version=>"", :connected_gems=>[], :signature=>""}
 
       a = []
       my_dir = Dir.pwd
@@ -76,6 +76,16 @@ module Dawn
         ret = {:name=>s.name, :version=>s.version.to_s} if s.name == "rails" || s.name == "sinatra"
         a << {:name=>s.name, :version=>s.version.to_s}
       end
+
+      # 20160517 - In order to save results in user's home directory, even in
+      # case of a single Gemfile.lock file analysis, so we don't have a project
+      # root to use as results main folder, we calculate sha1 of the
+      # Gemfile.lock, to be used instead.
+      #
+      # I know we read Gemfile.lock twice for this :-(
+
+      require 'digest/sha1'
+      ret[:signature] =  Digest::SHA1.new.hexdigest(File.read(File.basename(gemfile_lock)))
 
       ret[:connected_gems]=a
       ret

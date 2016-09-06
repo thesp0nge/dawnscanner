@@ -100,6 +100,18 @@ module Dawn
         debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}" 
         $logger.err "there are no connected gems... it seems Gemfile.lock parsing failed" if options[:guessed_mvc][:connected_gems].empty?
         @name = options[:guessed_mvc][:name]
+        $logger.error("!!! SIGNATURE = #{options[:guessed_mvc][:signature]}")
+
+        # 20160517 - In order to save results in user's home directory, even in
+        # case of a single Gemfile.lock file analysis, so we don't have a project
+        # root to use as results main folder, we calculate sha1 of the
+        # Gemfile.lock, to be used instead.
+        #
+        # In Core, we calculated sha1 signature of the Gemfile.lock file and
+        # here we use the signature as results root directory name where to
+        # store results.
+        #
+        @target = options[:guessed_mvc][:signature] if @target.nil?
         @mvc_version = options[:guessed_mvc][:version]
         @connected_gems = options[:guessed_mvc][:connected_gems]
         @gemfile_lock_sudo = true
@@ -242,6 +254,7 @@ module Dawn
           i+=1
         end
       end
+      $logger.debug("I'll proudly save this scan results into: #{@output_dir_name}")
       @output_dir_name
     end
 

@@ -14,7 +14,7 @@ module Dawn
     end
 
     def report
-      return ascii_plain_report    unless @engine.gemfile_lock.nil?
+      # return ascii_plain_report    unless @engine.gemfile_lock.nil?
       return ascii_tabular_report  if @format == :tabular
       return json_report           if @format == :json
       return ascii_plain_report    if @format == :console
