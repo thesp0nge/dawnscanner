@@ -1,6 +1,6 @@
 # Dawnscanner Knowledge base
 
-The knowledge base library for dawnscanner version 1.6.1 contains 229 security checks.
+The knowledge base library for dawnscanner version 1.6.g56c1269 contains 229 security checks.
 ---
 * Simple Form XSS - 20131129: There is a XSS vulnerability on Simple Form's label, hint and error options. When Simple Form creates a label, hint or error message it marks the text as being HTML safe, even though it may contain HTML tags. In applications where the text of these helpers can be provided by the users, malicious values can be provided and Simple Form will mark it as safe.
 * [CVE-2004-0755](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0755): The FileStore capability in CGI::Session for Ruby before 1.8.1, and possibly PStore, creates files with insecure permissions, which can allow local users to steal session information and hijack sessions.
@@ -479,4 +479,4 @@ Setting this to true will essentially strip out any host information.
 This check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME
 
 
-_Last updated: Mon 02 May 08:41:59 CEST 2016_
+_Last updated: Tue 06 Sep 22:24:44 CEST 2016_
