@@ -21,6 +21,7 @@ module Dawn
            })
           self.save_minor = true
           self.safe_dependencies = [{:name=>"activesupport", :version=>['4.1.12', '4.2.3']}]
+          self.save_major = true
 				end
 			end
 		end

@@ -2,7 +2,6 @@ require 'spec_helper'
 describe "The CVE-2015-3227 vulnerability" do
 	before(:all) do
 		@check = Dawn::Kb::CVE_2015_3227.new
-		@check.debug = true
 	end
   it "is reported when vulnerable active_support gem is used (4.1.11)" do
     @check.dependencies = [{:name=>"activesupport", :version=>'4.1.11'}]
@@ -24,4 +23,9 @@ describe "The CVE-2015-3227 vulnerability" do
     @check.dependencies = [{:name=>"activesupport", :version=>'4.2.3'}]
     expect(@check.vuln?).to   eq(false)
   end
+  it "is not reported when safe active_support gem is used (3.2.22)" do
+    @check.dependencies = [{:name=>"activesupport", :version=>'3.2.22'}]
+    expect(@check.vuln?).to   eq(false)
+  end
+
 end

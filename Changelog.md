@@ -8,6 +8,7 @@ frameworks.
 _latest update: Tue Sep 27 19:41:28 CEST 2016_
 
 * Issue #199 - CVE-2015-4020 seems to give the wrong Solution
+* Issue #168 - Dawn fails for many CVEs that rails 3.2.22 is not vulnerable to
 
 ## Version 1.6.3 - codename: Tow Mater (2016-09-06)
 

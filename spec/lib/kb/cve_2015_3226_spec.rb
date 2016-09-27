@@ -30,4 +30,6 @@ describe "The CVE-2015-3226 vulnerability" do
     expect(@check.vuln?).to   eq(false)
   end
 
+
+
 end
