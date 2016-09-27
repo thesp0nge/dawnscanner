@@ -20,6 +20,7 @@ module Dawn
            })
 
            self.safe_dependencies = [{:name=>"rails", :version=>['3.2.20', '4.0.11', '4.1.7', '4.2.0.beta3']}]
+          self.save_major = true
 				end
 			end
 		end

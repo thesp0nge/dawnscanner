@@ -25,4 +25,9 @@ describe "The CVE-2014-0080 vulnerability" do
     @check.dependencies = [{:name=>"rails", :version=>'4.0.3'}]
     expect(@check.vuln?).to eq(false)
   end
+  it "doesn't affect version 3.2.22" do 
+    @check.dependencies = [{:name=>"rails", :version=>'3.2.22'}]
+    expect(@check.vuln?).to eq(false)
+  end
+
 end
