@@ -207,6 +207,8 @@ The knowledge base library for dawnscanner version 1.6.g56c1269 contains 229 sec
 * CVE-2013-0285: The nori gem 2.0.x before 2.0.2, 1.1.x before 1.1.4, and 1.0.x before 1.0.3 for Ruby does not properly restrict casts of string values, which allows remote attackers to conduct object-injection attacks and execute arbitrary code, or cause a denial of service (memory and CPU consumption) involving nested XML entity references, by leveraging Action Pack support for (1) YAML type conversion or (2) Symbol type conversion, a similar vulnerability to CVE-2013-0156.
 * [CVE-2013-0333](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0333): lib/active_support/json/backends/yaml.rb in Ruby on Rails 2.3.x before 2.3.16 and 3.0.x before 3.0.20 does not properly convert JSON data to YAML data for processing by a YAML parser, which allows remote attackers to execute arbitrary code, conduct SQL injection attacks, or bypass authentication via crafted data that triggers unsafe decoding, a different vulnerability than CVE-2013-0156.
 * CVE-2013-0333: lib/active_support/json/backends/yaml.rb in Ruby on Rails 2.3.x before 2.3.16 and 3.0.x before 3.0.20 does not properly convert JSON data to YAML data for processing by a YAML parser, which allows remote attackers to execute arbitrary code, conduct SQL injection attacks, or bypass authentication via crafted data that triggers unsafe decoding, a different vulnerability than CVE-2013-0156.
+* [CVE-2013-0334](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0334): CVE-2013-0334: Bundler Gem for Ruby Multiple Top-level Source Lines Gemfile Handling Gem Installation Spoofing
+* CVE-2013-0334: CVE-2013-0334: Bundler Gem for Ruby Multiple Top-level Source Lines Gemfile Handling Gem Installation Spoofing
 * [CVE-2013-1607](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1607): PDFKit Gem for Ruby contains a flaw that is due to the program failing to properly validate input during the handling of parameters when generating PDF files. This may allow a remote attacker to potentially execute arbitrary code via the pdfkit generation options.
 * CVE-2013-1607: PDFKit Gem for Ruby contains a flaw that is due to the program failing to properly validate input during the handling of parameters when generating PDF files. This may allow a remote attacker to potentially execute arbitrary code via the pdfkit generation options.
 * [CVE-2013-1655](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1655): Puppet 2.7.x before 2.7.21 and 3.1.x before 3.1.1, when
@@ -479,4 +481,8 @@ Setting this to true will essentially strip out any host information.
 This check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME
 
 
+<<<<<<< HEAD
 _Last updated: Tue 06 Sep 22:24:44 CEST 2016_
+=======
+_Last updated: Tue 06 Sep 22:42:45 CEST 2016_
+>>>>>>> add_contributing

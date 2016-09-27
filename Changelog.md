@@ -12,6 +12,7 @@ _latest update: Tue Sep 27 19:41:28 CEST 2016_
 ## Version 1.6.3 - codename: Tow Mater (2016-09-06)
 
 * Issue #107 - Applying PULL REQUEST from @MKgridSec about CVE-2013-0334 check
+
 * Issue #196 - Applying PULL REQUEST from @MKgridSec about CVE-2016-0751
   incorrectly flagged
 * Issue #197 - Applying PULL REQUEST from @MKgridSec about CVE-2016-2098
