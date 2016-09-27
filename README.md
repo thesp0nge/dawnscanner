@@ -305,31 +305,10 @@ Thank you.
 
 [Matteo](https://github.com/matteocollina): for ideas on API and their usage with [github.com](https://github.com) hooks
 
-## Contribute to dawnscannerscanner
-
-Are you interested in contributing to dawnscanner project? Great, here is
-some very basic rules in order to make rocking pull requests.
-
-First of all, I use the branching model described in [this
-post](http://nvie.com/posts/a-successful-git-branching-model/). There are two
-major branches:
-
-* master: it contains in every moment the code for the latest dawnscanner
-  released gem. You can't make branches from here unless you're working on a
-  bugfix.
-* development: it contains the unstable code that is going to be the next
-  dawnscanner realease. You start from here. Pick a task on the Roadmap.md
-  and create a separated branch to work on your feature to. When you're ready
-  (remember to include also spec files), submit your pull request. If the code
-  will be fine, it will be merged into the development tree ready to be include
-  in upcoming gem version.
-
-No branch from master it would be analyzed unless they are related to bugfix.
-In this case, the branch name must be something like _issue\_#xx\_description_
 
 ## LICENSE
 
-Copyright (c) 2013-2015 Paolo Perego <paolo@dawnscanner.org>
+Copyright (c) 2013-2016 Paolo Perego <paolo@dawnscanner.org>
 
 MIT License
 
