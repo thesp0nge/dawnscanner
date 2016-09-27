@@ -23,7 +23,7 @@ module Dawn
             :applies=>["rails", "sinatra", "padrino"],
             :kind=>Dawn::KnowledgeBase::GEM_CHECK,
             :message=>message,
-            :mitigation=>"Please upgrade redcarpet gem to version 3.2.3 or later.",
+            :mitigation=>"Please upgrade rubygem to version 3.2.3 or later.",
             :aux_links=>[""]
            })
 
