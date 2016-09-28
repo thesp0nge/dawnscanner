@@ -16,7 +16,7 @@ module Dawn
             :message=>message,
             :attack_pattern => ["protect_from_forgery"],
             :negative_search=>true,
-            :mitigation=>"Make sure you are using Rails protect_from_forgery facilities in application_controller.rMake sure you are using Rails protect_from_forgery facilities in application_controller.rb",
+            :mitigation=>"Make sure you are using Rails protect_from_forgery facilities in application_controller.rb",
             :severity=>:info,
             :check_family=>:owasp_ror_cheatsheet
           })
