@@ -15,11 +15,11 @@
             :applies=>["rails"],
             :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
             :message=>message,
-            :mitigation=>"A new version for rack-ssl version it has been released. Pleas upgrade at least to version 1.4.0 or higher.",
+            :mitigation=>"A new version for rack-ssl version it has been released. Pleas upgrade at least to version 1.3.4 or higher.",
             :aux_links=>["http://seclists.org/oss-sec/2014/q1/594"]
            })
 
-           self.safe_dependencies = [{:name=>"rack-ssl", :version=>['1.4.0']}]
+           self.safe_dependencies = [{:name=>"rack-ssl", :version=>['1.3.4']}]
 				end
 			end
 		end
