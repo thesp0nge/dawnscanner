@@ -7,6 +7,12 @@ frameworks.
 
 _latest update: Tue Sep 27 23:32:32 CEST 2016_
 
+## Version 1.6.5 - codename: Tow Mater (2016-09-30)
+
+* Issue #212 - CVE-2014-2538 is marked as being vulnerable to rack-ssl 1.3.4.
+  The check was triggered for rack-ssl version < 1.4.0. However 1.3.4 is marked
+  as safe, so the check has to be changed as well.
+
 ## Version 1.6.4 - codename: Tow Mater (2016-09-27)
 
 * Issue #199 - CVE-2015-4020 seems to give the wrong Solution
