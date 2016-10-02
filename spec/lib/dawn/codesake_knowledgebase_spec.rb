@@ -1184,4 +1184,9 @@ it "must have test for OSVDB_132234" do
   expect(sc).not_to   be_nil
   expect(sc.class).to eq(Dawn::Kb::OSVDB_132234)
 end
+it "must have test for CVE-2016-6317" do
+  sc = kb.find("CVE-2016-6317")
+  expect(sc).not_to   be_nil
+  expect(sc.class).to eq(Dawn::Kb::CVE_2016_6317)
+end
 end

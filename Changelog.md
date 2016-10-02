@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Sun Oct  2 19:57:17 CEST 2016_
 
+* Adding a check for CVE-2016-6317: Unsafe Query Generation Risk in Active
+  Record
 * Adding a check for CVE-2016-6582: Doorkeeper gem does not revoke tokens &
   uses wrong auth/auth method
 * Issue #172 - Adding a check for OSVDB-132234: rack-attack Gem for Ruby
