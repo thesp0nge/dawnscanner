@@ -7,6 +7,8 @@ frameworks.
 
 _latest update: Sun Oct  2 19:57:17 CEST 2016_
 
+* Adding a check for CVE-2016-6582: Doorkeeper gem does not revoke tokens &
+  uses wrong auth/auth method
 * Issue #172 - Adding a check for OSVDB-132234: rack-attack Gem for Ruby
   missing normalization before request path processing. Please note that OSVDB
   it has been shutted down, however I was not able to find a CVE entry for
