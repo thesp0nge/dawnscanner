@@ -5,7 +5,12 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Sep 27 23:32:32 CEST 2016_
+_latest update: Sun Oct  2 19:57:17 CEST 2016_
+
+* Issue #172 - Adding a check for OSVDB-132234: rack-attack Gem for Ruby
+  missing normalization before request path processing. Please note that OSVDB
+  it has been shutted down, however I was not able to find a CVE entry for
+  this.
 
 ## Version 1.6.5 - codename: Tow Mater (2016-09-30)
 
