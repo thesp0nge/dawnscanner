@@ -5,8 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Sun Oct  2 19:57:17 CEST 2016_
+_latest update: Sun Oct  2 22:34:43 CEST 2016_
 
+* Adding a check for CVE-2016-6316: Possible XSS Vulnerability in Action View
 * Adding a check for CVE-2016-6317: Unsafe Query Generation Risk in Active
   Record
 * Adding a check for CVE-2016-6582: Doorkeeper gem does not revoke tokens &

@@ -267,6 +267,7 @@ require "dawn/kb/cve_2016_0752"
 require "dawn/kb/cve_2016_0753"
 require "dawn/kb/cve_2016_2097"
 require "dawn/kb/cve_2016_2098"
+require "dawn/kb/cve_2016_6316"
 require "dawn/kb/cve_2016_6317"
 require "dawn/kb/cve_2016_6582"
 
@@ -572,6 +573,7 @@ module Dawn
           Dawn::Kb::CVE_2016_0753.new,
           Dawn::Kb::CVE_2016_2097.new,
           Dawn::Kb::CVE_2016_2098.new,
+          Dawn::Kb::CVE_2016_6316.new,
           Dawn::Kb::CVE_2016_6317.new,
           Dawn::Kb::CVE_2016_6582.new,
 
