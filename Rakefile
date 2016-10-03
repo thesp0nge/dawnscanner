@@ -280,6 +280,22 @@ namespace :kb do
 
   end
 
+  desc 'Transform all checks to YAML file'
+  task :to_yaml do
+    YAML_KB = File.join(Dir.pwd, 'db')
+    FileUtils.rm_rf YAML_KB
+    FileUtils.mkdir_p YAML_KB
+
+    Dawn::KnowledgeBase.new.all.each do |check|
+      filename = File.join(YAML_KB, check.name, '.yml')
+      open(filename, 'w') do |f|
+        f.puts(check.to_yaml)
+      end
+      puts "#{filename} created"
+    end
+
+  end
+
   desc 'Creates a KnowledgeBase.md file'
   task :create do
     checks = Dawn::KnowledgeBase.new.all
