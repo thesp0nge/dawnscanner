@@ -7,6 +7,7 @@ frameworks.
 
 _latest update: Sun Oct  2 22:34:43 CEST 2016_
 
+* Changed config filename to dawnscanner.yml
 * Adding a check for CVE-2016-5697: XML signature wrapping attack in ruby-saml
 * Adding a check for CVE-2016-6316: Possible XSS Vulnerability in Action View
 * Adding a check for CVE-2016-6317: Unsafe Query Generation Risk in Active

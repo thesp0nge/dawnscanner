@@ -1,5 +1,6 @@
 ---
 config:
+  :kb: yaml
   :verbose: false
   :output: console
   :mvc: ''
