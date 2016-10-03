@@ -287,7 +287,10 @@ namespace :kb do
     FileUtils.mkdir_p YAML_KB
 
     Dawn::KnowledgeBase.new.all.each do |check|
-      filename = File.join(YAML_KB, check.name, '.yml')
+      out_dir = File.join(YAML_KB, check.kind.to_s)
+      FileUtils.mkdir_p(out_dir) unless Dir.exists? out_dir
+
+      filename = File.join(out_dir, check.name.gsub(" ", "_").gsub("-", "_") + '.yml')
       open(filename, 'w') do |f|
         f.puts(check.to_yaml)
       end
