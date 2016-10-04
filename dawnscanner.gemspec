@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.3'
 
+  gem.add_dependency 'bundler'
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
   gem.add_dependency 'ruby_parser'
