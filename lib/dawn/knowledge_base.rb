@@ -621,7 +621,7 @@ module Dawn
 
           ret = []
           ret += @aux_checks
-          ret += @cve_security_checks         if @enabled_checks.include?(:cve_bulletin)
+          ret += @cve_security_checks         if @enabled_checks.include?(:bulletin)
           ret += @owasp_ror_cheatsheet_checks if @enabled_checks.include?(:owasp_ror_cheatsheet)
           ret += @code_quality_checks         if @enabled_checks.include?(:code_quality)
 

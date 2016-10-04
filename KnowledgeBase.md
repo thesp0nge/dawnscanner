@@ -1,6 +1,6 @@
 # Dawnscanner Knowledge base
 
-The knowledge base library for dawnscanner version 1.6.3 contains 230 security checks.
+The knowledge base library for dawnscanner version 1.6.5 contains 235 security checks.
 ---
 * Simple Form XSS - 20131129: There is a XSS vulnerability on Simple Form's label, hint and error options. When Simple Form creates a label, hint or error message it marks the text as being HTML safe, even though it may contain HTML tags. In applications where the text of these helpers can be provided by the users, malicious values can be provided and Simple Form will mark it as safe.
 * [CVE-2004-0755](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0755): The FileStore capability in CGI::Session for Ruby before 1.8.1, and possibly PStore, creates files with insecure permissions, which can allow local users to steal session information and hijack sessions.
@@ -421,6 +421,28 @@ XML documents with carefully crafted entity expansion strings which can cause th
 controller or a view may be vulnerable to a code injection.
 * CVE-2016-2098: There is a possible remote code execution vulnerability in Action Pack. Applications that pass unverified user input to the render method in a
 controller or a view may be vulnerable to a code injection.
+* [CVE-2016-5697](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5697): ruby-saml prior to version 1.3.0 is vulnerable to an XML signature wrapping attack in the specific scenario where there was a signature that referenced at the same time 2 elements (but past the scheme validator process since 1 of the element was inside the encrypted assertion).
+* CVE-2016-5697: ruby-saml prior to version 1.3.0 is vulnerable to an XML signature wrapping attack in the specific scenario where there was a signature that referenced at the same time 2 elements (but past the scheme validator process since 1 of the element was inside the encrypted assertion).
+* [CVE-2016-6316](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6316): Text declared as "HTML safe" when passed as an attribute value to a tag helper will not have quotes escaped which can lead to an XSS attack.
+* CVE-2016-6316: Text declared as "HTML safe" when passed as an attribute value to a tag helper will not have quotes escaped which can lead to an XSS attack.
+* [CVE-2016-6317](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6317): Due to the way Active Record interprets parameters in combination with the way that JSON parameters are parsed, it is possible for an attacker to issue unexpected database queries with “IS NULL” or empty where clauses. This issue does not let an attacker insert arbitrary values into an SQL query, however they can cause the query to check for NULL or eliminate a WHERE clause when most users wouldn’t expect it.
+* CVE-2016-6317: Due to the way Active Record interprets parameters in combination with the way that JSON parameters are parsed, it is possible for an attacker to issue unexpected database queries with “IS NULL” or empty where clauses. This issue does not let an attacker insert arbitrary values into an SQL query, however they can cause the query to check for NULL or eliminate a WHERE clause when most users wouldn’t expect it.
+* [CVE-2016-6582](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6582): Doorkeeper failed to implement OAuth 2.0 Token Revocation (RFC 7009) in the following ways:
+
+Public clients making valid, unauthenticated calls to revoke a token would not have their token revoked
+Requests were not properly authenticating the client credentials but were, instead, looking at the access token in a second location
+Because of 2, the requests were also not authorizing confidential clients’ ability to revoke a given token. It should only revoke tokens that belong to it.
+The security implication is: OAuth 2.0 clients who "log out" a user expect to have the corresponding access & refresh tokens revoked, preventing an attacker who may have already hijacked the session from continuing to impersonate the victim. Because of the bug described above, this is not the case. As far as OWASP is concerned, this counts as broken authentication design.
+
+MITRE has assigned CVE-2016-6582 due to the security issues raised. An attacker, thanks to 1, can replay a hijacked session after a victim logs out/revokes their token. Additionally, thanks to 2 & 3, an attacker via a compromised confidential client could "grief" other clients by revoking their tokens (albeit this is an exceptionally narrow attack with little value).
+* CVE-2016-6582: Doorkeeper failed to implement OAuth 2.0 Token Revocation (RFC 7009) in the following ways:
+
+Public clients making valid, unauthenticated calls to revoke a token would not have their token revoked
+Requests were not properly authenticating the client credentials but were, instead, looking at the access token in a second location
+Because of 2, the requests were also not authorizing confidential clients’ ability to revoke a given token. It should only revoke tokens that belong to it.
+The security implication is: OAuth 2.0 clients who "log out" a user expect to have the corresponding access & refresh tokens revoked, preventing an attacker who may have already hijacked the session from continuing to impersonate the victim. Because of the bug described above, this is not the case. As far as OWASP is concerned, this counts as broken authentication design.
+
+MITRE has assigned CVE-2016-6582 due to the security issues raised. An attacker, thanks to 1, can replay a hijacked session after a victim logs out/revokes their token. Additionally, thanks to 2 & 3, an attacker via a compromised confidential client could "grief" other clients by revoking their tokens (albeit this is an exceptionally narrow attack with little value).
 * [OSVDB-105971](http://osvdb.org/show/osvdb/105971): sfpagent Gem for Ruby contains a flaw that is triggered as JSON[body] input is not properly sanitized when handling module names with shell metacharacters. This may allow a context-dependent attacker to execute arbitrary commands.
 * OSVDB-105971: sfpagent Gem for Ruby contains a flaw that is triggered as JSON[body] input is not properly sanitized when handling module names with shell metacharacters. This may allow a context-dependent attacker to execute arbitrary commands.
 * [OSVDB-108569](http://osvdb.org/show/osvdb/108569): backup_checksum Gem for Ruby contains a flaw in /lib/backup/cli/utility.rb that is triggered as the program displays password information in plaintext in the process list. This may allow a local attacker to gain access to password information.
@@ -453,6 +475,8 @@ controller or a view may be vulnerable to a code injection.
 * OSVDB_120857: refile Gem for Ruby contains a flaw that is triggered when input is not sanitized when handling the 'remote_image_url' field in a form, where 'image' is the name of the attachment. This may allow a remote attacker to execute arbitrary shell commands.
 * [OSVDB_121701](http://osvdb.org/show/osvdb/121701): open-uri-cached Gem for Ruby contains a flaw that is due to the program creating temporary files in a predictable, unsafe manner when using YAML. This may allow a local attacker to gain elevated privileges.
 * OSVDB_121701: open-uri-cached Gem for Ruby contains a flaw that is due to the program creating temporary files in a predictable, unsafe manner when using YAML. This may allow a local attacker to gain elevated privileges.
+* [OSVDB-132234](http://osvdb.org/show/osvdb/132234): When using rack-attack with a rails app, developers expect the request path to be normalized. In particular, trailing slashes are stripped so a request path "/login/" becomes "/login" by the time you're in ActionController. Since Rack::Attack runs before ActionDispatch, the request path is not yet normalized. This can cause throttles and blacklists to not work as expected. E.g., a throttle: throttle('logins', ...) {|req| req.path == "/login" } would not match a request to '/login/', though Rails would route '/login/' to the same '/login' action.
+* OSVDB-132234: When using rack-attack with a rails app, developers expect the request path to be normalized. In particular, trailing slashes are stripped so a request path "/login/" becomes "/login" by the time you're in ActionController. Since Rack::Attack runs before ActionDispatch, the request path is not yet normalized. This can cause throttles and blacklists to not work as expected. E.g., a throttle: throttle('logins', ...) {|req| req.path == "/login" } would not match a request to '/login/', though Rails would route '/login/' to the same '/login' action.
 * Owasp Ror CheatSheet: Command Injection: Ruby offers a function called "eval" which will dynamically build new Ruby code based on Strings. It also has a number of ways to call system commands. While the power of these commands is quite useful, extreme care should be taken when using them in a Rails based application. Usually, its just a bad idea. If need be, a whitelist of possible values should be used and any input should be validated as thoroughly as possible. The Ruby Security Reviewer's Guide has a section on injection and there are a number of OWASP references for it, starting at the top: Command Injection.
 * Owasp Ror CheatSheet: Cross Site Request Forgery: Ruby on Rails has specific, built in support for CSRF tokens. To enable it, or ensure that it is enabled, find the base ApplicationController and look for the protect_from_forgery directive. Note that by default Rails does not provide CSRF protection for any HTTP GET request.
 * Owasp Ror CheatSheet: Session management: By default, Ruby on Rails uses a Cookie based session store. What that means is that unless you change something, the session will not expire on the server. That means that some default applications may be vulnerable to replay attacks. It also means that sensitive information should never be put in the session.
@@ -481,4 +505,4 @@ Setting this to true will essentially strip out any host information.
 This check will analyze the source code looking for the following patterns: XXX, TO_CHECK, CHECKME, CHECK and FIXME
 
 
-_Last updated: Tue 06 Sep 22:42:45 CEST 2016_
+_Last updated: Tue 04 Oct 08:04:15 CEST 2016_

@@ -54,7 +54,7 @@ module Dawn
       #   + owasp_ror_cheatsheet
       #   + owasp_top_10_n (where n is a number between 1 and 10)
       attr_accessor :check_family
-      ALLOWED_FAMILIES = [:generic_check, :code_quality, :cve_bulletin, :code_style, :owasp_ror_cheatsheet, :owasp_top_10_1, :owasp_top_10_2, :owasp_top_10_3, :owasp_top_10_4, :owasp_top_10_5, :owasp_top_10_6, :owasp_top_10_7, :owasp_top_10_8, :owasp_top_10_9, :owasp_top_10_10]
+      ALLOWED_FAMILIES = [:generic_check, :code_quality, :bulletin, :code_style, :owasp_ror_cheatsheet, :owasp_top_10]
 
       # This is the check severity level. It tells how dangerous is the
       # vulnerability for you application.
@@ -120,7 +120,7 @@ module Dawn
         #
         # I don't want to manually fix 150+ ruby files to add something I can
         # deal here
-        @check_family = :cve if !options[:name].nil? && options[:name].start_with?('CVE-')
+        @check_family = :bulletin if !options[:name].nil? && (options[:name].start_with?('CVE-') || options[:name].start_with?('OSVDB'))
 
         if $logger.nil?
           # This is the old codesake-commons logging.
@@ -155,11 +155,11 @@ module Dawn
       end
 
       def family
-        return "CVE bulletin"                   if @check_family == :cve
+        return "CVE or OSVDB bulletin"          if @check_family == :bulletin
         return "Ruby coding style"              if @check_family == :code_style
         return "Ruby code quality check"        if @check_family == :code_quality
         return "Owasp Ruby on Rails cheatsheet" if @check_family == :owasp_ror_cheatsheet
-        return "Owasp Top 10"                   if @check_family.to_s.start_with?('owasp_top_10')
+        return "Owasp Top 10"                   if @check_family.== :owasp_top_10
         return "Unknown"
       end
 
