@@ -1,5 +1,11 @@
 require 'singleton'
 
+# For HTTPS communication to check for KB updates and to fetch them
+require 'net/http'
+require 'uri'
+
+require 'yaml'
+
 module Dawn
   # This is the YAML powered experimental knowledge base
   #
@@ -33,20 +39,60 @@ module Dawn
     COMBO_CHECK         = :combo_check
     CUSTOM_CHECK        = :custom_check
 
+    REMOTE_KB_URL_PREFIX  = "https://dawnscanner.org/data/"
+    FILES = %w(kb.yaml bulletin.tar.gz generic_check.tar.gz owasp_ror_cheatsheet.tar.gz code_style.tar.gz code_quality.tar.gz owasp_top_10.tar.gz signatures.tar.gz)
+
+
     attr_reader :security_checks
+    attr_reader :descriptor
+
+    def initialize(db_path=nil)
+
+      if $logger.nil?
+        require 'dawn/logger'
+        $logger = Logger.new(STDOUT)
+        $logger.helo "knowledge-base-experimental", Dawn::VERSION
+      end
+
+      lines = ""
+
+      path = File.join(Dir.pwd, "db")
+      path = db_path unless db_path.nil?
+
+      lines = File.read(File.join(path, "kb.yaml"))
+      @descriptor = YAML.load(lines)
+    end
 
     def find(name)
     end
 
+    def kb_descriptor
+      {:kb=>{:version=>"0.0.1", :revision=>Time.now.strftime("%Y%m%d"), :api=>Dawn::VERSION}}.to_yaml
+    end
+
+    def need_update?
+      FileUtils.mkdir_p("tmp")
+      begin
+        response = Net::HTTP.get URI(REMOTE_KB_URL_PREFIX + "kb.yaml")
+        open("tmp/kb.yaml", "w") do |f|
+          f.puts(response)
+        end
+        response = Net::HTTP.get URI(REMOTE_KB_URL_PREFIX + "kb.yaml.sig")
+        open("tmp/kb.yaml.sig", "w") do |f|
+          f.puts(response)
+        end
+      rescue Exception => e
+        $logger.error e.to_s
+        return false
+      end
+
+      # Verify kb.yaml signature
+
+      YAML.load(response)
+    end
+
     def all
       @security_checks
-    end
-    def all_by_mvc(mvc)
-      ret = []
-      @security_checks.each do |sc|
-        ret << sc if sc.applies_to?(mvc)
-      end
-      ret
     end
 
     # Load security checks from db/ folder.
@@ -62,9 +108,9 @@ module Dawn
     def load(options={})
       @security_checks = []
 
-      enabled_checks  = options[:enabled_checks] unless options[:enabled_checks].nil?
-      mvc             = options[:mvc] unless options[:mvc].nil?
-      path            = options[:path] unless options[:path].nil?
+      enabled_checks  = options[:enabled_checks]  unless options[:enabled_checks].nil?
+      mvc             = options[:mvc]             unless options[:mvc].nil?
+      path            = options[:path]            unless options[:path].nil?
 
 
 
@@ -73,7 +119,7 @@ module Dawn
     def dump(verbose=false)
       puts "Security checks currently supported:"
       i=0
-      self.new.all.each do |check|
+      KnowledgeBaseExperimental.instance.all.each do |check|
         i+=1
         if verbose
           puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
