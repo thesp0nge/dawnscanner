@@ -5,6 +5,7 @@ require 'net/http'
 require 'uri'
 
 require 'yaml'
+require 'digest'
 
 module Dawn
   # This is the YAML powered experimental knowledge base
@@ -54,19 +55,42 @@ module Dawn
         $logger.helo "knowledge-base-experimental", Dawn::VERSION
       end
 
+
       lines = ""
 
       path = File.join(Dir.pwd, "db")
       path = db_path unless db_path.nil?
 
+      unless File.exists?(File.join(path, "kb.yaml"))
+        $logger.error  "Missing kb.yaml in #{path}. Giving up"
+        raise "Missing kb.yaml in #{path}. Giving up"
+      end
+
+      unless File.exists?(File.join(path, "kb.yaml.sig"))
+        $logger.error  "Missing kb.yaml signature in #{path}. Giving up"
+        raise "Missing kb.yaml signature in #{path}. Giving up" 
+      end
+
       lines = File.read(File.join(path, "kb.yaml"))
-      @descriptor = YAML.load(lines)
+      hash_file = Digest::SHA256.hexdigest lines
+      hash_orig = File.read(File.join(path, "kb.yaml.sig"))
+
+      v = __verify_hash(hash_orig, hash_file)
+      if v
+        $logger.info("good kb.yaml file found. Reading knowledge base descriptor")
+        @descriptor = YAML.load(lines)
+      else
+        $logger.error("kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up")
+        raise "kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up"
+      end
+
+
     end
 
     def find(name)
     end
 
-    def kb_descriptor
+    def self.kb_descriptor
       {:kb=>{:version=>"0.0.1", :revision=>Time.now.strftime("%Y%m%d"), :api=>Dawn::VERSION}}.to_yaml
     end
 
@@ -133,6 +157,11 @@ module Dawn
 
     end
 
+    def __verify_hash(original, computed)
+      t=original.split(' ')
+      return false if t.length != 2
+      return (t[0] == computed)
+    end
 
   end
 end

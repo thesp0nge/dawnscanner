@@ -428,7 +428,7 @@ def __kb_pack
 
 
   open(File.join(YAML_KB, "kb.yaml"), 'w') do |f|
-    f.puts(Dawn::KnowledgeBaseExperimental.instance.kb_descriptor)
+    f.puts(Dawn::KnowledgeBaseExperimental.kb_descriptor)
   end
   puts "kb.yaml created"
   system "shasum -a 256 #{YAML_KB}/kb.yaml > #{YAML_KB}/kb.yaml.sig"
