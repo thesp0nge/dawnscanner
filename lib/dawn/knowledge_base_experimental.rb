@@ -48,7 +48,6 @@ module Dawn
     attr_reader :descriptor
 
     def initialize(db_path=nil)
-
       if $logger.nil?
         require 'dawn/logger'
         $logger = Logger.new(STDOUT)
@@ -58,22 +57,22 @@ module Dawn
 
       lines = ""
 
-      path = File.join(Dir.pwd, "db")
-      path = db_path unless db_path.nil?
+      $path = File.join(Dir.pwd, "db")
+      $path = db_path unless db_path.nil?
 
-      unless File.exists?(File.join(path, "kb.yaml"))
+      unless File.exists?(File.join($path, "kb.yaml"))
         $logger.error  "Missing kb.yaml in #{path}. Giving up"
         raise "Missing kb.yaml in #{path}. Giving up"
       end
 
-      unless File.exists?(File.join(path, "kb.yaml.sig"))
+      unless File.exists?(File.join($path, "kb.yaml.sig"))
         $logger.error  "Missing kb.yaml signature in #{path}. Giving up"
         raise "Missing kb.yaml signature in #{path}. Giving up" 
       end
 
-      lines = File.read(File.join(path, "kb.yaml"))
+      lines = File.read(File.join($path, "kb.yaml"))
       hash_file = Digest::SHA256.hexdigest lines
-      hash_orig = File.read(File.join(path, "kb.yaml.sig"))
+      hash_orig = File.read(File.join($path, "kb.yaml.sig"))
 
       v = __verify_hash(hash_orig, hash_file)
       if v
@@ -83,8 +82,18 @@ module Dawn
         $logger.error("kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up")
         raise "kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up"
       end
+    end
 
+    # Check if the local KB is packet or not.
+    #
+    # Returns true if at least one KB tarball file it has been found in the
+    # local DB path
+    def packed?
+      FILES.each do |fn|
+        return true if fn.end_with? 'tar.gz' and File.exists?(File.join($path, fn))
+      end
 
+      return false
     end
 
     def find(name)
