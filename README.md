@@ -18,7 +18,7 @@ box:
 [![Build Status](https://travis-ci.org/thesp0nge/dawnscanner.png?branch=master)](https://travis-ci.org/thesp0nge/dawnscanner)
 [![Dependency Status](https://gemnasium.com/thesp0nge/dawnscanner.png)](https://gemnasium.com/thesp0nge/dawnscanner)
 [![Coverage Status](https://coveralls.io/repos/thesp0nge/dawnscanner/badge.png)](https://coveralls.io/r/thesp0nge/dawnscanner)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/thesp0nge/dawnscanner/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Code Triagers Badge](https://www.codetriage.com/thesp0nge/dawnscanner/badges/users.svg)](https://www.codetriage.com/thesp0nge/dawnscanner)
 [![Inline docs](http://inch-ci.org/github/thesp0nge/dawnscanner.png?branch=master)](http://inch-ci.org/github/thesp0nge/dawnscanner)
 [![Gitter](https://badges.gitter.im/thesp0nge/dawnscanner.svg)](https://gitter.im/thesp0nge/dawnscanner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
