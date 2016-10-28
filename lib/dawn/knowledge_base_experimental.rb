@@ -27,7 +27,21 @@ module Dawn
   # the checks regarding the particular app, will be loaded in the security
   # check array. This should speed up BasicCheck internal routines.
   #
-  # Last update: Mon Oct  3 18:42:01 CEST 2016
+  # Class usage will be very simple. After getting the singleton instance, you
+  # will load the KB content. The load method will be also responsible about
+  # all relevant checks.
+  #
+  # Example
+  #
+  # require "dawn/knowledge_base_experimental"
+  #
+  # ...
+  #
+  # d = Dawn::KnowledgeBaseExperimental.instance
+  # d.update if d.update?
+  # d.load
+  #
+  # Last update: Fri Oct  7 08:03:43 CEST 2016
   class KnowledgeBaseExperimental
     include Dawn::Utils
     include Singleton
@@ -46,55 +60,17 @@ module Dawn
 
     attr_reader :security_checks
     attr_reader :descriptor
+    attr_reader :path
 
-    def initialize(db_path=nil)
+    def initialize(options={})
       if $logger.nil?
         require 'dawn/logger'
         $logger = Logger.new(STDOUT)
         $logger.helo "knowledge-base-experimental", Dawn::VERSION
       end
-
-
-      lines = ""
-
-      $path = File.join(Dir.pwd, "db")
-      $path = db_path unless db_path.nil?
-
-      unless File.exists?(File.join($path, "kb.yaml"))
-        $logger.error  "Missing kb.yaml in #{path}. Giving up"
-        raise "Missing kb.yaml in #{path}. Giving up"
-      end
-
-      unless File.exists?(File.join($path, "kb.yaml.sig"))
-        $logger.error  "Missing kb.yaml signature in #{path}. Giving up"
-        raise "Missing kb.yaml signature in #{path}. Giving up" 
-      end
-
-      lines = File.read(File.join($path, "kb.yaml"))
-      hash_file = Digest::SHA256.hexdigest lines
-      hash_orig = File.read(File.join($path, "kb.yaml.sig"))
-
-      v = __verify_hash(hash_orig, hash_file)
-      if v
-        $logger.info("good kb.yaml file found. Reading knowledge base descriptor")
-        @descriptor = YAML.load(lines)
-      else
-        $logger.error("kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up")
-        raise "kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up"
-      end
     end
 
-    # Check if the local KB is packet or not.
-    #
-    # Returns true if at least one KB tarball file it has been found in the
-    # local DB path
-    def packed?
-      FILES.each do |fn|
-        return true if fn.end_with? 'tar.gz' and File.exists?(File.join($path, fn))
-      end
 
-      return false
-    end
 
     def find(name)
     end
@@ -103,7 +79,7 @@ module Dawn
       {:kb=>{:version=>"0.0.1", :revision=>Time.now.strftime("%Y%m%d"), :api=>Dawn::VERSION}}.to_yaml
     end
 
-    def need_update?
+    def update?
       FileUtils.mkdir_p("tmp")
       begin
         response = Net::HTTP.get URI(REMOTE_KB_URL_PREFIX + "kb.yaml")
@@ -138,14 +114,49 @@ module Dawn
     #          reviewed.
     #   + path: the path for the KB root folder. Please note that #{Dir.pwd}/db
     #           is the default location.
+    #
+    # Returns an array of security checks, matching the mvc to be reviewed and
+    # the enabled check list or an empty array if an error occured.
     def load(options={})
       @security_checks = []
+      $path = File.join(Dir.pwd, "db")
 
       enabled_checks  = options[:enabled_checks]  unless options[:enabled_checks].nil?
       mvc             = options[:mvc]             unless options[:mvc].nil?
-      path            = options[:path]            unless options[:path].nil?
+      $path           = options[:path]            unless options[:path].nil?
 
+      unless __valid?
+        $logger.error "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
+        return []
+      end
 
+      unless __load?
+        $logger.error "The library must be consumed with dawnscanner up to v#{$descriptor["kb"]["api"]}. You are using dawnscanner v#{Dawn::VERSION}"
+        return []
+      end
+
+      # TODO: untar and unzip from here (look for it in Google)
+      if __packed?
+        $logger.info "a packed knowledge base it has been found. Unpacking it"
+        __unpack
+      end
+
+      enabled_checks.each do |d|
+
+        dir = File.join($path, d)
+
+        # Please note that if we enter in this branch, it means someone
+        # tampered the KB between the previous __valid? check and this point.
+        # Of course this is a very rare situation, but we must handle it.
+        unless Dir.exists?(dir)
+          $logger.critical "Missing check directory #{dir}"
+          $logger.error "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
+          return []
+        end
+
+        # Enumerate all YAML file in the give dir
+
+      end
 
     end
 
@@ -166,11 +177,69 @@ module Dawn
 
     end
 
+    private
+
     def __verify_hash(original, computed)
       t=original.split(' ')
       return false if t.length != 2
       return (t[0] == computed)
     end
+
+    def __valid?
+
+      lines = ""
+
+      unless File.exists?(File.join($path, "kb.yaml"))
+        $logger.error  "Missing kb.yaml in #{path}. Giving up"
+        return false
+      end
+
+      unless File.exists?(File.join($path, "kb.yaml.sig"))
+        $logger.error  "Missing kb.yaml signature in #{path}. Giving up"
+        return false
+      end
+
+      lines = File.read(File.join($path, "kb.yaml"))
+      hash_file = Digest::SHA256.hexdigest lines
+      hash_orig = File.read(File.join($path, "kb.yaml.sig"))
+
+      v = __verify_hash(hash_orig, hash_file)
+      if v
+        $logger.info("good kb.yaml file found. Reading knowledge base descriptor")
+        @descriptor = YAML.load(lines)
+      else
+        $logger.error("kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up")
+        return false
+      end
+
+      return true
+    end
+
+    # Check if the local KB is packet or not.
+    #
+    # Returns true if at least one KB tarball file it has been found in the
+    # local DB path
+    def __packed?
+      FILES.each do |fn|
+        return true if fn.end_with? 'tar.gz' and File.exists?(File.join($path, fn))
+      end
+      return false
+    end
+
+    def __unpack
+
+    end
+
+    def __load?
+      api = $descriptor["kb"]["api"]
+      v = Dawn::VERSION
+      require "dawn/kb/version_check"
+
+      vc = VersionCheck.new
+      return true if vc.is_higher?(api, v) # => true if v > api
+      return false
+    end
+
 
   end
 end
