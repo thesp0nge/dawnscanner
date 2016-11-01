@@ -8,6 +8,7 @@ require 'cucumber/rake/task'
 require 'fileutils'
 require "dawn/utils"
 require "dawn/knowledge_base"
+require "dawn/knowledge_base_experimental"
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty -x"
@@ -279,6 +280,32 @@ namespace :kb do
     end
 
   end
+  desc 'Pack the library for shipping'
+
+  task :pack do
+    YAML_KB = File.join(Dir.pwd, 'db')
+    __kb_pack
+  end
+
+  desc 'Transform all checks to YAML file and pack the library for shipping'
+  task :to_yaml do
+    YAML_KB = File.join(Dir.pwd, 'db')
+    FileUtils.rm_rf YAML_KB
+    FileUtils.mkdir_p YAML_KB
+
+    Dawn::KnowledgeBase.new.all.each do |check|
+      out_dir = File.join(YAML_KB, check.check_family.to_s)
+      FileUtils.mkdir_p(out_dir) unless Dir.exists? out_dir
+
+      filename = File.join(out_dir, check.name.gsub(" ", "_").gsub("-", "_") + '.yml')
+      open(filename, 'w') do |f|
+        f.puts(check.to_yaml)
+      end
+      puts "#{filename} created"
+    end
+
+    __kb_pack
+  end
 
   desc 'Creates a KnowledgeBase.md file'
   task :create do
@@ -362,4 +389,54 @@ namespace :rubysec do
     system "rm -rf #{target_dir}ruby-advisory-db"
 
   end
+end
+
+def __kb_pack
+  if Dir.exists? "#{YAML_KB}/bulletin"
+    system "tar cfvz #{YAML_KB}/bulletin.tar.gz #{YAML_KB}/bulletin"
+    system "rm -rf #{YAML_KB}/bulletin"
+    system "shasum -a 256 #{YAML_KB}/bulletin.tar.gz > #{YAML_KB}/bulletin.tar.gz.sig"
+  end
+
+  if Dir.exists? "#{YAML_KB}/generic_check"
+    system "tar cfvz #{YAML_KB}/generic_check.tar.gz #{YAML_KB}/generic_check"
+    system "rm -rf #{YAML_KB}/generic_check"
+    system "shasum -a 256 #{YAML_KB}/generic_check.tar.gz > #{YAML_KB}/generic_check.tar.gz.sig"
+  end
+
+  if Dir.exists? "#{YAML_KB}/owasp_ror_cheatsheet"
+    system "tar cfvz #{YAML_KB}/owasp_ror_cheatsheet.tar.gz #{YAML_KB}/owasp_ror_cheatsheet"
+    system "rm -rf #{YAML_KB}/owasp_ror_cheatsheet"
+    system "shasum -a 256 #{YAML_KB}/owasp_ror_cheatsheet.tar.gz > #{YAML_KB}/owasp_ror_cheatsheet.tar.gz.sig"
+  end
+
+  if Dir.exists? "#{YAML_KB}/code_style"
+    system "tar cfvz #{YAML_KB}/code_style.tar.gz #{YAML_KB}/code_style"
+    system "rm -rf #{YAML_KB}/code_style"
+    system "shasum -a 256 #{YAML_KB}/code_style.tar.gz > #{YAML_KB}/code_style.tar.gz.sig"
+  end
+  if Dir.exists? "#{YAML_KB}/code_quality"
+    system "tar cfvz #{YAML_KB}/code_quality.tar.gz #{YAML_KB}/code_quality"
+    system "rm -rf #{YAML_KB}/code_quality"
+    system "shasum -a 256 #{YAML_KB}/code_quality.tar.gz > #{YAML_KB}/code_quality.tar.gz.sig"
+  end
+  if Dir.exists? "#{YAML_KB}/owasp_top_10"
+    system "tar cfvz #{YAML_KB}/owasp_top_10.tar.gz #{YAML_KB}/owasp_top_10"
+    system "rm -rf #{YAML_KB}/owasp_top_10"
+    system "shasum -a 256 #{YAML_KB}/owasp_top_10.tar.gz > #{YAML_KB}/owasp_top_10.tar.gz.sig"
+  end
+
+
+  open(File.join(YAML_KB, "kb.yaml"), 'w') do |f|
+    f.puts(Dawn::KnowledgeBaseExperimental.kb_descriptor)
+  end
+  puts "kb.yaml created"
+  system "shasum -a 256 #{YAML_KB}/kb.yaml > #{YAML_KB}/kb.yaml.sig"
+
+  system "tar cfvz #{YAML_KB}/signatures.tar.gz #{YAML_KB}/*.tar.gz.sig"
+  system "rm -rf #{YAML_KB}/*.tar.gz.sig "
+  puts "#{YAML_KB}/signatures.tar.gz created"
+
+  puts "Library ready to be shipped"
+
 end

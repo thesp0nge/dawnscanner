@@ -22,6 +22,7 @@
 
           self.safe_dependencies = [{:name=>"rails", :version=>['2.3.13', '3.0.11', '3.1.2']}]
           self.save_major = true
+          self.save_minor = true
 
 				end
 			end

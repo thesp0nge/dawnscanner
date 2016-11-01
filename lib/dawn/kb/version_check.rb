@@ -364,7 +364,7 @@ module Dawn
         # we have a non vulnerable major, but the minor is and there is an higher version in array
         # eg. we detected v1.3.2, safe version is 1.3.3 and there is also a safe 2.x.x
         return debug_me_and_return_false("#{detected_version} has a major version vulnerable but honoring save_major_fix") if major && @save_major_fix
-        return debug_me_and_return_false("#{detected_version} has a minor version vulnerable but honoring save_minor_fix") if minor && @save_minor_fix
+        return debug_me_and_return_false("#{detected_version} has a minor version vulnerable but honoring save_minor_fix") if minor and @save_minor_fix
         return true if major && minor
         return true if ! major && minor && patch && ! @save_major_fix && ! @save_minor_fix
         return true if major && !@save_major_fix
