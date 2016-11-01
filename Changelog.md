@@ -5,7 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Sun Oct  2 22:34:43 CEST 2016_
+_latest update: Tue Nov  1 18:59:51 CET 2016_
+
+## Version 1.6.6 - codename: Tow Mater (2016-11-01)
 
 * Changed config filename to dawnscanner.yml
 * Adding a check for CVE-2016-5697: XML signature wrapping attack in ruby-saml
