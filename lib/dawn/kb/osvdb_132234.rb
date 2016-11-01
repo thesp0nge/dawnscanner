@@ -13,7 +13,7 @@ module Dawn
 
           super({
             :title=>title,
-            :name=> "OSVDB-132234",
+            :name=> "OSVDB_132234",
             :cve=>"",
             :osvdb=>"132234",
             :cvss=>"",
