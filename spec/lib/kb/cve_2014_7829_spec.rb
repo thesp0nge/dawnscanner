@@ -2,7 +2,7 @@ require 'spec_helper'
 describe "The CVE-2014-7829 vulnerability" do
 	before(:all) do
 		@check = Dawn::Kb::CVE_2014_7829.new
-		# @check.debug = true
+		@check.debug = true
 	end
   it "is reported when vulnerable rails gem is used (3.2.20)" do
     @check.dependencies = [{:name=>"rails", :version=>'3.2.20'}]

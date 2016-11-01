@@ -5,7 +5,19 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Sep 27 23:32:32 CEST 2016_
+_latest update: Sun Oct  2 22:34:43 CEST 2016_
+
+* Changed config filename to dawnscanner.yml
+* Adding a check for CVE-2016-5697: XML signature wrapping attack in ruby-saml
+* Adding a check for CVE-2016-6316: Possible XSS Vulnerability in Action View
+* Adding a check for CVE-2016-6317: Unsafe Query Generation Risk in Active
+  Record
+* Adding a check for CVE-2016-6582: Doorkeeper gem does not revoke tokens &
+  uses wrong auth/auth method
+* Issue #172 - Adding a check for OSVDB-132234: rack-attack Gem for Ruby
+  missing normalization before request path processing. Please note that OSVDB
+  it has been shutted down, however I was not able to find a CVE entry for
+  this.
 
 ## Version 1.6.5 - codename: Tow Mater (2016-09-30)
 

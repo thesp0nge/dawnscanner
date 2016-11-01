@@ -1,5 +1,6 @@
 ---
 config:
+  :kb: yaml
   :verbose: false
   :output: console
   :mvc: ''
@@ -11,16 +12,7 @@ config:
   :enabled_checks:
   - :generic_check
   - :code_quality
-  - :cve_bulletin
+  - :bulletin
   - :code_style
   - :owasp_ror_cheatsheet
-  - :owasp_top_10_1
-  - :owasp_top_10_2
-  - :owasp_top_10_3
-  - :owasp_top_10_4
-  - :owasp_top_10_5
-  - :owasp_top_10_6
-  - :owasp_top_10_7
-  - :owasp_top_10_8
-  - :owasp_top_10_9
-  - :owasp_top_10_10
+  - :owasp_top_10
