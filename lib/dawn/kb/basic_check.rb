@@ -49,7 +49,7 @@ module Dawn
       # This is a flag for the security check family. Valid values are:
       #   + generic_check
       #   + code_quality
-      #   + cve_bulletin
+      #   + bulletin
       #   + code_style
       #   + owasp_ror_cheatsheet
       #   + owasp_top_10_n (where n is a number between 1 and 10)
