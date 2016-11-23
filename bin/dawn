@@ -92,7 +92,7 @@ opts.each do |opt, val|
   when '--config-file'
     options = Dawn::Core.read_conf(val)
   when '--disable-cve-bulletins'
-    options[:enabled_checks].delete(:cve_bulletin)
+    options[:enabled_checks].delete(:bulletin)
   when '--disable-code-quality'
     options[:enabled_checks].delete(:code_quality)
   when '--disable-code-style'
