@@ -7,6 +7,9 @@ frameworks.
 
 _latest update: Tue Nov  1 22:47:56 CET 2016_
 
+## Version 1.6.7 - codename: Tow Mater (2016-11-24)
+
+* Removed a typo preventing CVE bulletins to be loaded in the KB
 * Removed CVSS as external dependency. Now it is a Dawn::Cvss module
 * Dropped sys-uname dependency. Using shell 'uname -r' instead
 * Dropped ptools dependency. Pattern matching will run also with binary files.
