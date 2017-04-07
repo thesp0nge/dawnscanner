@@ -1,7 +1,7 @@
 module Dawn
-    VERSION = "1.6.7"
+    VERSION = "1.6.8"
     CODENAME = "Tow Mater"
-    RELEASE = "20161123"
-    BUILD = "8"
-    COMMIT = "g285b36f"
+    RELEASE = "20170407"
+    BUILD = "3"
+    COMMIT = "gd5245d7"
 end
