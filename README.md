@@ -1,5 +1,7 @@
 # Dawnscanner - The raising security scanner for ruby web applications
 
+[![Join the chat at https://gitter.im/thesp0nge/dawnscanner](https://badges.gitter.im/thesp0nge/dawnscanner.svg)](https://gitter.im/thesp0nge/dawnscanner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 dawnscanner is a source code scanner designed to review your ruby code for security
 issues.
 
