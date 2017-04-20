@@ -115,7 +115,7 @@ needs, and to specify the target directory where your code is stored.
 $ dawn [options] target
 ```
 
-In case of need, there is a quick command line option reference running 
+In case of need, there is a quick command line option reference running
 ```dawn -h``` at your OS prompt.
 
 ```
@@ -266,6 +266,52 @@ $ dawn /Users/thesp0nge/src/hacking/rt_first_app --html --file report.html
 09:00:54 [*] dawn: report.html created (2952 bytes)
 09:00:54 [*] dawn is leaving
 ```
+
+---
+
+## Add TravisCI
+
+### Step 1: Link Travis CI and GitHub
+
+First, Travis CI needs to know about your GitHub project. Login to Travis CI and press the “+” button. Next, flick the repository switch on for your repo. If you cannot see your code repo, press the “Sync” button to refresh the list of public repositories. If you have a private GitHub project, you need to upgrade to Travis CI Pro since it is only free for public repositories.
+
+### Step 2: Build Configuration
+
+Next, create a file called “.travis.yml” in the root of your project repo:
+
+```
+language: python
+python:
+  - "2.7"
+cache: pip
+install:
+  - pip install -r requirements.txt
+script:
+  - python tests.py
+```
+
+- The ‘language’ section is used to specify the language of the software.
+- The ‘python’ section is used to specify the version or versions of Python to use for testing.
+- The ‘install’ section is used to specify commands to run before testing, such as the installation of dependencies or the compilation of required packages.
+- The ‘script’ section is used to specify the command to test your software. Typically, this command will find all tests in your project and run them. The specified command must exit with a status code of 0 if the test is successful; otherwise the test will be considered a failure.
+
+Alternatively, I can specify multiple versions of Python and Travis CI will test my project with each version:
+```
+language: python
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+cache: pip
+install:
+  - pip install -r requirements.txt
+script:
+  - py.test --cov-report term-missing --cov app -v
+```
+
+### Step 3: Trigger builds
+
+To trigger builds,  push the commit that adds “.travis.yml” to the project.
 
 ---
 
