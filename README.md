@@ -123,44 +123,50 @@ $ dawn -h
 Usage: dawn [options] target_directory
 
 Examples:
-  $ dawn a_sinatra_webapp_directory
-  $ dawn -C the_rails_blog_engine
-  $ dawn -C --json a_sinatra_webapp_directory
-  $ dawn --ascii-tabular-report my_rails_blog_ecommerce
-  $ dawn --html -F my_report.html my_rails_blog_ecommerce
+	$ dawn a_sinatra_webapp_directory
+	$ dawn -C the_rails_blog_engine
+	$ dawn -C --json a_sinatra_webapp_directory
+	$ dawn --ascii-tabular-report my_rails_blog_ecommerce
+	$ dawn --html -F my_report.html my_rails_blog_ecommerce
 
-   -r, --rails          force dawn to consider the target a rails application
-   -s, --sinatra        force dawn to consider the target a sinatra application
-   -p, --padrino        force dawn to consider the target a padrino application
-   -G, --gem-lock       force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock
-   -a, --ascii-tabular-report   cause dawn to format findings using table in ascii art
-   -j, --json                   cause dawn to format findings using json
-   -C, --count-only             dawn will only count vulnerabilities (useful for scripts)
-   -z, --exit-on-warn           dawn will return number of found vulnerabilities as exit code
-   -F, --file filename          tells dawn to write output to filename
-   -c, --config-file filename   tells dawn to load configuration from filename
+   -r, --rails					force dawn to consider the target a rails application (DEPRECATED)
+   -s, --sinatra				force dawn to consider the target a sinatra application (DEPRECATED)
+   -p, --padrino				force dawn to consider the target a padrino application (DEPRECATED)
+   -G, --gem-lock				force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock (DEPRECATED)
+   -d, --dependencies				force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock
+
+Reporting
+
+   -a, --ascii-tabular-report			cause dawn to format findings using tables in ascii art (DEPRECATED)
+   -j, --json					cause dawn to format findings using json
+   -K, --console					cause dawn to format findings using plain ascii text
+   -C, --count-only				dawn will only count vulnerabilities (useful for scripts)
+   -z, --exit-on-warn				dawn will return number of found vulnerabilities as exit code
+   -F, --file filename				tells dawn to write output to filename
+   -c, --config-file filename			tells dawn to load configuration from filename
 
 Disable security check family
 
-       --disable-cve-bulletins  disable all CVE security checks
-       --disable-code-quality   disable all code quality checks
-       --disable-code-style     disable all code style checks
-       --disable-owasp-ror-cheatsheet   disable all Owasp Ruby on Rails cheatsheet checks
-       --disable-owasp-top-10           disable all Owasp Top 10 checks
+       --disable-cve-bulletins			disable all CVE security checks
+       --disable-code-quality			disable all code quality checks
+       --disable-code-style			disable all code style checks
+       --disable-owasp-ror-cheatsheet		disable all Owasp Ruby on Rails cheatsheet checks
+       --disable-owasp-top-10			disable all Owasp Top 10 checks
 
-Flags useful to query dawnscanner
+Flags useful to query Dawn
 
-       -S, --search-knowledge-base [check_name]   search check_name in the knowledge base
-           --list-knowledge-base                  list knowledge-base content
-           --list-known-families                  list security check families contained in dawn's knowledge base
-           --list-known-framework                 list ruby MVC frameworks supported by dawn
+   -S, --search-knowledge-base [check_name]	search check_name in the knowledge base
+       --list-knowledge-base			list knowledge-base content
+       --list-known-families			list security check families contained in dawn's knowledge base
+       --list-known-framework			list ruby MVC frameworks supported by dawn
+       --list-scan-registry			list past scan informations stored in scan registry 
 
 Service flags
 
-   -D, --debug                                  enters dawn debug mode
-   -V, --verbose                                the output will be more verbose
-   -v, --version                                show version information
-   -h, --help                                   show this help
+   -D, --debug					enters dawn debug mode
+   -V, --verbose				the output will be more verbose
+   -v, --version				show version information
+   -h, --help					show this help
 ```
 
 ### Rake task
