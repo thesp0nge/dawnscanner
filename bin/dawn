@@ -31,13 +31,6 @@ opts    = GetoptLong.new(
   [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
   [ '--console',                '-K',   GetoptLong::NO_ARGUMENT],
 
-  # MVC forcing
-  # Deprecated in 1.5.x
-  # To be removed in 2.0.0
-  [ '--rails',                  '-r',   GetoptLong::NO_ARGUMENT],
-  [ '--sinatra',                '-s',   GetoptLong::NO_ARGUMENT],
-  [ '--padrino',                '-p',   GetoptLong::NO_ARGUMENT],
-
   [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
   [ '--dependencies',           '-d',   GetoptLong::REQUIRED_ARGUMENT],
 
@@ -125,12 +118,6 @@ opts.each do |opt, val|
     options[:output] = "tabular"
   when '--html'
     options[:output] = "html"
-  when '--rails'
-    options[:mvc]=:rails
-  when '--sinatra'
-    options[:mvc]=:sinatra
-  when '--padrino'
-    options[:mvc]=:padrino
   when '--file'
     options[:filename] = val
   when '--gem-lock'
@@ -203,14 +190,7 @@ end
 trap("INT") { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].empty?
 $logger.die("invalid directory (#{target})") if options[:gemfile_name].empty?  &&! Dawn::Core.is_good_target?(target)
-$logger.die("if scanning Gemfile.lock file you must not force target MVC using one from -r, -s or -p flag") if ! options[:mvc].empty? && options[:gemfile_scan]
 $logger.debug("security check enabled: #{options[:enabled_checks]}") if options[:debug]
-
-# MVC flag deprecation warnings
-$logger.warn("the --rails is deprecated and it will be removed in version 2.0.0")   if options[:mvc] == :rails
-$logger.warn("the --sinatra is deprecated and it will be removed in version 2.0.0") if options[:mvc] == :sinatra
-$logger.warn("the --padrino is deprecated and it will be removed in version 2.0.0") if options[:mvc] == :padrino
-
 
 ## MVC auto detect.
 
@@ -219,14 +199,8 @@ $logger.warn("the --padrino is deprecated and it will be removed in version 2.0.
 
 unless options[:gemfile_scan]
   begin
-    if options[:mvc].empty?
-      engine = Dawn::Core.detect_mvc(target)
-      $logger.debug("using #{engine.class.name} engine via autodect") if options[:debug]
-    else
-      engine = Dawn::Rails.new(target)      if options[:mvc] == :rails
-      engine = Dawn::Sinatra.new(target)    if options[:mvc] == :sinatra
-      engine = Dawn::Padrino.new(target)    if options[:mvc] == :padrino
-    end
+    engine = Dawn::Core.detect_mvc(target)
+    $logger.debug("using #{engine.class.name} engine via autodect") if options[:debug]
   rescue ArgumentError => e
     r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>e.message, :scan_status=>:failed})
     $logger.die(e.message)
@@ -239,7 +213,7 @@ end
 if engine.nil?
   $logger.error("MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues")
   r.do_save({:target=>File.basename(target), :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
-  $logger.die("ruby framework auto detect failed. Please force if rails, sinatra or padrino with -r, -s or -p flags")
+  $logger.die('ruby framework auto detect failed.')
 end
 ## end MVC auto detect.
 
