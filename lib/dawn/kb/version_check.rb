@@ -41,7 +41,24 @@ module Dawn
         return debug_me_and_return_false("detected version #{@detected} found as is in safe array")      if is_detected_in_safe?
         return debug_me_and_return_false("detected version #{@detected} is higher than all version marked safe")  if is_detected_highest?
 
-        @safe.sort.each do |s|
+        check_versions = nil
+        @safe.each do |safe_version|
+
+          sva = version_string_to_array(safe_version)
+          dva = version_string_to_array(@detected)
+
+          next unless is_same_version?(sva[:version], dva[:version], true)
+          next unless sva[:version].count == dva[:version].count || is_beta_check?(sva[:beta], dva[:beta]) || is_rc_check?(sva[:rc], dva[:rc]) || is_pre_check?(sva[:pre], dva[:pre])
+
+          check_versions = [safe_version]
+          break
+        end
+
+        debug_me "vuln?: limited check_versions: #{check_versions.inspect}"
+        check_versions ||= @safe
+        debug_me "vuln?: fallback check_versions: #{check_versions.inspect}"
+
+        check_versions.sort.each do |s|
           debug_me "vuln?: evaluating #{@detected} against save version: #{s}"
 
           @save_minor_fix   = save_minor_fix

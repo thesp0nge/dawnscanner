@@ -32,8 +32,12 @@ describe "The CVE-2016-2098 vulnerability" do
     @check.dependencies = [{:name=>"actionpack", :version=>"5.0.0.1"}]
 		expect(@check.vuln?).to   eq(false)
 	end
-	it "is not reported when a fixed release is detected" do
+  it "is not reported when a fixed release is detected" do
     @check.dependencies = [{:name=>"actionpack", :version=>"3.2.22.2"}]
+    expect(@check.vuln?).to   eq(false)
+  end
+	it "is not reported when a higher release is detected" do
+    @check.dependencies = [{:name=>"actionpack", :version=>"3.2.22.5"}]
 		expect(@check.vuln?).to   eq(false)
 	end
 	it "is not reported when a fixed release is detected" do
