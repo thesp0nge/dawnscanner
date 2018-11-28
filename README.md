@@ -129,9 +129,6 @@ Examples:
 	$ dawn --ascii-tabular-report my_rails_blog_ecommerce
 	$ dawn --html -F my_report.html my_rails_blog_ecommerce
 
-   -r, --rails					force dawn to consider the target a rails application (DEPRECATED)
-   -s, --sinatra				force dawn to consider the target a sinatra application (DEPRECATED)
-   -p, --padrino				force dawn to consider the target a padrino application (DEPRECATED)
    -G, --gem-lock				force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock (DEPRECATED)
    -d, --dependencies				force dawn to scan only for vulnerabilities affecting dependencies in Gemfile.lock
 
