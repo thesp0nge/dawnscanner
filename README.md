@@ -22,6 +22,8 @@ really soon.
 The dawnscanner project will be updated soon with new security checks and
 kickstarted again.
 
+Paolo
+
 ---
 
 [![Gem Version](https://badge.fury.io/rb/dawnscanner.png)](http://badge.fury.io/rb/dawnscanner)
