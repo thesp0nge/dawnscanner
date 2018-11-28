@@ -59,30 +59,11 @@ application.
 
 ## Installation
 
-dawnscanner rubygem is cryptographically signed. To be sure the gem you
-install hasn’t been tampered, you must first add ```paolo@dawnscanner.org```
-public signing certificate as trusted to your gem specific keyring.
-
-```
-$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/thesp0nge/dawnscanner/master/certs/paolo_at_dawnscanner_dot_org.pem)
-```
-
 You can install latest dawnscanner version, fetching it from
 [Rubygems](https://rubygems.org) by typing:
 
 ```
-$ gem install dawnscanner -P MediumSecurity
-```
-
-The MediumSecurity trust profile will verify signed gems, but allow the
-installation of unsigned dependencies. This is necessary because not all of
-dawnscanner’s dependencies are signed, so we cannot use HighSecurity.
-
-In order to install a release candidate version, the gem install command line
-is the following:
-
-```
-$ gem install dawnscanner --pre -P MediumSecurity
+$ gem install dawnscanner 
 ```
 
 If you want to add dawn to your project Gemfile, you must add the following:
