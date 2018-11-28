@@ -7,6 +7,10 @@ frameworks.
 
 _latest update: mer 28 nov 2018, 11.03.53, CET_
 
+## Version 2.0.0 - codename: Finn McMissile (2019-xx-xx)
+
+* New knowledge base, YAML based and distributed separately from the ruby gem.
+
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 
 * Removed signing certificate. This will solve issue #233 and #229
