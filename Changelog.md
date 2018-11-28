@@ -5,7 +5,17 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: Tue Nov  1 22:47:56 CET 2016_
+_latest update: mer 28 nov 2018, 11.03.53, CET_
+
+## Version 1.6.9 - codename: Tow Mater (2018-11-28)
+
+* Removed signing certificate. This will solve issue #233 and #229
+* Removed datamapper support. I will change to active\_record sooner or later.
+  This will solve issue #232 and issue #218
+
+## Version 1.6.8 - codename: Tow Mater (2017-04-07)
+
+* Update signing certficate
 
 ## Version 1.6.7 - codename: Tow Mater (2016-11-24)
 

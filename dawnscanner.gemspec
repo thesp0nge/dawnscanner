@@ -10,17 +10,14 @@ Gem::Specification.new do |gem|
   gem.email         = ["paolo@dawnscanner.org"]
   gem.description   = %q{Dawnscanner is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 150 security checks with their own mitigation suggestion.}
   gem.summary       = %q{Dawnscanner is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
-  gem.homepage      = "http://dawnscanner.org"
+  gem.homepage      = "https://dawnscanner.org"
   gem.files         = `git ls-files`.split($/)
   gem.license       = "MIT"
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.cert_chain  = ['certs/paolo_at_dawnscanner_dot_org.pem']
-  gem.signing_key = File.expand_path("~/.ssh/paolo_at_dawnscanner_dot_org_private_key.pem") if $0 =~ /gem\z/
-
-  gem.required_ruby_version = '>= 1.9.3'
+  gem.required_ruby_version = '>= 2.3.0'
 
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
@@ -31,10 +28,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'logger-colors'
   gem.add_dependency 'ptools'
   gem.add_dependency 'sqlite3'
-  gem.add_dependency 'dm-sqlite-adapter'
-  gem.add_dependency 'data_mapper'
+  # gem.add_dependency 'datamapper'
+  # gem.add_dependency 'dm-sqlite-adapter'
 
-  # Dependencies for code stats
   # To be added back in 1.5.5
   # gem.add_dependency 'code_metrics'
   # gem.add_dependency 'metric_fu-Saikuro'

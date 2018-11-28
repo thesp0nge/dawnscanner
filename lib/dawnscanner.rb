@@ -10,7 +10,7 @@ require "dawn/reporter"
 require "dawn/logger"
 
 # Datamapper classes
-require 'data_mapper'
-require "dawn/registry"
+#require 'data_mapper'
+#require "dawn/registry"
 
 require "date"

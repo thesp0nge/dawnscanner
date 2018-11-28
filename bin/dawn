@@ -13,10 +13,10 @@ LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
 # Datamapper stuff
-DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")
-DataMapper::Logger.new(Dawn::Core.sql_log_name, :debug)
-DataMapper.finalize
-DataMapper.auto_upgrade!
+#DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")
+#DataMapper::Logger.new(Dawn::Core.sql_log_name, :debug)
+#DataMapper.finalize
+#DataMapper.auto_upgrade!
 
 require 'logger'
 $logger = Logger.new(STDOUT)
@@ -180,12 +180,14 @@ target=ARGV.shift
 target = File.expand_path(".") if target == "."
 
 $logger.helo APPNAME, Dawn::VERSION
-r = Dawn::Registry.new
 
-unless Dir.exist?(Dawn::Core.registry_db_folder)
-  FileUtils.mkdir_p(Dawn::Core.registry_db_folder)
-  $logger.info "#{Dawn::Core.registry_db_folder} created" if Dir.exist?(Dawn::Core.registry_db_folder)
-end
+## It will be migrated to active record in 2019
+# r = Dawn::Registry.new
+
+# unless Dir.exist?(Dawn::Core.registry_db_folder)
+  # FileUtils.mkdir_p(Dawn::Core.registry_db_folder)
+  # $logger.info "#{Dawn::Core.registry_db_folder} created" if Dir.exist?(Dawn::Core.registry_db_folder)
+# end
 
 trap("INT") { $logger.die('[INTERRUPTED]') }
 $logger.die("missing target") if target.nil? && options[:gemfile_name].empty?
@@ -202,7 +204,7 @@ unless options[:gemfile_scan]
     engine = Dawn::Core.detect_mvc(target)
     $logger.debug("using #{engine.class.name} engine via autodect") if options[:debug]
   rescue ArgumentError => e
-    r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>e.message, :scan_status=>:failed})
+    # r.do_save({:target=>File.basename(target), :scan_started=>DateTime.now, :scan_duration => 0, :issues_found=> -1, :output_dir=> "", :message=>e.message, :scan_status=>:failed})
     $logger.die(e.message)
   end
 else
@@ -212,7 +214,7 @@ end
 
 if engine.nil?
   $logger.error("MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues")
-  r.do_save({:target=>File.basename(target), :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
+  # r.do_save({:target=>File.basename(target), :message=>"MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues", :scan_status=>:failed})
   $logger.die('ruby framework auto detect failed.')
 end
 ## end MVC auto detect.
@@ -220,7 +222,7 @@ end
 if options[:exit_on_warn]
   Kernel.at_exit do
     if engine.count_vulnerabilities != 0
-      r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
+      # r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
       Kernel.exit(engine.count_vulnerabilities)
     end
   end
@@ -234,12 +236,12 @@ end
 $logger.warn "this is a development Dawn version" if Dawn::RELEASE == "(development)"
 
 if engine.nil?
-  r.do_save({:target=>File.basename(target), :message=>"missing target framework option", :scan_status=>:failed})
+  # r.do_save({:target=>File.basename(target), :message=>"missing target framework option", :scan_status=>:failed})
   $logger.die "missing target framework option"
 end
 
 if ! options[:gemfile_scan] && ! engine.can_apply?
-  r.do_save({:target=>File.basename(target), :message=>"nothing to do on #{target}", :scan_status=>:failed})
+  # r.do_save({:target=>File.basename(target), :message=>"nothing to do on #{target}", :scan_status=>:failed})
   $logger.die "nothing to do on #{target}"
 end
 
@@ -250,22 +252,22 @@ if options[:output] == "count"
   STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
   STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"
 
-  r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
+  # r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
   $logger.bye
   Kernel.exit(0)
 end
 
 Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:output].to_sym, :filename=>options[:filename]}).report
-if (r.do_save({:target=>File.basename(engine.target),
-           :scan_started=>engine.scan_start,
-           :scan_duration => engine.scan_time.round(3),
-           :issues_found=>engine.vulnerabilities.count,
-           :output_dir=>engine.output_dir_name,
-           :scan_status=>:completed}))
-  $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
-else
-  r.errors.each do |error|
-    $logger.error error
-  end
-end
+#if (r.do_save({:target=>File.basename(engine.target),
+#           :scan_started=>engine.scan_start,
+#           :scan_duration => engine.scan_time.round(3),
+#           :issues_found=>engine.vulnerabilities.count,
+#           :output_dir=>engine.output_dir_name,
+#           :scan_status=>:completed}))
+#  $logger.info "#{Dawn::Core.registry_db_name} updated with scan infos"
+#else
+#  r.errors.each do |error|
+#    $logger.error error
+#  end
+#end
 $logger.bye
