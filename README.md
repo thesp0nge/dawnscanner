@@ -12,11 +12,20 @@ box:
 * [Sinatra](http://www.sinatrarb.com)
 * [Padrino](http://www.padrinorb.com)
 
+## Quick update from November, 2018
+
+As you can see dawnscanner is on hold since more then an year. Sorry for that.
+It's life. I was overwhelmed by tons of stuff and I dedicated free time to
+Offensive Security certifications. True to be told, I'm starting OSCE journey
+really soon.
+
+The dawnscanner project will be updated soon with new security checks and
+kickstarted again.
+
 ---
 
 [![Gem Version](https://badge.fury.io/rb/dawnscanner.png)](http://badge.fury.io/rb/dawnscanner)
 [![Build Status](https://travis-ci.org/thesp0nge/dawnscanner.png?branch=master)](https://travis-ci.org/thesp0nge/dawnscanner)
-[![Dependency Status](https://gemnasium.com/thesp0nge/dawnscanner.png)](https://gemnasium.com/thesp0nge/dawnscanner)
 [![Coverage Status](https://coveralls.io/repos/thesp0nge/dawnscanner/badge.png)](https://coveralls.io/r/thesp0nge/dawnscanner)
 [![Code Triagers Badge](https://www.codetriage.com/thesp0nge/dawnscanner/badges/users.svg)](https://www.codetriage.com/thesp0nge/dawnscanner)
 [![Inline docs](http://inch-ci.org/github/thesp0nge/dawnscanner.png?branch=master)](http://inch-ci.org/github/thesp0nge/dawnscanner)
