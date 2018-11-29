@@ -71,6 +71,12 @@ options = Dawn::Core.read_conf(Dawn::Core.find_conf(true))
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
+Dawn::Cli::DawnCli.start
+$logger.helo APPNAME, Dawn::VERSION
+$logger.debug("HERE")
+$logger.bye
+Kernel.exit(0)
+
 ###############################################################################
 # CLI argument start.
 #
@@ -179,7 +185,6 @@ target=ARGV.shift
 
 target = File.expand_path(".") if target == "."
 
-$logger.helo APPNAME, Dawn::VERSION
 
 ## It will be migrated to active record in 2019
 # r = Dawn::Registry.new
@@ -270,4 +275,3 @@ Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret, :format=>options[:out
 #    $logger.error error
 #  end
 #end
-$logger.bye

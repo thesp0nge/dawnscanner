@@ -7,6 +7,19 @@ require 'uri'
 require 'yaml'
 require 'digest'
 
+require 'date'
+
+# Core KB
+require "dawn/kb/basic_check"
+require "dawn/kb/pattern_match_check"
+require "dawn/kb/dependency_check"
+require "dawn/kb/ruby_version_check"
+require "dawn/kb/operating_system_check"
+require "dawn/kb/combo_check"
+require "dawn/kb/version_check"
+require "dawn/kb/deprecation_check"
+require "dawn/kb/rubygem_check"
+
 module Dawn
   # This is the YAML powered experimental knowledge base
   #
@@ -46,6 +59,11 @@ module Dawn
     include Dawn::Utils
     include Singleton
 
+    @@path = ""
+    @@error = ""
+    @@enabled_checks = [:generic_check, :code_quality, :bulletin, :code_style, :owasp_top_10]
+
+
     GEM_CHECK           = :rubygem_check
     DEPENDENCY_CHECK    = :dependency_check
     PATTERN_MATCH_CHECK = :pattern_match_check
@@ -57,6 +75,7 @@ module Dawn
     REMOTE_KB_URL_PREFIX  = "https://dawnscanner.org/data/"
     FILES = %w(kb.yaml bulletin.tar.gz generic_check.tar.gz owasp_ror_cheatsheet.tar.gz code_style.tar.gz code_quality.tar.gz owasp_top_10.tar.gz signatures.tar.gz)
 
+    VERSION = "0.0.1"
 
     attr_reader :security_checks
     attr_reader :descriptor
@@ -68,15 +87,41 @@ module Dawn
         $logger = Logger.new(STDOUT)
         $logger.helo "knowledge-base-experimental", Dawn::VERSION
       end
+      @path=@@path
+      @enabled_checks = @@enabled_checks
+
+      $logger.debug "KB root path is #{@path}"
     end
 
+    def self.enabled_checks= checks
+      @@enabled_checks=checks
+    end
+
+
+    def self.path= path_name
+      @@path=path_name
+    end
+
+    def is_packed?
+      return __packed?
+    end
+
+    def is_valid?
+      return __valid?
+    end
 
 
     def find(name)
+      $logger.debug "I'm asked to find #{name}"
+    end
+
+    def unpack
+      $logger.warn "unpack is not yet implemented"
+
     end
 
     def self.kb_descriptor
-      {:kb=>{:version=>"0.0.1", :revision=>Time.now.strftime("%Y%m%d"), :api=>Dawn::VERSION}}.to_yaml
+      {:kb=>{:version=>VERSION, :revision=>Time.now.strftime("%Y%m%d"), :api=>Dawn::VERSION}}.to_yaml
     end
 
     def update?
@@ -106,58 +151,44 @@ module Dawn
 
     # Load security checks from db/ folder.
     #
-    # options - The list of the options to be passed to KB. It can contain:
-    #   + enabled_checks: an array of security checks that must be enabled
-    #      [:generic_check, :code_quality, :bulletin, :code_style, :owasp_ror_cheatsheet, :owasp_top_10]
-    #   + mvc: the mvc name for the target application, in order for the KB to
-    #          deselect all security checks that don't fit the code to be
-    #          reviewed.
-    #   + path: the path for the KB root folder. Please note that #{Dir.pwd}/db
-    #           is the default location.
-    #
     # Returns an array of security checks, matching the mvc to be reviewed and
     # the enabled check list or an empty array if an error occured.
-    def load(options={})
+    def load
       @security_checks = []
-      $path = File.join(Dir.pwd, "db")
-
-      enabled_checks  = options[:enabled_checks]  unless options[:enabled_checks].nil?
-      mvc             = options[:mvc]             unless options[:mvc].nil?
-      $path           = options[:path]            unless options[:path].nil?
+      # $path = File.join(Dir.pwd, "db")
 
       unless __valid?
-        $logger.error "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
+        @@error = "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
         return []
       end
 
       unless __load?
-        $logger.error "The library must be consumed with dawnscanner up to v#{$descriptor["kb"]["api"]}. You are using dawnscanner v#{Dawn::VERSION}"
+        @@error = "The library must be consumed with dawnscanner up to v#{@descriptor[:kb][:api]}. You are using dawnscanner v#{Dawn::VERSION}"
         return []
       end
 
-      # TODO: untar and unzip from here (look for it in Google)
-      if __packed?
-        $logger.info "a packed knowledge base it has been found. Unpacking it"
-        __unpack
-      end
+      @enabled_checks.each do |d|
 
-      enabled_checks.each do |d|
-
-        dir = File.join($path, d)
+        dir = File.join(@path, d.to_s)
 
         # Please note that if we enter in this branch, it means someone
         # tampered the KB between the previous __valid? check and this point.
         # Of course this is a very rare situation, but we must handle it.
         unless Dir.exists?(dir)
-          $logger.critical "Missing check directory #{dir}"
-          $logger.error "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
-          return []
+          $logger.warn "Missing check directory #{dir}"
+        else
+          Dir.glob(dir+"/**/*.yml").each do |f|
+            data = YAML.load_file(f)
+            @security_checks << data
+          end
+
         end
 
-        # Enumerate all YAML file in the give dir
 
       end
 
+      $logger.debug "#{@security_checks.count}"
+      return @security_checks
     end
 
     def dump(verbose=false)
@@ -189,19 +220,19 @@ module Dawn
 
       lines = ""
 
-      unless File.exists?(File.join($path, "kb.yaml"))
+      unless File.exists?(File.join(@path, "kb.yaml"))
         $logger.error  "Missing kb.yaml in #{path}. Giving up"
         return false
       end
 
-      unless File.exists?(File.join($path, "kb.yaml.sig"))
+      unless File.exists?(File.join(@path, "kb.yaml.sig"))
         $logger.error  "Missing kb.yaml signature in #{path}. Giving up"
         return false
       end
 
-      lines = File.read(File.join($path, "kb.yaml"))
+      lines = File.read(File.join(@path, "kb.yaml"))
       hash_file = Digest::SHA256.hexdigest lines
-      hash_orig = File.read(File.join($path, "kb.yaml.sig"))
+      hash_orig = File.read(File.join(@path, "kb.yaml.sig"))
 
       v = __verify_hash(hash_orig, hash_file)
       if v
@@ -221,21 +252,17 @@ module Dawn
     # local DB path
     def __packed?
       FILES.each do |fn|
-        return true if fn.end_with? 'tar.gz' and File.exists?(File.join($path, fn))
+        return true if fn.end_with? 'tar.gz' and File.exists?(File.join(@path, fn))
       end
       return false
     end
 
-    def __unpack
-
-    end
-
     def __load?
-      api = $descriptor["kb"]["api"]
+      api = @descriptor[:kb][:api]
       v = Dawn::VERSION
       require "dawn/kb/version_check"
 
-      vc = VersionCheck.new
+      vc = Dawn::Kb::VersionCheck.new
       return true if vc.is_higher?(api, v) # => true if v > api
       return false
     end

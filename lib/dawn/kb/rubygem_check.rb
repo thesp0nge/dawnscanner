@@ -1,7 +1,7 @@
 # This module handles security checks for RubyGems framework.
 module Dawn
   module Kb
-    module GemCheck
+    class RubygemCheck
       include BasicCheck
 
       attr_accessor :safe_versions

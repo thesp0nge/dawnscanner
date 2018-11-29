@@ -1,6 +1,6 @@
 module Dawn
   module Kb
-    module RubyVersionCheck
+    class RubyVersionCheck
       include BasicCheck
       # Array of hashes in the {:engine=>"ruby", :version=>"1.9.3", :patchlevel=>"p342"} form
       attr_accessor   :safe_rubies
@@ -83,6 +83,7 @@ module Dawn
         end
         false
       end
+
     end
   end
 end

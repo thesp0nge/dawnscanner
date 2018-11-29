@@ -1,6 +1,6 @@
 module Dawn
   module Kb
-    module ComboCheck
+    class ComboCheck
       include BasicCheck
 
       attr_reader   :checks

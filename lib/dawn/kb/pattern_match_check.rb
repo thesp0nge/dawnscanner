@@ -2,7 +2,7 @@ require 'ptools'
 
 module Dawn
   module Kb
-    module PatternMatchCheck
+    class PatternMatchCheck
       include BasicCheck
 
 
