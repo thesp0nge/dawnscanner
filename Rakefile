@@ -7,7 +7,6 @@ require 'cucumber/rake/task'
 
 require 'fileutils'
 require "dawn/utils"
-require "dawn/knowledge_base"
 require "dawn/knowledge_base_experimental"
 
 Cucumber::Rake::Task.new(:features) do |t|
