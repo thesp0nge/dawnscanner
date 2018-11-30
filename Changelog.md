@@ -10,6 +10,9 @@ _latest update: mer 28 nov 2018, 11.03.53, CET_
 ## Version 2.0.0 - codename: Finn McMissile (2019-xx-xx)
 
 * New knowledge base, YAML based and distributed separately from the ruby gem.
+* New CLI based on Thor library. Please read README.md file to know how to
+  invoke dawn the right way or use the 'dawn help' command
+* Added a new debug\_verbosely API for engines and checks
 
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 

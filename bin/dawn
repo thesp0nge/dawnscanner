@@ -22,6 +22,8 @@ $logger = Logger.new(STDOUT)
 $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 
 engine  = nil
+$debug=false
+$verbose=false
 
 
 options = Dawn::Core.read_conf(Dawn::Core.find_conf(true))

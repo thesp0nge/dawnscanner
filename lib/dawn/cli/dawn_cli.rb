@@ -51,6 +51,7 @@ module Dawn
       option :gemfile, :type=>:boolean
       option :exit_on_warn, :type=>:boolean
       option :debug, :type=>:boolean
+      option :verbose, :type=>:boolean
       option :count, :type=>:boolean
       option :output
 
@@ -60,10 +61,13 @@ module Dawn
         trap("INT") { $logger.die('[INTERRUPTED]') }
 
         $logger.die("invalid directory (#{target})") unless Dawn::Core.is_good_target?(target)
+
+        $debug = true if options[:debug]
+        $verbose = true if options[:verbose]
+
         
-        if options[:gemfile]
-          engine = Dawn::GemfileLock.new(target)
-        end
+        engine = Dawn::GemfileLock.new(target) if options[:gemfile]
+
         if engine.nil?
           $logger.error("MVC detection failure. Please open an issue at https://github.com/thesp0nge/dawnscanner/issues")
           $logger.die('ruby framework auto detect failed.')
@@ -77,11 +81,7 @@ module Dawn
           end
         end
 
-        if options[:debug]
-          $logger.warn "putting engine in debug mode"
-          engine.debug = true
-        end
-
+      
         engine.load_knowledge_base
         ret = engine.apply_all
         if options[:output]

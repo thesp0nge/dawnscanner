@@ -61,8 +61,6 @@ module Dawn
       @applied = []
       @reflected_xss = []
       @engine_error = false
-      @debug = false
-      @debug = options[:debug] unless options[:debug].nil?
       @applied_checks = 0
       @skipped_checks = 0
       @gemfile_lock_sudo = false
@@ -83,13 +81,10 @@ module Dawn
         require 'logger'
         $logger = Logger.new(STDOUT)
         $logger.helo "dawn-engine", Dawn::VERSION
-
       end
       $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
       $logger.warn "combo security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
       debug_me "engine is in debug mode" 
-
-      $logger.debug options[:guessed_mvc]
 
       if @name == "Gemfile.lock" && ! options[:guessed_mvc].nil?
         # since all checks relies on @name a Gemfile.lock engine must
@@ -175,8 +170,9 @@ module Dawn
       Dawn::KnowledgeBase.path="/home/thesp0nge/src/hacking/dawnscanner/db"
       Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
       kb = Dawn::KnowledgeBase.instance
-      @checks=kb.load
+      $logger.warn "KB path is forced @ /home/thesp0nge/src/hacking/dawnscanner/db"
 
+      @checks=kb.load
       debug_me("#{@checks.count} checks loaded")
       @checks
     end
@@ -307,6 +303,7 @@ module Dawn
         return false
       end
       if @checks.empty?
+        $logger.warn "no security checks found. This is strange"
         @scan_stop = Time.now
         debug_me("SCAN STOPPED: #{@scan_stop}")
         return false
@@ -374,13 +371,13 @@ module Dawn
     def get_rvm_ruby_ver
       return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".ruby-version"))
       hash = File.read(File.join(@target, '.ruby-version')).split('-')
-      return {:version=>hash[0], :patchlevel=>hash[1]}
+      return {:version=>hash[0].chop, :patchlevel=>hash[1]}
     end
     def _do_apply(check)
       unless ((check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
 
         @applied << { :name => name }
-        debug_me "applying check #{check.name}"
+        debug_me "applying check #{check.name} - #{check.kind}"
         @applied_checks += 1
 
         check.ruby_version  = @ruby_version[:version]

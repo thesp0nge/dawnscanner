@@ -1,7 +1,10 @@
 module Dawn
   module Utils
     def debug_me(msg)
-      $logger.debug(msg) if @debug
+      $logger.debug(msg) if $debug
+    end
+    def debug_verbosely(msg)
+      $logger.debug("VERBOSE: #{msg}") if $debug and $verbose
     end
 
     def debug_me_and_return_true(msg)
@@ -11,7 +14,7 @@ module Dawn
       __debug_me_and_return(msg, false)
     end
     def __debug_me_and_return(msg, status)
-      $logger.debug(msg) if @debug
+      $logger.debug(msg) if $debug
       return status
     end
   end

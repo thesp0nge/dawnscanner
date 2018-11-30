@@ -23,16 +23,16 @@ module Dawn
         @save_major ||= options[:save_major]
         @debug      ||= options[:debug]
         @enable_warning ||= options[:enable_warning]
-        debug_me "VersionCheck initialized"
+        debug_verbosely "VersionCheck initialized"
       end
 
       def vuln?
-        debug_me "Detected version is #{@detected}"
-        debug_me "Safe versions array is #{@safe}"
-        debug_me "Deprecated versions array is #{@deprecated}. I'll mark them as vulnerable" unless @deprecated.nil?
-        debug_me "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable" unless @excluded.nil?
-        debug_me "SAVE_MINOR FLAG = #{@save_minor}"
-        debug_me "SAVE_MAJOR FLAG = #{@save_major}"
+        debug_verbosely "Detected version is #{@detected}"
+        debug_verbosely "Safe versions array is #{@safe}"
+        debug_verbosely "Deprecated versions array is #{@deprecated}. I'll mark them as vulnerable" unless @deprecated.nil?
+        debug_verbosely "Excluded versions array is #{@excluded}. I'll mark them as not vulnerable" unless @excluded.nil?
+        debug_verbosely "SAVE_MINOR FLAG = #{@save_minor}"
+        debug_verbosely "SAVE_MAJOR FLAG = #{@save_major}"
 
         @status = :deprecated if is_detected_deprecated?
         return debug_me_and_return_false("detected version #{detected} is marked to be excluded for vulnerable ones")   if is_detected_excluded?
@@ -54,12 +54,12 @@ module Dawn
           break
         end
 
-        debug_me "vuln?: limited check_versions: #{check_versions.inspect}"
+        debug_verbosely "vuln?: limited check_versions: #{check_versions.inspect}"
         check_versions ||= @safe
-        debug_me "vuln?: fallback check_versions: #{check_versions.inspect}"
+        debug_verbosely "vuln?: fallback check_versions: #{check_versions.inspect}"
 
         check_versions.sort.each do |s|
-          debug_me "vuln?: evaluating #{@detected} against save version: #{s}"
+          debug_verbosely "vuln?: evaluating #{@detected} against save version: #{s}"
 
           @save_minor_fix   = save_minor_fix
           @save_major_fix   = save_major_fix
@@ -67,7 +67,7 @@ module Dawn
 
           vuln  = is_vulnerable_version?(s, @detected)
 
-          debug_me "DETECTED #{@detected} is marked VULN=#{vuln} against #{s} ( SAVE_MINOR_FIX=#{@save_minor_fix} SAVE_MAJOR_FIX=#{@save_major_fix})"
+          debug_verbosely "DETECTED #{@detected} is marked VULN=#{vuln} against #{s} ( SAVE_MINOR_FIX=#{@save_minor_fix} SAVE_MAJOR_FIX=#{@save_major_fix})"
           return true if vuln
         end
 
@@ -84,7 +84,7 @@ module Dawn
       def is_detected_highest?
         higher= @detected
         @safe.sort.each do |s|
-          debug_me("higher is #{higher}")
+          debug_verbosely("higher is #{higher}")
           higher=s if is_higher?(s, higher)
         end
         return (higher == @detected)
@@ -137,7 +137,7 @@ module Dawn
         ret = ver && beta && rc unless same
         ret = beta && rc if same
 
-        debug_me("is_higher? a=#{a}, b=#{b} VER=#{ver} - BETA=#{beta} - RC=#{rc} - SAME=#{same} - a>b? = (#{ret})")
+        debug_verbosely("is_higher? a=#{a}, b=#{b} VER=#{ver} - BETA=#{beta} - RC=#{rc} - SAME=#{same} - a>b? = (#{ret})")
         return ret
       end
 
@@ -146,7 +146,7 @@ module Dawn
         dva = version_string_to_array(@detected)[:version]
         @safe.sort.each do |s|
           sva = version_string_to_array(s)[:version]
-          debug_me "is_there_an_higher_major_version? DVA=#{dva} - SVA=#{sva}"
+          debug_verbosely "is_there_an_higher_major_version? DVA=#{dva} - SVA=#{sva}"
           return debug_me_and_return_true("is_there_an_higher_major_version? is returning true for #{@detected}") if dva[0] < sva[0]
         end
         return debug_me_and_return_false("is_there_an_higher_major_version? is returning false")
@@ -188,8 +188,8 @@ module Dawn
           sva = version_string_to_array(s)[:version]
           sM = is_same_major?(sva, dva)
           sm = is_same_minor?(sva, dva)
-          debug_me("save_minor_fix: SVA=#{sva};DVA=#{dva};SAME_MAJOR? = #{sM}; SAME_MINOR?=#{sm}; ( dva[2] >= sva[2] )=#{(dva[2] >= sva[2])}")
-          debug_me("save_minor_fix: is_there_higher_minor_version? = #{hm}")
+          debug_verbosely("save_minor_fix: SVA=#{sva};DVA=#{dva};SAME_MAJOR? = #{sM}; SAME_MINOR?=#{sm}; ( dva[2] >= sva[2] )=#{(dva[2] >= sva[2])}")
+          debug_verbosely("save_minor_fix: is_there_higher_minor_version? = #{hm}")
           return true if sM and sm and dva[2] >= sva[2] && hm
           return true if sM and hm
         end
@@ -229,7 +229,7 @@ module Dawn
         return (safe_version[2] > detected_version[2])
       end
       def is_vulnerable_aux_patch?(safe_version, detected_version)
-        debug_me "is_vulnerable_aux_patch?: SV[3]=#{safe_version[3]}, DV[3]=#{detected_version[3]}"
+        debug_verbosely "is_vulnerable_aux_patch?: SV[3]=#{safe_version[3]}, DV[3]=#{detected_version[3]}"
         return true if detected_version[3].nil? and ! safe_version[3].nil?
         return false if safe_version[3].nil? || detected_version[3].nil?
         return (safe_version[3] > detected_version[3])
@@ -272,11 +272,11 @@ module Dawn
           # eg. in case of a beta release, the array is [5,0,0,1] meaning
           # 5.0.0.beta1. Of course it must be handled in a different way than
           # 5.0.0.1 release that it will result in the same array
-          debug_me "is_same_version? with limit=TRUE"
+          debug_verbosely "is_same_version? with limit=TRUE"
           ret = true if (safe_version_array[0] == detected_version_array[0]) && (safe_version_array[1] == detected_version_array[1]) && (safe_version_array[2] == detected_version_array[2])
         end
 
-        debug_me "is_same_version? SVA=#{safe_version_array} DVA=#{detected_version_array} RET=#{ret}"
+        debug_verbosely "is_same_version? SVA=#{safe_version_array} DVA=#{detected_version_array} RET=#{ret}"
 
         return ret
       end
@@ -293,7 +293,7 @@ module Dawn
         # if the safe_version_beta is 0 then the detected_version_beta is
         # vulnerable by design, since the safe version is a stable and we
         # detected a beta.
-        debug_me("is_vulnerable_beta?: safe_version_beta=#{safe_version_beta} - detected_version_beta=#{detected_version_beta}")
+        debug_verbosely("is_vulnerable_beta?: safe_version_beta=#{safe_version_beta} - detected_version_beta=#{detected_version_beta}")
         return debug_me_and_return_false("is_vulnerable_beta? = FALSE") if safe_version_beta != -1 and detected_version_beta == -1
         return debug_me_and_return_true("is_vulnerable_beta? = TRUE") if safe_version_beta == -1 and detected_version_beta != -1
         return debug_me_and_return_true("is_vulnerable_beta? = TRUE") if safe_version_beta == 0 && detected_version_beta != -1
@@ -317,7 +317,7 @@ module Dawn
         # if the safe_version_rc is 0 then the detected_version_rc is
         # vulnerable by design, since the safe version is a stable and we
         # detected a rc.
-        debug_me "entering is_vulnerable_rc?: s=#{safe_version_rc}, d=#{detected_version_rc}"
+        debug_verbosely "entering is_vulnerable_rc?: s=#{safe_version_rc}, d=#{detected_version_rc}"
         return debug_me_and_return_false("is_vulnerable_rc? = FALSE") if detected_version_rc == -1
 
         return debug_me_and_return_false("is_vulnerable_rc? = FALSE") if safe_version_rc != -1 and detected_version_rc == -1
@@ -357,8 +357,8 @@ module Dawn
       def is_vulnerable_version?(safe_version, detected_version)
         sva = version_string_to_array(safe_version)
         dva = version_string_to_array(detected_version)
-        debug_me("SVA=#{sva.inspect}")
-        debug_me("DVA=#{dva.inspect}")
+        debug_verbosely("SVA=#{sva.inspect}")
+        debug_verbosely("DVA=#{dva.inspect}")
         safe_version_array = sva[:version]
         detected_version_array = dva[:version]
 
@@ -370,7 +370,7 @@ module Dawn
         patch = is_vulnerable_patch?(safe_version_array, detected_version_array)
         aux_patch = is_vulnerable_aux_patch?(safe_version_array, detected_version_array)
 
-        debug_me "is_vulnerable_version? SAVE_VERSION=#{safe_version},DETECTED=#{detected_version} -> IS_VULN_MAJOR?=#{major} IS_VULN_MINOR?=#{minor} IS_VULN_PATCH?=#{patch} IS_VULN_AUX_PATCH=#{aux_patch} SAVE_MINOR_FIX=#{@save_minor_fix} SAVE_MAJOR_FIX=#{@save_major_fix}"
+        debug_verbosely "is_vulnerable_version? SAVE_VERSION=#{safe_version},DETECTED=#{detected_version} -> IS_VULN_MAJOR?=#{major} IS_VULN_MINOR?=#{minor} IS_VULN_PATCH?=#{patch} IS_VULN_AUX_PATCH=#{aux_patch} SAVE_MINOR_FIX=#{@save_minor_fix} SAVE_MAJOR_FIX=#{@save_major_fix}"
 
         return debug_me_and_return_false("#{detected_version} doesn't have a vulnerable MAJOR number") if is_higher_major?(detected_version, safe_version) #and minor and patch
 
@@ -417,7 +417,7 @@ module Dawn
             # I'll support also nonsense checks.
 
             $logger.warn "Setting the predicate #{dep} will mark all versions as deprecated" unless self.enable_warning.nil?
-            debug_me "You kindly mark #{detected_version} as deprecated with this predicate #{dep}"
+            debug_verbosely "You kindly mark #{detected_version} as deprecated with this predicate #{dep}"
             return true
           end
 
