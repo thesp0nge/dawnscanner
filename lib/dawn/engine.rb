@@ -89,6 +89,8 @@ module Dawn
       $logger.warn "combo security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
       debug_me "engine is in debug mode" 
 
+      $logger.debug options[:guessed_mvc]
+
       if @name == "Gemfile.lock" && ! options[:guessed_mvc].nil?
         # since all checks relies on @name a Gemfile.lock engine must
         # impersonificate the engine for the mvc it was detected
@@ -169,13 +171,12 @@ module Dawn
 
     def load_knowledge_base(enabled_checks=[])
       debug_me("load_knowledge_base called. Enabled checks are: #{enabled_checks}")
-      if @name == "Gemfile.lock"
-        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all if @force.empty?
-        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@force) unless @force.empty? 
-      else
-        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@name) 
 
-      end
+      Dawn::KnowledgeBase.path="/home/thesp0nge/src/hacking/dawnscanner/db"
+      Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
+      kb = Dawn::KnowledgeBase.instance
+      @checks=kb.load
+
       debug_me("#{@checks.count} checks loaded")
       @checks
     end

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'bundler'
-require 'getoptlong'
 require 'json'
 require 'terminal-table'
 require 'justify'
@@ -22,48 +21,6 @@ require 'logger'
 $logger = Logger.new(STDOUT)
 $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 
-opts    = GetoptLong.new(
-  # report formatting options
-
-  [ '--ascii-tabular-report',   '-a',   GetoptLong::NO_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
-  [ '--tabular',                '-T',   GetoptLong::NO_ARGUMENT],
-  [ '--json',                   '-j',   GetoptLong::NO_ARGUMENT],
-  [ '--html',                   '-H',   GetoptLong::NO_ARGUMENT],
-  [ '--console',                '-K',   GetoptLong::NO_ARGUMENT],
-
-  [ '--gem-lock',               '-G',   GetoptLong::REQUIRED_ARGUMENT], # Deprecated in 1.5.x - To be removed in 2.0.0
-  [ '--dependencies',           '-d',   GetoptLong::REQUIRED_ARGUMENT],
-
-  [ '--count-only',             '-C',   GetoptLong::NO_ARGUMENT],
-  [ '--exit-on-warn',           '-z',   GetoptLong::NO_ARGUMENT],
-
-  # Disable checks by family type
-  [ '--disable-cve-bulletins',          GetoptLong::NO_ARGUMENT],
-  [ '--disable-code-quality',           GetoptLong::NO_ARGUMENT],
-  [ '--disable-code-style',             GetoptLong::NO_ARGUMENT],
-  [ '--disable-owasp-ror-cheatsheet',   GetoptLong::NO_ARGUMENT],
-  [ '--disable-owasp-top-10',           GetoptLong::NO_ARGUMENT],
-
-  # Search knowledge base
-  [ '--search-knowledge-base',  '-S',   GetoptLong::REQUIRED_ARGUMENT],
-  # List stuff
-  [ '--list-knowledge-base',            GetoptLong::NO_ARGUMENT],
-  [ '--list-known-framework',           GetoptLong::NO_ARGUMENT],
-  [ '--list-known-families',            GetoptLong::NO_ARGUMENT],
-  [ '--list-scan-registry',             GetoptLong::NO_ARGUMENT],
-  # please save output to file
-  [ '--file',                   '-F',   GetoptLong::REQUIRED_ARGUMENT],
-  # specify an alternate config file
-  [ '--config-file',            '-c',   GetoptLong::REQUIRED_ARGUMENT],
-
-  # service options
-  [ '--verbose',                '-V',   GetoptLong::NO_ARGUMENT],
-  [ '--debug',                  '-D',   GetoptLong::NO_ARGUMENT],
-  [ '--version',                '-v',   GetoptLong::NO_ARGUMENT],
-  [ '--help',                   '-h',   GetoptLong::NO_ARGUMENT]
-)
-opts.quiet=true
-
 engine  = nil
 
 
@@ -72,8 +29,6 @@ check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 
 Dawn::Cli::DawnCli.start
-$logger.helo APPNAME, Dawn::VERSION
-$logger.debug("HERE")
 $logger.bye
 Kernel.exit(0)
 
@@ -227,7 +182,6 @@ end
 if options[:exit_on_warn]
   Kernel.at_exit do
     if engine.count_vulnerabilities != 0
-      # r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
       Kernel.exit(engine.count_vulnerabilities)
     end
   end

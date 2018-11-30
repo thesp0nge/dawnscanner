@@ -11,8 +11,7 @@ require "dawn/logger"
 require "dawn/cli/dawn_cli"
 
 # KB 
-# require "dawn/knowledge_base"
-require "dawn/knowledge_base_experimental"
+require "dawn/knowledge_base"
 # Datamapper classes
 #require 'data_mapper'
 #require "dawn/registry"
