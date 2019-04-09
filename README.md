@@ -12,6 +12,15 @@ box:
 * [Sinatra](http://www.sinatrarb.com)
 * [Padrino](http://www.padrinorb.com)
 
+## Quick update from April, 2019
+
+We just released version 2.0.0 release candidate 1 with a YAML powered revamped
+knowledge base. Please note that dawnscanner will include a telemetry facility
+sending a POST  on https://dawnscanner.org/telemetry with an application id and
+some information about version and knowledge base.
+
+We won't now and ever collect your source code on our side.
+
 ## Quick update from November, 2018
 
 As you can see dawnscanner is on hold since more then an year. Sorry for that.
