@@ -8,16 +8,16 @@ module Dawn
     class Kb < Thor
       desc "search", "Searches the knowledge base for a given security test"
       def search(string)
-        kb = Dawn::KnowledgeBaseExperimental.instance
+        kb = Dawn::KnowledgeBase.instance
         kb.find(string)
       end
 
       desc "status", "Checks the status of the knowledge base"
       def status
         $logger.helo APPNAME, Dawn::VERSION
-        Dawn::KnowledgeBaseExperimental.path="/home/thesp0nge/src/hacking/dawnscanner/db"
-        Dawn::KnowledgeBaseExperimental.enabled_checks=[:bulletin, :generic_check]
-        kb = Dawn::KnowledgeBaseExperimental.instance
+        Dawn::KnowledgeBase.path="/home/thesp0nge/src/hacking/dawnscanner/db"
+        Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
+        kb = Dawn::KnowledgeBase.instance
         kb.load
         if kb.is_packed?
           $logger.error "The knowledge base is packed. It must be unpacked with the 'unpack' command before it can be used" 

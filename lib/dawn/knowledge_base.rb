@@ -50,7 +50,7 @@ module Dawn
   #
   # ...
   #
-  # d = Dawn::KnowledgeBaseExperimental.instance
+  # d = Dawn::KnowledgeBase.instance
   # d.update if d.update?
   # d.load
   #
@@ -194,7 +194,7 @@ module Dawn
     def dump(verbose=false)
       puts "Security checks currently supported:"
       i=0
-      KnowledgeBaseExperimental.instance.all.each do |check|
+      KnowledgeBase.instance.all.each do |check|
         i+=1
         if verbose
           puts "Name: #{check.name}\tCVSS: #{check.cvss_score}\tReleased: #{check.release_date}"
