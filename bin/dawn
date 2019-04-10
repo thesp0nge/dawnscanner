@@ -26,7 +26,6 @@ $debug=false
 $verbose=false
 
 
-options = Dawn::Core.read_conf(Dawn::Core.find_conf(true))
 check = ""
 guess = {:name=>"", :version=>"", :connected_gems=>[]}
 

@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+require 'socket'
 # Statistics stuff
 # require 'code_metrics/statistics'
 
@@ -66,6 +69,9 @@ module Dawn
       @gemfile_lock_sudo = false
 
       set_target(dir) unless dir.nil?
+
+      
+
       @ruby_version = get_ruby_version if dir.nil?
       @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
 
@@ -105,6 +111,8 @@ module Dawn
       #
       # load_knowledge_base
     end
+
+    
 
     def detect_views
       []
@@ -285,9 +293,55 @@ module Dawn
       false
     end
 
+    def have_a_telemetry_id?
+      $logger.debug ($telemetry_id != ""  and ! $telemetry_id.nil?)
+      return ($telemetry_id != ""  and ! $telemetry_id.nil?)
+      
+    end
+
+    def get_a_telemetry_id
+      return "" if ($telemetry_url == "" or $telemetry_url.nil?)
+      $logger.debug("T: " + $telemetry_url)
+
+      url = URI.parse($telemetry_url+"/new")
+      res = Net::HTTP.get_response(url)
+
+      return "" unless res.code.to_i == 200
+      return JSON.parse(res.body)["uuid"]
+    end
+
+    def telemetry
+      unless have_a_telemetry_id?
+        $telemetry_id = get_a_telemetry_id
+        $config[:telemetry][:id] = $telemetry_id
+        $logger.debug($config)
+        $logger.debug("saving config to " + $config_name)
+        File.open($config_name, 'w') { |f| f.write $config.to_yaml }
+      end
+
+      $logger.debug("Telemetry ID is: " + $telemetry_id)
+      
+      uri=URI.parse($telemetry_url+"/"+$telemetry_id)
+      header = {'Content-Type': 'text/json'}
+      tele = { "kb_version" => Dawn::KnowledgeBase::VERSION , 
+               "ip" => Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
+            }
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Post.new(uri.request_uri, header)
+      request.body = tele.to_json
+
+      response=http.request(request)
+      $logger.debug(response.inspect)
+
+      return true
+      
+    end
+
     def apply_all
       @scan_start = Time.now
       debug_me("SCAN STARTED: #{@scan_start}")
+
+      telemetry
 
       # FIXME.20140325
       # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.

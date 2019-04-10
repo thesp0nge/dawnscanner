@@ -14,6 +14,7 @@ _latest update: mer 28 nov 2018, 11.03.53, CET_
   invoke dawn the right way or use the 'dawn help' command
 * Added a new debug\_verbosely API for engines and checks
 * Removed rake osvdb[name] and rake cve[name] tasks
+* Adding telemetry
 
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 

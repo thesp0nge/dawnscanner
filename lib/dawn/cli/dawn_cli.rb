@@ -65,7 +65,17 @@ module Dawn
         $debug = true if options[:debug]
         $verbose = true if options[:verbose]
 
-        
+        $config_name= Dawn::Core.find_conf(true)
+        $config = Dawn::Core.read_conf($config_name)
+        $logger.debug($config)
+
+        $telemetry_url = $config[:telemetry][:endpoint] if $config[:telemetry][:enabled]
+        $logger.debug("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
+        $telemetry_id = $config[:telemetry][:id] if $config[:telemetry][:enabled]
+
+        $logger.debug("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
+        $logger.info("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
+ 
         engine = Dawn::GemfileLock.new(target) if options[:gemfile]
 
         if engine.nil?
@@ -83,6 +93,7 @@ module Dawn
 
       
         engine.load_knowledge_base
+        
         ret = engine.apply_all
         if options[:output]
           STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"

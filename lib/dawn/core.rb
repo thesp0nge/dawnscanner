@@ -112,6 +112,7 @@ module Dawn
         fn = p + conf_name if p.start_with?('/')
         # if outside $HOME the config file must be hidden
         fn = File.expand_path(p) + '/.'+conf_name if ! p.start_with?('/')
+        $logger.debug("found a config file: " + fn) if File.exist?(fn)
         return fn if File.exist?(fn)
       end
 
@@ -122,7 +123,7 @@ module Dawn
 
       # If create_if_none flag is set to true, than I'll create a config file
       # on the current directory with the default configuration.
-      conf = {"config"=>{:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
 
       # Calculate the conf file path
       conf_path = File.expand_path('~') +'/.'+conf_name
@@ -131,6 +132,7 @@ module Dawn
       File.open(conf_path, 'w') do |f|
         rv = f.write(YAML.dump(conf))
       end
+      $logger.debug(conf_path)
 
       conf_path
     end
@@ -138,6 +140,7 @@ module Dawn
     def self.read_conf(file=nil)
       conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
       begin
+        $logger.debug("returning a default config") if file.nil? or ! File.exist?(file)
         return conf if file.nil?
         file = file.chop if (not file.nil? and file.end_with? '/')
         return conf if ! File.exist?(file)
@@ -146,9 +149,9 @@ module Dawn
         return conf
       end
 
-      c = YAML.load_file(file)
+      cf = YAML.load_file(file)
 
-      cf = c["config"]
+      tm = cf[:telemetry]
       cc = cf[:enabled_checks]
 
       # TODO
@@ -157,6 +160,7 @@ module Dawn
       conf[:debug] = cf["debug"] unless cf["debug"].nil?
       conf[:output] = cf["output"] unless cf["output"].nil?
       conf[:enabled_checks] = cc unless cc.nil?
+      conf[:telemetry] = tm unless tm.nil?
 
       return conf
     end
