@@ -1,4 +1,5 @@
 require 'thor'
+require 'dawn/utils'
 
 module Dawn
   module Cli
@@ -6,6 +7,7 @@ module Dawn
     # This class is responsible for the "dawn kb" command and related
     # subcommands.
     class Kb < Thor
+      package_name "dawnscanner"
       desc "search", "Searches the knowledge base for a given security test"
       def search(string)
         kb = Dawn::KnowledgeBase.instance
@@ -19,14 +21,13 @@ module Dawn
         Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
         kb = Dawn::KnowledgeBase.instance
         kb.load
+        if kb.security_checks.empty?
+          $logger.error(kb.error)
+        end
+        
+        $logger.info("" + kb.security_checks.count.to_s + " security checks loaded")
         if kb.is_packed?
           $logger.error "The knowledge base is packed. It must be unpacked with the 'unpack' command before it can be used" 
-        else
-          if kb.is_valid?
-            $logger.info "Good Knowledge base found"
-          else
-            $logger.error "Invalid knowledge base found"
-          end
         end
         $logger.bye
         Kernel.exit(0)
@@ -34,7 +35,9 @@ module Dawn
     end
 
     class DawnCli < Thor
+      package_name "dawnscanner"
       class_option :verbose, :type=>:boolean
+      class_option :debug, :type=>:boolean
 
       map %w[--version -v] => :__print_version
 
@@ -48,16 +51,14 @@ module Dawn
       subcommand "kb", Dawn::Cli::Kb
 
       desc "scan", "scans a folder for security issues"
+      option :config_file
       option :gemfile, :type=>:boolean
       option :exit_on_warn, :type=>:boolean
-      option :debug, :type=>:boolean
-      option :verbose, :type=>:boolean
       option :count, :type=>:boolean
       option :output
 
       def scan(target)
         $logger.helo APPNAME, Dawn::VERSION
-        $logger.debug "scanning #{target}"
         trap("INT") { $logger.die('[INTERRUPTED]') }
 
         $logger.die("invalid directory (#{target})") unless Dawn::Core.is_good_target?(target)
@@ -65,17 +66,19 @@ module Dawn
         $debug = true if options[:debug]
         $verbose = true if options[:verbose]
 
-        $config_name= Dawn::Core.find_conf(true)
-        $config = Dawn::Core.read_conf($config_name)
-        $logger.debug($config)
+        debug_me("scanning #{target}")
+
+        $config_file= Dawn::Core.find_conf(true) if options[:config_file].nil?
+        $config = Dawn::Core.read_conf($config_file)
 
         $telemetry_url = $config[:telemetry][:endpoint] if $config[:telemetry][:enabled]
-        $logger.debug("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
+        debug_me("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
         $telemetry_id = $config[:telemetry][:id] if $config[:telemetry][:enabled]
 
-        $logger.debug("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
+        debug_me("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
         $logger.info("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
  
+        engine = Dawn::Core.detect_mvc(target) unless options[:gemfile]
         engine = Dawn::GemfileLock.new(target) if options[:gemfile]
 
         if engine.nil?
@@ -98,13 +101,12 @@ module Dawn
         if options[:output]
           STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
           STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"
-
-          # r.do_save({:target=>engine.target, :scan_started=>engine.scan_start, :scan_duration => engine.scan_time.round(3), :issues_found=>engine.vulnerabilities.count, :output_dir=>engine.output_dir_name, :scan_status=>:completed})
           $logger.bye
           Kernel.exit(0)
         end
 
         Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret}).report
+        $logger.bye
 
         Kernel.exit(0)
 

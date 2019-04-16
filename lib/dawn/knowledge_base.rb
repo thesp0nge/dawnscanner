@@ -56,11 +56,10 @@ module Dawn
   #
   # Last update: gio 29 nov 2018, 17.34.57, CET
   class KnowledgeBase
-    include Dawn::Utils
     include Singleton
 
     @@path = ""
-    @@error = ""
+    @error = ""
     @@enabled_checks = [:generic_check, :code_quality, :bulletin, :code_style, :owasp_top_10]
 
 
@@ -80,6 +79,7 @@ module Dawn
     attr_reader :security_checks
     attr_reader :descriptor
     attr_reader :path
+    attr_reader :error
 
     def initialize(options={})
       if $logger.nil?
@@ -90,7 +90,7 @@ module Dawn
       @path=@@path
       @enabled_checks = @@enabled_checks
 
-      $logger.debug "KB root path is #{@path}"
+      debug_me "KB root path is #{@path}"
     end
 
     def self.enabled_checks= checks
@@ -112,7 +112,7 @@ module Dawn
 
 
     def find(name)
-      $logger.debug "I'm asked to find #{name}"
+      debug_me "I'm asked to find #{name}"
     end
 
     def unpack
@@ -158,12 +158,12 @@ module Dawn
       # $path = File.join(Dir.pwd, "db")
 
       unless __valid?
-        @@error = "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
+        @error = "An invalid library it has been found. Please use --recovery flag to force fresh install from dawnscanner.org"
         return []
       end
 
       unless __load?
-        @@error = "The library must be consumed with dawnscanner up to v#{@descriptor[:kb][:api]}. You are using dawnscanner v#{Dawn::VERSION}"
+        @error = "The library must be consumed with dawnscanner up to v#{@descriptor[:kb][:api]}. You are using dawnscanner v#{Dawn::VERSION}"
         return []
       end
 
@@ -187,7 +187,7 @@ module Dawn
 
       end
 
-      $logger.debug "#{@security_checks.count}"
+      debug_me "#{@security_checks.count}"
       return @security_checks
     end
 
@@ -236,7 +236,7 @@ module Dawn
 
       v = __verify_hash(hash_orig, hash_file)
       if v
-        $logger.info("good kb.yaml file found. Reading knowledge base descriptor")
+        debug_me("good kb.yaml file found. Reading knowledge base descriptor")
         @descriptor = YAML.load(lines)
       else
         $logger.error("kb.yaml signature mismatch. Found #{hash_file} while expecting #{hash_orig}. Giving up")
@@ -263,7 +263,7 @@ module Dawn
       require "dawn/kb/version_check"
 
       vc = Dawn::Kb::VersionCheck.new
-      return true if vc.is_higher?(api, v) # => true if v > api
+      return true if vc.is_higher?(v, api) # => true if v > api
       return false
     end
 

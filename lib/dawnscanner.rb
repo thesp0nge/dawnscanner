@@ -1,4 +1,3 @@
-require "dawn/utils"
 require "dawn/core"
 require "dawn/version"
 require "dawn/rails"
@@ -12,6 +11,7 @@ require "dawn/cli/dawn_cli"
 
 # KB 
 require "dawn/knowledge_base"
-# Datamapper classes
-#require 'data_mapper'
-#require "dawn/registry"
+
+# General purpose utilities
+require "dawn/utils"
+include Dawn::Utils
