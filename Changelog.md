@@ -17,6 +17,8 @@ _latest update: mer 28 nov 2018, 11.03.53, CET_
 * Adding telemetry
 * Dawn::Utils include refactory. Now it's available application wide
 * debug information refactory. 
+* engine class, apply_all method now accepts an optional parameter containing a
+  list of security checks to be excluded (issue #230).
 
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 

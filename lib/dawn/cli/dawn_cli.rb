@@ -50,11 +50,13 @@ module Dawn
       desc "kb SUBCOMMAND ... ARGS", "Interacts with the knowledge base"
       subcommand "kb", Dawn::Cli::Kb
 
-      desc "scan", "scans a folder for security issues"
+      desc "scan", "scans a ruby written application for security issues"
       option :config_file
-      option :gemfile, :type=>:boolean
+      method_option :gemfile, :type=>:boolean, :default=>true, :aliases => "-G", :desc => "uses Gemfile.lock to detect MVC"
+      method_option :skip, :type=>:array, :aliases => "-S", :desc => "specify a list of security checks to be skipped"
       option :exit_on_warn, :type=>:boolean
       option :count, :type=>:boolean
+      option :s
       option :output
 
       def scan(target)
@@ -65,6 +67,10 @@ module Dawn
 
         $debug = true if options[:debug]
         $verbose = true if options[:verbose]
+        checks_to_be_skipped = []
+        checks_to_be_skipped = options[:skip] unless options[:skip].nil?
+
+        $logger.error("#{options[:skip]}")
 
         debug_me("scanning #{target}")
 
@@ -73,9 +79,10 @@ module Dawn
 
         $telemetry_url = $config[:telemetry][:endpoint] if $config[:telemetry][:enabled]
         debug_me("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
+        
         $telemetry_id = $config[:telemetry][:id] if $config[:telemetry][:enabled]
-
         debug_me("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
+
         $logger.info("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
  
         engine = Dawn::Core.detect_mvc(target) unless options[:gemfile]
@@ -97,7 +104,7 @@ module Dawn
       
         engine.load_knowledge_base
         
-        ret = engine.apply_all
+        ret = engine.apply_all(checks_to_be_skipped)
         if options[:output]
           STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
           STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"

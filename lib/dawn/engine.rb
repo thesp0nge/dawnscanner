@@ -332,28 +332,25 @@ module Dawn
       request = Net::HTTP::Post.new(uri.request_uri, header)
       request.body = tele.to_json
 
-      response=http.request(request)
-      debug_me(response.inspect)
-
-      return true
-      
+      begin
+        response=http.request(request)
+        debug_me(response.inspect)
+        return true
+      rescue => e
+        $logger.error "telemetry: #{e.message}"
+        return false
+      end
     end
 
-    def apply_all
+    def apply_all(checks_to_be_skipped=[])
       @scan_start = Time.now
+      debug_me("I'm asked to skip those checks #{checks_to_be_skipped}")
       debug_me("SCAN STARTED: #{@scan_start}")
 
       telemetry
 
-      # FIXME.20140325
-      # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
-      # Reason is simple, load_knowledge_base now needs enabled check array
-      # and I don't want to pollute engine API to propagate this value. It's
-      # a param to load_knowledge_base and then bin/dawn calls it
-      # accordingly.
-      # load_knowledge_base if @checks.nil?
       if @checks.nil?
-        $logger.err "you must load knowledge base before trying to apply security checks"
+        $logger.error "you must load knowledge base before trying to apply security checks"
         @scan_stop = Time.now
         debug_me("SCAN STOPPED: #{@scan_stop}")
         return false
@@ -366,7 +363,11 @@ module Dawn
       end
 
       @checks.each do |check|
-        _do_apply(check)
+        if checks_to_be_skipped.include?(check.name) 
+          $logger.info("skipping security check #{check.name}")
+        else
+          _do_apply(check)
+        end
       end
 
       @scan_stop = Time.now

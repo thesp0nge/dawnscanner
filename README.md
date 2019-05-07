@@ -1,7 +1,7 @@
 # Dawnscanner - The raising security scanner for ruby web applications
 
-dawnscanner is a source code scanner designed to review your ruby code for security
-issues.
+dawnscanner is a source code scanner designed to review your ruby code for
+security issues.
 
 dawnscanner is able to scan plain ruby scripts (e.g. command line applications) but
 all its features are unleashed when dealing with web applications source code.
