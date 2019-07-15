@@ -312,6 +312,11 @@ module Dawn
     end
 
     def telemetry
+      unless $config[:telemetry][:enabled] 
+        debug_me("telemetry is disabled")
+        return false
+      end
+
       unless have_a_telemetry_id?
         $telemetry_id = get_a_telemetry_id
         $config[:telemetry][:id] = $telemetry_id

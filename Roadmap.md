@@ -11,12 +11,24 @@ The document is _dynamic_ and feature schedule may vary. If you do need a
 feature to be included sooner, please open an [issue on
 github](https://github.com/thesp0nge/dawnscanner/issues/new)
 
-_latest update: Thu Dec  3 18:29:11 CET 2015_
+_latest update: mar 7 mag 2019, 17:48:53, CEST_
 
 
-## Version 1.5.5 (est. Jan 2016)
+* Add Hanami support
+* Add node.js support
 
-* close all issues on github markedsfor milestone 1.5.5
+* Add Maven support (this will lead of creating the skeleton of a
+  dawnscanner-java gem. I will decide later if it will stay with the core or if
+  it will be a separted gem plugging into dawnscanner as plugin).
+* Add support for pure Rack applications
+* Add basic support for Javascript. At the beginning, it will be a signature
+  based support. dawnscanner will try to detect the js library version by using
+  SHA hashing functions, comparing it with fingerprint of vulnerable libraies.
+  Of course, this will lead to false negatives if a user tamper the original
+  JS. We must consider also minified versions and we're not able to deal with
+  obfuscated code.
+
+
 * Issue #131 - Adding a check for OSVDB 119927 : http Gem for Ruby SSL Certificate Validation MitM Spoofing
 * Issue #119 - Adding a check for OSVDB 114641 : Ruby lib/rexml/entity.rb NULL String Handling Recursive XML External Entity (XXE) Expansion Resource Consumption Remote DoS
 * Issue #118 - Adding a check for OSVDB 113965 : Sprockets Gem for Ruby Unspecified Request Handling File Enumeration
@@ -39,24 +51,6 @@ _latest update: Thu Dec  3 18:29:11 CET 2015_
 * adding test for CVE-2011-4969  XSS in jquery < 1.6.2
 
 
-## Version 2.0.0 (est. June 2016)
-
-### New supported frameworks
-
-* Add Lotus support
-* Add Maven support (this will lead of creating the skeleton of a
-  dawnscanner-java gem. I will decide later if it will stay with the core or if
-  it will be a separted gem plugging into dawnscanner as plugin).
-* Add support for pure Rack applications
-* Add basic support for Javascript. At the beginning, it will be a signature
-  based support. dawnscanner will try to detect the js library version by using
-  SHA hashing functions, comparing it with fingerprint of vulnerable libraies.
-  Of course, this will lead to false negatives if a user tamper the original
-  JS. We must consider also minified versions and we're not able to deal with
-  obfuscated code.
-
-### New checks
-
 * Add a language check. It will handle a ruby script as input and a
   ruby\_parser line as unsafe pattern. It will compile the ruby and look for
   the unsafe pattern
@@ -67,7 +61,6 @@ _latest update: Thu Dec  3 18:29:11 CET 2015_
   dawnscanner the proper way. This is a dynamic tests that it must be run in a
   static way, looking for the public directory for old and backup files
   pattern.
-* Security checks for vulnerabilities out until 31 May 2016.
 
 ### New features
 
@@ -115,7 +108,6 @@ _latest update: Thu Dec  3 18:29:11 CET 2015_
 ## Version 2.5.0 (est. December 2016)
 
 * Add automatic mitigation patch generation for Ruby
-* Add node.js support
 * Add Opal support
 
 ## Long term Roadmap
