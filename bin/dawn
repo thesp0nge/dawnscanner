@@ -8,6 +8,7 @@ require 'justify'
 require 'dawnscanner'
 
 APPNAME = File.basename($0)
+
 LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
 VALID_OUTPUT_FORMAT   = %w(console json csv html)
 
@@ -23,7 +24,7 @@ $logger.formatter = proc do |severity, datetime, progname, msg|
     date_format = datetime.strftime("%Y-%m-%d %H:%M:%S")
     if severity == "INFO" or severity == "WARN"
         "[#{date_format}] #{severity}  (dawn): #{msg}\n"
-    else        
+    else
         "[#{date_format}] #{severity} (dawn): #{msg}\n"
     end
 end

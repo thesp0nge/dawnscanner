@@ -3,7 +3,6 @@ require 'dawn/utils'
 
 module Dawn
   module Cli
-    
     # This class is responsible for the "dawn kb" command and related
     # subcommands.
     class Kb < Thor
@@ -17,17 +16,15 @@ module Dawn
       desc "status", "Checks the status of the knowledge base"
       def status
         $logger.helo APPNAME, Dawn::VERSION
-        Dawn::KnowledgeBase.path="/home/thesp0nge/src/hacking/dawnscanner/db"
         Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
         kb = Dawn::KnowledgeBase.instance
         kb.load
         if kb.security_checks.empty?
           $logger.error(kb.error)
         end
-        
         $logger.info("" + kb.security_checks.count.to_s + " security checks loaded")
         if kb.is_packed?
-          $logger.error "The knowledge base is packed. It must be unpacked with the 'unpack' command before it can be used" 
+          $logger.error "The knowledge base is packed. It must be unpacked with the 'unpack' command before it can be used"
         end
         $logger.bye
         Kernel.exit(0)
@@ -79,12 +76,12 @@ module Dawn
 
         $telemetry_url = $config[:telemetry][:endpoint] if $config[:telemetry][:enabled]
         debug_me("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
-        
+
         $telemetry_id = $config[:telemetry][:id] if $config[:telemetry][:enabled]
         debug_me("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
 
         $logger.info("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
- 
+
         engine = Dawn::Core.detect_mvc(target) unless options[:gemfile]
         engine = Dawn::GemfileLock.new(target) if options[:gemfile]
 
@@ -101,9 +98,9 @@ module Dawn
           end
         end
 
-      
+
         engine.load_knowledge_base
-        
+
         ret = engine.apply_all(checks_to_be_skipped)
         if options[:output]
           STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"

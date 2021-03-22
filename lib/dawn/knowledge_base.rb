@@ -58,7 +58,6 @@ module Dawn
   class KnowledgeBase
     include Singleton
 
-    @@path = ""
     @error = ""
     @@enabled_checks = [:generic_check, :code_quality, :bulletin, :code_style, :owasp_top_10]
 
@@ -87,7 +86,10 @@ module Dawn
         $logger = Logger.new(STDOUT)
         $logger.helo "knowledge-base-experimental", Dawn::VERSION
       end
-      @path=@@path
+      @path = default_path
+      @path = options[:path] if options[:path]
+      FileUtils.mkdir_p(@path)
+
       @enabled_checks = @@enabled_checks
 
       debug_me "KB root path is #{@path}"
@@ -97,9 +99,13 @@ module Dawn
       @@enabled_checks=checks
     end
 
+    def default_path
+      @path = File.join(Dir.home, 'dawnscanner', 'kb')
+      return @path
+    end
 
     def self.path= path_name
-      @@path=path_name
+      @path=path_name
     end
 
     def is_packed?
