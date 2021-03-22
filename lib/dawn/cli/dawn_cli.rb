@@ -7,10 +7,19 @@ module Dawn
     # subcommands.
     class Kb < Thor
       package_name "dawnscanner"
-      desc "search", "Searches the knowledge base for a given security test"
-      def search(string)
+      desc "find", "Searches the knowledge base for a given security test"
+      def find(string)
         kb = Dawn::KnowledgeBase.instance
         kb.find(string)
+      end
+
+      desc "unpack", "Unpacks security checks in KB library path"
+      def unpack
+        $logger.helo APPNAME, Dawn::VERSION
+        kb = Dawn::KnowledgeBase.instance
+        kb.unpack
+        $logger.bye
+        Kernel.exit(0)
       end
 
       desc "status", "Checks the status of the knowledge base"

@@ -1,5 +1,7 @@
 require 'singleton'
 
+require 'rubygems/package'
+
 # For HTTPS communication to check for KB updates and to fetch them
 require 'net/http'
 require 'uri'
@@ -21,10 +23,7 @@ require "dawn/kb/deprecation_check"
 require "dawn/kb/rubygem_check"
 
 module Dawn
-  # This is the YAML powered experimental knowledge base
-  #
-  # When the old KB format, using Ruby classes will be marked as deprecated,
-  # than this one will be the official.
+  # This is the YAML powered knowledge base
   #
   # Dawnscanner KB will be a bunch of YAML file, stored in a hierachy of
   # directories resembling security checks family. A digital signature will be
@@ -46,7 +45,7 @@ module Dawn
   #
   # Example
   #
-  # require "dawn/knowledge_base_experimental"
+  # require "dawn/knowledge_base"
   #
   # ...
   #
@@ -54,7 +53,7 @@ module Dawn
   # d.update if d.update?
   # d.load
   #
-  # Last update: gio 29 nov 2018, 17.34.57, CET
+  # Last update: Mon Mar 22 05:08:55 PM CET 2021
   class KnowledgeBase
     include Singleton
 
@@ -122,8 +121,29 @@ module Dawn
     end
 
     def unpack
-      $logger.warn "unpack is not yet implemented"
-
+      # https://weblog.jamisbuck.org/2015/7/23/tar-gz-in-ruby.html
+      FILES.each do |f|
+        full_name = File.join(path,f)
+        if File.file?(full_name) and File.extname(full_name).eql?('.gz')
+          File.open(full_name, "rb") do |file|
+            Zlib::GzipReader.wrap(file) do |gz|
+              Gem::Package::TarReader.new(gz) do |tar|
+                tar.each do |entry|
+                  if entry.file?
+                    FileUtils.mkdir_p(File.dirname(File.join(path, entry.full_name)))
+                    File.open(File.join(path, entry.full_name), "wb") do |f|
+                      f.write(entry.read)
+                    end
+                    File.chmod(entry.header.mode, File.join(path,entry.full_name))
+                  end
+                end
+              end
+            end
+          end
+        else
+          $logger.warn("can't open " + f)
+        end
+      end
     end
 
     def self.kb_descriptor
