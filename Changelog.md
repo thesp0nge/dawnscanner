@@ -21,6 +21,7 @@ _latest update: mer 28 nov 2018, 11.03.53, CET_
   list of security checks to be excluded (issue #230).
 * Fix issue #244. Now the KB path is no more hardcoded but it is relative to
   $HOME and 'dawnscanner' folder where results are stored.
+* Fix issue #245. Pattern matching check is skipped on empty files.
 
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 
