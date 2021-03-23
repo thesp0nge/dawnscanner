@@ -138,7 +138,7 @@ module Dawn
     end
 
     def self.read_conf(file=nil)
-      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES, :telemetry=>{:enabled=>false, :endpoint=>"", :id=>""}}
       begin
         debug_me("returning a default config") if file.nil? or ! File.exist?(file)
         return conf if file.nil?

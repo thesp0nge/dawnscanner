@@ -39,7 +39,7 @@ module Dawn
     attr_reader :controllers
 
     # Models I don't know right now. Let them initialized as Array... we
-    # will see later 
+    # will see later
     attr_reader :models
 
     attr_accessor :debug
@@ -69,10 +69,10 @@ module Dawn
 
       set_target(dir) unless dir.nil?
 
-      
+
 
       @ruby_version = get_ruby_version if dir.nil?
-      @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
+      @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil?
 
       # @stats        = gather_statistics
 
@@ -89,12 +89,12 @@ module Dawn
       end
       $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
       $logger.warn "combo security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
-      debug_me "engine is in debug mode" 
+      debug_me "engine is in debug mode"
 
       if @name == "Gemfile.lock" && ! options[:guessed_mvc].nil?
         # since all checks relies on @name a Gemfile.lock engine must
         # impersonificate the engine for the mvc it was detected
-        debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}" 
+        debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}"
         $logger.err "there are no connected gems... it seems Gemfile.lock parsing failed" if options[:guessed_mvc][:connected_gems].empty?
         @name = options[:guessed_mvc][:name]
         @mvc_version = options[:guessed_mvc][:version]
@@ -111,7 +111,7 @@ module Dawn
       # load_knowledge_base
     end
 
-    
+
 
     def detect_views
       []
@@ -125,10 +125,10 @@ module Dawn
 
     def build_view_array(dir)
 
-      return [] unless File.exist?(dir) and File.directory?(dir) 
+      return [] unless File.exist?(dir) and File.directory?(dir)
 
       ret = []
-      Dir.glob(File.join("#{dir}", "*")).each do |filename| 
+      Dir.glob(File.join("#{dir}", "*")).each do |filename|
         ret << {:filename=>filename, :language=>:haml} if File.extname(filename) == ".haml"
       end
 
@@ -151,9 +151,9 @@ module Dawn
         # does the target use rvm?
         ver = get_rvm_ruby_ver if  ver[:version].empty? && ver[:patchlevel].empty?
         # take the running ruby otherwise
-        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? && ver[:patchlevel].empty? 
+        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? && ver[:patchlevel].empty?
       else
-        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} 
+        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"}
 
       end
 
@@ -174,10 +174,8 @@ module Dawn
     def load_knowledge_base(enabled_checks=[])
       debug_me("load_knowledge_base called. Enabled checks are: #{enabled_checks}")
 
-      Dawn::KnowledgeBase.path="/home/thesp0nge/src/hacking/dawnscanner/db"
       Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
       kb = Dawn::KnowledgeBase.instance
-      $logger.warn "KB path is forced @ /home/thesp0nge/src/hacking/dawnscanner/db"
 
       @checks=kb.load
       debug_me("#{@checks.count} checks loaded")
@@ -192,13 +190,13 @@ module Dawn
       return ver unless has_gemfile_lock?
 
       my_dir = Dir.pwd
-      Dir.chdir(@target) 
+      Dir.chdir(@target)
       lockfile = Bundler::LockfileParser.new(Bundler.read_file("Gemfile.lock"))
       lockfile.specs.each do |s|
         # detecting MVC version using @name in case of sinatra, padrino or rails engine
-        ver= s.version.to_s if s.name == @name && @name != "Gemfile.lock" 
+        ver= s.version.to_s if s.name == @name && @name != "Gemfile.lock"
         # detecting MVC version using @force in case of Gemfile.lock engine
-        ver= s.version.to_s if s.name == @force.to_s && @name == "Gemfile.lock" 
+        ver= s.version.to_s if s.name == @force.to_s && @name == "Gemfile.lock"
         @connected_gems << {:name=>s.name, :version=>s.version.to_s}
       end
       Dir.chdir(my_dir)
@@ -297,7 +295,7 @@ module Dawn
     def have_a_telemetry_id?
       debug_me ($telemetry_id != ""  and ! $telemetry_id.nil?)
       return ($telemetry_id != ""  and ! $telemetry_id.nil?)
-      
+
     end
 
     def get_a_telemetry_id
@@ -312,7 +310,7 @@ module Dawn
     end
 
     def telemetry
-      unless $config[:telemetry][:enabled] 
+      unless $config[:telemetry][:enabled]
         debug_me("telemetry is disabled")
         return false
       end
@@ -326,11 +324,11 @@ module Dawn
       end
 
       debug_me("Telemetry ID is: " + $telemetry_id)
-      
+
       uri=URI.parse($telemetry_url+"/"+$telemetry_id)
       header = {'Content-Type': 'text/json'}
-      tele = { "kb_version" => Dawn::KnowledgeBase::VERSION , 
-               "ip" => Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address, 
+      tele = { "kb_version" => Dawn::KnowledgeBase::VERSION ,
+               "ip" => Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address,
                "message"=> Dawn::KnowledgeBase
             }
       http = Net::HTTP.new(uri.host, uri.port)
@@ -368,7 +366,7 @@ module Dawn
       end
 
       @checks.each do |check|
-        if checks_to_be_skipped.include?(check.name) 
+        if checks_to_be_skipped.include?(check.name)
           $logger.info("skipping security check #{check.name}")
         else
           _do_apply(check)

@@ -56,14 +56,15 @@ module Dawn
       desc "kb SUBCOMMAND ... ARGS", "Interacts with the knowledge base"
       subcommand "kb", Dawn::Cli::Kb
 
-      desc "scan", "scans a ruby written application for security issues"
-      option :config_file
-      method_option :gemfile, :type=>:boolean, :default=>true, :aliases => "-G", :desc => "uses Gemfile.lock to detect MVC"
-      method_option :skip, :type=>:array, :aliases => "-S", :desc => "specify a list of security checks to be skipped"
-      option :exit_on_warn, :type=>:boolean
-      option :count, :type=>:boolean
-      option :s
-      option :output
+      desc "scan", "scans a ruby written web application for security issues"
+      method_option :config_file,   :type=>:string,   :default=>"",     :aliases => "-c", :desc=>"tells dawn to load configuration from filename"
+      method_option :gemfile,       :type=>:boolean,  :default=>true,   :aliases => "-G", :desc => "uses Gemfile.lock to detect MVC"
+      method_option :skip,          :type=>:array,                      :aliases => "-S", :desc => "specify a list of security checks to be skipped"
+      method_option :report_format, :type=>:string,                     :aliases => "-F", :desc=>"specify the report format (text, html, json). Default is plain text files."
+      method_option :exit_on_warn,  :type=>:boolean,  :default=>false,  :aliases => "-z", :desc =>"return number of found vulnerabilities as exit code"
+      method_option :count,         :type=>:boolean,  :default=>false,  :aliases => "-C", :desc=>"count vulnerabilities (useful for scripts)"
+      method_option :output,        :type=>:string,                     :aliases => "-O", :desc=>"write output to a file with the name specified by the parameter"
+      method_option :dependencies,  :type=>:boolean,  :default=>false,  :aliases => "-d", :desc=>"scan only for vulnerabilities affecting dependencies in Gemfile.lock"
 
       def scan(target)
         $logger.helo APPNAME, Dawn::VERSION
@@ -75,8 +76,6 @@ module Dawn
         $verbose = true if options[:verbose]
         checks_to_be_skipped = []
         checks_to_be_skipped = options[:skip] unless options[:skip].nil?
-
-        $logger.error("#{options[:skip]}")
 
         debug_me("scanning #{target}")
 
@@ -113,9 +112,10 @@ module Dawn
         engine.load_knowledge_base
 
         ret = engine.apply_all(checks_to_be_skipped)
-        if options[:output]
-          STDERR.puts (ret)? engine.vulnerabilities.count : "-1" unless options[:output] == "json"
-          STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json if options[:output] == "json"
+
+
+        if options[:report_format] and options[:report_format].eql? "json"
+          STDERR.puts (ret)? {:status=>"OK", :vulnerabilities_count=>engine.count_vulnerabilities}.to_json : {:status=>"KO", :vulnerabilities_count=>-1}.to_json
           $logger.bye
           Kernel.exit(0)
         end
