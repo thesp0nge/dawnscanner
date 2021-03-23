@@ -83,6 +83,8 @@ module Dawn
         $config_file= Dawn::Core.find_conf(true) if options[:config_file].nil?
         $config = Dawn::Core.read_conf($config_file)
 
+        debug_me($config)
+
         $telemetry_url = $config[:telemetry][:endpoint] if $config[:telemetry][:enabled]
         debug_me("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
 

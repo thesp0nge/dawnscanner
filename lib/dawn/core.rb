@@ -123,7 +123,7 @@ module Dawn
 
       # If create_if_none flag is set to true, than I'll create a config file
       # on the current directory with the default configuration.
-      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES, :telemetry=>{:enabled=>false, :endpoint=>"", :id=>""}}
 
       # Calculate the conf file path
       conf_path = File.expand_path('~') +'/.'+conf_name
