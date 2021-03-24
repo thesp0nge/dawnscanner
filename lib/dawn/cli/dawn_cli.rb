@@ -90,7 +90,7 @@ module Dawn
         $telemetry_id = $config[:telemetry][:id] if $config[:telemetry][:enabled]
         debug_me("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
 
-        $logger.info("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
+        debug_me("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
 
         engine = Dawn::Core.detect_mvc(target) unless options[:gemfile]
         engine = Dawn::GemfileLock.new(target) if options[:gemfile]
@@ -119,6 +119,8 @@ module Dawn
           $logger.bye
           Kernel.exit(0)
         end
+
+        $logger.info("#{engine.count_vulnerabilities} issues found")
 
         Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret}).report
         $logger.bye
