@@ -21,6 +21,7 @@ require "dawn/kb/combo_check"
 require "dawn/kb/version_check"
 require "dawn/kb/deprecation_check"
 require "dawn/kb/rubygem_check"
+require "dawn/kb/unsafe_depedency_check"
 
 module Dawn
   # This is the YAML powered knowledge base
