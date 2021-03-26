@@ -1,7 +1,7 @@
 # Dawnscanner - The raising security scanner for ruby web applications
 
-dawnscanner is a source code scanner designed to review your ruby code for security
-issues.
+dawnscanner is a source code scanner designed to review your ruby code for
+security issues.
 
 dawnscanner is able to scan plain ruby scripts (e.g. command line applications) but
 all its features are unleashed when dealing with web applications source code.
@@ -11,6 +11,15 @@ box:
 * [Ruby on Rails](http://rubyonrails.org)
 * [Sinatra](http://www.sinatrarb.com)
 * [Padrino](http://www.padrinorb.com)
+
+## Quick update from April, 2019
+
+We just released version 2.0.0 release candidate 1 with a YAML powered revamped
+knowledge base. Please note that dawnscanner will include a telemetry facility
+sending a POST  on https://dawnscanner.org/telemetry with an application id and
+some information about version and knowledge base.
+
+We won't now and ever collect your source code on our side.
 
 ## Quick update from November, 2018
 

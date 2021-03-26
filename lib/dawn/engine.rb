@@ -1,9 +1,11 @@
+require 'net/http'
+require 'json'
+require 'socket'
 # Statistics stuff
 # require 'code_metrics/statistics'
 
 module Dawn
   module Engine
-    include Dawn::Utils
 
     attr_reader :target
     attr_reader :name
@@ -37,7 +39,7 @@ module Dawn
     attr_reader :controllers
 
     # Models I don't know right now. Let them initialized as Array... we
-    # will see later 
+    # will see later
     attr_reader :models
 
     attr_accessor :debug
@@ -61,15 +63,16 @@ module Dawn
       @applied = []
       @reflected_xss = []
       @engine_error = false
-      @debug = false
-      @debug = options[:debug] unless options[:debug].nil?
       @applied_checks = 0
       @skipped_checks = 0
       @gemfile_lock_sudo = false
 
       set_target(dir) unless dir.nil?
+
+
+
       @ruby_version = get_ruby_version if dir.nil?
-      @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil? 
+      @gemfile_lock = options[:gemfile_name] unless options[:gemfile_name].nil?
 
       # @stats        = gather_statistics
 
@@ -83,16 +86,15 @@ module Dawn
         require 'logger'
         $logger = Logger.new(STDOUT)
         $logger.helo "dawn-engine", Dawn::VERSION
-
       end
       $logger.warn "pattern matching security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
       $logger.warn "combo security checks are disabled for Gemfile.lock scan" if @name == "Gemfile.lock"
-      debug_me "engine is in debug mode" 
+      debug_me "engine is in debug mode"
 
       if @name == "Gemfile.lock" && ! options[:guessed_mvc].nil?
         # since all checks relies on @name a Gemfile.lock engine must
         # impersonificate the engine for the mvc it was detected
-        debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}" 
+        debug_me "now I'm switching my name from #{@name} to #{options[:guessed_mvc][:name]}"
         $logger.err "there are no connected gems... it seems Gemfile.lock parsing failed" if options[:guessed_mvc][:connected_gems].empty?
         @name = options[:guessed_mvc][:name]
         @mvc_version = options[:guessed_mvc][:version]
@@ -109,6 +111,8 @@ module Dawn
       # load_knowledge_base
     end
 
+
+
     def detect_views
       []
     end
@@ -121,10 +125,10 @@ module Dawn
 
     def build_view_array(dir)
 
-      return [] unless File.exist?(dir) and File.directory?(dir) 
+      return [] unless File.exist?(dir) and File.directory?(dir)
 
       ret = []
-      Dir.glob(File.join("#{dir}", "*")).each do |filename| 
+      Dir.glob(File.join("#{dir}", "*")).each do |filename|
         ret << {:filename=>filename, :language=>:haml} if File.extname(filename) == ".haml"
       end
 
@@ -147,9 +151,9 @@ module Dawn
         # does the target use rvm?
         ver = get_rvm_ruby_ver if  ver[:version].empty? && ver[:patchlevel].empty?
         # take the running ruby otherwise
-        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? && ver[:patchlevel].empty? 
+        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} if ver[:version].empty? && ver[:patchlevel].empty?
       else
-        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"} 
+        ver = {:engine=>RUBY_ENGINE, :version=>RUBY_VERSION, :patchlevel=>"p#{RUBY_PATCHLEVEL}"}
 
       end
 
@@ -169,13 +173,11 @@ module Dawn
 
     def load_knowledge_base(enabled_checks=[])
       debug_me("load_knowledge_base called. Enabled checks are: #{enabled_checks}")
-      if @name == "Gemfile.lock"
-        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all if @force.empty?
-        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@force) unless @force.empty? 
-      else
-        @checks = Dawn::KnowledgeBase.new({:enabled_checks=>enabled_checks}).all_by_mvc(@name) 
 
-      end
+      Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
+      kb = Dawn::KnowledgeBase.instance
+
+      @checks=kb.load
       debug_me("#{@checks.count} checks loaded")
       @checks
     end
@@ -188,13 +190,13 @@ module Dawn
       return ver unless has_gemfile_lock?
 
       my_dir = Dir.pwd
-      Dir.chdir(@target) 
+      Dir.chdir(@target)
       lockfile = Bundler::LockfileParser.new(Bundler.read_file("Gemfile.lock"))
       lockfile.specs.each do |s|
         # detecting MVC version using @name in case of sinatra, padrino or rails engine
-        ver= s.version.to_s if s.name == @name && @name != "Gemfile.lock" 
+        ver= s.version.to_s if s.name == @name && @name != "Gemfile.lock"
         # detecting MVC version using @force in case of Gemfile.lock engine
-        ver= s.version.to_s if s.name == @force.to_s && @name == "Gemfile.lock" 
+        ver= s.version.to_s if s.name == @force.to_s && @name == "Gemfile.lock"
         @connected_gems << {:name=>s.name, :version=>s.version.to_s}
       end
       Dir.chdir(my_dir)
@@ -267,6 +269,8 @@ module Dawn
     # otherwise
     def apply(name)
 
+      telemetry
+
       # FIXME.20140325
       # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
       # Reason is simple, load_knowledge_base now needs enabled check array
@@ -288,31 +292,85 @@ module Dawn
       false
     end
 
-    def apply_all
+    def have_a_telemetry_id?
+      debug_me ($telemetry_id != ""  and ! $telemetry_id.nil?)
+      return ($telemetry_id != ""  and ! $telemetry_id.nil?)
+
+    end
+
+    def get_a_telemetry_id
+      return "" if ($telemetry_url == "" or $telemetry_url.nil?)
+      debug_me("T: " + $telemetry_url)
+
+      url = URI.parse($telemetry_url+"/new")
+      res = Net::HTTP.get_response(url)
+
+      return "" unless res.code.to_i == 200
+      return JSON.parse(res.body)["uuid"]
+    end
+
+    def telemetry
+      unless $config[:telemetry][:enabled]
+        debug_me("telemetry is disabled")
+        return false
+      end
+
+      unless have_a_telemetry_id?
+        $telemetry_id = get_a_telemetry_id
+        $config[:telemetry][:id] = $telemetry_id
+        debug_me($config)
+        debug_me("saving config to " + $config_name)
+        File.open($config_name, 'w') { |f| f.write $config.to_yaml }
+      end
+
+      debug_me("Telemetry ID is: " + $telemetry_id)
+
+      uri=URI.parse($telemetry_url+"/"+$telemetry_id)
+      header = {'Content-Type': 'text/json'}
+      tele = { "kb_version" => Dawn::KnowledgeBase::VERSION ,
+               "ip" => Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address,
+               "message"=> Dawn::KnowledgeBase
+            }
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Post.new(uri.request_uri, header)
+      request.body = tele.to_json
+
+      begin
+        response=http.request(request)
+        debug_me(response.inspect)
+        return true
+      rescue => e
+        $logger.error "telemetry: #{e.message}"
+        return false
+      end
+    end
+
+    def apply_all(checks_to_be_skipped=[])
       @scan_start = Time.now
+      debug_me("I'm asked to skip those checks #{checks_to_be_skipped}")
       debug_me("SCAN STARTED: #{@scan_start}")
 
-      # FIXME.20140325
-      # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
-      # Reason is simple, load_knowledge_base now needs enabled check array
-      # and I don't want to pollute engine API to propagate this value. It's
-      # a param to load_knowledge_base and then bin/dawn calls it
-      # accordingly.
-      # load_knowledge_base if @checks.nil?
+      telemetry
+
       if @checks.nil?
-        $logger.err "you must load knowledge base before trying to apply security checks"
+        $logger.error "you must load knowledge base before trying to apply security checks"
         @scan_stop = Time.now
         debug_me("SCAN STOPPED: #{@scan_stop}")
         return false
       end
       if @checks.empty?
+        $logger.warn "no security checks found. This is strange"
         @scan_stop = Time.now
         debug_me("SCAN STOPPED: #{@scan_stop}")
         return false
       end
 
       @checks.each do |check|
-        _do_apply(check)
+        if checks_to_be_skipped.include?(check.name)
+          $logger.info("skipping security check #{check.name}")
+        else
+          _do_apply(check)
+        end
       end
 
       @scan_stop = Time.now
@@ -373,13 +431,13 @@ module Dawn
     def get_rvm_ruby_ver
       return {:version=>"", :patchlevel=>""} unless File.exist?(File.join(@target, ".ruby-version"))
       hash = File.read(File.join(@target, '.ruby-version')).split('-')
-      return {:version=>hash[0], :patchlevel=>hash[1]}
+      return {:version=>hash[0].chop, :patchlevel=>hash[1]}
     end
     def _do_apply(check)
       unless ((check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK || check.kind == Dawn::KnowledgeBase::COMBO_CHECK ) && @gemfile_lock_sudo)
 
         @applied << { :name => name }
-        debug_me "applying check #{check.name}"
+        debug_me "applying check #{check.name} - #{check.kind}"
         @applied_checks += 1
 
         check.ruby_version  = @ruby_version[:version]

@@ -1,0 +1,29 @@
+--- !ruby/object:Dawn::Kb::UnsafeDependencyCheck
+applies:
+- rails
+- sinatra
+- padrino
+title: A test here
+cvss: '(AV:L/AC:L/Au:S/C:N/I:C/A:C)'
+cve: 'CVE-2021-99999'
+owasp: A9
+release_date: '25/03/2021'
+kind: :unsafe_dependency_check
+message: |-
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nisi turpis, tincidunt rhoncus leo sed, euismod sollicitudin nisl. In a arcu accumsan, fermentum quam vel, auctor risus. Nulla non sollicitudin libero. Cras hendrerit consectetur pulvinar. Vivamus ligula quam, vulputate eget justo in, varius rhoncus lorem. Nulla vel volutpat enim. Nulla hendrerit posuere tempor. Nulla in metus eget lacus tempor sollicitudin sed et dolor. Ut interdum volutpat felis, ac bibendum mauris volutpat ut. Etiam posuere justo ex, nec faucibus orci suscipit sit amet. Vivamus rutrum massa fermentum mi pellentesque vehicula. Nullam elementum urna mauris, nec cursus risus convallis vel. Nulla consectetur enim ut magna rutrum, et mollis ante auctor. Etiam accumsan in lacus et ultricies. Morbi ullamcorper velit a ipsum egestas, quis laoreet lectus placerat. Maecenas nunc augue, pulvinar non ligula ac, maximus venenatis mi.
+
+remediation: |-
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et metus blandit, viverra ante a, auctor urna. Integer eget est ac nisl bibendum pharetra. Vivamus rhoncus neque vitae felis congue luctus. Praesent vitae lobortis mi. Nulla malesuada elit dictum tincidunt volutpat. Quisque tincidunt lorem nec eros ullamcorper lobortis. Nunc in felis sit amet purus sollicitudin tincidunt. Sed semper sapien nisi, non rutrum orci ultricies eget. Integer neque mauris, gravida ac varius nec, tincidunt consequat turpis. Fusce nisi metus, iaculis a eros eget, interdum sodales lectus. Pellentesque purus nisi, venenatis ut quam vitae, lacinia tristique turpis. Morbi sed maximus odio, et interdum risus. Duis nec congue lacus. Nunc sed elit a leo fermentum feugiat a aliquam arcu.
+
+severity: :critical
+priority: :high
+check_family: :bulletin
+vulnerable_version_array:
+- :name: 'acme-gem'
+  :version:
+  - '0.5.0'
+  - '0.9.0'
+  - '0.9.2'
+  - '1.3.2'
+  - '2.9.0'
+  - '3.4.0'

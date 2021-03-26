@@ -1,6 +1,6 @@
 module Dawn
   module Kb
-    module DependencyCheck
+    class DependencyCheck
       include BasicCheck
 
       attr_accessor :dependencies

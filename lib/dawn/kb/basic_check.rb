@@ -4,8 +4,6 @@ module Dawn
   module Kb
     module BasicCheck
 
-      include Dawn::Utils
-
       attr_reader :title
       attr_reader :name
       attr_reader :cve
@@ -239,6 +237,7 @@ module Dawn
 
         ret
       end
+
     end
   end
 end

@@ -8,7 +8,6 @@ require 'cucumber/rake/task'
 require 'fileutils'
 require "dawn/utils"
 require "dawn/knowledge_base"
-require "dawn/knowledge_base_experimental"
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty -x"
@@ -63,214 +62,6 @@ namespace :version do
   end
 end
 
-# namespace :check do
-# desc "Create a dependency check"
-# task :dependency, :name do |t, args|
-# end
-
-# end
-desc "Create a new CVE test"
-task :cve, :name do |t,args|
-  name      = args.name
-  SRC_DIR   = "./lib/dawn/kb/"
-  SPEC_DIR  = "./spec/lib/kb/"
-
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Dawn::KnowledgeBase.find(nil, name).nil?
-  raise "### Invalid CVE title: #{name}" if name.nil? or name.empty? or /CVE-\d{4}-\d{4}/.match(name).nil?
-  raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
-  raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
-
-  puts "Adding #{name} to knowledge base..."
-
-  rb_filename = SRC_DIR+name.downcase.gsub("-", "_")+".rb"
-  spec_filename = SPEC_DIR+name.downcase.gsub("-", "_")+"_spec.rb"
-  class_name = name.gsub("-", "_")
-
-  open(rb_filename, "w") do |file|
-    file.puts "module Dawn"
-    file.puts "\t\tmodule Kb"
-    file.puts "\t\t\t# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
-    file.puts "\t\t\tclass #{class_name}"
-    file.puts "\t\t\t\t# Include the testing skeleton for this CVE"
-    file.puts "\t\t\t\t# include PatternMatchCheck"
-    file.puts "\t\t\t\t# include DependencyCheck"
-    file.puts "\t\t\t\t# include RubyVersionCheck"
-    file.puts ""
-    file.puts "\t\t\t\tdef initialize"
-    file.puts "\t\t\t\t\ttitle   = \"\""
-    file.puts "\t\t\t\t\tmessage = \"\""
-    file.puts "\t\t\t\tend"
-    file.puts "\t\t\tend"
-    file.puts "\t\tend"
-    file.puts "end"
-  end
-  puts "#{rb_filename} created"
-
-  open(spec_filename, "w") do |file|
-    file.puts "require 'spec_helper'"
-
-    file.puts "describe \"The #{name} vulnerability\" do"
-    file.puts "\tbefore(:all) do"
-    file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
-    file.puts "\t\t# @check.debug = true"
-    file.puts "\tend"
-    file.puts "\tit \"is reported when the vulnerable gem is detected\" do"
-    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\texpect(@check.vuln?).to   eq(true)"
-    file.puts "\tend"
-    file.puts "\tit \"is not reported when a fixed release is detected\" do"
-    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\texpect(@check.vuln?).to   eq(false)"
-    file.puts "\tend"
-    file.puts "end"
-  end
-  puts "#{spec_filename} created"
-
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN ./spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN ./lib/dawn/knowledge_base.rb in order to reflect changes"
-  puts "require \"dawn/kb/#{class_name.downcase}\""
-  puts "it \"must have test for #{name}\" do"
-  puts "  sc = kb.find(\"#{name}\")"
-  puts "  expect(sc).not_to   be_nil"
-  puts "  expect(sc.class).to eq(Dawn::Kb::#{class_name})"
-  puts "end"
-
-
-end
-
-desc "Create a new OSVDB security check"
-task :osvdb, :name do |t,args|
-  name      = args.name
-  SRC_DIR   = "./lib/dawn/kb/"
-  SPEC_DIR  = "./spec/lib/kb/"
-
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Dawn::KnowledgeBase.find(nil, name).nil?
-  raise "### Invalid OSVDB identifier: #{name}" if name.nil? or name.empty? or /\d{6}/.match(name).nil?
-  raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
-  raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
-
-  puts "Adding #{name} to knowledge base..."
-
-  name = "OSVDB_"+name
-
-  rb_filename = SRC_DIR+name.downcase.gsub("-", "_")+".rb"
-  spec_filename = SPEC_DIR+name.downcase.gsub("-", "_")+"_spec.rb"
-  class_name = name.gsub("-", "_")
-
-  open(rb_filename, "w") do |file|
-    file.puts "module Dawn"
-    file.puts "\t\tmodule Kb"
-    file.puts "\t\t\t# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
-    file.puts "\t\t\tclass #{class_name}"
-    file.puts "\t\t\t\t# Include the testing skeleton for this Security Check"
-    file.puts "\t\t\t\t# include PatternMatchCheck"
-    file.puts "\t\t\t\t# include DependencyCheck"
-    file.puts "\t\t\t\t# include RubyVersionCheck"
-    file.puts ""
-    file.puts "\t\t\t\tdef initialize"
-    file.puts "\t\t\t\t\ttitle   = \"\""
-    file.puts "\t\t\t\t\tmessage = \"\""
-    file.puts "\t\t\t\tend"
-    file.puts "\t\t\tend"
-    file.puts "\t\tend"
-    file.puts "end"
-  end
-  puts "#{rb_filename} created"
-
-  open(spec_filename, "w") do |file|
-    file.puts "require 'spec_helper'"
-
-    file.puts "describe \"The #{name} vulnerability\" do"
-    file.puts "\tbefore(:all) do"
-    file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
-    file.puts "\t\t# @check.debug = true"
-    file.puts "\tend"
-    file.puts "\tit \"is reported when the vulnerable gem is detected\" do"
-    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\texpect(@check.vuln?).to   eq(true)"
-    file.puts "\tend"
-    file.puts "\tit \"is not reported when a fixed release is detected\" do"
-    file.puts "\t\t@check.dependencies = [{:name=>\"\", :version=>\"\"}]"
-    file.puts "\t\texpect(@check.vuln?).to   eq(false)"
-    file.puts "\tend"
-    file.puts "end"
-  end
-  puts "#{spec_filename} created"
-
-
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN ./spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN ./lib/dawn/knowledge_base.rb in order to reflect changes"
-  puts "require \"dawn/kb/#{class_name.downcase}\""
-  puts "it \"must have test for #{name}\" do"
-  puts "  sc = kb.find(\"#{name}\")"
-  puts "  expect(sc).not_to   be_nil"
-  puts "  expect(sc.class).to eq(Dawn::Kb::#{class_name})"
-  puts "end"
-
-end
-
-
-
-desc "Create a new Generic security check"
-task :check, :name do |t,args|
-  name      = args.name
-  SRC_DIR   = "./lib/dawn/kb/"
-  SPEC_DIR  = "./spec/lib/kb/"
-
-  raise "### It seems that #{name} is already in Dawn knowledge base" unless Dawn::KnowledgeBase.find(nil, name).nil?
-  raise "### No target directory: #{SRC_DIR}" unless Dir.exists?(SRC_DIR)
-  raise "### No rspec directory: #{SPEC_DIR}" unless Dir.exists?(SPEC_DIR)
-
-  puts "Adding #{name} to knowledge base..."
-
-  rb_filename = SRC_DIR+name.downcase.gsub("-", "_")+".rb"
-  spec_filename = SPEC_DIR+name.downcase.gsub("-", "_")+"_spec.rb"
-  class_name = name.gsub("-", "_")
-
-  open(rb_filename, "w") do |file|
-    file.puts "module Dawn"
-    file.puts "\t\tmodule Kb"
-    file.puts "\t\t\t# Automatically created with rake on #{Time.now.strftime('%Y-%m-%d')}"
-    file.puts "\t\t\tclass #{class_name}"
-    file.puts "\t\t\t\t# Include the testing skeleton for this Security Check"
-    file.puts "\t\t\t\t# include PatternMatchCheck"
-    file.puts "\t\t\t\t# include DependencyCheck"
-    file.puts "\t\t\t\t# include RubyVersionCheck"
-    file.puts ""
-    file.puts "\t\t\t\tdef initialize"
-    file.puts "\t\t\t\tend"
-    file.puts "\t\t\tend"
-    file.puts "\t\tend"
-    file.puts "end"
-  end
-  puts "#{rb_filename} created"
-
-  open(spec_filename, "w") do |file|
-    file.puts "require 'spec_helper'"
-
-    file.puts "describe \"The #{name} vulnerability\" do"
-    file.puts "\tbefore(:all) do"
-    file.puts "\t\t@check = Dawn::Kb::#{class_name}.new"
-    file.puts "\t\t# @check.debug = true"
-    file.puts "\tend"
-    file.puts "\tit \"is reported when...\""
-    file.puts "end"
-  end
-  puts "#{spec_filename} created"
-
-
-  puts "*** PLEASE IMPLEMENT TEST FOR #{name} IN ./spec/lib/dawn/codesake_knowledgebase_spec.rb in order to reflect changes"
-  puts "*** PLEASE ADD THIS CODE IN ./lib/dawn/knowledge_base.rb in order to reflect changes"
-  puts "require \"dawn/kb/#{class_name.downcase}\""
-  puts "it \"must have test for #{name}\" do"
-  puts "  sc = kb.find(\"#{name}\")"
-  puts "  sc.should_not   be_nil"
-  puts "  sc.class.should == Dawn::Kb::#{class_name}"
-  puts "end"
-
-
-end
-
 namespace :kb do
   desc 'Check information lint'
   task :lint do
@@ -283,27 +74,8 @@ namespace :kb do
   desc 'Pack the library for shipping'
 
   task :pack do
-    YAML_KB = File.join(Dir.pwd, 'db')
-    __kb_pack
-  end
-
-  desc 'Transform all checks to YAML file and pack the library for shipping'
-  task :to_yaml do
-    YAML_KB = File.join(Dir.pwd, 'db')
-    FileUtils.rm_rf YAML_KB
-    FileUtils.mkdir_p YAML_KB
-
-    Dawn::KnowledgeBase.new.all.each do |check|
-      out_dir = File.join(YAML_KB, check.check_family.to_s)
-      FileUtils.mkdir_p(out_dir) unless Dir.exists? out_dir
-
-      filename = File.join(out_dir, check.name.gsub(" ", "_").gsub("-", "_") + '.yml')
-      open(filename, 'w') do |f|
-        f.puts(check.to_yaml)
-      end
-      puts "#{filename} created"
-    end
-
+    YAML_KB = File.join(Dir.home, "dawnscanner", 'db')
+    FileUtils.mkdir_p(YAML_KB)
     __kb_pack
   end
 
@@ -428,14 +200,10 @@ def __kb_pack
 
 
   open(File.join(YAML_KB, "kb.yaml"), 'w') do |f|
-    f.puts(Dawn::KnowledgeBaseExperimental.kb_descriptor)
+    f.puts(Dawn::KnowledgeBase.kb_descriptor)
   end
   puts "kb.yaml created"
   system "shasum -a 256 #{YAML_KB}/kb.yaml > #{YAML_KB}/kb.yaml.sig"
-
-  system "tar cfvz #{YAML_KB}/signatures.tar.gz #{YAML_KB}/*.tar.gz.sig"
-  system "rm -rf #{YAML_KB}/*.tar.gz.sig "
-  puts "#{YAML_KB}/signatures.tar.gz created"
 
   puts "Library ready to be shipped"
 

@@ -2,7 +2,7 @@ require 'ptools'
 
 module Dawn
   module Kb
-    module PatternMatchCheck
+    class PatternMatchCheck
       include BasicCheck
 
 
@@ -25,7 +25,7 @@ module Dawn
 
       EXCLUSION_LIST = [
         "tags",
-        "vendor/bundle", 
+        "vendor/bundle",
         "features",
         "specs",
         "test"
@@ -38,10 +38,10 @@ module Dawn
         @attack_pattern_is_regex  = false
         @glob                     = "**"
         @attack_pattern           = options[:attack_pattern] unless options[:attack_pattern].nil?
-        @negative_search          = options[:negative_search] unless options[:negative_search].nil? 
-        @avoid_comments           = options[:avoid_comments] unless options[:avoid_comments].nil? 
-        @evidences                = options[:evidences] unless options[:evidences].nil? 
-        @attack_pattern_is_regex  = options[:attack_pattern_is_regex] unless options[:attack_pattern_is_regex].nil? 
+        @negative_search          = options[:negative_search] unless options[:negative_search].nil?
+        @avoid_comments           = options[:avoid_comments] unless options[:avoid_comments].nil?
+        @evidences                = options[:evidences] unless options[:evidences].nil?
+        @attack_pattern_is_regex  = options[:attack_pattern_is_regex] unless options[:attack_pattern_is_regex].nil?
         @glob                     = File.join(@glob, options[:glob]) unless options[:glob].nil?
         debug_me("EVIDENCES ARE #{@evidences.inspect}")
       end
@@ -60,6 +60,7 @@ module Dawn
         Dir.glob(File.join("#{root_dir}", @glob)).each do |filename|
           debug_me("#{File.basename(__FILE__)}@#{__LINE__}: analyzing #{filename}: search is #{@negative_search}")
           matches = []
+          raise ArgumentError.new("skipping empty file") if File.zero?(filename)
           begin
             matches = run(load_file(filename)) if File.exists?(filename) && File.file?(filename) && ! File.binary?(filename) && ! must_exclude?(filename)
             found = ! matches.empty?
@@ -84,17 +85,17 @@ module Dawn
         return ret_value
       end
 
-      private 
+      private
       def string_to_array(par)
         return par if par.class == Array
-        %w(par)  
+        %w(par)
       end
 
       def load_file(filename)
 
         f = File.open(filename)
         lines = f.readlines
-        f.close 
+        f.close
 
         lines
       end

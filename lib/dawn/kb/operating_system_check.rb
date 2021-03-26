@@ -1,6 +1,6 @@
   module Dawn
     module Kb
-      module OperatingSystemCheck
+      class OperatingSystemCheck
         include BasicCheck
 
         # safe_os is an Hash with this form {:family=>"", :vendor=>"", :version=>""}
