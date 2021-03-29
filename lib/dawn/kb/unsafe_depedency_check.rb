@@ -29,8 +29,11 @@ module Dawn
         # this should not be an array. This involves too many underlying
         # changes one day I'll make.
         @dependencies.each do |dep|
-          if dep[:name] == @vulnerable_version_array[0][:name]
-            return true if @vulnerable_version_array[0][:version].include? dep[:version]
+          unless @vulnerable_version_array.nil? or @vulnerable_version_array.empty?
+            if dep[:name] == @vulnerable_version_array[0][:name]
+              return false if @vulnerable_version_array[0][:version].nil? or @vulnerable_version_array[0][:version].empty?
+              return true if @vulnerable_version_array[0][:version].include? dep[:version]
+            end
           end
         end
 

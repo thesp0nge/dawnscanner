@@ -62,13 +62,14 @@ module Dawn
     @@enabled_checks = [:generic_check, :code_quality, :bulletin, :code_style, :owasp_top_10]
 
 
-    GEM_CHECK           = :rubygem_check
-    DEPENDENCY_CHECK    = :dependency_check
-    PATTERN_MATCH_CHECK = :pattern_match_check
-    RUBY_VERSION_CHECK  = :ruby_version_check
-    OS_CHECK            = :os_check
-    COMBO_CHECK         = :combo_check
-    CUSTOM_CHECK        = :custom_check
+    GEM_CHECK               = :rubygem_check
+    DEPENDENCY_CHECK        = :dependency_check
+    UNSAFE_DEPENDENCY_CHECK = :unsafe_dependency_check
+    PATTERN_MATCH_CHECK     = :pattern_match_check
+    RUBY_VERSION_CHECK      = :ruby_version_check
+    OS_CHECK                = :os_check
+    COMBO_CHECK             = :combo_check
+    CUSTOM_CHECK            = :custom_check
 
     REMOTE_KB_URL_PREFIX  = "https://dawnscanner.org/data/"
     FILES = %w(kb.yaml bulletin.tar.gz generic_check.tar.gz owasp_ror_cheatsheet.tar.gz code_style.tar.gz code_quality.tar.gz owasp_top_10.tar.gz signatures.tar.gz)

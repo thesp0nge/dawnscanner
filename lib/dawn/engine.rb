@@ -442,7 +442,8 @@ module Dawn
 
         check.ruby_version  = @ruby_version[:version]
         check.detected_ruby = @ruby_version                           if check.kind == Dawn::KnowledgeBase::RUBY_VERSION_CHECK
-        check.dependencies  = self.connected_gems                     if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK
+        check.dependencies  = self.connected_gems                     if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK or
+                                                                          check.kind == Dawn::KnowledgeBase::UNSAFE_DEPENDENCY_CHECK
         check.root_dir      = self.target                             if check.kind == Dawn::KnowledgeBase::PATTERN_MATCH_CHECK
         check.options       = {:detected_ruby => self.ruby_version,
                                :dependencies => self.connected_gems,

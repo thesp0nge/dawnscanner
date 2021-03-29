@@ -199,7 +199,8 @@ module Dawn
         # 1_a) Third party gem vulnerabilities
         rows = []
         @engine.vulnerabilities.each do |vuln|
-          rows << [vuln[:name].justify(10), vuln[:severity], vuln[:message].justify(30), vuln[:remediation].justify(15), vuln[:evidences].join.justify(15)]
+          $logger.error(vuln)
+          rows << [vuln[:name]&.justify(10), vuln[:severity], vuln[:message]&.justify(30), vuln[:remediation]&.justify(15), vuln[:evidences].join&.justify(15)]
           rows << :separator
         end
         table = Terminal::Table.new :title=>"Vulnerabilities", :headings=>['Issue', 'Severity', 'Description', 'Solution', 'Evidences'], :rows=>rows
