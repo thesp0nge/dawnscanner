@@ -180,7 +180,10 @@ module Dawn
     #
     # Returns an array of security checks, matching the mvc to be reviewed and
     # the enabled check list or an empty array if an error occured.
-    def load
+    def load(lint=false)
+      good    =0
+      invalid =0
+
       @security_checks = []
       # $path = File.join(Dir.pwd, "db")
 
@@ -205,10 +208,20 @@ module Dawn
           $logger.warn "Missing check directory #{dir}"
         else
           Dir.glob(dir+"/**/*.yml").each do |f|
-            data = YAML.load_file(f)
-            @security_checks << data
+            begin
+              data = YAML.load_file(f)
+              @security_checks << data
+              good+=1
+              $logger.info("#{File.basename(f)} loaded") if lint
+            rescue Exception => e
+              $logger.error(e.message)
+              invalid+=1
+            end
           end
+        end
 
+        if lint
+          $logger.info("#{invalid} invalid checks out of #{good+invalid}")
         end
 
 

@@ -13,6 +13,12 @@ module Dawn
         kb.find(string)
       end
 
+      desc "lint", "Checks knowledge base content for correcteness"
+      def lint
+        kb = Dawn::KnowledgeBase.instance
+        kb.load(true)
+      end
+
       desc "unpack", "Unpacks security checks in KB library path"
       def unpack
         $logger.helo APPNAME, Dawn::VERSION
