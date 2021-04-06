@@ -44,7 +44,7 @@ namespace :version do
       f.puts("module Dawn")
 
       puts "#{branch_name}|"
-      if branch_name != "master"
+      if branch_name != "main"
         av = version.split('.')
         f.puts "    VERSION = \"#{av[0]}.#{av[1]}.#{commit_hash.chop}\""
         f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
