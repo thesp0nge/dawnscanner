@@ -1,12 +1,10 @@
 # Dawnscanner - The raising security scanner for ruby web applications
 
-dawnscanner is a source code scanner designed to review your ruby code for
+dawnscanner is a source code scanner designed to review your web applications for
 security issues.
 
-dawnscanner is able to scan plain ruby scripts (e.g. command line applications) but
-all its features are unleashed when dealing with web applications source code.
-dawnscanner is able to scan major MVC (Model View Controller) frameworks, out of the
-box:
+dawnscanner is able to scan web applications written in Ruby and it supports all 
+major MVC (Model View Controller) frameworks, out of the box:
 
 * [Ruby on Rails](http://rubyonrails.org)
 * [Sinatra](http://www.sinatrarb.com)
