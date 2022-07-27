@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'socket'
+require 'fileutils'
 # Statistics stuff
 # require 'code_metrics/statistics'
 

@@ -11,6 +11,8 @@ require 'digest'
 
 require 'date'
 
+require 'fileutils'
+
 # Core KB
 require "dawn/kb/basic_check"
 require "dawn/kb/pattern_match_check"
