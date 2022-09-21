@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require 'lib/dawn/version'
+require_relative 'lib/dawn/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "dawnscanner"
