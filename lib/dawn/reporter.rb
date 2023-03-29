@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Dawn
   class Reporter
 
