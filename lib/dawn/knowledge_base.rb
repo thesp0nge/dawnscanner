@@ -212,7 +212,18 @@ module Dawn
         else
           Dir.glob(dir+"/**/*.yml").each do |f|
             begin
-              data = YAML.load_file(f)
+              data = YAML.load_file(f, permitted_classes: [Dawn::Kb::UnsafeDependencyCheck,
+                                                           Dawn::Kb::BasicCheck,
+                                                           Dawn::Kb::ComboCheck,
+                                                           Dawn::Kb::DependencyCheck,
+                                                           Dawn::Kb::DeprecationCheck,
+                                                           Dawn::Kb::OperatingSystemCheck,
+                                                           Dawn::Kb::PatternMatchCheck,
+                                                           Dawn::Kb::RubygemCheck,
+                                                           Dawn::Kb::RubyVersionCheck,
+                                                           Dawn::Kb::VersionCheck,
+                                                           Date,
+                                                           Symbol])
               @security_checks << data
               good+=1
               $logger.info("#{File.basename(f)} loaded") if lint
