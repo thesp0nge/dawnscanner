@@ -1,26 +1,29 @@
 require 'spec_helper'
 
-class DependencyMockup
-  include Dawn::Kb::DependencyCheck
+# class DependencyMockup
+#   include Dawn::Kb::DependencyCheck
 
-  def initialize
-    message = "This is a mock"
-    super(
-      :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
-      :applies=>['sinatra', 'padrino', 'rails'],
-      :message=> message
-    )
-    # self.debug = true
+#   def initialize
+#     message = "This is a mock"
+#     super(
+#       :kind=>Dawn::KnowledgeBase::DEPENDENCY_CHECK,
+#       :applies=>['sinatra', 'padrino', 'rails'],
+#       :message=> message
+#     )
+#     # self.debug = true
 
-    self.safe_dependencies = [{:name=>'this_gem', :version=>['0.3.0', '1.3.3', '2.3.3', '2.4.2', '9.4.31.2']}]
-    self.save_major = true
-  end
-end
+#     self.safe_dependencies = [{:name=>'this_gem', :version=>['0.3.0', '1.3.3', '2.3.3', '2.4.2', '9.4.31.2']}]
+#     self.save_major = true
+#   end
+# end
 
 
 describe "The security check for gem dependency should" do
   before(:all) do
-    @check = DependencyMockup.new
+    @check = Dawn::Kb::DependencyCheck.new
+    @check.kind=Dawn::KnowledgeBase::DEPENDENCY_CHECK
+    @check.applies = ['sinatra', 'padrino', 'rails']
+    @check.message = "This is a mock"
   end
   # let (:check) {Mockup.new}
 
