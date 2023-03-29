@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: mer 28 nov 2018, 11.03.53, CET_
+_latest update: mer 29 mar 2023, 18:32:56, CEST_
 
-## Version 2.0.0 - codename: Finn McMissile (2019-xx-xx)
+## Version 2.0.0
 
 * New knowledge base, YAML based and distributed separately from the ruby gem.
 * New CLI based on Thor library. Please read README.md file to know how to
@@ -24,6 +24,8 @@ _latest update: mer 28 nov 2018, 11.03.53, CET_
 * Fix issue #245. Pattern matching check is skipped on empty files.
 * Fix issue #250. Require missing fileutils, thanks to @lukaszsliwa
 * Fix issue #252. File.exists was removed in newer interpreter versions
+* Dropping codenames
+* Class names must be declared before loading YAML files
 
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 

@@ -1,15 +1,3 @@
-# Each dawnscanner major release will have a Disney Pixar Cars / Cars2
-# character as codename. My son Daniele loves those films and since I love
-# him too, this is a kinda sort of tribute of my son's passion.
-#
-# Future releases
-#
-# | Character       | Release |
-# |-----------------|---------|
-# | "Finn McMissile"|  2.0.0  |
-# |  "Fillmore"     |  x.x.0  |
-# |"Holly Shiftwell"|  x.x.0  |
-# |   "Guido"       |  x.x.0  |
-# |   "Luigi"       |  x.x.0  |
-# | "Doc Hudson"    |  x.x.0  |
-2.0.0.rc4 - Finn McMissile
+# I removed codenames :-)
+# Code review is fun
+2.0.0.rc5

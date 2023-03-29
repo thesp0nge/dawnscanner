@@ -37,7 +37,6 @@ namespace :version do
       a = f.readlines
     end
     version = a[a.length - 1].split('-')[0]# .chomp
-    codename = a[a.length - 1].split('-')[1]
 
     File.open("./lib/dawn/version.rb", "w") do |f|
 
@@ -47,12 +46,9 @@ namespace :version do
       if branch_name != "main"
         av = version.split('.')
         f.puts "    VERSION = \"#{av[0]}.#{av[1]}.#{commit_hash.chop}\""
-        f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
         f.puts "    RELEASE = \"(development)\""
       else
-        puts "here"
         f.puts "    VERSION = \"#{version.rstrip!}\""
-        f.puts "    CODENAME = \"#{codename.lstrip!.chop}\""
         f.puts "    RELEASE = \"#{release}\""
       end
       f.puts "    BUILD = \"#{build_number.chop}\""
