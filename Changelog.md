@@ -23,6 +23,7 @@ _latest update: mer 28 nov 2018, 11.03.53, CET_
   $HOME and 'dawnscanner' folder where results are stored.
 * Fix issue #245. Pattern matching check is skipped on empty files.
 * Fix issue #250. Require missing fileutils, thanks to @lukaszsliwa
+* Fix issue #252. File.exists was removed in newer interpreter versions
 
 ## Version 1.6.9 - codename: Tow Mater (2018-11-28)
 

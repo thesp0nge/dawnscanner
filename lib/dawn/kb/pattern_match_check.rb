@@ -62,7 +62,7 @@ module Dawn
           matches = []
           raise ArgumentError.new("skipping empty file") if File.zero?(filename)
           begin
-            matches = run(load_file(filename)) if File.exists?(filename) && File.file?(filename) && ! File.binary?(filename) && ! must_exclude?(filename)
+            matches = run(load_file(filename)) if File.exist?(filename) && File.file?(filename) && ! File.binary?(filename) && ! must_exclude?(filename)
             found = ! matches.empty?
           rescue ArgumentError => e
             puts "Skipping pattern match check for #{filename}: #{e.message}"
