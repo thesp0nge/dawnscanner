@@ -1,23 +1,13 @@
 require 'spec_helper'
 
-class Mockup
-  include Dawn::Kb::RubyVersionCheck
-
-  def initialize
-    message = "This is a mock"
-    super(
-      :kind=>Dawn::KnowledgeBase::RUBY_VERSION_CHECK, 
-      :applies=>['sinatra', 'padrino', 'rails'],
-      :message=> message
-    )
-    # self.debug = true
-
-    self.safe_rubies = [{:version=>"1.9.3", :patchlevel=>"p392"}, {:version=>"2.0.0", :patchlevel=>"p0"}]
-  end
-end
-
 describe "The security check for Ruby interpreter version" do
-  let (:check) {Mockup.new}
+  before(:all) do
+    @check = Dawn::Kb::RubyVersionCheck.new
+    @check.message = "This is a mock"
+    @check.kind=Dawn::KnowledgeBase::RUBY_VERSION_CHECK
+    @check.applies=['sinatra', 'padrino', 'rails']
+    @check.safe_rubies = [{:version=>"1.9.3", :patchlevel=>"p392"}, {:version=>"2.0.0", :patchlevel=>"p0"}]
+  end
 
   it "fires if ruby version is vulnerable" do
     check.detected_ruby = {:version=>"1.9.2", :patchlevel=>"p10000"}

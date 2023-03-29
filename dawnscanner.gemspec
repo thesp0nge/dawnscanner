@@ -52,8 +52,9 @@ Gem::Specification.new do |gem|
   # Marked to be unused right now
   # gem.add_dependency 'parser'
 
-  gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency('coveralls')
+  gem.add_development_dependency('rake')
+  gem.add_development_dependency('rspec')
   gem.add_development_dependency('tomdoc')
   gem.add_development_dependency('aruba')
 end
