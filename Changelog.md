@@ -14,7 +14,6 @@ _latest update: mer 29 mar 2023, 18:32:56, CEST_
   invoke dawn the right way or use the 'dawn help' command
 * Added a new debug\_verbosely API for engines and checks
 * Removed rake osvdb[name] and rake cve[name] tasks
-* Adding telemetry
 * Dawn::Utils include refactory. Now it's available application wide
 * debug information refactory.
 * engine class, apply_all method now accepts an optional parameter containing a

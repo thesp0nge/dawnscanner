@@ -270,8 +270,6 @@ module Dawn
     # otherwise
     def apply(name)
 
-      telemetry
-
       # FIXME.20140325
       # Now if no checks are loaded because knowledge base was not previously called, apply and apply_all proudly refuse to run.
       # Reason is simple, load_knowledge_base now needs enabled check array
@@ -293,65 +291,12 @@ module Dawn
       false
     end
 
-    def have_a_telemetry_id?
-      debug_me ($telemetry_id != ""  and ! $telemetry_id.nil?)
-      return ($telemetry_id != ""  and ! $telemetry_id.nil?)
 
-    end
-
-    def get_a_telemetry_id
-      return "" if ($telemetry_url == "" or $telemetry_url.nil?)
-      debug_me("T: " + $telemetry_url)
-
-      url = URI.parse($telemetry_url+"/new")
-      res = Net::HTTP.get_response(url)
-
-      return "" unless res.code.to_i == 200
-      return JSON.parse(res.body)["uuid"]
-    end
-
-    def telemetry
-      unless $config[:telemetry][:enabled]
-        debug_me("telemetry is disabled")
-        return false
-      end
-
-      unless have_a_telemetry_id?
-        $telemetry_id = get_a_telemetry_id
-        $config[:telemetry][:id] = $telemetry_id
-        debug_me($config)
-        debug_me("saving config to " + $config_name)
-        File.open($config_name, 'w') { |f| f.write $config.to_yaml }
-      end
-
-      debug_me("Telemetry ID is: " + $telemetry_id)
-
-      uri=URI.parse($telemetry_url+"/"+$telemetry_id)
-      header = {'Content-Type': 'text/json'}
-      tele = { "kb_version" => Dawn::KnowledgeBase::VERSION ,
-               "ip" => Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address,
-               "message"=> Dawn::KnowledgeBase
-            }
-      http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Post.new(uri.request_uri, header)
-      request.body = tele.to_json
-
-      begin
-        response=http.request(request)
-        debug_me(response.inspect)
-        return true
-      rescue => e
-        $logger.error "telemetry: #{e.message}"
-        return false
-      end
-    end
 
     def apply_all(checks_to_be_skipped=[])
       @scan_start = Time.now
       debug_me("I'm asked to skip those checks #{checks_to_be_skipped}")
       debug_me("SCAN STARTED: #{@scan_start}")
-
-      telemetry
 
       if @checks.nil?
         $logger.error "you must load knowledge base before trying to apply security checks"

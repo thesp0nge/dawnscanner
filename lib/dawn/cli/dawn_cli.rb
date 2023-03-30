@@ -90,14 +90,6 @@ module Dawn
 
         debug_me($config)
 
-        $telemetry_url = $config[:telemetry][:endpoint] if $config[:telemetry][:enabled]
-        debug_me("telemetry url is " + $telemetry_url) unless @telemetry_url.nil?
-
-        $telemetry_id = $config[:telemetry][:id] if $config[:telemetry][:enabled]
-        debug_me("telemetry id is " + $telemetry_id) unless @telemetry_id.nil?
-
-        debug_me("telemetry is disabled in config file") unless $config[:telemetry][:enabled]
-
         engine = Dawn::Core.detect_mvc(target) unless options[:gemfile]
         engine = Dawn::GemfileLock.new(target) if options[:gemfile]
 
