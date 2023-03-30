@@ -123,7 +123,7 @@ module Dawn
 
       # If create_if_none flag is set to true, than I'll create a config file
       # on the current directory with the default configuration.
-      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES, :telemetry=>{:enabled=>false, :endpoint=>"", :id=>""}}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
 
       # Calculate the conf file path
       conf_path = File.expand_path('~') +'/.'+conf_name
@@ -138,7 +138,7 @@ module Dawn
     end
 
     def self.read_conf(file=nil)
-      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES, :telemetry=>{:enabled=>false, :endpoint=>"", :id=>""}}
+      conf = {:verbose=>false, :output=>"tabular", :mvc=>"", :gemfile_scan=>false, :gemfile_name=>"", :filename=>nil, :debug=>false, :exit_on_warn => false, :enabled_checks=> Dawn::Kb::BasicCheck::ALLOWED_FAMILIES}
       begin
         debug_me("returning a default config") if file.nil? or ! File.exist?(file)
         return conf if file.nil?
@@ -151,7 +151,6 @@ module Dawn
 
       cf = YAML.load_file(file)
 
-      tm = cf[:telemetry]
       cc = cf[:enabled_checks]
 
       # TODO
@@ -160,7 +159,6 @@ module Dawn
       conf[:debug] = cf["debug"] unless cf["debug"].nil?
       conf[:output] = cf["output"] unless cf["output"].nil?
       conf[:enabled_checks] = cc unless cc.nil?
-      conf[:telemetry] = tm unless tm.nil?
 
       return conf
     end

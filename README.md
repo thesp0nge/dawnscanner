@@ -3,33 +3,12 @@
 dawnscanner is a source code scanner designed to review your web applications for
 security issues.
 
-dawnscanner is able to scan web applications written in Ruby and it supports all 
+The tool is able to scan web applications written in Ruby and it supports all
 major MVC (Model View Controller) frameworks, out of the box:
 
 * [Ruby on Rails](http://rubyonrails.org)
 * [Sinatra](http://www.sinatrarb.com)
 * [Padrino](http://www.padrinorb.com)
-
-## Quick update from April, 2019
-
-We just released version 2.0.0 release candidate 1 with a YAML powered revamped
-knowledge base. Please note that dawnscanner will include a telemetry facility
-sending a POST  on https://dawnscanner.org/telemetry with an application id and
-some information about version and knowledge base.
-
-We won't now and ever collect your source code on our side.
-
-## Quick update from November, 2018
-
-As you can see dawnscanner is on hold since more then an year. Sorry for that.
-It's life. I was overwhelmed by tons of stuff and I dedicated free time to
-Offensive Security certifications. True to be told, I'm starting OSCE journey
-really soon.
-
-The dawnscanner project will be updated soon with new security checks and
-kickstarted again.
-
-Paolo
 
 ---
 
@@ -42,11 +21,11 @@ Paolo
 
 ---
 
-dawnscanner version 1.6.6 has 235 security checks loaded in its knowledge
-base. Most of them are CVE bulletins applying to gems or the ruby interpreter
-itself. There are also some check coming from Owasp Ruby on Rails cheatsheet.
+dawnscanner version 2.0 has 650+ security checks loaded in its knowledge base
+which is weekly updated from the [National Vulnerability
+Database](https://nvd.nist.gov/) by NIST.
 
-## An overall introduction
+## A brief "how it works"
 
 When you run dawnscanner on your code it parses your project Gemfile.lock
 looking for the gems used and it tries to detect the ruby interpreter version
@@ -72,7 +51,7 @@ You can install latest dawnscanner version, fetching it from
 [Rubygems](https://rubygems.org) by typing:
 
 ```
-$ gem install dawnscanner 
+$ gem install dawnscanner
 ```
 
 If you want to add dawn to your project Gemfile, you must add the following:
@@ -97,6 +76,28 @@ on your system. Please note that you have to manage dependencies on your own
 this way. It makes sense only if you want to hack the code or something like
 that.
 
+You need to download the [knowledge
+base](https://github.com/thesp0nge/dawnscanner_knowledge_base/releases) from
+Github and unpack the archive to ```$HOME/dawnscanner/kb``` directory.
+
+A typical kb directory layout is similar to this:
+
+```
+$ ll ~/dawnscanner/kb
+total 56K
+drwxr-xr-x 2 thesp0nge users  28K 29 mar 18.27 bulletin
+drwxr-xr-x 2 thesp0nge users   72  7 lug  2021 generic_check
+-rw-r--r-- 1 thesp0nge users   65 29 mar 17.06 kb.yaml
+-rw-r--r-- 1 thesp0nge users   74 29 mar 17.06 kb.yaml.sig
+drwxr-xr-x 2 thesp0nge users 4,0K  7 lug  2021 owasp_ror_cheatsheet
+```
+
+The knowledge base is structured this way:
+* bulletin is the folder where all CVE downloaded from NIST are stored.
+* generic_check is the folder with all custom checks for your code
+* owasp_ror_cheatsheet is for the Owasp Ruby on Rails cheatsheet
+  reccomendations
+
 ## Usage
 
 You can start your code review with dawnscanner very easily. Simply tell the tool
@@ -114,7 +115,7 @@ needs, and to specify the target directory where your code is stored.
 $ dawn [options] target
 ```
 
-In case of need, there is a quick command line option reference running 
+In case of need, there is a quick command line option reference running
 ```dawn -h``` at your OS prompt.
 
 ```
@@ -155,7 +156,7 @@ Flags useful to query Dawn
        --list-knowledge-base			list knowledge-base content
        --list-known-families			list security check families contained in dawn's knowledge base
        --list-known-framework			list ruby MVC frameworks supported by dawn
-       --list-scan-registry			list past scan informations stored in scan registry 
+       --list-scan-registry			list past scan informations stored in scan registry
 
 Service flags
 
@@ -332,7 +333,3 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-
