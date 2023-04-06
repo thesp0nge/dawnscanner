@@ -28,6 +28,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'ptools'
   gem.add_dependency 'psych'
 
+  gem.add_dependency 'parser'
+
   # For CLI we will use thor
   gem.add_dependency 'thor'
 
