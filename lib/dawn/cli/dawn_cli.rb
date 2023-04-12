@@ -119,6 +119,7 @@ module Dawn
         end
 
         $logger.info("#{engine.count_vulnerabilities} issues found")
+        $logger.info("#{engine.checks.count} checks applied")
 
         Dawn::Reporter.new({:engine=>engine, :apply_all_code=>ret}).report
         $logger.bye

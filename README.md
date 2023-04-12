@@ -21,7 +21,7 @@ major MVC (Model View Controller) frameworks, out of the box:
 
 ---
 
-dawnscanner version 2.0 has 650+ security checks loaded in its knowledge base
+dawnscanner version 2.0 has 680+ security checks loaded in its knowledge base
 which is weekly updated from the [National Vulnerability
 Database](https://nvd.nist.gov/) by NIST.
 
