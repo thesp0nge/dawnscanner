@@ -31,6 +31,8 @@ module Dawn
         @dependencies.each do |dep|
           unless @vulnerable_version_array.nil? or @vulnerable_version_array.empty?
             if dep[:name] == @vulnerable_version_array[0][:name]
+              debug_me("DEP VERSION #{dep[:version]}")
+              debug_me("VULN_VER #{@vulnerable_version_array[0][:version]}")
               return false if @vulnerable_version_array[0][:version].nil? or @vulnerable_version_array[0][:version].empty?
               return true if @vulnerable_version_array[0][:version].include? dep[:version]
             end

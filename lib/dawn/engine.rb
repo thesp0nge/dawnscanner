@@ -401,15 +401,15 @@ module Dawn
           vc = nil
           vc = check.vulnerable_checks if check.kind == Dawn::KnowledgeBase::COMBO_CHECK
 
-          @vulnerabilities  << {:name=> check.name,
-                                :severity=>check.severity,
-                                :priority=>check.priority,
-                                :kind=>check.check_family,
-                                :message=>check.message,
-                                :remediation=>check.remediation,
-                                :evidences=>check.evidences,
-                                :cve_link=>check.cve_link,
-                                :cvss_score=>check.cvss_score,
+          @vulnerabilities  << {:name=> check.name || "CVE-XXXX-YYYY",
+                                :severity=>check.severity || "Unknown severity",
+                                :priority=>check.priority || "Unknown priority",
+                                :kind=>check.check_family || "Unknown kind",
+                                :message=>check.message || "",
+                                :remediation=>check.remediation || "",
+                                :evidences=>check.evidences || [],
+                                :cve_link=>check.cve_link || "No link",
+                                :cvss_score=>check.cvss_score || "No score",
                                 :vulnerable_checks=>vc}
 
         end
