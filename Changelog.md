@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: gio 13 apr 2023, 15:46:13, CEST_
+_latest update: thu 13 apr 2023, 16:54:52, CEST_
 
-## Version 2.1.0 (xxxx-xx-xx)
+## Version 2.1.0 (2023-04-13)
 
 * BasicCheck: added an attribute do flag as vulnerable a dependency gem only if
   it matches the name, overriding the version. It will be used in dawn kb list
