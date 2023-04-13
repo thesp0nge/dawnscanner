@@ -5,9 +5,17 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: mer 29 mar 2023, 18:32:56, CEST_
+_latest update: gio 13 apr 2023, 15:46:13, CEST_
 
-## Version 2.0.0
+## Version 2.1.0 (xxxx-xx-xx)
+
+* BasicCheck: added an attribute do flag as vulnerable a dependency gem only if
+  it matches the name, overriding the version. It will be used in dawn kb list
+  command, when the user won't enter the version information.
+* Added the "list" subcommand to "kb". It can be used to fetch from the
+  knowledge base all CVEs affecting a particular gem.
+
+## Version 2.0.0 (2023-04-13)
 
 * New knowledge base, YAML based and distributed separately from the ruby gem.
 * New CLI based on Thor library. Please read README.md file to know how to
@@ -308,7 +316,7 @@ _latest update: mer 29 mar 2023, 18:32:56, CEST_
 
 * Adding a check for OSVDB-108569: information disclosure in backup_checksum
   gem (issue #69)
-* Fix issue #74. Now BasicChack has its own cve, osvdb attributes and a rake
+* Fix issue #74. Now BasicCheck has its own cve, osvdb attributes and a rake
   task will perform a sanity check if those values have been initialized
 * Fix issue #62 about codesake-dawn config filename
 * Adding a check for CVE-2013-2105: HTML injection in show_in_browser rubygem

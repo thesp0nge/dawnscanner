@@ -122,6 +122,39 @@ module Dawn
 
     def find(name)
       debug_me "I'm asked to find #{name}"
+      debug_me "Please implement find command"
+    end
+
+    # Find all security issues affecting the gem passed as argument.
+    # The gem parameter can contains also the version number, separated by a
+    # ':'
+    #
+    # == Parameters:
+    # string::
+    #   A string containing the gem name, and eventually the version, to search
+    #   for vulnerabilities.
+    #   e.g.
+    #     $ dawn kb list sinatra        =>  returns all bulletins affecting sinatra gem
+    #     $ dawn kb list sinatra 2.0.0  =>  return all bulletins affecting
+    #                                       sinatra gem version 2.0.0
+    #
+    # == Returns:
+    # An array with all the vulnerabilities affecting the gem (or the
+    # particular gem version if provided).
+    def find_issues_by_gem(string = "")
+      issues = []
+      @security_checks.each do |check|
+        if check.kind == Dawn::KnowledgeBase::DEPENDENCY_CHECK or check.kind == Dawn::KnowledgeBase::UNSAFE_DEPENDENCY_CHECK
+             debug_me "applying check #{check.name}"
+             name = string.split(':')[0]
+             version = string.split(':')[1]
+             check.please_ignore_dep_version = true if version.nil?
+             check.dependencies  = [{:name=>name, :version=>version}]
+             issues << check if check.vuln?
+        end
+      end
+      debug_me "#{issues}"
+      return issues
     end
 
     def unpack
@@ -187,6 +220,10 @@ module Dawn
       good    =0
       invalid =0
 
+      unless @security_checks.nil?
+        debug_me("KB was previously loaded")
+        return @security_checks
+      end
       @security_checks = []
       # $path = File.join(Dir.pwd, "db")
 

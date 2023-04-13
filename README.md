@@ -100,11 +100,12 @@ being analyzed.
 Is it possible, with the kb subcommand, to query the knowledge base.
 
 ```
-dawn kb find            # Searches the knowledge base for a given security test
-dawn kb help [COMMAND]  # Describe subcommands or one specific subcommand
-dawn kb lint            # Checks knowledge base content for correcteness
-dawn kb status          # Checks the status of the knowledge base
-dawn kb unpack          # Unpacks security checks in KB library path
+dawn kb find                        # Searches the knowledge base for a given vulnerability
+dawn kb help [COMMAND]              # Describe subcommands or one specific subcommand
+dawn kb lint                        # Checks knowledge base content for correcteness
+dawn kb list gem_name[gem_version]  # List all security issues affecting a gem passed as argument (the version string is optional).
+dawn kb status                      # Checks the status of the knowledge base
+dawn kb unpack                      # Unpacks security checks in KB library path
 ```
 
 ## Useful links
