@@ -6,21 +6,34 @@ module Dawn
     # This class is responsible for the "dawn kb" command and related
     # subcommands.
     class Kb < Thor
-      package_name "dawnscanner"
-      desc "find", "Searches the knowledge base for a given security test"
+      package_name "dawn"
+      class_option :verbose, :type=>:boolean
+      class_option :debug, :type=>:boolean
+
+      no_commands{
+        def init_globals
+          $debug = true if options[:debug]
+          $verbose = true if options[:verbose]
+        end
+      }
+
+      desc "find", "Searches the knowledge base for a given vulnerability"
       def find(string)
+        init_globals
         kb = Dawn::KnowledgeBase.instance
         kb.find(string)
       end
 
       desc "lint", "Checks knowledge base content for correcteness"
       def lint
+        init_globals
         kb = Dawn::KnowledgeBase.instance
         kb.load(true)
       end
 
       desc "unpack", "Unpacks security checks in KB library path"
       def unpack
+        init_globals
         $logger.helo APPNAME, Dawn::VERSION
         kb = Dawn::KnowledgeBase.instance
         kb.unpack
@@ -30,6 +43,7 @@ module Dawn
 
       desc "status", "Checks the status of the knowledge base"
       def status
+        init_globals
         $logger.helo APPNAME, Dawn::VERSION
         Dawn::KnowledgeBase.enabled_checks=[:bulletin, :generic_check]
         kb = Dawn::KnowledgeBase.instance
@@ -44,10 +58,29 @@ module Dawn
         $logger.bye
         Kernel.exit(0)
       end
+
+      desc "list gem_name[gem_version]", "List all security issues affecting a gem passed as argument (the version string is optional)."
+      def list(gem_name, gem_version=nil)
+        init_globals
+        to_check="#{gem_name}"
+        to_check += ":#{gem_version}" unless gem_version.nil?
+
+        Dawn::KnowledgeBase.enabled_checks=[:bulletin]
+        kb = Dawn::KnowledgeBase.instance
+        kb.load
+        if kb.security_checks.empty?
+          $logger.error(kb.error)
+        end
+        issues = kb.find_issues_by_gem(to_check)
+
+        issues.each do |issue|
+          puts "#{issue.name} "
+        end
+      end
     end
 
     class DawnCli < Thor
-      package_name "dawnscanner"
+      package_name "dawn"
       class_option :verbose, :type=>:boolean
       class_option :debug, :type=>:boolean
 

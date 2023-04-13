@@ -5,17 +5,17 @@ Gem::Specification.new do |gem|
   gem.name          = "dawnscanner"
   gem.version       = Dawn::VERSION
   gem.authors       = ["Paolo Perego"]
-  gem.email         = ["paolo@dawnscanner.org"]
-  gem.description   = %q{Dawnscanner is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 150 security checks with their own mitigation suggestion.}
-  gem.summary       = %q{Dawnscanner is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
-  gem.homepage      = "https://dawnscanner.org"
+  gem.email         = ["paolo@armoredcode.com"]
+  gem.description   = %q{dawn is a security source code scanner for ruby powered code. It is especially designed for web applications, but it works also with general purpose ruby scripts. Dawn supports all major MVC frameworks like ruby on rails, padrino and sinatra; it provides more than 680 security checks with their own mitigation suggestion.}
+  gem.summary       = %q{dawn is a security source code scanner for ruby powered code. It is crafted with love to make your sinatra, padrino and ruby on rails web applications secure.}
+  gem.homepage      = "https://github.com/thesp0nge/dawnscanner"
   gem.files         = `git ls-files`.split($/)
   gem.license       = "MIT"
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = '>= 2.3.0'
+  gem.required_ruby_version = '>= 3.0.0'
 
   gem.add_dependency 'cvss'
   gem.add_dependency 'haml'

@@ -78,6 +78,13 @@ module Dawn
       #   + :none
       attr_accessor :priority
 
+      # Introduced in 2.1.0
+      # It allows a security check to be marked as positive (vulnerable), only
+      # if it matches the dependency gem name, ignoring the version.
+      #
+      # Only used in DEPENDENCY and UNSAFE_DEPENDENCY checks
+      attr_accessor :please_ignore_dep_version
+
       def initialize(options={})
         @applies                  = []
         @ruby_version             = ""
@@ -113,6 +120,8 @@ module Dawn
         @severity         = options[:severity] unless options[:severity].nil?
         @priority         = options[:priority] unless options[:priority].nil?
         @check_family     = options[:check_family] unless options[:check_family].nil?
+
+        @please_ignore_dep_version = false
 
         # FIXME.20140325
         #
