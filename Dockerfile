@@ -6,9 +6,9 @@ RUN apt-get update -qq \
   build-essential \
   wget
 
-RUN gem install dawnscanner --version '2.1.0'
+RUN gem install dawnscanner --version '2.1.1'
 RUN wget https://github.com/thesp0nge/dawnscanner_knowledge_base/releases/latest/download/kb.tar.gz
-RUN rm -rf /usr/share/dawnscanner; mkdir -p /usr/share/dawnscanner; tar xfvz kb.tar.gz -C /usr/share/dawnscanner
+RUN rm -rf /root/dawnscanner/kb; mkdir -p /root/dawnscanner/kb; tar xfvz kb.tar.gz -C /root/dawnscanner/kb
 
 WORKDIR /code
 ENTRYPOINT ["dawn"]

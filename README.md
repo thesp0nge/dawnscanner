@@ -76,6 +76,39 @@ The knowledge base is structured this way:
 * owasp_ror_cheatsheet is for the Owasp Ruby on Rails cheatsheet
   recomendations
 
+## Running as a Docker container
+
+Starting from version 2.2.0, a Dockerfile is available to run dawn scanner as a 
+docker container.
+
+### Building the docker container
+
+From the directory where Dockerfile is, run this command:
+
+```
+docker build -t dawn:v1 .
+```
+
+Of course, you can label your image as you want.
+
+### Running the scan
+
+dawn expects to have a /code folder as a working directory. You have to tell 
+docker to mount the folder containing your source files as /code before actually scanning it.
+
+```
+docker run -v "/home/thesp0nge/src/hacking/achievement_maker:/code" dawn:v1 scan /code
+```
+
+### Known issues
+
+dawn running as docker image is **alpha** stage. Known issues are:
+
+* docker image not deployed as official in hub.docker.com
+* results stay in the container
+
+If you find other issues, please [open them](https://github.com/thesp0nge/dawnscanner/issues/new) in GitHub and I will work on it.
+
 ## Usage
 
 Starting from version 2.0, the tool uses subcommands to start specific tasks,
