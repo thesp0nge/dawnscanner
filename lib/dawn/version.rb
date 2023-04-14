@@ -1,6 +1,6 @@
 module Dawn
-    VERSION = "2.1.0"
-    RELEASE = "20230413"
-    BUILD = "3"
-    COMMIT = "gc8a1ac6"
+    VERSION = "2.1.1"
+    RELEASE = "20230414"
+    BUILD = "1"
+    COMMIT = "gbb3ea6d"
 end

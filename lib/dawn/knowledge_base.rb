@@ -244,7 +244,7 @@ module Dawn
         # Please note that if we enter in this branch, it means someone
         # tampered the KB between the previous __valid? check and this point.
         # Of course this is a very rare situation, but we must handle it.
-        unless Dir.exists?(dir)
+        unless Dir.exist?(dir)
           $logger.warn "Missing check directory #{dir}"
         else
           Dir.glob(dir+"/**/*.yml").each do |f|
@@ -311,12 +311,12 @@ module Dawn
 
       lines = ""
 
-      unless File.exists?(File.join(@path, "kb.yaml"))
+      unless File.exist?(File.join(@path, "kb.yaml"))
         $logger.error  "Missing kb.yaml in #{path}. Giving up"
         return false
       end
 
-      unless File.exists?(File.join(@path, "kb.yaml.sig"))
+      unless File.exist?(File.join(@path, "kb.yaml.sig"))
         $logger.error  "Missing kb.yaml signature in #{path}. Giving up"
         return false
       end
@@ -343,7 +343,7 @@ module Dawn
     # local DB path
     def __packed?
       FILES.each do |fn|
-        return true if fn.end_with? 'tar.gz' and File.exists?(File.join(@path, fn))
+        return true if fn.end_with? 'tar.gz' and File.exist?(File.join(@path, fn))
       end
       return false
     end

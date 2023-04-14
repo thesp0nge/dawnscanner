@@ -5,7 +5,11 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: thu 13 apr 2023, 16:54:52, CEST_
+_latest update: fri 14 apr 2023, 16:36:56, CEST_
+
+## Version 2.1.1 (2023-04-14)
+
+* Issue #252 fix was uncomplete.
 
 ## Version 2.1.0 (2023-04-13)
 
