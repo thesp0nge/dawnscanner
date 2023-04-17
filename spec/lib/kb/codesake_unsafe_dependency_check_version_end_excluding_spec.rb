@@ -16,7 +16,6 @@ describe "The security check for gem unsafe dependency, when versionEndExcluding
                                                    Dawn::Kb::VersionCheck,
                                                    Date,
                                                    Symbol])
-    @check.debug=true
   end
 
   it "fires if vulnerable 0.5.0 version is detected" do

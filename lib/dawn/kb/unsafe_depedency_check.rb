@@ -32,7 +32,6 @@ module Dawn
           unless @vulnerable_version_array.nil? or @vulnerable_version_array.empty?
             if dep[:name] == @vulnerable_version_array[0][:name]
 
-              puts @vulnerable_version_array[0]
               unless @vulnerable_version_array[0][:versionEndIncluding].nil?
                 if (Gem::Version.new(dep[:version]) > Gem::Version.new(@vulnerable_version_array[0][:versionEndIncluding]))
                   return false

@@ -16,8 +16,6 @@ describe "The security check for gem unsafe dependency should" do
                                                    Dawn::Kb::VersionCheck,
                                                    Date,
                                                    Symbol])
-    @check.debug=true
-    puts @check.vulnerable_version_array
   end
 
   it "fires if vulnerable 0.5.0 version is detected" do
