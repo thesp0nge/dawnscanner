@@ -7,6 +7,13 @@ frameworks.
 
 _latest update: fri 14 apr 2023, 16:36:56, CEST_
 
+## Version 2.2.0 (2023-0x-xx)
+
+* DepedencyCheck: marked as deprecated
+* UnsafeDependencyCheck: added support for new kb keywords:
+    - versionEndIncluding
+    - versionEndExcluding
+
 ## Version 2.1.1 (2023-04-14)
 
 * Issue #252 fix was uncomplete.
