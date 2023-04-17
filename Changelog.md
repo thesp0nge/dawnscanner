@@ -5,9 +5,9 @@ It supports [Sinatra](http://www.sinatrarb.com),
 [Padrino](http://www.padrinorb.com) and [Ruby on Rails](http://rubyonrails.org)
 frameworks.
 
-_latest update: fri 14 apr 2023, 16:36:56, CEST_
+_latest update: Mon 17 Apr 2023, 18:07:04, CEST_
 
-## Version 2.2.0 (2023-0x-xx)
+## Version 2.2.0 (2023-04-17)
 
 * DepedencyCheck: marked as deprecated
 * UnsafeDependencyCheck: added support for new kb keywords:
