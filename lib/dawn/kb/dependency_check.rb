@@ -25,10 +25,14 @@ module Dawn
       attr_accessor :save_minor
       attr_accessor :save_major
 
+      # @deprecated Please use UnsafeDependencyCheck instead. This class is no
+      # longer supperted and it will be removed really soon.
       def initialize(options)
         super(options)
         @save_minor ||= options[:save_minor]
         @save_major ||= options[:save_major]
+
+        warn "This class is deprecated. Please use UnsafeDependencyCheck instead"
       end
 
       def vuln?
