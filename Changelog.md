@@ -7,6 +7,9 @@ frameworks.
 
 _latest update: Mon 17 Apr 2023, 18:07:04, CEST_
 
+* Fixed issue #257. Now the knowledge base is searched in three different
+  locations, $HOME, /usr/share and /usr/local/share
+
 ## Version 2.2.0 (2023-04-17)
 
 * DepedencyCheck: marked as deprecated
