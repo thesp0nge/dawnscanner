@@ -7,6 +7,9 @@ frameworks.
 
 _latest update: Mon 17 Apr 2023, 18:07:04, CEST_
 
+* Fixed issue #260. Removed old codesake-dawn named rake tasks. dawn is not
+  intended to be run via rake anymore.
+
 ## Version 2.2.0 (2023-04-17)
 
 * DepedencyCheck: marked as deprecated
