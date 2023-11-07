@@ -1,4 +1,4 @@
-require 'cvss'
+require 'cvss/cvss'
 
 module Dawn
   module Kb
