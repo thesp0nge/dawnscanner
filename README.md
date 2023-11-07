@@ -55,7 +55,7 @@ $ gem install dawnscanner
 ```
 
 After that, you need to download the [knowledge
-base](https://github.com/thesp0nge/dawn_knowledge_base/releases) from
+base](https://github.com/thesp0nge/dawnscanner_knowledge_base/releases) from
 Github and unpack the archive to ```$HOME/dawnscanner/kb``` directory.
 
 A typical kb directory layout is similar to this:

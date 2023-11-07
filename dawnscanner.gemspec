@@ -17,7 +17,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 3.0.0'
 
-  gem.add_dependency 'cvss'
+  # Issue #259
+  # gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
   gem.add_dependency 'ruby_parser'
   gem.add_dependency 'sys-uname'
