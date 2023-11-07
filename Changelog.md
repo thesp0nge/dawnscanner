@@ -7,11 +7,15 @@ frameworks.
 
 _latest update: Mon 17 Apr 2023, 18:07:04, CEST_
 
+
 ## Version 2.3.0 (2023-xx-xx)
 
+* Fixed issue #257. Now the knowledge base is searched in three different
+  locations, $HOME, /usr/share and /usr/local/share
 * Issue #259: cvss rubygem was 10 years old and only used in dawnscanner. Being
   a separate gem, requires more effort in creating pacakges for distributions.
   It makes sense to integrate cvss gem within the project.
+
 
 ## Version 2.2.0 (2023-04-17)
 

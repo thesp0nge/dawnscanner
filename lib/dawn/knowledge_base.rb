@@ -73,7 +73,7 @@ module Dawn
     COMBO_CHECK             = :combo_check
     CUSTOM_CHECK            = :custom_check
 
-    REMOTE_KB_URL_PREFIX  = "https://dawnscanner.org/data/"
+    REMOTE_KB_URL_PREFIX  = "https://github.com/thesp0nge/dawnscanner_knowledge_base/releases/latest"
     FILES = %w(kb.yaml bulletin.tar.gz generic_check.tar.gz owasp_ror_cheatsheet.tar.gz code_style.tar.gz code_quality.tar.gz owasp_top_10.tar.gz signatures.tar.gz)
 
     VERSION = "0.0.1"
@@ -91,7 +91,7 @@ module Dawn
       end
       @path = default_path
       @path = options[:path] if options[:path]
-      FileUtils.mkdir_p(@path)
+      FileUtils.mkdir_p(@path) unless @path.empty?
 
       @enabled_checks = @@enabled_checks
 
@@ -102,8 +102,23 @@ module Dawn
       @@enabled_checks=checks
     end
 
+    # Starting from version 2.3.0 the knowledge base will be searched in
+    # different locations and it will be used the first found.
+    #
+    # 1. $HOME/dawnscanner/kb
+    # 2. /usr/share/dawnscanner/kb
+    # 3. /usr/local/share/dawnscanner/kb
     def default_path
-      @path = File.join(Dir.home, 'dawnscanner', 'kb')
+      path_list=[File.join(Dir.home, "dawnscanner", "kb"),
+                 "/usr/share/dawnscanner/kb",
+                 "/usr/local/share/dawnscanner/kb"]
+      path_list.each do |p|
+        if Dir.exist?(p)
+          @path = p
+          return @path
+        end
+      end
+      @path = ""
       return @path
     end
 
