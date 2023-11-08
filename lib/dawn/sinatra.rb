@@ -33,12 +33,11 @@ module Dawn
 
     # TODO: appname should be hopefully autodetect from config.ru
     def detect_appname(target)
-      return File.basename(target) if is_single_file?
-      return "app.rb" if File.exist?(File.join(self.target, "app.rb"))
-      return "application.rb" if File.exist?(File.join(self.target, "application.rb"))
-      file_array = Dir.glob(File.join("#{target}", "*.rb"))
-      return file_array[0] if ! file_array.nil? and file_array.count == 1
-      return "" # gracefully failure
+      return File.basename(target)  if is_single_file?
+      return "app.rb"               if File.exist?(File.join(self.target, "app.rb"))
+      return "application.rb"       if File.exist?(File.join(self.target, "application.rb"))
+
+      return target # gracefully failure
     end
 
     def detect_reflected_xss
