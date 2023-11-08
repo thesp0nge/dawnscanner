@@ -16,6 +16,10 @@ _latest update: Mon 17 Apr 2023, 18:07:04, CEST_
   It makes sense to integrate cvss gem within the project.
 * Fixed issue #260. Removed old codesake-dawn named rake tasks. dawn is not
   intended to be run via rake anymore.
+* Issue #268. As part of the Hackweek (https://t.ly/epoSZ), dawn must be able
+  to parse a Sinatra application to spot vulnerabilities. As Sinatra code can
+  be also self contained in a single file, this must be allowed as a valid
+  target.
 
 
 ## Version 2.2.0 (2023-04-17)

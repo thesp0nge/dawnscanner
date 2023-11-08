@@ -1,4 +1,5 @@
 require "yaml"
+require 'parser/current'
 
 module Dawn
   class Core
@@ -79,7 +80,33 @@ module Dawn
 
     end
 
+    ##
+    # detect_mvc_from_file is a method to check if a ruby script is a self
+    # contained web application, most likely if it is a Sinatra web application
+    # or a simple script.
+    #
+    # TODO: this method has a known bug. It relies only on the presence of a
+    # "require 'sinatra'" statement to detect a sinatra app. In case of a
+    # malformed ruby script, requiring sinatra gem but not defining a real
+    # sinatra app, dawnscanner will be fooled.
+    #
+    # @param target [String] the target filename
+    # @return [Object] a Dawn::Sinatra instance or nil in case of error
+    def self.detect_mvc_from_file(target)
+      code = File.read(target)
+      parsed_code = Parser::CurrentRuby.parse(code)
+      ast = Dawn::Processor::Require.new
+      ast.process_all(parsed_code)
+
+      return Dawn::Sinatra.new(target) if ast.is_sinatra
+
+      return nil
+    end
+
     def self.detect_mvc(target)
+
+      # Issue#268
+      return detect_mvc_from_file(target) if (File.file?(target) and File.extname(target) == ".rb")
 
       raise ArgumentError.new("you must set target directory") if target.nil?
 

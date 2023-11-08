@@ -31,6 +31,8 @@ Gem::Specification.new do |gem|
   # For CLI we will use thor
   gem.add_dependency 'thor'
 
+  gem.add_dependency 'parser'
+
   # gem.add_dependency 'sqlite3'
   # gem.add_dependency 'datamapper'
   # gem.add_dependency 'dm-sqlite-adapter'

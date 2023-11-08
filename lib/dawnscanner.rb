@@ -9,7 +9,8 @@ require "dawn/logger"
 
 require "dawn/cli/dawn_cli"
 
-# KB 
+require "dawn/processor/require"
+# KB
 require "dawn/knowledge_base"
 
 # General purpose utilities
