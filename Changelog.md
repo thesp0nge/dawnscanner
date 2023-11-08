@@ -20,6 +20,8 @@ _latest update: Mon 17 Apr 2023, 18:07:04, CEST_
   to parse a Sinatra application to spot vulnerabilities. As Sinatra code can
   be also self contained in a single file, this must be allowed as a valid
   target.
+* Dawn::Sinatra: adding code to handle single file applications. After the name
+  is detected, the single file is parsed and analyzed.
 
 
 ## Version 2.2.0 (2023-04-17)

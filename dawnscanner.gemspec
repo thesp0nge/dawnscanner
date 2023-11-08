@@ -20,7 +20,6 @@ Gem::Specification.new do |gem|
   # Issue #259
   # gem.add_dependency 'cvss'
   gem.add_dependency 'haml'
-  gem.add_dependency 'ruby_parser'
   gem.add_dependency 'sys-uname'
   gem.add_dependency 'terminal-table'
   gem.add_dependency 'justify'
@@ -33,7 +32,6 @@ Gem::Specification.new do |gem|
   # For CLI we will use thor
   gem.add_dependency 'thor'
 
-  gem.add_dependency 'parser'
 
   # gem.add_dependency 'sqlite3'
   # gem.add_dependency 'datamapper'

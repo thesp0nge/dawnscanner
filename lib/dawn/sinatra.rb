@@ -8,13 +8,18 @@ module Dawn
     attr_reader :sinks
     attr_reader :appname
 
+    # True if the Sinatra application is contained in a single file. Used to
+    # speed up analisys for very basic apps.
+    attr_reader :single_file
+
     # mount_point is the mounting point for this Sinatra application. It's
     # filled up only in padrino engines
     attr_reader :mount_point
 
-    def initialize(dir=nil, mp=nil)
+    def initialize(dir=nil, mp=nil, single_file=false)
       super(dir, "sinatra")
       @appname = detect_appname(self.target)
+      @single_file = single_file
       error! if self.appname == ""
       @views = detect_views
       @sinks = detect_sinks(self.appname) unless self.appname == ""
@@ -22,8 +27,13 @@ module Dawn
       @mount_point = (mp.nil?)? "" : mp
     end
 
+    def is_single_file?
+      return @single_file
+    end
+
     # TODO: appname should be hopefully autodetect from config.ru
     def detect_appname(target)
+      return File.basename(target) if (File.file?(target) and File.extname(target)==".rb")
       return "app.rb" if File.exist?(File.join(self.target, "app.rb"))
       return "application.rb" if File.exist?(File.join(self.target, "application.rb"))
       file_array = Dir.glob(File.join("#{target}", "*.rb"))
@@ -69,7 +79,7 @@ module Dawn
               if is_assignement_from_params?(body, :attrasgn)
 
                 if body[0][0] == :call
-                  sink_name=body[0][2].to_s unless body[1].to_s == "[]=" 
+                  sink_name=body[0][2].to_s unless body[1].to_s == "[]="
                   sink_name="#{body[2].to_a[1].to_s}" if body[1].to_s == "[]=" # the sink is assigned to an Array
 
                   sink_source = "#{body[3].to_a[1][2].to_s}[#{body[3].to_a[3][1].to_s}]"
