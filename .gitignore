@@ -20,3 +20,4 @@ test/version_tmp
 tmp
 db/*
 tags
+spec/dev/

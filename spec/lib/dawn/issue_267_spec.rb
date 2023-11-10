@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe "This vulnerable Sinatra application " do
   before (:all) do
+    $stderr.close
     @engine = Dawn::Core.detect_mvc("./spec/support/reflected_xss_sinatra_app.rb")
   end
   it "is a good target too" do

@@ -16,15 +16,28 @@ module Dawn
     # filled up only in padrino engines
     attr_reader :mount_point
 
+    # True if it's a valid ruby code. Meaningful only if single_file = true
+    attr_reader :valid
+
     def initialize(dir=nil, mp=nil, single_file=false)
       super(dir, "sinatra")
       @appname = detect_appname(self.target)
       @single_file = single_file
-      error! if self.appname == ""
-      @views = detect_views
-      @sinks = detect_sinks(self.appname) unless self.appname == ""
-      @reflected_xss = detect_reflected_xss unless self.appname == "" || !@views
-      @mount_point = (mp.nil?)? "" : mp
+      @valid=true
+      if is_single_file?
+        # A single ruby script containing a web application. Mostly a corner
+        # case but I started from this scenario to work on better source code
+        # parsing. See issue #268 for details.
+
+        # Parsing the source file
+        parsed_code = Dawn::Core.read_and_parse_a_source_file(self.target)
+        @valid = false if parsed_code.nil?
+      else
+        @views = detect_views
+        @sinks = detect_sinks(self.appname) unless self.appname == ""
+        @reflected_xss = detect_reflected_xss unless self.appname == "" || !@views
+        @mount_point = (mp.nil?)? "" : mp
+      end
     end
 
     def is_single_file?

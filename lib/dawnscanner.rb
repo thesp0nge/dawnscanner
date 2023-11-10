@@ -10,6 +10,8 @@ require "dawn/logger"
 require "dawn/cli/dawn_cli"
 
 require "dawn/processor/require"
+require "dawn/processor/sinatra"
+
 # KB
 require "dawn/knowledge_base"
 
