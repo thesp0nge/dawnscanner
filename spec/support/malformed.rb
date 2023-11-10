@@ -1,0 +1,3 @@
+class Malformed
+do
+end

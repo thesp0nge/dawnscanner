@@ -8,8 +8,20 @@ describe "The Sinatra AST processor " do
   end
 
   it " exists and it's my friend" do
-    puts @ast.inspect
     true
+  end
+
+  describe " when applied to the reflected_xss_sinatra_app " do
+    it "founds 2 routes" do
+      expect(@ast.routes.count).to be == 2
+    end
+    it " must have a route to '/' using GET http verb" do
+      r = @ast.routes[0]
+      expect(r[:method]).to be == "GET"
+      expect(r[:name]).to   be == "/"
+      expect(r[:params]).to be == []
+    end
+
   end
 
 end

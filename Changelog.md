@@ -22,6 +22,11 @@ _latest update: Mon 17 Apr 2023, 18:07:04, CEST_
   target.
 * Dawn::Sinatra: adding code to handle single file applications. After the name
   is detected, the single file is parsed and analyzed.
+* Creating Dawn::Processor::Sinatra class to parse and build Sinatra app AST
+* new method Dawn::Core.read_and_parse_a_source_file. It takes a filename as
+  input, read its content and parse it using parser rubygem.
+* Added a code in spec_helper.rb to redirect output and error string to a file
+  (that is in .gitignore)
 
 
 ## Version 2.2.0 (2023-04-17)

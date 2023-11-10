@@ -189,5 +189,25 @@ module Dawn
 
       return conf
     end
+
+
+    ##
+    # Read a file, parse it with parser rubygem and returns the AST to be visited by a custom processor.
+    #
+    # @param name [String] the filename to be parsed
+    # @return the AST of the parsed file or  nil in case of error.
+    def self.read_and_parse_a_source_file(name)
+      return nil unless File.file?(name)
+
+      code = File.read(name)
+      begin
+        parsed_code = Parser::CurrentRuby.parse(code)
+
+        return parsed_code
+      rescue Parser::SyntaxError => pe
+        $logger.error("read_and_parse_a_source_file(): " + pe.to_s)
+        return nil
+      end
+    end
   end
 end
