@@ -5,7 +5,7 @@ agree to abide by the latest version of the [Contributor Covenant Code of
 Conduct](http://contributor-covenant.org/version/1/4/).
 
 Are you still interested in contributing to
-[dawnscanner](https://dawnscanner.org) project? Great, here is some very basic
+[dawnscanner](https://github.com/thesp0nge/dawnscanner) project? Great, here is some very basic
 rules in order to make rocking pull requests.
 
 First of all, I use the branching model described in [this
@@ -91,4 +91,4 @@ request](https://github.com/thesp0nge/dawnscanner/compare/).
 
 Enjoy it!
 
-Last update: _Tue Sep 27 22:44:01 CEST 2016_
+Last update: _November 2023_
