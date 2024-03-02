@@ -4,38 +4,38 @@ require 'bundler'
 require 'json'
 require 'terminal-table'
 require 'justify'
+require 'logger'
 
 require 'dawnscanner'
 
-APPNAME = File.basename($0)
+APPNAME = File.basename($PROGRAM_NAME)
 
-LIST_KNOWN_FRAMEWORK  = %w(rails sinatra padrino)
-VALID_OUTPUT_FORMAT   = %w(console json csv html)
+LIST_KNOWN_FRAMEWORK  = %w[rails sinatra padrino].freeze
+VALID_OUTPUT_FORMAT   = %w[console json csv html].freeze
 
 # Datamapper stuff
-#DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")
-#DataMapper::Logger.new(Dawn::Core.sql_log_name, :debug)
-#DataMapper.finalize
-#DataMapper.auto_upgrade!
+# DataMapper.setup(:default, "sqlite3://#{Dawn::Core.registry_db_name}")
+# DataMapper::Logger.new(Dawn::Core.sql_log_name, :debug)
+# DataMapper.finalize
+# DataMapper.auto_upgrade!
 
-require 'logger'
-$logger = Logger.new(STDOUT)
+$logger = Logger.new($stdout)
 $logger.formatter = proc do |severity, datetime, progname, msg|
-    date_format = datetime.strftime("%Y-%m-%d %H:%M:%S")
-    if severity == "INFO" or severity == "WARN"
-        "[#{date_format}] #{severity}  (dawn): #{msg}\n"
-    else
-        "[#{date_format}] #{severity} (dawn): #{msg}\n"
-    end
+  date_format = datetime.strftime('%Y-%m-%d %H:%M:%S')
+
+  if %w[INFO WARN].include?(severity)
+    "[#{date_format}] #{severity}  (dawn): #{msg}\n"
+  else
+    "[#{date_format}] #{severity} (dawn): #{msg}\n"
+  end
 end
 
-engine  = nil
-$debug=false
-$verbose=false
+engine = nil
+$debug = false
+$verbose = false
 
-
-check = ""
-guess = {:name=>"", :version=>"", :connected_gems=>[]}
+check = ''
+guess = { name: '', version: '', connected_gems: [] }
 
 Dawn::Cli::DawnCli.start
 Kernel.exit(0)
